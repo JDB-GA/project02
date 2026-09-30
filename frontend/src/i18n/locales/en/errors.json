@@ -1,0 +1,12 @@
+{
+  "INVALID_CREDENTIALS": "Invalid credentials. Please try again!",
+  "EMAIL_ALREADY_REGISTERED": "This email is already registered",
+  "MOBILE_ALREADY_REGISTERED": "This mobile number is already registered",
+  "TOO_MANY_REQUESTS": "Too many attempts. Please wait a minute and try again",
+  "VALIDATION_FAILED": "Some fields are invalid. Please check them and try again",
+  "DATA_CONFLICT": "This information is already in use",
+  "NOT_FOUND": "The requested resource was not found",
+  "network": "Unable to reach the server. Check your connection and try again",
+  "server": "Something went wrong on our side. Please try again later",
+  "unexpected": "Something went wrong. Please try again"
+}

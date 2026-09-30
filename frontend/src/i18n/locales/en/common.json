@@ -1,0 +1,21 @@
+{
+  "appName": "Digital Wallet",
+  "loading": "Loading…",
+  "language": {
+    "switch": "Switch language"
+  },
+  "home": {
+    "title": "Home",
+    "welcome": "Welcome back",
+    "email": "Email",
+    "mobileNumber": "Mobile number",
+    "role": "Role",
+    "logout": "Log out"
+  },
+  "roles": {
+    "CLIENT": "Client",
+    "MERCHANT": "Merchant",
+    "ADMIN": "Admin",
+    "SUPER_ADMIN": "Super admin"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identifierRequired": "أدخل بريدك الإلكتروني أو رقم جوالك",
+  "identifierInvalid": "أدخل بريداً إلكترونياً صحيحاً أو رقم جوال من {{mobileLength}} أرقام",
+  "emailRequired": "البريد الإلكتروني مطلوب",
+  "emailInvalid": "أدخل بريداً إلكترونياً صحيحاً",
+  "emailTooLong": "يجب ألا يتجاوز البريد الإلكتروني {{emailMax}} حرفاً",
+  "emailTaken": "هذا البريد الإلكتروني مسجّل مسبقاً",
+  "mobileRequired": "رقم الجوال مطلوب",
+  "mobileInvalid": "أدخل {{mobileLength}} أرقام بدون رمز الدولة",
+  "mobileTaken": "رقم الجوال هذا مسجّل مسبقاً",
+  "passwordRequired": "كلمة المرور مطلوبة",
+  "passwordTooShort": "يجب أن تتكون كلمة المرور من {{passwordMin}} أحرف على الأقل",
+  "passwordTooLong": "يجب ألا تتجاوز كلمة المرور {{passwordMax}} حرفاً",
+  "confirmPasswordRequired": "أكّد كلمة المرور",
+  "passwordsMismatch": "كلمتا المرور غير متطابقتين",
+  "invalid": "هذه القيمة غير صالحة"
+}

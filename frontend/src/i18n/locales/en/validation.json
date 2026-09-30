@@ -1,0 +1,17 @@
+{
+  "identifierRequired": "Enter your email or mobile number",
+  "identifierInvalid": "Enter a valid email or a {{mobileLength}}-digit mobile number",
+  "emailRequired": "Email is required",
+  "emailInvalid": "Enter a valid email address",
+  "emailTooLong": "Email must be at most {{emailMax}} characters",
+  "emailTaken": "This email is already registered",
+  "mobileRequired": "Mobile number is required",
+  "mobileInvalid": "Enter {{mobileLength}} digits without the country code",
+  "mobileTaken": "This mobile number is already registered",
+  "passwordRequired": "Password is required",
+  "passwordTooShort": "Password must be at least {{passwordMin}} characters",
+  "passwordTooLong": "Password must be at most {{passwordMax}} characters",
+  "confirmPasswordRequired": "Confirm your password",
+  "passwordsMismatch": "Passwords do not match",
+  "invalid": "This value is invalid"
+}
