@@ -2,10 +2,10 @@
 
 Monorepo with a Spring Boot API and a React frontend.
 
-| Folder      | Stack                                   | Runs on               |
-|-------------|-----------------------------------------|-----------------------|
-| `backend/`  | Spring Boot 4, Java 17, PostgreSQL      | http://localhost:8080 |
-| `frontend/` | React 19, Vite, TypeScript, pnpm        | http://localhost:5173 |
+| Folder      | Stack                              | Runs on               |
+| ----------- | ---------------------------------- | --------------------- |
+| `backend/`  | Spring Boot 4, Java 17, PostgreSQL | http://localhost:8080 |
+| `frontend/` | React 19, Vite, TypeScript, pnpm   | http://localhost:5173 |
 
 ## Prerequisites
 
@@ -38,9 +38,9 @@ cd backend
    ```
 
    In `application-dev.properties`, set at least:
-    - `spring.datasource.password` — your PostgreSQL password
-    - `jwt-secret` — a random 256-bit hex string (`openssl rand -hex 32`)
-    - `cors-allowed-origins` — the frontend URL (`http://localhost:5173` in dev)
+   - `spring.datasource.password` — your PostgreSQL password
+   - `jwt-secret` — a random 256-bit hex string (`openssl rand -hex 32`)
+   - `cors-allowed-origins` — the frontend URL (`http://localhost:5173` in dev)
 
    These files are gitignored; never commit real credentials.
 
@@ -74,7 +74,7 @@ cp src/main/resources/application-prod.properties.example src/main/resources/app
 It reads every secret from environment variables, so no real values live in the file. Set these on the server:
 
 | Variable                 | Example                                              |
-|--------------------------|------------------------------------------------------|
+| ------------------------ | ---------------------------------------------------- |
 | `SPRING_PROFILES_ACTIVE` | `prod`                                               |
 | `DB_URL`                 | `jdbc:postgresql://db-host:5432/digital-wallet`      |
 | `DB_USERNAME`            | `wallet_app`                                         |
@@ -124,4 +124,19 @@ pnpm preview
 
 ```bash
 pnpm lint
+```
+
+ESLint runs type-aware (`strictTypeChecked` + `stylisticTypeChecked`) with the React X and React DOM plugins. Generated shadcn components in `src/components/ui` are excluded.
+
+### Structure
+
+```
+src/
+├── app/         providers, router, route guards
+├── components/  shared components (ui/ is shadcn)
+├── config/      env and route constants
+├── features/    feature modules (api, components, hooks, schemas, types, utils)
+├── hooks/       shared hooks
+├── i18n/        i18next setup and en/ar translations
+└── lib/         HTTP client and query client
 ```
