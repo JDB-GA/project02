@@ -9,3 +9,5 @@ spring.jpa.show-sql=true
 
 jwt-secret=YOUR_JWT_SECRET
 jwt-expiration-ms=86400000
+auth-cookie-secure=false
+cors-allowed-origins=http://localhost:5173

@@ -4,6 +4,7 @@ import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.config.constants.SecurityConstants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.WebUtils;
 
 import java.io.IOException;
 
@@ -42,7 +44,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith(SecurityConstants.BEARER_PREFIX)) {
             return header.substring(SecurityConstants.BEARER_PREFIX.length());
         }
-        return null;
+
+        Cookie cookie = WebUtils.getCookie(request, SecurityConstants.AUTH_COOKIE_NAME);
+        return cookie != null && !cookie.getValue().isBlank() ? cookie.getValue() : null;
     }
 
     private void authenticate(String username, HttpServletRequest request) {

@@ -1,9 +1,12 @@
 package com.almotawaj.wallet.exception;
 
+import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.config.constants.ErrorMessages;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,29 +23,42 @@ public class GlobalExceptionHandler {
         e.getBindingResult().getFieldErrors()
                 .forEach(error -> errors.putIfAbsent(error.getField(), error.getDefaultMessage()));
 
-        ProblemDetail problem =
-                ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ErrorMessages.VALIDATION_FAILED);
+        ProblemDetail problem = problem(HttpStatus.BAD_REQUEST, ErrorMessages.VALIDATION_FAILED, ErrorCodes.VALIDATION_FAILED);
         problem.setProperty(ErrorMessages.VALIDATION_ERRORS_KEY, errors);
         return problem;
     }
 
     @ExceptionHandler(AuthenticationException.class)
     public ProblemDetail handleAuthentication(AuthenticationException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ErrorMessages.INVALID_CREDENTIALS);
+        return problem(HttpStatus.UNAUTHORIZED, ErrorMessages.INVALID_CREDENTIALS, ErrorCodes.INVALID_CREDENTIALS);
     }
 
     @ExceptionHandler(InformationExistException.class)
     public ProblemDetail handleExists(InformationExistException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
+        return problem(HttpStatus.CONFLICT, e.getMessage(), e.getCode());
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ProblemDetail handleDataIntegrity(DataIntegrityViolationException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ErrorMessages.DATA_CONFLICT);
+        return problem(HttpStatus.CONFLICT, ErrorMessages.DATA_CONFLICT, ErrorCodes.DATA_CONFLICT);
     }
 
     @ExceptionHandler(InformationNotFoundException.class)
     public ProblemDetail handleNotFound(InformationNotFoundException e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        return problem(HttpStatus.NOT_FOUND, e.getMessage(), ErrorCodes.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RateLimitExceededException.class)
+    public ResponseEntity<ProblemDetail> handleRateLimit(RateLimitExceededException e) {
+        long retryAfterSeconds = Math.max(1, e.getRetryAfter().toSeconds());
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .header(HttpHeaders.RETRY_AFTER, String.valueOf(retryAfterSeconds))
+                .body(problem(HttpStatus.TOO_MANY_REQUESTS, ErrorMessages.TOO_MANY_REQUESTS, ErrorCodes.TOO_MANY_REQUESTS));
+    }
+
+    private static ProblemDetail problem(HttpStatus status, String detail, String code) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(status, detail);
+        problem.setProperty(ErrorCodes.PROPERTY, code);
+        return problem;
     }
 }

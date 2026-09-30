@@ -1,14 +1,19 @@
 package com.almotawaj.wallet.controller;
 
 import com.almotawaj.wallet.config.constants.ApiPaths;
+import com.almotawaj.wallet.config.security.AuthCookieFactory;
+import com.almotawaj.wallet.config.security.MyUserDetails;
+import com.almotawaj.wallet.model.LoginResult;
 import com.almotawaj.wallet.model.request.LoginRequest;
 import com.almotawaj.wallet.model.request.RegisterRequest;
-import com.almotawaj.wallet.model.response.LoginResponse;
 import com.almotawaj.wallet.model.response.UserResponse;
 import com.almotawaj.wallet.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AuthCookieFactory authCookieFactory;
 
     @PostMapping(ApiPaths.REGISTER)
     @ResponseStatus(HttpStatus.CREATED)
@@ -24,7 +30,22 @@ public class UserController {
     }
 
     @PostMapping(ApiPaths.LOGIN)
-    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
-        return userService.login(request);
+    public ResponseEntity<UserResponse> login(@Valid @RequestBody LoginRequest request) {
+        LoginResult result = userService.login(request);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, authCookieFactory.create(result.token()).toString())
+                .body(result.user());
+    }
+
+    @PostMapping(ApiPaths.LOGOUT)
+    public ResponseEntity<Void> logout() {
+        return ResponseEntity.noContent()
+                .header(HttpHeaders.SET_COOKIE, authCookieFactory.clear().toString())
+                .build();
+    }
+
+    @GetMapping(ApiPaths.ME)
+    public UserResponse me(@AuthenticationPrincipal MyUserDetails userDetails) {
+        return UserResponse.from(userDetails.user());
     }
 }

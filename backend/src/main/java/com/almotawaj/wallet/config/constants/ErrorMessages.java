@@ -16,6 +16,7 @@ public final class ErrorMessages {
     public static final String EMAIL_ALREADY_REGISTERED = "Email address is already registered";
     public static final String MOBILE_ALREADY_REGISTERED = "Mobile number is already registered";
     public static final String DATA_CONFLICT = "Request conflicts with existing data";
+    public static final String TOO_MANY_REQUESTS = "Too many requests, please try again later";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String UNEXPECTED_PRINCIPAL = "Unexpected principal type after authentication";
