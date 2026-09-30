@@ -1,12 +1,29 @@
 package com.almotawaj.wallet.model.response;
 
 import com.almotawaj.wallet.model.User;
+import com.almotawaj.wallet.model.UserRole;
 import com.almotawaj.wallet.model.UserStatus;
 
 import java.util.UUID;
 
-public record UserResponse(UUID id, String username, String email, UserStatus status) {
+public record UserResponse(
+        UUID id,
+        String email,
+        String mobileNumber,
+        UserRole role,
+        UserStatus status,
+        boolean emailVerified,
+        boolean mobileVerified
+) {
     public static UserResponse from(User user) {
-        return new UserResponse(user.getId(), user.getUsername(), user.getEmailAddress(), user.getStatus());
+        return new UserResponse(
+                user.getId(),
+                user.getEmailAddress(),
+                user.getMobileNumber(),
+                user.getRole(),
+                user.getStatus(),
+                user.isEmailVerified(),
+                user.isMobileVerified()
+        );
     }
 }
