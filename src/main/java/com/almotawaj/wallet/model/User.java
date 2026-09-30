@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, length = ValidationLimits.USERNAME_MAX)
+    @Column(nullable = false, unique = true, length = ValidationLimits.USERNAME_MAX)
     private String username;
 
     @Column(nullable = false, unique = true, length = ValidationLimits.EMAIL_MAX)

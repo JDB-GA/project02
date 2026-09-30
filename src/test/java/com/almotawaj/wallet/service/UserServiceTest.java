@@ -53,7 +53,7 @@ class UserServiceTest {
             return saved;
         });
 
-        RegisterRequest request = new RegisterRequest(" muntadher ", "  Test@Mail.COM ", "password123");
+        RegisterRequest request = new RegisterRequest(" Muntadher ", "  Test@Mail.COM ", "password123");
         UserResponse response = userService.register(request);
 
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
@@ -74,6 +74,17 @@ class UserServiceTest {
         when(userRepository.existsByEmailAddress("test@mail.com")).thenReturn(true);
 
         assertThatThrownBy(() -> userService.register(new RegisterRequest("user", "test@mail.com", "password123")))
+                .isInstanceOf(InformationExistException.class);
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
+    void register_rejectsDuplicateUsernameIgnoringCase() {
+        when(userRepository.existsByEmailAddress("new@mail.com")).thenReturn(false);
+        when(userRepository.existsByUsername("muntadher")).thenReturn(true);
+
+        assertThatThrownBy(() -> userService.register(new RegisterRequest("MUNTADHER", "new@mail.com", "password123")))
                 .isInstanceOf(InformationExistException.class);
 
         verify(userRepository, never()).save(any());

@@ -30,14 +30,18 @@ public class UserService {
 
     @Transactional
     public UserResponse register(RegisterRequest request) {
-        String email = normalizeEmail(request.email());
+        String email = normalize(request.email());
+        String username = normalize(request.username());
 
         if (userRepository.existsByEmailAddress(email)) {
             throw new InformationExistException(ErrorMessages.EMAIL_ALREADY_REGISTERED);
         }
+        if (userRepository.existsByUsername(username)) {
+            throw new InformationExistException(ErrorMessages.USERNAME_ALREADY_TAKEN);
+        }
 
         User user = new User();
-        user.setUsername(request.username().trim());
+        user.setUsername(username);
         user.setEmailAddress(email);
         user.setPassword(passwordEncoder.encode(request.password()));
 
@@ -45,7 +49,7 @@ public class UserService {
     }
 
     public LoginResponse login(LoginRequest request) {
-        String email = normalizeEmail(request.email());
+        String email = normalize(request.email());
         Authentication authentication = authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken.unauthenticated(email, request.password()));
 
@@ -56,7 +60,7 @@ public class UserService {
         return new LoginResponse(jwtUtils.generateToken(userDetails));
     }
 
-    private static String normalizeEmail(String email) {
-        return email.trim().toLowerCase(Locale.ROOT);
+    private static String normalize(String value) {
+        return value.trim().toLowerCase(Locale.ROOT);
     }
 }

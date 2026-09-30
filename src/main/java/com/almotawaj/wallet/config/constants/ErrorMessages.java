@@ -13,6 +13,7 @@ public final class ErrorMessages {
     public static final String VALIDATION_ERRORS_KEY = "errors";
     public static final String INVALID_CREDENTIALS = "Invalid email or password";
     public static final String EMAIL_ALREADY_REGISTERED = "Email address is already registered";
+    public static final String USERNAME_ALREADY_TAKEN = "Username is already taken";
     public static final String DATA_CONFLICT = "Request conflicts with existing data";
 
     public static final String USER_NOT_FOUND = "User not found";
