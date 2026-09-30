@@ -1,10 +1,16 @@
 package com.almotawaj.wallet.model.request;
 
-import lombok.Getter;
+import com.almotawaj.wallet.config.constants.ErrorMessages;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
-@Getter
-public class LoginRequest {
-    private String email;
-    private String password;
+public record LoginRequest(
 
+        @NotBlank(message = ErrorMessages.EMAIL_REQUIRED)
+        @Email(message = ErrorMessages.EMAIL_INVALID)
+        String email,
+
+        @NotBlank(message = ErrorMessages.PASSWORD_REQUIRED)
+        String password
+) {
 }
