@@ -1,3 +1,4 @@
+import type { SubmitEvent } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -23,17 +24,23 @@ export function useRegisterForm() {
     mode: 'onTouched',
   })
 
-  const onSubmit = form.handleSubmit((values) =>
+  const submit = form.handleSubmit((values) => {
     register.mutate(toRegisterPayload(values), {
       onSuccess: () => {
         toast.success(t('register.success'))
         void navigate(ROUTES.login)
       },
       onError: (error) => {
-        getRegisterFieldErrors(error).forEach(({ field, key }) =>
-          form.setError(field, { message: key }, { shouldFocus: true }))
+        getRegisterFieldErrors(error).forEach(({ field, key }) => {
+          form.setError(field, { message: key }, { shouldFocus: true })
+        })
       },
-    }))
+    })
+  })
+
+  const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+    void submit(event)
+  }
 
   const hasFieldErrors = register.isError && getRegisterFieldErrors(register.error).length > 0
 

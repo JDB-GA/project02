@@ -1,13 +1,14 @@
-import { useState, type ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group'
+import { usePasswordVisibility } from '../hooks/usePasswordVisibility'
 
 type PasswordInputProps = Omit<ComponentProps<typeof InputGroupInput>, 'type'>
 
 export function PasswordInput(props: PasswordInputProps) {
   const { t } = useTranslation('auth')
-  const [isVisible, setIsVisible] = useState(false)
+  const { isVisible, toggleVisibility } = usePasswordVisibility()
 
   return (
     <InputGroup>
@@ -17,7 +18,7 @@ export function PasswordInput(props: PasswordInputProps) {
           size="icon-xs"
           aria-label={t(isVisible ? 'password.hide' : 'password.show')}
           aria-pressed={isVisible}
-          onClick={() => setIsVisible((visible) => !visible)}
+          onClick={toggleVisibility}
         >
           {isVisible ? <EyeOffIcon /> : <EyeIcon />}
         </InputGroupButton>

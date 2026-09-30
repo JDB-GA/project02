@@ -1,3 +1,4 @@
+import type { SubmitEvent } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from '../schemas/login.schema'
@@ -15,7 +16,11 @@ export function useLoginForm() {
     mode: 'onTouched',
   })
 
-  const onSubmit = form.handleSubmit((values) => login.mutate(values))
+  const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+    void form.handleSubmit((values) => {
+      login.mutate(values)
+    })(event)
+  }
 
   return {
     form,

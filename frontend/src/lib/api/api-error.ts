@@ -6,7 +6,7 @@ export class ApiError extends Error {
   readonly fieldErrors: Readonly<Record<string, string>>
 
   constructor(status: number, problem: ProblemDetail) {
-    super(problem.detail ?? `Request failed with status ${status}`)
+    super(problem.detail ?? `Request failed with status ${String(status)}`)
     this.name = 'ApiError'
     this.status = status
     this.code = problem.code
