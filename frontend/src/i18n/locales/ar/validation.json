@@ -13,5 +13,6 @@
   "passwordTooLong": "يجب ألا تتجاوز كلمة المرور {{passwordMax}} حرفاً",
   "confirmPasswordRequired": "أكّد كلمة المرور",
   "passwordsMismatch": "كلمتا المرور غير متطابقتين",
-  "invalid": "هذه القيمة غير صالحة"
+  "invalid": "هذه القيمة غير صالحة",
+  "otpInvalid": "أدخل الرمز المكوّن من {{otpLength}} أرقام"
 }

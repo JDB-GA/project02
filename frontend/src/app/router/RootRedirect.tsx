@@ -1,14 +1,15 @@
-import { Navigate, Outlet } from 'react-router'
+import { Navigate } from 'react-router'
 import { FullPageSpinner } from '@/components/FullPageSpinner'
+import { ROUTES } from '@/config/routes'
 import { useCurrentUser } from '@/features/auth/hooks/useCurrentUser'
 import { getLandingRoute } from './get-landing-route'
 
-export function GuestRoute() {
+export function RootRedirect() {
   const { data: user, isPending } = useCurrentUser()
 
   if (isPending) {
     return <FullPageSpinner />
   }
 
-  return user ? <Navigate to={getLandingRoute(user)} replace /> : <Outlet />
+  return <Navigate to={user ? getLandingRoute(user) : ROUTES.login} replace />
 }

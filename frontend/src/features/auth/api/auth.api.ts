@@ -3,7 +3,7 @@ import { HTTP_STATUS } from '@/lib/api/http.constants'
 import { requestJson, requestVoid } from '@/lib/api/http-client'
 import { AUTH_ENDPOINTS } from '../constants/auth.constants'
 import { userSchema } from '../schemas/user.schema'
-import type { LoginPayload, RegisterPayload } from '../types/auth.types'
+import type { LoginPayload, RegisterPayload, VerifyEmailPayload } from '../types/auth.types'
 import type { User } from '../types/user.types'
 
 export const authApi = {
@@ -14,6 +14,11 @@ export const authApi = {
     requestJson(AUTH_ENDPOINTS.register, userSchema, { method: 'POST', body: payload }),
 
   logout: (): Promise<void> => requestVoid(AUTH_ENDPOINTS.logout, { method: 'POST' }),
+
+  verifyEmail: (payload: VerifyEmailPayload): Promise<User> =>
+    requestJson(AUTH_ENDPOINTS.verifyEmail, userSchema, { method: 'POST', body: payload }),
+
+  resendVerification: (): Promise<void> => requestVoid(AUTH_ENDPOINTS.resendVerification, { method: 'POST' }),
 
   getCurrentUser: async (signal?: AbortSignal): Promise<User | null> => {
     try {

@@ -13,5 +13,6 @@
   "passwordTooLong": "Password must be at most {{passwordMax}} characters",
   "confirmPasswordRequired": "Confirm your password",
   "passwordsMismatch": "Passwords do not match",
-  "invalid": "This value is invalid"
+  "invalid": "This value is invalid",
+  "otpInvalid": "Enter the {{otpLength}}-digit code"
 }

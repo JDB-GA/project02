@@ -1,5 +1,7 @@
 import type { z } from 'zod'
 import { env } from '@/config/env'
+import i18n from '@/i18n'
+import { DEFAULT_LANGUAGE } from '@/i18n/languages'
 import { ApiError } from './api-error'
 import { CONTENT_TYPE_JSON } from './http.constants'
 import type { ProblemDetail, RequestOptions } from './http.types'
@@ -12,9 +14,13 @@ async function parseProblem(response: Response): Promise<ProblemDetail> {
 }
 
 async function send(path: string, { method = 'GET', body, signal }: RequestOptions): Promise<Response> {
-  const headers: HeadersInit = body === undefined
-    ? { Accept: CONTENT_TYPE_JSON }
-    : { Accept: CONTENT_TYPE_JSON, 'Content-Type': CONTENT_TYPE_JSON }
+  const headers: Record<string, string> = {
+    Accept: CONTENT_TYPE_JSON,
+    'Accept-Language': i18n.resolvedLanguage ?? DEFAULT_LANGUAGE,
+  }
+  if (body !== undefined) {
+    headers['Content-Type'] = CONTENT_TYPE_JSON
+  }
 
   const response = await fetch(`${env.apiUrl}${path}`, {
     method,

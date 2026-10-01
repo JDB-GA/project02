@@ -3,6 +3,10 @@ export interface LoginPayload {
   password: string
 }
 
+export interface VerifyEmailPayload {
+  code: string
+}
+
 export interface RegisterPayload {
   email: string
   mobileNumber: string

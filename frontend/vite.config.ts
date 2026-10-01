@@ -16,4 +16,16 @@ export default defineConfig({
       '@': path.resolve(import.meta.dirname, './src'),
     },
   },
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            { name: 'react-vendor', test: /node_modules[\\/](react|react-dom|react-router|scheduler)[\\/]/, priority: 20 },
+            { name: 'vendor', test: /node_modules[\\/]/, priority: 10 },
+          ],
+        },
+      },
+    },
+  },
 })

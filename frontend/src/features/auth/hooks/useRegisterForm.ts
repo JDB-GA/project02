@@ -2,9 +2,7 @@ import type { SubmitEvent } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
-import { ROUTES } from '@/config/routes'
 import { registerSchema } from '../schemas/register.schema'
 import type { RegisterFormValues } from '../types/auth-form.types'
 import { getErrorKey } from '../utils/get-error-key'
@@ -16,7 +14,6 @@ const DEFAULT_VALUES: RegisterFormValues = { email: '', mobileNumber: '', passwo
 
 export function useRegisterForm() {
   const { t } = useTranslation('auth')
-  const navigate = useNavigate()
   const register = useRegister()
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -28,7 +25,6 @@ export function useRegisterForm() {
     register.mutate(toRegisterPayload(values), {
       onSuccess: () => {
         toast.success(t('register.success'))
-        void navigate(ROUTES.login)
       },
       onError: (error) => {
         getRegisterFieldErrors(error).forEach(({ field, key }) => {

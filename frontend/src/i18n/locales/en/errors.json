@@ -8,5 +8,11 @@
   "NOT_FOUND": "The requested resource was not found",
   "network": "Unable to reach the server. Check your connection and try again",
   "server": "Something went wrong on our side. Please try again later",
-  "unexpected": "Something went wrong. Please try again"
+  "unexpected": "Something went wrong. Please try again",
+  "EMAIL_ALREADY_VERIFIED": "Your email is already verified",
+  "OTP_NOT_FOUND": "No active code. Please request a new one",
+  "OTP_INVALID": "Incorrect code. Please try again",
+  "OTP_EXPIRED": "This code has expired. Please request a new one",
+  "OTP_ATTEMPTS_EXCEEDED": "Too many incorrect attempts. Please request a new code",
+  "OTP_RESEND_COOLDOWN": "Please wait before requesting a new code"
 }
