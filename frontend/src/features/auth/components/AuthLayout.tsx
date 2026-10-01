@@ -15,12 +15,12 @@ export function AuthLayout({ title, description, footer, children }: AuthLayoutP
   const { t } = useTranslation()
 
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center bg-muted p-4 md:p-10">
+    <main className="flex min-h-svh flex-col items-center justify-center bg-linear-to-b from-secondary to-background p-4 md:p-10">
       <PageTitle title={title} />
       <div className="flex w-full max-w-sm flex-col gap-6">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2 font-medium">
-            <WalletIcon className="size-5" aria-hidden="true" />
+            <WalletIcon className="size-5 text-primary" aria-hidden="true" />
             {t('appName')}
           </span>
           <LanguageSwitcher />

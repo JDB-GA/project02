@@ -9,7 +9,7 @@ export function AppLayout() {
       <AppSidebar />
       <SidebarInset>
         <AppHeader />
-        <div className="flex flex-1 flex-col p-4 md:p-6">
+        <div className="flex flex-1 flex-col bg-muted p-4 md:p-6">
           <Outlet />
         </div>
       </SidebarInset>

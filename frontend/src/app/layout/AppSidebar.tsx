@@ -13,7 +13,7 @@ export function AppSidebar() {
     <Sidebar side={direction === 'rtl' ? 'right' : 'left'} collapsible="icon">
       <SidebarHeader>
         <div className="flex items-center gap-2 px-2 py-1.5 font-semibold">
-          <WalletIcon className="size-5 shrink-0" aria-hidden="true" />
+          <WalletIcon className="size-5 shrink-0 text-primary" aria-hidden="true" />
           <span className="truncate group-data-[collapsible=icon]:hidden">{t('appName')}</span>
         </div>
       </SidebarHeader>
