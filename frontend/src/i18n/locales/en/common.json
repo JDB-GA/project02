@@ -29,5 +29,10 @@
       "title": "Admin",
       "heading": "Welcome to the admin dashboard"
     }
+  },
+  "nav": {
+    "menu": "Menu",
+    "account": "Account options",
+    "toggleSidebar": "Toggle sidebar"
   }
 }
