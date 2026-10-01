@@ -43,7 +43,7 @@ public class User {
     private boolean emailVerified = false;
 
     @Column(nullable = false)
-    private boolean mobileVerified = false;
+    private boolean mobileVerified = true;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

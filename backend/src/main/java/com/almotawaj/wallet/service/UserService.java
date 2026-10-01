@@ -20,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Locale;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -27,9 +29,10 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
+    private final EmailVerificationService emailVerificationService;
 
     @Transactional
-    public UserResponse register(RegisterRequest request) {
+    public LoginResult register(RegisterRequest request, Locale locale) {
         String email = LoginIdentifier.normalizeEmail(request.email());
         String mobileNumber = LoginIdentifier.normalizeMobile(request.mobileNumber());
 
@@ -45,10 +48,13 @@ public class UserService {
         user.setMobileNumber(mobileNumber);
         user.setPassword(passwordEncoder.encode(request.password()));
 
-        return UserResponse.from(userRepository.save(user));
+        User saved = userRepository.save(user);
+        emailVerificationService.sendCode(saved, locale);
+
+        return new LoginResult(jwtUtils.generateToken(new MyUserDetails(saved)), UserResponse.from(saved));
     }
 
-    public LoginResult login(LoginRequest request) {
+    public LoginResult login(LoginRequest request, Locale locale) {
         String identifier = LoginIdentifier.normalize(request.identifier());
         Authentication authentication = authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken.unauthenticated(identifier, request.password()));
@@ -56,6 +62,8 @@ public class UserService {
         if (!(authentication.getPrincipal() instanceof MyUserDetails userDetails)) {
             throw new IllegalStateException(ErrorMessages.UNEXPECTED_PRINCIPAL);
         }
+
+        emailVerificationService.sendCodeIfNoneActive(userDetails.user(), locale);
 
         return new LoginResult(jwtUtils.generateToken(userDetails), UserResponse.from(userDetails.user()));
     }

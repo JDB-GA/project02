@@ -1,2 +1,2 @@
-spring.application.name=wallet
+spring.application.name=digital-wallet
 spring.profiles.active=dev

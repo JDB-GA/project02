@@ -1,5 +1,3 @@
-spring.application.name=digital-wallet
-server.port=8080
 server.error.include-stacktrace=ALWAYS
 spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url=jdbc:postgresql://localhost:5432/digital-wallet
@@ -11,3 +9,19 @@ jwt-secret=YOUR_JWT_SECRET
 jwt-expiration-ms=86400000
 auth-cookie-secure=false
 cors-allowed-origins=http://localhost:5173
+
+spring.mail.host=smtp.resend.com
+spring.mail.port=587
+spring.mail.username=resend
+spring.mail.password=YOUR_RESEND_API_KEY
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+spring.mail.properties.mail.smtp.connectiontimeout=5000
+spring.mail.properties.mail.smtp.timeout=5000
+spring.mail.properties.mail.smtp.writetimeout=5000
+
+spring.messages.fallback-to-system-locale=false
+otp-secret=YOUR_OTP_SECRET
+mail-from=Digital Wallet <onboarding@resend.dev>
+mail-logo-url=https://almotawaj.com/logo/logo.png

@@ -13,7 +13,10 @@ import java.util.List;
 public record MyUserDetails(User user) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(SecurityConstants.ROLE_PREFIX + user.getRole().name()));
+        SimpleGrantedAuthority role = new SimpleGrantedAuthority(SecurityConstants.ROLE_PREFIX + user.getRole().name());
+        return user.isEmailVerified()
+                ? List.of(role, new SimpleGrantedAuthority(SecurityConstants.EMAIL_VERIFIED_AUTHORITY))
+                : List.of(role);
     }
 
     @Override

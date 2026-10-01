@@ -1,6 +1,7 @@
 package com.almotawaj.wallet.config.security;
 
 import com.almotawaj.wallet.config.constants.ApiPaths;
+import com.almotawaj.wallet.config.constants.SecurityConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +42,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, ApiPaths.AUTH_REGISTER, ApiPaths.AUTH_LOGIN, ApiPaths.AUTH_LOGOUT).permitAll()
                         .requestMatchers(ApiPaths.ERROR).permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(HttpMethod.GET, ApiPaths.AUTH_ME).authenticated()
+                        .requestMatchers(HttpMethod.POST, ApiPaths.AUTH_VERIFY_EMAIL, ApiPaths.AUTH_RESEND_VERIFICATION).authenticated()
+                        .anyRequest().hasAuthority(SecurityConstants.EMAIL_VERIFIED_AUTHORITY))
                 .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

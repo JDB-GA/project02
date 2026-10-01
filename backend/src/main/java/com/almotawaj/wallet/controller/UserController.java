@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Locale;
+
 @RestController
 @RequestMapping(ApiPaths.AUTH_USERS)
 @RequiredArgsConstructor
@@ -24,17 +26,13 @@ public class UserController {
     private final AuthCookieFactory authCookieFactory;
 
     @PostMapping(ApiPaths.REGISTER)
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse register(@Valid @RequestBody RegisterRequest request) {
-        return userService.register(request);
+    public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request, Locale locale) {
+        return withAuthCookie(ResponseEntity.status(HttpStatus.CREATED), userService.register(request, locale));
     }
 
     @PostMapping(ApiPaths.LOGIN)
-    public ResponseEntity<UserResponse> login(@Valid @RequestBody LoginRequest request) {
-        LoginResult result = userService.login(request);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.SET_COOKIE, authCookieFactory.create(result.token()).toString())
-                .body(result.user());
+    public ResponseEntity<UserResponse> login(@Valid @RequestBody LoginRequest request, Locale locale) {
+        return withAuthCookie(ResponseEntity.ok(), userService.login(request, locale));
     }
 
     @PostMapping(ApiPaths.LOGOUT)
@@ -47,5 +45,11 @@ public class UserController {
     @GetMapping(ApiPaths.ME)
     public UserResponse me(@AuthenticationPrincipal MyUserDetails userDetails) {
         return UserResponse.from(userDetails.user());
+    }
+
+    private ResponseEntity<UserResponse> withAuthCookie(ResponseEntity.BodyBuilder builder, LoginResult result) {
+        return builder
+                .header(HttpHeaders.SET_COOKIE, authCookieFactory.create(result.token()).toString())
+                .body(result.user());
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -48,12 +49,26 @@ public class GlobalExceptionHandler {
         return problem(HttpStatus.NOT_FOUND, e.getMessage(), ErrorCodes.NOT_FOUND);
     }
 
+    @ExceptionHandler(OtpVerificationException.class)
+    public ProblemDetail handleOtpVerification(OtpVerificationException e) {
+        return problem(HttpStatus.BAD_REQUEST, e.getMessage(), e.getCode());
+    }
+
     @ExceptionHandler(RateLimitExceededException.class)
     public ResponseEntity<ProblemDetail> handleRateLimit(RateLimitExceededException e) {
-        long retryAfterSeconds = Math.max(1, e.getRetryAfter().toSeconds());
+        return tooManyRequests(e.getRetryAfter(), ErrorMessages.TOO_MANY_REQUESTS, ErrorCodes.TOO_MANY_REQUESTS);
+    }
+
+    @ExceptionHandler(OtpResendCooldownException.class)
+    public ResponseEntity<ProblemDetail> handleOtpResendCooldown(OtpResendCooldownException e) {
+        return tooManyRequests(e.getRetryAfter(), ErrorMessages.OTP_RESEND_COOLDOWN, ErrorCodes.OTP_RESEND_COOLDOWN);
+    }
+
+    private static ResponseEntity<ProblemDetail> tooManyRequests(Duration retryAfter, String detail, String code) {
+        long retryAfterSeconds = Math.max(1, retryAfter.toSeconds());
         return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
                 .header(HttpHeaders.RETRY_AFTER, String.valueOf(retryAfterSeconds))
-                .body(problem(HttpStatus.TOO_MANY_REQUESTS, ErrorMessages.TOO_MANY_REQUESTS, ErrorCodes.TOO_MANY_REQUESTS));
+                .body(problem(HttpStatus.TOO_MANY_REQUESTS, detail, code));
     }
 
     private static ProblemDetail problem(HttpStatus status, String detail, String code) {
