@@ -24,6 +24,6 @@ build/
 !**/src/test/**/build/
 
 ### App config (contains secrets) ###
-src/main/resources/application.properties
 src/main/resources/application-*.properties
+!src/main/resources/application-prod.properties
 !src/main/resources/*.properties.example
