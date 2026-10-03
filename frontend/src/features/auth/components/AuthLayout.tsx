@@ -1,6 +1,6 @@
 import type { PropsWithChildren, ReactNode } from 'react'
-import { WalletIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { AppLogo } from '@/components/AppLogo'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { PageTitle } from '@/components/PageTitle'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -20,7 +20,7 @@ export function AuthLayout({ title, description, footer, children }: AuthLayoutP
       <div className="flex w-full max-w-sm flex-col gap-6">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2 font-medium">
-            <WalletIcon className="size-5 text-primary" aria-hidden="true" />
+            <AppLogo />
             {t('appName')}
           </span>
           <LanguageSwitcher />
