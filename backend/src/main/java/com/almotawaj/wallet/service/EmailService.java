@@ -4,36 +4,33 @@ import com.almotawaj.wallet.config.constants.LocaleConstants;
 import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.config.constants.MailConstants;
 import com.almotawaj.wallet.config.constants.OtpConstants;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import com.resend.Resend;
+import com.resend.core.exception.ResendException;
+import com.resend.services.emails.model.CreateEmailOptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.mail.MailException;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.Context;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.UUID;
 
 @Slf4j
 @Service
 public class EmailService {
-    private final JavaMailSender mailSender;
+    private final Resend resend;
     private final MessageSource messageSource;
     private final ITemplateEngine templateEngine;
     private final String fromAddress;
     private final String logoUrl;
 
-    public EmailService(JavaMailSender mailSender, MessageSource messageSource, ITemplateEngine templateEngine,
+    public EmailService(Resend resend, MessageSource messageSource, ITemplateEngine templateEngine,
                         @Value(MailConstants.FROM_PROPERTY) String fromAddress,
                         @Value(MailConstants.LOGO_URL_PROPERTY) String logoUrl) {
-        this.mailSender = mailSender;
+        this.resend = resend;
         this.messageSource = messageSource;
         this.templateEngine = templateEngine;
         this.fromAddress = fromAddress;
@@ -43,14 +40,14 @@ public class EmailService {
     @Async
     public void sendVerificationCode(UUID userId, String to, String code, Locale locale) {
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
-            helper.setFrom(fromAddress);
-            helper.setTo(to);
-            helper.setSubject(messageSource.getMessage(MailConstants.VERIFICATION_SUBJECT_KEY, null, locale));
-            helper.setText(renderPlainText(code, locale), renderHtml(code, locale));
-            mailSender.send(message);
-        } catch (MessagingException | MailException e) {
+            resend.emails().send(CreateEmailOptions.builder()
+                    .from(fromAddress)
+                    .to(to)
+                    .subject(messageSource.getMessage(MailConstants.VERIFICATION_SUBJECT_KEY, null, locale))
+                    .text(renderPlainText(code, locale))
+                    .html(renderHtml(code, locale))
+                    .build());
+        } catch (ResendException e) {
             log.error(LogMessages.EMAIL_SEND_FAILED, userId, e);
         }
     }

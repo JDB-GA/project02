@@ -1,6 +1,7 @@
 package com.almotawaj.wallet.config.constants;
 
 public final class MailConstants {
+    public static final String API_KEY_PROPERTY = "${resend-api-key}";
     public static final String FROM_PROPERTY = "${mail-from}";
     public static final String VERIFICATION_SUBJECT_KEY = "email.verification.subject";
     public static final String VERIFICATION_BODY_KEY = "email.verification.body";

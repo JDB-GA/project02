@@ -25,6 +25,7 @@
         <!-- JWT -->
         <jjwt.version>0.12.6</jjwt.version>
         <bucket4j.version>8.14.0</bucket4j.version>
+        <resend.version>4.4.0</resend.version>
     </properties>
 
     <dependencies>
@@ -81,8 +82,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
+            <groupId>com.resend</groupId>
+            <artifactId>resend-java</artifactId>
+            <version>${resend.version}</version>
         </dependency>
 
         <dependency>
