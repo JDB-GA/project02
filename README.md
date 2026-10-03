@@ -42,7 +42,7 @@ cd backend
    - `jwt-secret` — a random 256-bit hex string (`openssl rand -hex 32`)
    - `cors-allowed-origins` — the frontend URL (`http://localhost:5173` in dev)
    - `otp-secret` — a random 256-bit hex string, different from `jwt-secret` (`openssl rand -hex 32`)
-   - `spring.mail.*` and `mail-from` — your email provider's SMTP settings and sender address
+   - `resend-api-key` and `mail-from` — your Resend API key and verified sender address
 
    These files are gitignored; never commit real credentials.
 
@@ -67,13 +67,7 @@ java -jar target/wallet-*.jar
 
 ### Production
 
-Copy the production example:
-
-```bash
-cp src/main/resources/application-prod.properties.example src/main/resources/application-prod.properties
-```
-
-It reads every secret from environment variables, so no real values live in the file. Set these on the server:
+`application-prod.properties` is committed. It reads every secret from environment variables, so no real values live in the file. Set these on the server:
 
 | Variable                 | Example                                              |
 | ------------------------ | ---------------------------------------------------- |
@@ -85,10 +79,7 @@ It reads every secret from environment variables, so no real values live in the 
 | `JWT_EXPIRATION_MS`      | optional, defaults to `86400000` (24h)               |
 | `CORS_ALLOWED_ORIGINS`   | `https://wallet.example.com` (comma-separated list)  |
 | `OTP_SECRET`             | output of `openssl rand -hex 32`, different from JWT |
-| `MAIL_HOST`              | optional, defaults to `smtp.resend.com`              |
-| `MAIL_PORT`              | optional, defaults to `587`                          |
-| `MAIL_USERNAME`          | optional, defaults to `resend`                       |
-| `MAIL_PASSWORD`          | Resend API key (`re_...`)                            |
+| `RESEND_API_KEY`         | Resend API key (`re_...`)                            |
 | `MAIL_FROM`              | `Digital Wallet <no-reply@yourdomain.com>`           |
 | `MAIL_LOGO_URL`          | optional, defaults to `https://almotawaj.com/logo/logo.png` |
 | `PORT`                   | optional, defaults to `8080`                         |
