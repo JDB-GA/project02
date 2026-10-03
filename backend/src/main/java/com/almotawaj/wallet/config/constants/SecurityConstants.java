@@ -19,6 +19,10 @@ public final class SecurityConstants {
     public static final List<String> CORS_ALLOWED_HEADERS = List.of("Content-Type", "Accept", "Authorization");
     public static final long CORS_MAX_AGE_SECONDS = 3600;
 
+    public static final String CONTENT_SECURITY_POLICY = "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'";
+    public static final String PERMISSIONS_POLICY = "camera=(), microphone=(), geolocation=(), payment=(), usb=()";
+    public static final long HSTS_MAX_AGE_SECONDS = 63072000;
+
     private SecurityConstants() {
     }
 }
