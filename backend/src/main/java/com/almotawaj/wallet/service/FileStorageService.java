@@ -6,7 +6,7 @@ import com.almotawaj.wallet.exception.FileStorageException;
 import com.almotawaj.wallet.model.FileType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.PathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionSynchronization;
@@ -41,7 +41,7 @@ public class FileStorageService {
     }
 
     public Resource load(String key) {
-        return new PathResource(resolve(key));
+        return new FileSystemResource(resolve(key));
     }
 
     private void deleteOnRollback(String key) {

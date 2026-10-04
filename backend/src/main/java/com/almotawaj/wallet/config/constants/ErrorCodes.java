@@ -8,6 +8,7 @@ public final class ErrorCodes {
     public static final String MOBILE_ALREADY_REGISTERED = "MOBILE_ALREADY_REGISTERED";
     public static final String DATA_CONFLICT = "DATA_CONFLICT";
     public static final String NOT_FOUND = "NOT_FOUND";
+    public static final String ACCESS_DENIED = "ACCESS_DENIED";
     public static final String TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS";
     public static final String EMAIL_ALREADY_VERIFIED = "EMAIL_ALREADY_VERIFIED";
     public static final String OTP_NOT_FOUND = "OTP_NOT_FOUND";
