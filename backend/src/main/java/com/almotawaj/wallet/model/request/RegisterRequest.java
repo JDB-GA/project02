@@ -8,7 +8,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record RegisterRequest(
+public record
+RegisterRequest(
         @NotBlank(message = ErrorMessages.EMAIL_REQUIRED)
         @Email(message = ErrorMessages.EMAIL_INVALID)
         @Size(max = ValidationLimits.EMAIL_MAX, message = ErrorMessages.EMAIL_TOO_LONG)

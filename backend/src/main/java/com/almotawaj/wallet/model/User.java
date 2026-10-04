@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -38,6 +39,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private UserStatus status = UserStatus.ACTIVE;
+
+    @Enumerated(EnumType.STRING)
+    @ColumnDefault("'NOT_SUBMITTED'")
+    @Column(nullable = false, length = 20)
+    private KycStatus kycStatus = KycStatus.NOT_SUBMITTED;
 
     @Column(nullable = false)
     private boolean emailVerified = false;
