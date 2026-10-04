@@ -16,3 +16,5 @@ spring.messages.fallback-to-system-locale=false
 otp-secret=YOUR_OTP_SECRET
 mail-from=Digital Wallet <onboarding@resend.dev>
 mail-logo-url=https://almotawaj.com/logo/logo.png
+
+storage-root=uploads

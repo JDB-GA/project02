@@ -27,3 +27,6 @@ build/
 src/main/resources/application-*.properties
 !src/main/resources/application-prod.properties
 !src/main/resources/*.properties.example
+
+### Uploaded files ###
+uploads/

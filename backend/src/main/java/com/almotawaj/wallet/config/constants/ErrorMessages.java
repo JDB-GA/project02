@@ -11,6 +11,22 @@ public final class ErrorMessages {
     public static final String PASSWORD_LENGTH = "Password must be between {min} and {max} characters";
     public static final String OTP_REQUIRED = "Verification code is required";
     public static final String OTP_FORMAT_INVALID = "Verification code must be 6 digits";
+    public static final String FULL_NAME_REQUIRED = "Full name is required";
+    public static final String FULL_NAME_INVALID = "Full name may only contain letters, spaces, dots, apostrophes and hyphens";
+    public static final String FULL_NAME_TOO_LONG = "Full name must be at most {max} characters";
+    public static final String CPR_REQUIRED = "CPR number is required";
+    public static final String CPR_INVALID = "CPR number must be 9 digits";
+    public static final String DATE_OF_BIRTH_REQUIRED = "Date of birth is required";
+    public static final String DATE_OF_BIRTH_PAST = "Date of birth must be in the past";
+    public static final String NATIONALITY_REQUIRED = "Nationality is required";
+    public static final String NATIONALITY_INVALID = "Nationality must be a 2-letter country code";
+    public static final String BLOCK_INVALID = "Block must be 1 to 4 digits";
+    public static final String ROAD_INVALID = "Road must be 1 to 5 digits";
+    public static final String BUILDING_INVALID = "Building must be 1 to 6 letters or digits";
+    public static final String FLAT_INVALID = "Flat must be 1 to 6 letters or digits";
+    public static final String AREA_REQUIRED = "Area is required";
+    public static final String AREA_TOO_LONG = "Area must be at most {max} characters";
+    public static final String EXPIRY_DATE_REQUIRED = "Expiry date is required";
 
     public static final String VALIDATION_FAILED = "Validation failed";
     public static final String VALIDATION_ERRORS_KEY = "errors";
@@ -25,6 +41,16 @@ public final class ErrorMessages {
     public static final String OTP_EXPIRED = "Verification code has expired, request a new one";
     public static final String OTP_ATTEMPTS_EXCEEDED = "Too many incorrect attempts, request a new code";
     public static final String OTP_RESEND_COOLDOWN = "Please wait before requesting a new code";
+    public static final String KYC_ALREADY_PENDING = "You already have a verification request under review";
+    public static final String KYC_ALREADY_APPROVED = "Your identity is already verified";
+    public static final String CPR_ALREADY_USED = "This CPR number is already used by another account";
+    public static final String KYC_UNDERAGE = "You must be at least 18 years old";
+    public static final String DOCUMENT_EXPIRED = "Identity documents must not be expired";
+    public static final String FILE_REQUIRED = "File is required";
+    public static final String FILE_TYPE_INVALID = "File type is not allowed";
+    public static final String FILE_TOO_LARGE = "File is larger than the allowed size";
+    public static final String KYC_NOT_FOUND = "No verification request found";
+    public static final String DOCUMENT_NOT_FOUND = "Document not found";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String UNEXPECTED_PRINCIPAL = "Unexpected principal type after authentication";

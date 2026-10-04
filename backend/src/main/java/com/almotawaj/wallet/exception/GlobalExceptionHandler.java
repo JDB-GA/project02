@@ -11,6 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.time.Duration;
 import java.util.LinkedHashMap;
@@ -52,6 +53,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(OtpVerificationException.class)
     public ProblemDetail handleOtpVerification(OtpVerificationException e) {
         return problem(HttpStatus.BAD_REQUEST, e.getMessage(), e.getCode());
+    }
+
+    @ExceptionHandler(BusinessRuleException.class)
+    public ProblemDetail handleBusinessRule(BusinessRuleException e) {
+        return problem(HttpStatus.UNPROCESSABLE_CONTENT, e.getMessage(), e.getCode());
+    }
+
+    @ExceptionHandler(InvalidFileException.class)
+    public ProblemDetail handleInvalidFile(InvalidFileException e) {
+        return problem(HttpStatus.BAD_REQUEST, e.getMessage(), e.getCode());
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ProblemDetail handleUploadTooLarge(MaxUploadSizeExceededException e) {
+        return problem(HttpStatus.CONTENT_TOO_LARGE, ErrorMessages.FILE_TOO_LARGE, ErrorCodes.FILE_TOO_LARGE);
     }
 
     @ExceptionHandler(RateLimitExceededException.class)

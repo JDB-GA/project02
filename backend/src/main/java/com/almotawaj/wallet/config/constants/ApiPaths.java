@@ -14,6 +14,8 @@ public final class ApiPaths {
     public static final String AUTH_ME = AUTH_USERS + ME;
     public static final String AUTH_VERIFY_EMAIL = AUTH_USERS + VERIFY_EMAIL;
     public static final String AUTH_RESEND_VERIFICATION = AUTH_USERS + RESEND_VERIFICATION;
+    public static final String KYC = "/api/kyc";
+    public static final String MY_KYC_DOCUMENT = "/me/documents/{documentId}";
     public static final String ERROR = "/error";
     public static final String ALL = "/**";
 
