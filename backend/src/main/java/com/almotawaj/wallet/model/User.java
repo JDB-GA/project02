@@ -11,6 +11,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -44,6 +46,13 @@ public class User {
     @ColumnDefault("'NOT_SUBMITTED'")
     @Column(nullable = false, length = 20)
     private KycStatus kycStatus = KycStatus.NOT_SUBMITTED;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = DatabaseTables.USER_PERMISSIONS, joinColumns = @JoinColumn(name = "user_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "permission"}))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "permission", nullable = false, length = 40)
+    private Set<Permission> permissions = new HashSet<>();
 
     @Column(nullable = false)
     private boolean emailVerified = false;
