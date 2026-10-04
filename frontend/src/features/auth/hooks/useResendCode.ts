@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { useCountdown } from '@/hooks/useCountdown'
 import { RESEND_COOLDOWN_SECONDS } from '../constants/auth.constants'
-import { getErrorKey } from '../utils/get-error-key'
+import { getErrorKey } from '@/lib/api/get-error-key'
 import { useResendVerification } from './useResendVerification'
 
 export function useResendCode() {

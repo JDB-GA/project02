@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from '../schemas/login.schema'
 import type { LoginFormValues } from '../types/auth-form.types'
-import { getErrorKey } from '../utils/get-error-key'
+import { getErrorKey } from '@/lib/api/get-error-key'
 import { useLogin } from './useLogin'
 
 const DEFAULT_VALUES: LoginFormValues = { identifier: '', password: '' }

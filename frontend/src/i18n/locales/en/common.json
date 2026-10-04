@@ -28,11 +28,20 @@
     "admin": {
       "title": "Admin",
       "heading": "Welcome to the admin dashboard"
+    },
+    "verification": {
+      "title": "Identity Verification",
+      "heading": "Verify your identity"
     }
   },
   "nav": {
     "menu": "Menu",
     "account": "Account options",
     "toggleSidebar": "Toggle sidebar"
+  },
+  "fileInput": {
+    "choose": "Choose file",
+    "replace": "Replace file",
+    "empty": "No file selected"
   }
 }

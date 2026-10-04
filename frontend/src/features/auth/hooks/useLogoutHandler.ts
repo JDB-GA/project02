@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-import { getErrorKey } from '../utils/get-error-key'
+import { getErrorKey } from '@/lib/api/get-error-key'
 import { useLogout } from './useLogout'
 
 export function useLogoutHandler() {

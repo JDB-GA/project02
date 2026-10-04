@@ -8,7 +8,7 @@ import { isApiError } from '@/lib/api/api-error'
 import { AUTH_QUERY_KEYS } from '../constants/auth.constants'
 import { verifyEmailSchema } from '../schemas/verify-email.schema'
 import type { VerifyEmailFormValues } from '../types/auth-form.types'
-import { getErrorKey } from '../utils/get-error-key'
+import { getErrorKey } from '@/lib/api/get-error-key'
 import { useVerifyEmail } from './useVerifyEmail'
 
 const ALREADY_VERIFIED_CODE = 'EMAIL_ALREADY_VERIFIED'

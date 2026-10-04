@@ -1,0 +1,70 @@
+{
+  "form": {
+    "personalTitle": "Personal information",
+    "personalDescription": "Enter your details exactly as they appear on your CPR card.",
+    "addressTitle": "Address",
+    "addressDescription": "Your current residential address in Bahrain.",
+    "documentsTitle": "Documents",
+    "documentsDescription": "Upload clear copies. Identity documents must be valid.",
+    "submit": "Submit for review",
+    "success": "Your verification request was submitted for review."
+  },
+  "fields": {
+    "fullName": "Full name",
+    "fullNamePlaceholder": "As shown on your CPR",
+    "cprNumber": "CPR number",
+    "cprPlaceholder": "990101234",
+    "dateOfBirth": "Date of birth",
+    "nationality": "Nationality",
+    "nationalityPlaceholder": "Select nationality",
+    "block": "Block",
+    "road": "Road",
+    "building": "Building",
+    "flat": "Flat (optional)",
+    "area": "Area",
+    "areaPlaceholder": "Manama",
+    "cprFile": "CPR card",
+    "cprExpiryDate": "CPR expiry date",
+    "passportFile": "Passport",
+    "passportExpiryDate": "Passport expiry date",
+    "photo": "Personal photo"
+  },
+  "hints": {
+    "pdf": "PDF only, up to {{maxFileSizeMb}} MB",
+    "image": "JPG or PNG, up to {{maxFileSizeMb}} MB"
+  },
+  "status": {
+    "PENDING": "Under review",
+    "APPROVED": "Verified",
+    "REJECTED": "Rejected"
+  },
+  "statusCard": {
+    "PENDING": "We are reviewing your documents. You will be notified once the review is complete.",
+    "APPROVED": "Your identity is verified. You have full access to your wallet.",
+    "submittedAt": "Submitted",
+    "reviewedAt": "Reviewed"
+  },
+  "rejection": {
+    "title": "Your previous request was rejected",
+    "description": "Please correct the issue below and submit again.",
+    "reasonLabel": "Reason:"
+  },
+  "documents": {
+    "title": "Documents",
+    "download": "Download {{name}}",
+    "expires": "Expires {{date}}",
+    "downloadFailed": "Could not download the document. Please try again.",
+    "CPR": "CPR card",
+    "PASSPORT": "Passport",
+    "PHOTO": "Personal photo"
+  },
+  "prompt": {
+    "title": "Verify your identity",
+    "NOT_SUBMITTED": "Complete identity verification to unlock all wallet features.",
+    "PENDING": "Your verification request is under review.",
+    "REJECTED": "Your verification request was rejected. Please submit again.",
+    "action": "Go to verification"
+  },
+  "loadError": "Could not load your verification status.",
+  "retry": "Try again"
+}

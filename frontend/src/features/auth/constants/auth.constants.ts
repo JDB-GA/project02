@@ -22,10 +22,3 @@ export const OTP_LENGTH = 6
 export const OTP_PATTERN = /^\d{6}$/
 export const RESEND_COOLDOWN_SECONDS = 60
 
-export const VALIDATION_PARAMS = {
-  mobileLength: MOBILE_NUMBER_LENGTH,
-  emailMax: EMAIL_MAX_LENGTH,
-  passwordMin: PASSWORD_MIN_LENGTH,
-  passwordMax: PASSWORD_MAX_LENGTH,
-  otpLength: OTP_LENGTH,
-} as const

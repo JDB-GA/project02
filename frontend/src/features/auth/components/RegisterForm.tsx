@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next'
 import { FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { useRegisterForm } from '../hooks/useRegisterForm'
-import { FormErrorMessage } from './FormErrorMessage'
-import { FormField } from './FormField'
+import { FormErrorMessage } from '@/components/form/FormErrorMessage'
+import { FormField } from '@/components/form/FormField'
 import { MobileNumberInput } from './MobileNumberInput'
 import { PasswordInput } from './PasswordInput'
-import { SubmitButton } from './SubmitButton'
+import { SubmitButton } from '@/components/form/SubmitButton'
 
 export function RegisterForm() {
   const { t } = useTranslation('auth')

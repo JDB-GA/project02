@@ -14,5 +14,14 @@
   "OTP_INVALID": "Incorrect code. Please try again",
   "OTP_EXPIRED": "This code has expired. Please request a new one",
   "OTP_ATTEMPTS_EXCEEDED": "Too many incorrect attempts. Please request a new code",
-  "OTP_RESEND_COOLDOWN": "Please wait before requesting a new code"
+  "OTP_RESEND_COOLDOWN": "Please wait before requesting a new code",
+  "ACCESS_DENIED": "You do not have permission to perform this action",
+  "KYC_ALREADY_PENDING": "Your verification request is already under review",
+  "KYC_ALREADY_APPROVED": "Your identity is already verified",
+  "CPR_ALREADY_USED": "This CPR number is already used by another account",
+  "KYC_UNDERAGE": "You must be at least 18 years old",
+  "DOCUMENT_EXPIRED": "Your identity documents must not be expired",
+  "FILE_REQUIRED": "Please attach all required files",
+  "FILE_TYPE_INVALID": "One of the files has an unsupported type",
+  "FILE_TOO_LARGE": "One of the files is larger than 5 MB"
 }

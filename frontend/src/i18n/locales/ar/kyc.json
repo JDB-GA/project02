@@ -1,0 +1,70 @@
+{
+  "form": {
+    "personalTitle": "المعلومات الشخصية",
+    "personalDescription": "أدخل بياناتك كما تظهر تماماً في بطاقتك الشخصية.",
+    "addressTitle": "العنوان",
+    "addressDescription": "عنوان سكنك الحالي في البحرين.",
+    "documentsTitle": "الوثائق",
+    "documentsDescription": "ارفع نسخاً واضحة. يجب أن تكون وثائق الهوية سارية.",
+    "submit": "إرسال للمراجعة",
+    "success": "تم إرسال طلب التحقق الخاص بك للمراجعة."
+  },
+  "fields": {
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "كما يظهر في البطاقة الشخصية",
+    "cprNumber": "الرقم الشخصي",
+    "cprPlaceholder": "990101234",
+    "dateOfBirth": "تاريخ الميلاد",
+    "nationality": "الجنسية",
+    "nationalityPlaceholder": "اختر الجنسية",
+    "block": "المجمع",
+    "road": "الطريق",
+    "building": "المبنى",
+    "flat": "الشقة (اختياري)",
+    "area": "المنطقة",
+    "areaPlaceholder": "المنامة",
+    "cprFile": "البطاقة الشخصية",
+    "cprExpiryDate": "تاريخ انتهاء البطاقة الشخصية",
+    "passportFile": "جواز السفر",
+    "passportExpiryDate": "تاريخ انتهاء جواز السفر",
+    "photo": "صورة شخصية"
+  },
+  "hints": {
+    "pdf": "PDF فقط، بحد أقصى {{maxFileSizeMb}} ميجابايت",
+    "image": "JPG أو PNG، بحد أقصى {{maxFileSizeMb}} ميجابايت"
+  },
+  "status": {
+    "PENDING": "قيد المراجعة",
+    "APPROVED": "تم التحقق",
+    "REJECTED": "مرفوض"
+  },
+  "statusCard": {
+    "PENDING": "نقوم بمراجعة وثائقك. سيتم إشعارك عند اكتمال المراجعة.",
+    "APPROVED": "تم التحقق من هويتك. لديك وصول كامل إلى محفظتك.",
+    "submittedAt": "تاريخ الإرسال",
+    "reviewedAt": "تاريخ المراجعة"
+  },
+  "rejection": {
+    "title": "تم رفض طلبك السابق",
+    "description": "يرجى تصحيح المشكلة أدناه وإعادة الإرسال.",
+    "reasonLabel": "السبب:"
+  },
+  "documents": {
+    "title": "الوثائق",
+    "download": "تنزيل {{name}}",
+    "expires": "تنتهي في {{date}}",
+    "downloadFailed": "تعذّر تنزيل الوثيقة. يرجى المحاولة مرة أخرى.",
+    "CPR": "البطاقة الشخصية",
+    "PASSPORT": "جواز السفر",
+    "PHOTO": "صورة شخصية"
+  },
+  "prompt": {
+    "title": "تحقق من هويتك",
+    "NOT_SUBMITTED": "أكمل التحقق من الهوية للوصول إلى جميع ميزات المحفظة.",
+    "PENDING": "طلب التحقق الخاص بك قيد المراجعة.",
+    "REJECTED": "تم رفض طلب التحقق الخاص بك. يرجى إعادة الإرسال.",
+    "action": "الانتقال إلى التحقق"
+  },
+  "loadError": "تعذّر تحميل حالة التحقق الخاصة بك.",
+  "retry": "إعادة المحاولة"
+}

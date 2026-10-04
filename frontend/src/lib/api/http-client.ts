@@ -18,7 +18,8 @@ async function send(path: string, { method = 'GET', body, signal }: RequestOptio
     Accept: CONTENT_TYPE_JSON,
     'Accept-Language': i18n.resolvedLanguage ?? DEFAULT_LANGUAGE,
   }
-  if (body !== undefined) {
+  const isFormData = body instanceof FormData
+  if (body !== undefined && !isFormData) {
     headers['Content-Type'] = CONTENT_TYPE_JSON
   }
 
@@ -27,7 +28,7 @@ async function send(path: string, { method = 'GET', body, signal }: RequestOptio
     signal,
     headers,
     credentials: 'include',
-    body: body === undefined ? undefined : JSON.stringify(body),
+    body: isFormData || body === undefined ? body : JSON.stringify(body),
   })
 
   if (!response.ok) {
@@ -48,4 +49,9 @@ export async function requestJson<TSchema extends z.ZodType>(
 
 export async function requestVoid(path: string, options: RequestOptions = {}): Promise<void> {
   await send(path, options)
+}
+
+export async function requestBlob(path: string, options: RequestOptions = {}): Promise<Blob> {
+  const response = await send(path, options)
+  return response.blob()
 }

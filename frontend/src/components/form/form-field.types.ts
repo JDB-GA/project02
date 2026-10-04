@@ -8,9 +8,14 @@ export type FieldControlProps<TValues extends FieldValues, TName extends FieldPa
     'aria-describedby': string | undefined
   }
 
-export interface FormFieldProps<TValues extends FieldValues, TName extends FieldPath<TValues>> {
-  control: Control<TValues>
+export interface FormFieldProps<
+  TValues extends FieldValues,
+  TName extends FieldPath<TValues>,
+  TTransformedValues = TValues,
+> {
+  control: Control<TValues, unknown, TTransformedValues>
   name: TName
   label: string
+  description?: string
   children: (props: FieldControlProps<TValues, TName>) => ReactNode
 }

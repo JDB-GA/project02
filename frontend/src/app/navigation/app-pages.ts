@@ -1,4 +1,4 @@
-import { LayoutDashboardIcon, StoreIcon, WalletIcon } from 'lucide-react'
+import { LayoutDashboardIcon, ShieldCheckIcon, StoreIcon, WalletIcon } from 'lucide-react'
 import { ROUTES } from '@/config/routes'
 import type { AppPage } from './app-page.types'
 
@@ -10,6 +10,14 @@ export const APP_PAGES: readonly AppPage[] = [
     roles: ['CLIENT'],
     showInSidebar: true,
     lazy: async () => ({ Component: (await import('@/features/wallet/pages/WalletPage')).WalletPage }),
+  },
+  {
+    id: 'verification',
+    path: ROUTES.verification,
+    icon: ShieldCheckIcon,
+    roles: ['CLIENT'],
+    showInSidebar: true,
+    lazy: async () => ({ Component: (await import('@/features/kyc/pages/VerificationPage')).VerificationPage }),
   },
   {
     id: 'merchant',

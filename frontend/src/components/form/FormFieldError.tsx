@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { FieldError } from '@/components/ui/field'
 import { isValidationKey } from '@/i18n/keys'
-import { VALIDATION_PARAMS } from '../constants/auth.constants'
+import { VALIDATION_PARAMS } from '@/config/validation-params'
 
 interface FormFieldErrorProps {
   id: string

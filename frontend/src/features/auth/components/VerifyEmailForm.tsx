@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { FieldGroup } from '@/components/ui/field'
 import { useVerifyEmailForm } from '../hooks/useVerifyEmailForm'
-import { FormErrorMessage } from './FormErrorMessage'
-import { FormField } from './FormField'
+import { FormErrorMessage } from '@/components/form/FormErrorMessage'
+import { FormField } from '@/components/form/FormField'
 import { OtpCodeInput } from './OtpCodeInput'
-import { SubmitButton } from './SubmitButton'
+import { SubmitButton } from '@/components/form/SubmitButton'
 
 export function VerifyEmailForm() {
   const { t } = useTranslation('auth')
