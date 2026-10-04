@@ -26,8 +26,9 @@ public class OtpHasher {
     }
 
     public boolean matches(UUID userId, OtpPurpose purpose, String code, String expectedHash) {
-        byte[] expected = HexFormat.of().parseHex(expectedHash);
-        return MessageDigest.isEqual(digest(userId, purpose, code), expected);
+        return MessageDigest.isEqual(
+                hash(userId, purpose, code).getBytes(StandardCharsets.UTF_8),
+                expectedHash.getBytes(StandardCharsets.UTF_8));
     }
 
     private byte[] digest(UUID userId, OtpPurpose purpose, String code) {
