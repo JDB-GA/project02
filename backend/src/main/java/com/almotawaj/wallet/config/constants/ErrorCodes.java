@@ -24,6 +24,10 @@ public final class ErrorCodes {
     public static final String FILE_REQUIRED = "FILE_REQUIRED";
     public static final String FILE_TYPE_INVALID = "FILE_TYPE_INVALID";
     public static final String FILE_TOO_LARGE = "FILE_TOO_LARGE";
+    public static final String KYC_ALREADY_REVIEWED = "KYC_ALREADY_REVIEWED";
+    public static final String PERMISSION_NOT_GRANTABLE = "PERMISSION_NOT_GRANTABLE";
+    public static final String SUPER_ADMIN_PERMISSIONS_FIXED = "SUPER_ADMIN_PERMISSIONS_FIXED";
+    public static final String INVALID_REQUEST_PARAMETER = "INVALID_REQUEST_PARAMETER";
 
     private ErrorCodes() {
     }

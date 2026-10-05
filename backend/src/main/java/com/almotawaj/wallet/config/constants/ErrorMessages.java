@@ -27,6 +27,8 @@ public final class ErrorMessages {
     public static final String AREA_REQUIRED = "Area is required";
     public static final String AREA_TOO_LONG = "Area must be at most {max} characters";
     public static final String EXPIRY_DATE_REQUIRED = "Expiry date is required";
+    public static final String REJECTION_REASON_REQUIRED = "Rejection reason is required";
+    public static final String REJECTION_REASON_TOO_LONG = "Rejection reason must be at most {max} characters";
 
     public static final String VALIDATION_FAILED = "Validation failed";
     public static final String VALIDATION_ERRORS_KEY = "errors";
@@ -52,6 +54,10 @@ public final class ErrorMessages {
     public static final String FILE_TOO_LARGE = "File is larger than the allowed size";
     public static final String KYC_NOT_FOUND = "No verification request found";
     public static final String DOCUMENT_NOT_FOUND = "Document not found";
+    public static final String KYC_ALREADY_REVIEWED = "This verification request has already been reviewed";
+    public static final String PERMISSION_NOT_GRANTABLE = "This permission cannot be granted to this user's role";
+    public static final String SUPER_ADMIN_PERMISSIONS_FIXED = "Super admin permissions cannot be changed";
+    public static final String INVALID_REQUEST_PARAMETER = "One of the request parameters is invalid";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String UNEXPECTED_PRINCIPAL = "Unexpected principal type after authentication";

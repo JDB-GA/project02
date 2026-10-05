@@ -16,6 +16,13 @@ public final class ApiPaths {
     public static final String AUTH_RESEND_VERIFICATION = AUTH_USERS + RESEND_VERIFICATION;
     public static final String KYC = "/api/kyc";
     public static final String MY_KYC_DOCUMENT = "/me/documents/{documentId}";
+    public static final String ADMIN_KYC = "/api/admin/kyc";
+    public static final String KYC_APPLICATION = "/{applicationId}";
+    public static final String KYC_APPLICATION_DOCUMENT = "/{applicationId}/documents/{documentId}";
+    public static final String KYC_APPROVE = "/{applicationId}/approve";
+    public static final String KYC_REJECT = "/{applicationId}/reject";
+    public static final String ADMIN_STAFF = "/api/admin/staff";
+    public static final String STAFF_PERMISSION = "/{userId}/permissions/{permission}";
     public static final String ERROR = "/error";
     public static final String ALL = "/**";
 

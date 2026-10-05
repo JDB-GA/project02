@@ -1,22 +1,34 @@
 package com.almotawaj.wallet.config.security;
 
 import com.almotawaj.wallet.config.constants.SecurityConstants;
+import com.almotawaj.wallet.model.Permission;
 import com.almotawaj.wallet.model.User;
+import com.almotawaj.wallet.model.UserRole;
 import com.almotawaj.wallet.model.UserStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 public record MyUserDetails(User user) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority role = new SimpleGrantedAuthority(SecurityConstants.ROLE_PREFIX + user.getRole().name());
-        return user.isEmailVerified()
-                ? List.of(role, new SimpleGrantedAuthority(SecurityConstants.EMAIL_VERIFIED_AUTHORITY))
-                : List.of(role);
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(SecurityConstants.ROLE_PREFIX + user.getRole().name()));
+        if (user.isEmailVerified()) {
+            authorities.add(new SimpleGrantedAuthority(SecurityConstants.EMAIL_VERIFIED_AUTHORITY));
+        }
+        effectivePermissions().forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission.name())));
+        return authorities;
+    }
+
+    private Set<Permission> effectivePermissions() {
+        return user.getRole() == UserRole.SUPER_ADMIN ? EnumSet.allOf(Permission.class) : user.getPermissions();
     }
 
     @Override

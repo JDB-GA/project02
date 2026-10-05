@@ -3,6 +3,7 @@ package com.almotawaj.wallet.exception;
 import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.config.constants.ErrorMessages;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.core.PropertyReferenceException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -12,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.time.Duration;
@@ -39,6 +41,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ProblemDetail handleAccessDenied(AccessDeniedException e) {
         return problem(HttpStatus.FORBIDDEN, ErrorMessages.ACCESS_DENIED, ErrorCodes.ACCESS_DENIED);
+    }
+
+    @ExceptionHandler({PropertyReferenceException.class, MethodArgumentTypeMismatchException.class})
+    public ProblemDetail handleInvalidParameter(Exception e) {
+        return problem(HttpStatus.BAD_REQUEST, ErrorMessages.INVALID_REQUEST_PARAMETER, ErrorCodes.INVALID_REQUEST_PARAMETER);
     }
 
     @ExceptionHandler(InformationExistException.class)
