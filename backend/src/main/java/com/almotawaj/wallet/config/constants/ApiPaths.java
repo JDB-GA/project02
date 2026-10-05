@@ -21,8 +21,11 @@ public final class ApiPaths {
     public static final String KYC_APPLICATION_DOCUMENT = "/{applicationId}/documents/{documentId}";
     public static final String KYC_APPROVE = "/{applicationId}/approve";
     public static final String KYC_REJECT = "/{applicationId}/reject";
-    public static final String ADMIN_STAFF = "/api/admin/staff";
-    public static final String STAFF_PERMISSION = "/{userId}/permissions/{permission}";
+    public static final String ADMIN_USERS = "/api/admin/users";
+    public static final String USER_BY_ID = "/{userId}";
+    public static final String USER_SUSPEND = "/{userId}/suspend";
+    public static final String USER_REACTIVATE = "/{userId}/reactivate";
+    public static final String USER_PERMISSION = "/{userId}/permissions/{permission}";
     public static final String ERROR = "/error";
     public static final String ALL = "/**";
 

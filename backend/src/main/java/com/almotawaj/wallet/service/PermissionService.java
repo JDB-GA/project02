@@ -8,34 +8,24 @@ import com.almotawaj.wallet.exception.InformationNotFoundException;
 import com.almotawaj.wallet.model.Permission;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.UserRole;
-import com.almotawaj.wallet.model.response.PageResponse;
-import com.almotawaj.wallet.model.response.StaffPermissionsResponse;
+import com.almotawaj.wallet.model.response.AdminUserResponse;
 import com.almotawaj.wallet.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PermissionService {
-    private static final List<UserRole> STAFF_ROLES = List.of(UserRole.ADMIN, UserRole.MERCHANT);
-
     private final UserRepository userRepository;
-
-    @Transactional(readOnly = true)
-    public PageResponse<StaffPermissionsResponse> listStaff(UserRole role, Pageable pageable) {
-        List<UserRole> roles = role == null ? STAFF_ROLES : List.of(role);
-        return PageResponse.from(userRepository.findByRoleIn(roles, pageable), StaffPermissionsResponse::from);
-    }
+    private final AdminUserMapper mapper;
 
     @Transactional
-    public StaffPermissionsResponse grant(UUID actorId, UUID userId, Permission permission) {
+    public AdminUserResponse grant(UUID actorId, UUID userId, Permission permission) {
         User user = findEditableUser(userId);
         if (!permission.isGrantableTo(user.getRole())) {
             throw new BusinessRuleException(ErrorMessages.PERMISSION_NOT_GRANTABLE, ErrorCodes.PERMISSION_NOT_GRANTABLE);
@@ -43,16 +33,16 @@ public class PermissionService {
         if (user.getPermissions().add(permission)) {
             log.info(LogMessages.PERMISSION_GRANTED, actorId, permission, userId);
         }
-        return StaffPermissionsResponse.from(user);
+        return mapper.toResponse(user);
     }
 
     @Transactional
-    public StaffPermissionsResponse revoke(UUID actorId, UUID userId, Permission permission) {
+    public AdminUserResponse revoke(UUID actorId, UUID userId, Permission permission) {
         User user = findEditableUser(userId);
         if (user.getPermissions().remove(permission)) {
             log.info(LogMessages.PERMISSION_REVOKED, actorId, permission, userId);
         }
-        return StaffPermissionsResponse.from(user);
+        return mapper.toResponse(user);
     }
 
     private User findEditableUser(UUID userId) {

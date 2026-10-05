@@ -8,6 +8,8 @@ public final class LogMessages {
     public static final String KYC_REVIEWED = "Admin {} marked KYC application {} as {}";
     public static final String PERMISSION_GRANTED = "Super admin {} granted {} to user {}";
     public static final String PERMISSION_REVOKED = "Super admin {} revoked {} from user {}";
+    public static final String USER_STATUS_CHANGED = "Actor {} changed user {} status from {} to {}";
+    public static final String USER_CONTACT_UPDATED = "Actor {} updated contact details of user {}";
     public static final String FILE_DELETE_FAILED = "Failed to delete stored file {}";
 
     private LogMessages() {

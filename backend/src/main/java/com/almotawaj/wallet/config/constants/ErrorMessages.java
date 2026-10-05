@@ -58,6 +58,9 @@ public final class ErrorMessages {
     public static final String PERMISSION_NOT_GRANTABLE = "This permission cannot be granted to this user's role";
     public static final String SUPER_ADMIN_PERMISSIONS_FIXED = "Super admin permissions cannot be changed";
     public static final String INVALID_REQUEST_PARAMETER = "One of the request parameters is invalid";
+    public static final String CANNOT_MANAGE_SELF = "You cannot manage your own account here";
+    public static final String USER_CLOSED = "This account is closed and cannot be changed";
+    public static final String INVALID_STATUS_TRANSITION = "This status change is not allowed";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String UNEXPECTED_PRINCIPAL = "Unexpected principal type after authentication";

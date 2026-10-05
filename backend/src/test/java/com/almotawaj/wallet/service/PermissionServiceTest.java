@@ -25,6 +25,8 @@ class PermissionServiceTest {
 
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private AdminUserMapper mapper;
 
     @InjectMocks
     private PermissionService permissionService;
@@ -41,8 +43,9 @@ class PermissionServiceTest {
     void grant_addsPermissionToAdmin() {
         User admin = userWithRole(UserRole.ADMIN);
 
-        assertThat(permissionService.grant(ACTOR_ID, admin.getId(), Permission.KYC_REVIEW).permissions())
-                .containsExactly(Permission.KYC_REVIEW);
+        permissionService.grant(ACTOR_ID, admin.getId(), Permission.KYC_REVIEW);
+
+        assertThat(admin.getPermissions()).containsExactly(Permission.KYC_REVIEW);
     }
 
     @Test
@@ -76,6 +79,8 @@ class PermissionServiceTest {
         User admin = userWithRole(UserRole.ADMIN);
         admin.getPermissions().add(Permission.KYC_REVIEW);
 
-        assertThat(permissionService.revoke(ACTOR_ID, admin.getId(), Permission.KYC_REVIEW).permissions()).isEmpty();
+        permissionService.revoke(ACTOR_ID, admin.getId(), Permission.KYC_REVIEW);
+
+        assertThat(admin.getPermissions()).isEmpty();
     }
 }

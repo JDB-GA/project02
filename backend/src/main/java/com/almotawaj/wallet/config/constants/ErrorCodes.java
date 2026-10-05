@@ -28,6 +28,9 @@ public final class ErrorCodes {
     public static final String PERMISSION_NOT_GRANTABLE = "PERMISSION_NOT_GRANTABLE";
     public static final String SUPER_ADMIN_PERMISSIONS_FIXED = "SUPER_ADMIN_PERMISSIONS_FIXED";
     public static final String INVALID_REQUEST_PARAMETER = "INVALID_REQUEST_PARAMETER";
+    public static final String CANNOT_MANAGE_SELF = "CANNOT_MANAGE_SELF";
+    public static final String USER_CLOSED = "USER_CLOSED";
+    public static final String INVALID_STATUS_TRANSITION = "INVALID_STATUS_TRANSITION";
 
     private ErrorCodes() {
     }
