@@ -1,6 +1,6 @@
 # User Stories
 
-Format: *As a [user], I want to [action], so that [reason].* Each story is one Trello card: the story is the card title, the acceptance criteria are its checklist, and the label shows the epic. Stories marked (planned) are not built yet.
+Format: *As a [user], I want to [action], so that [reason].* Stories marked (planned) are not built yet.
 
 ## Epic: Accounts
 
