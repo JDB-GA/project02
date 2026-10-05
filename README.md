@@ -250,3 +250,7 @@ Email is sent through Resend's HTTPS API because Railway blocks outbound SMTP on
 ## Project management
 
 Development follows feature branches (`feature-auth`, `feature-layout`, `feature-identity-verify`, …) with short Title Case commits. The process, timeline and remaining work are in [`Planning.md`](Planning.md); user stories with acceptance criteria are in [`docs/user-stories.md`](docs/user-stories.md); progress is tracked on [Trello](https://trello.com/b/81cjvTR6/project-02-jdb).
+
+## License
+
+© 2026 Muntadher Almutawaj. All rights reserved. See [`LICENSE`](LICENSE).
