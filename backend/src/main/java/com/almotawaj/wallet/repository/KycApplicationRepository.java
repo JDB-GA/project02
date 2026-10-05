@@ -20,6 +20,8 @@ public interface KycApplicationRepository extends JpaRepository<KycApplication, 
 
     boolean existsByCprNumberAndStatusInAndUserIdNot(String cprNumber, Collection<KycApplicationStatus> statuses, UUID userId);
 
+    Optional<KycApplication> findFirstByUserIdAndStatusOrderByCreatedAtDesc(UUID userId, KycApplicationStatus status);
+
     @EntityGraph(attributePaths = "user")
     Page<KycApplication> findByStatus(KycApplicationStatus status, Pageable pageable);
 

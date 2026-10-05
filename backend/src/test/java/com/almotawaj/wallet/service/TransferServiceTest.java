@@ -1,0 +1,109 @@
+package com.almotawaj.wallet.service;
+
+import com.almotawaj.wallet.config.constants.ErrorCodes;
+import com.almotawaj.wallet.exception.BusinessRuleException;
+import com.almotawaj.wallet.model.TransactionType;
+import com.almotawaj.wallet.model.User;
+import com.almotawaj.wallet.model.Wallet;
+import com.almotawaj.wallet.model.WalletTransaction;
+import com.almotawaj.wallet.model.request.TransferRequest;
+import com.almotawaj.wallet.repository.WalletTransactionRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
+
+import java.math.BigDecimal;
+import java.time.Clock;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+class TransferServiceTest {
+    private static final UUID SENDER_ID = UUID.randomUUID();
+    private static final String RECIPIENT_EMAIL = "sara@example.com";
+
+    @Mock
+    private WalletProvisioner provisioner;
+    @Mock
+    private WalletLocker walletLocker;
+    @Mock
+    private RecipientResolver recipientResolver;
+    @Mock
+    private WalletHolderNames holderNames;
+    @Mock
+    private WalletTransactionRepository transactionRepository;
+    @Mock
+    private TransactionReferenceGenerator referenceGenerator;
+
+    private TransferService transferService;
+    private Wallet sender;
+    private Wallet receiver;
+
+    private static Wallet wallet(String balance) {
+        Wallet wallet = new Wallet();
+        wallet.setId(UUID.randomUUID());
+        wallet.setUser(new User());
+        wallet.setBalance(new BigDecimal(balance));
+        return wallet;
+    }
+
+    @BeforeEach
+    void setUp() {
+        WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
+        DailyLimitPolicy limits = new DailyLimitPolicy(transactionRepository, Clock.systemUTC());
+        transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, limits, ledger);
+        sender = wallet("100.000");
+        receiver = wallet("5.000");
+        User recipient = new User();
+        recipient.setId(UUID.randomUUID());
+        when(recipientResolver.resolve(SENDER_ID, RECIPIENT_EMAIL)).thenReturn(recipient);
+        when(provisioner.getOrCreate(SENDER_ID)).thenReturn(sender);
+        when(provisioner.getOrCreate(recipient.getId())).thenReturn(receiver);
+        when(walletLocker.lockPair(sender.getId(), receiver.getId())).thenReturn(new WalletLocker.LockedPair(sender, receiver));
+        when(holderNames.fullName(any())).thenReturn("Holder");
+        when(referenceGenerator.next()).thenReturn("TXN-20261005-AAAAAAAA", "TXN-20261005-BBBBBBBB");
+        when(transactionRepository.sumAmountSince(any(), any(), any())).thenReturn(BigDecimal.ZERO);
+        when(transactionRepository.saveAndFlush(any(WalletTransaction.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    }
+
+    @Test
+    void transfer_movesMoneyBetweenWallets() {
+        var response = transferService.transfer(SENDER_ID, new TransferRequest(RECIPIENT_EMAIL, new BigDecimal("40"), " Dinner "));
+
+        assertThat(sender.getBalance()).isEqualByComparingTo("60.000");
+        assertThat(receiver.getBalance()).isEqualByComparingTo("45.000");
+        assertThat(response.type()).isEqualTo(TransactionType.TRANSFER_OUT);
+        assertThat(response.description()).isEqualTo("Dinner");
+    }
+
+    @Test
+    void transfer_rejectsInsufficientBalance() {
+        assertThatThrownBy(() -> transferService.transfer(SENDER_ID, new TransferRequest(RECIPIENT_EMAIL, new BigDecimal("100.001"), null)))
+                .isInstanceOf(BusinessRuleException.class)
+                .hasFieldOrPropertyWithValue("code", ErrorCodes.INSUFFICIENT_BALANCE);
+        assertThat(receiver.getBalance()).isEqualByComparingTo("5.000");
+        verify(transactionRepository, never()).saveAndFlush(any());
+    }
+
+    @Test
+    void transfer_rejectsAmountAboveDailyLimit() {
+        sender.setBalance(new BigDecimal("20000.000"));
+        when(transactionRepository.sumAmountSince(any(), any(), any())).thenReturn(new BigDecimal("9999.000"));
+
+        assertThatThrownBy(() -> transferService.transfer(SENDER_ID, new TransferRequest(RECIPIENT_EMAIL, new BigDecimal("2"), null)))
+                .isInstanceOf(BusinessRuleException.class)
+                .hasFieldOrPropertyWithValue("code", ErrorCodes.DAILY_TRANSFER_LIMIT_EXCEEDED);
+        verify(referenceGenerator, never()).next();
+    }
+}

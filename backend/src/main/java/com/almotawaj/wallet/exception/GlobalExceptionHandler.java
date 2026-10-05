@@ -60,7 +60,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InformationNotFoundException.class)
     public ProblemDetail handleNotFound(InformationNotFoundException e) {
-        return problem(HttpStatus.NOT_FOUND, e.getMessage(), ErrorCodes.NOT_FOUND);
+        return problem(HttpStatus.NOT_FOUND, e.getMessage(), e.getCode());
     }
 
     @ExceptionHandler(OtpVerificationException.class)

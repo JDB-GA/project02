@@ -22,6 +22,7 @@ public final class DocExamples {
     public static final String CPR_EXPIRY = "2029-06-30";
     public static final String PASSPORT_EXPIRY = "2031-03-31";
     public static final String TOP_UP_SOURCE = "NBB_SALARY";
+    public static final String TRANSFER_NOTE = "Dinner split";
     public static final String AMOUNT = "150.500";
 
     private DocExamples() {

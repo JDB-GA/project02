@@ -4,6 +4,7 @@ import com.almotawaj.wallet.config.constants.docs.AuthDocs;
 import com.almotawaj.wallet.config.constants.docs.KycDocs;
 import com.almotawaj.wallet.config.constants.docs.KycReviewDocs;
 import com.almotawaj.wallet.config.constants.docs.SystemDocs;
+import com.almotawaj.wallet.config.constants.docs.TransferDocs;
 import com.almotawaj.wallet.config.constants.docs.UserAdminDocs;
 import com.almotawaj.wallet.config.constants.docs.WalletDocs;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Component
 public class TagOrderCustomizer implements OpenApiCustomizer {
-    private static final List<String> ORDER = List.of(AuthDocs.TAG, KycDocs.TAG, WalletDocs.TAG, KycReviewDocs.TAG, UserAdminDocs.TAG,
+    private static final List<String> ORDER = List.of(AuthDocs.TAG, KycDocs.TAG, WalletDocs.TAG, TransferDocs.TAG, KycReviewDocs.TAG, UserAdminDocs.TAG,
             UserAdminDocs.PERMISSIONS_TAG, SystemDocs.AUDIT_TAG, SystemDocs.SEED_TAG);
 
     @Override

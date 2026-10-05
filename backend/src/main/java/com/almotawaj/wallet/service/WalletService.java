@@ -1,8 +1,6 @@
 package com.almotawaj.wallet.service;
 
-import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.config.constants.WalletLimits;
-import com.almotawaj.wallet.exception.InformationNotFoundException;
 import com.almotawaj.wallet.model.Counterparty;
 import com.almotawaj.wallet.model.TopUpSource;
 import com.almotawaj.wallet.model.TransactionType;
@@ -10,7 +8,6 @@ import com.almotawaj.wallet.model.Wallet;
 import com.almotawaj.wallet.model.WalletTransaction;
 import com.almotawaj.wallet.model.request.TopUpRequest;
 import com.almotawaj.wallet.model.response.*;
-import com.almotawaj.wallet.repository.WalletRepository;
 import com.almotawaj.wallet.repository.WalletTransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,10 +23,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class WalletService {
     private final WalletProvisioner provisioner;
-    private final WalletRepository walletRepository;
+    private final WalletLocker walletLocker;
     private final WalletTransactionRepository transactionRepository;
     private final WalletLedger ledger;
-    private final TopUpLimiter topUpLimiter;
+    private final DailyLimitPolicy dailyLimitPolicy;
 
     @Transactional
     public WalletResponse getMine(UUID userId) {
@@ -52,16 +49,14 @@ public class WalletService {
                 Arrays.stream(TopUpSource.values()).map(TopUpSourceResponse::from).toList(),
                 new BigDecimal(WalletLimits.TOP_UP_MIN),
                 new BigDecimal(WalletLimits.TOP_UP_MAX),
-                TopUpLimiter.DAILY_LIMIT,
-                topUpLimiter.remainingToday(wallet.getId()));
+                DailyLimitPolicy.TOP_UP_LIMIT,
+                dailyLimitPolicy.remainingTopUp(wallet.getId()));
     }
 
     @Transactional
     public WalletTransactionResponse topUp(UUID userId, TopUpRequest request) {
-        provisioner.getOrCreate(userId);
-        Wallet wallet = walletRepository.findByUserIdForUpdate(userId)
-                .orElseThrow(() -> new InformationNotFoundException(ErrorMessages.NOT_FOUND));
-        topUpLimiter.ensureWithinLimit(wallet.getId(), request.amount());
+        Wallet wallet = walletLocker.lock(provisioner.getOrCreate(userId).getId());
+        dailyLimitPolicy.ensureTopUpAllowed(wallet.getId(), request.amount());
         TopUpSource source = request.source();
         Counterparty sender = new Counterparty(source.getHolderName(), source.getIban(), source.getBic());
         WalletTransaction transaction = ledger.credit(wallet, TransactionType.TOP_UP, request.amount(), sender,

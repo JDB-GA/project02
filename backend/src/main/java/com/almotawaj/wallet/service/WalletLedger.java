@@ -21,13 +21,24 @@ public class WalletLedger {
 
     public WalletTransaction credit(Wallet lockedWallet, TransactionType type, BigDecimal amount,
                                     Counterparty counterparty, String description) {
-        BigDecimal scaled = amount.setScale(ValidationLimits.MONEY_SCALE, RoundingMode.UNNECESSARY);
+        BigDecimal scaled = scale(amount);
         lockedWallet.setBalance(lockedWallet.getBalance().add(scaled));
         return record(lockedWallet, type, TransactionDirection.CREDIT, scaled, counterparty, description);
     }
 
-    private WalletTransaction record(Wallet wallet, TransactionType type, TransactionDirection direction,
-                                     BigDecimal amount, Counterparty counterparty, String description) {
+    public WalletTransaction debit(Wallet lockedWallet, TransactionType type, BigDecimal amount,
+                                   Counterparty counterparty, String description) {
+        BigDecimal scaled = scale(amount);
+        lockedWallet.setBalance(lockedWallet.getBalance().subtract(scaled));
+        return record(lockedWallet, type, TransactionDirection.DEBIT, scaled, counterparty, description);
+    }
+
+    private static BigDecimal scale(BigDecimal amount) {
+        return amount.setScale(ValidationLimits.MONEY_SCALE, RoundingMode.UNNECESSARY);
+    }
+
+    private WalletTransaction record(Wallet wallet, TransactionType type, TransactionDirection direction, BigDecimal amount,
+                                     Counterparty counterparty, String description) {
         WalletTransaction transaction = new WalletTransaction();
         transaction.setWallet(wallet);
         transaction.setReference(referenceGenerator.next());

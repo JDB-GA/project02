@@ -7,7 +7,6 @@ import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.Wallet;
 import com.almotawaj.wallet.model.WalletTransaction;
 import com.almotawaj.wallet.model.request.TopUpRequest;
-import com.almotawaj.wallet.repository.WalletRepository;
 import com.almotawaj.wallet.repository.WalletTransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,7 +37,7 @@ class WalletServiceTest {
     @Mock
     private WalletProvisioner provisioner;
     @Mock
-    private WalletRepository walletRepository;
+    private WalletLocker walletLocker;
     @Mock
     private WalletTransactionRepository transactionRepository;
     @Mock
@@ -51,12 +49,13 @@ class WalletServiceTest {
     @BeforeEach
     void setUp() {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
-        TopUpLimiter limiter = new TopUpLimiter(transactionRepository, CLOCK);
-        walletService = new WalletService(provisioner, walletRepository, transactionRepository, ledger, limiter);
+        DailyLimitPolicy limiter = new DailyLimitPolicy(transactionRepository, CLOCK);
+        walletService = new WalletService(provisioner, walletLocker, transactionRepository, ledger, limiter);
         wallet = new Wallet();
         wallet.setId(WALLET_ID);
         wallet.setBalance(new BigDecimal("10.000"));
-        when(walletRepository.findByUserIdForUpdate(USER_ID)).thenReturn(Optional.of(wallet));
+        when(provisioner.getOrCreate(USER_ID)).thenReturn(wallet);
+        when(walletLocker.lock(WALLET_ID)).thenReturn(wallet);
     }
 
     private void receivedToday(String amount) {

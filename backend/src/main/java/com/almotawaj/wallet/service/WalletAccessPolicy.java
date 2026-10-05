@@ -6,11 +6,18 @@ import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.model.KycStatus;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.UserRole;
+import com.almotawaj.wallet.model.UserStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WalletAccessPolicy {
+    public boolean canReceive(User user) {
+        boolean eligibleRole = user.getRole() == UserRole.MERCHANT
+                || (user.getRole() == UserRole.CLIENT && user.getKycStatus() == KycStatus.APPROVED);
+        return eligibleRole && user.getStatus() == UserStatus.ACTIVE;
+    }
+
     public void ensureCanUseWallet(User user) {
         if (user.getRole() == UserRole.MERCHANT) {
             return;

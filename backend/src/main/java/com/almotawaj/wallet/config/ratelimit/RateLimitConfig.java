@@ -16,6 +16,6 @@ public class RateLimitConfig implements WebMvcConfigurer {
         registry.addInterceptor(rateLimitInterceptor)
                 .addPathPatterns(ApiPaths.AUTH_LOGIN, ApiPaths.AUTH_REGISTER, ApiPaths.AUTH_VERIFY_EMAIL, ApiPaths.AUTH_RESEND_VERIFICATION,
                         ApiPaths.AUTH_FORGOT_PASSWORD, ApiPaths.AUTH_RESET_PASSWORD, ApiPaths.AUTH_CHANGE_PASSWORD, ApiPaths.SEED,
-                        ApiPaths.WALLET_TOP_UPS);
+                        ApiPaths.WALLET_TOP_UPS, ApiPaths.WALLET_TRANSFERS, ApiPaths.WALLET_RECIPIENTS);
     }
 }

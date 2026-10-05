@@ -4,6 +4,10 @@ public final class WalletConstants {
     public static final String CURRENCY = "BHD";
     public static final String COUNTRY_CODE = "BH";
     public static final String BANK_CODE = "ALMT";
+    public static final String BANK_BIC = "ALMTBHBM";
+    public static final String EMAIL_MASK = "***";
+    public static final String EMAIL_MARKER = "@";
+    public static final String NAME_INITIAL_SUFFIX = ".";
     public static final int ACCOUNT_NUMBER_LENGTH = 14;
     public static final int IBAN_LENGTH = 22;
     public static final int IBAN_MIN_LENGTH = 15;

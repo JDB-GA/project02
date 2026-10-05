@@ -74,6 +74,14 @@ public final class ErrorMessages {
     public static final String SEED_PASSWORD_MISSING = "Set the SEED_PASSWORD environment variable before seeding";
     public static final String WALLET_KYC_REQUIRED = "Verify your identity before using your wallet";
     public static final String DAILY_TOP_UP_LIMIT_EXCEEDED = "This transfer exceeds your daily receiving limit";
+    public static final String DAILY_TRANSFER_LIMIT_EXCEEDED = "This transfer exceeds your daily sending limit";
+    public static final String INSUFFICIENT_BALANCE = "Your balance is not enough for this transfer";
+    public static final String SELF_TRANSFER_NOT_ALLOWED = "You cannot send money to yourself";
+    public static final String RECIPIENT_NOT_FOUND = "No wallet found for this email, mobile number or IBAN";
+    public static final String RECIPIENT_UNAVAILABLE = "This user cannot receive money yet";
+    public static final String RECIPIENT_REQUIRED = "Enter the recipient's email, mobile number or IBAN";
+    public static final String RECIPIENT_TOO_LONG = "Recipient must be at most {max} characters";
+    public static final String NOTE_TOO_LONG = "Note must be at most {max} characters";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String NOT_FOUND = "The requested resource was not found";
