@@ -80,6 +80,28 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 **US-18 – Seed demo data.** As a developer or grader, I want to load demo accounts with one request, so that I can try every role immediately.
 - [ ] Protected by a seed token; safe to run repeatedly; disabled when no token is configured.
 
+## Epic: Wallet
+
+**US-24 – My wallet.** As a verified client or a merchant, I want a wallet with my own IBAN and balance, so that I can receive and spend money.
+- [ ] The wallet opens automatically; clients need approved KYC.
+- [ ] The IBAN is a valid, unique Bahraini IBAN that never changes; balances use 3 decimals (BHD).
+
+**US-25 – Receive a bank transfer.** As a wallet holder, I want to receive money from an account at another bank, so that I can fund my wallet.
+- [ ] I only choose a demo source account and an amount; the sender details are filled in by the server.
+- [ ] 0.100–5,000.000 BHD per transfer and at most 10,000.000 BHD per day.
+
+**US-26 – Send money.** As a wallet holder, I want to send money to another user by email, mobile number or IBAN, so that I can pay friends and businesses.
+- [ ] Typing 3+ characters suggests up to 5 masked matches; I see a masked preview before sending.
+- [ ] I need enough balance, cannot send to myself, and can send at most 10,000.000 BHD per day.
+- [ ] Concurrent transfers can never overspend my balance.
+
+**US-27 – Transaction history.** As a wallet holder, I want to see my transactions with the counterparty and reference, so that I can track my money.
+- [ ] Paged, newest first, credits and debits clearly marked.
+
+**US-28 – Search transactions (planned).** As a wallet holder, I want to search and filter my transactions, so that I can find a payment quickly.
+
+**US-29 – Request money (planned).** As a wallet holder, I want to request money from another user, so that they can pay me with one tap.
+
 ## Epic: Profile
 
 **US-19 – Profile picture (planned).** As a user, I want to upload and change my profile picture, so that my account feels personal.
@@ -98,5 +120,5 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 
 ## Epic: Notifications
 
-**US-23 – Live updates (planned).** As a user, I want to see KYC decisions and payment results instantly, so that I don't need to refresh.
+**US-23 – Live updates (planned).** As a user, I want to see money received, KYC decisions and payment results instantly, so that I don't need to refresh.
 - [ ] Delivered with Server-Sent Events.

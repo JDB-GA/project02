@@ -1,6 +1,6 @@
 # Almotawaj Digital Wallet
 
-A bilingual (English / Arabic) digital wallet for Bahrain. Clients register, verify their email and their identity (KYC); staff review identity documents and manage users through role- and permission-based access.
+A bilingual (English / Arabic) digital wallet for Bahrain. Clients register, verify their email and their identity (KYC), then get a wallet with its own IBAN to receive bank transfers and send money to other users; staff review identity documents and manage users through role- and permission-based access.
 
 |            | URL                                                                                                                       |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -24,6 +24,10 @@ Monorepo:
 - **Identity verification (KYC)** – clients submit personal details, address, CPR and passport (PDF) and a photo; they can preview and download their own documents.
 - **KYC review** – reviewers filter applications, preview documents and approve or reject with a reason. Clients are emailed the decision in English and Arabic.
 - **User management** – search users, create users by invitation (they set their own password), edit contact details, suspend, reactivate and soft delete (close) accounts.
+- **Wallet** – every verified client and merchant gets one wallet with a unique, generated Bahraini IBAN (`BH` + check digits + `ALMT` + 14 digits, valid ISO 13616 mod-97). Balances are in BHD with 3 decimals and every movement is an append-only ledger entry.
+- **Receive transfers (simulated)** – choose one of five demo external accounts and an amount; the backend fills in the sender's name, IBAN and BIC.
+- **Send money** – send to another wallet by email, mobile number or IBAN, with autocomplete (masked suggestions) and a masked recipient preview before sending.
+- **Transactions** – paged history with the counterparty, type, reference and signed amount.
 - **Permissions** – the super admin grants fine-grained permissions to admins with checkboxes.
 - **Audit log** – every administrative and security action is stored and listed for the super admin.
 - **Security** – BCrypt passwords, httpOnly `SameSite=Strict` JWT cookie, token revocation, HMAC-hashed one-time codes, rate limiting, strict CORS, CSP/HSTS and other security headers on both apps, file type checks by content.
@@ -33,8 +37,8 @@ Monorepo:
 
 | Role          | Can do                                                               |
 | ------------- | -------------------------------------------------------------------- |
-| `CLIENT`      | Register, verify email, submit and track KYC, manage their password  |
-| `MERCHANT`    | Merchant area (payment features are planned)                         |
+| `CLIENT`      | Register, verify email, submit and track KYC, manage their password; after KYC approval: wallet, receive transfers, send money |
+| `MERCHANT`    | Wallet, receive transfers, send money (checkout payments are planned) |
 | `ADMIN`       | Only what their permissions allow                                    |
 | `SUPER_ADMIN` | Everything, including granting permissions and reading the audit log |
 
@@ -58,6 +62,11 @@ Admins with `USER_MANAGE` manage clients and merchants only; only the super admi
 9. Suspending or closing a user, or changing/resetting a password, takes effect on the very next request.
 10. Permissions are only grantable to the roles that may hold them; super admin permissions are fixed.
 11. Forgot-password responses never reveal whether an email exists.
+12. Only KYC-approved clients and merchants have wallets; each wallet has exactly one IBAN that never changes, and each user has one wallet.
+13. Limits live in `WalletLimits`: top-ups and transfers are 0.100–5,000.000 BHD each, and at most 10,000.000 BHD may be received by top-up and 10,000.000 BHD sent by transfer per day (Bahrain time). Checkout payments will have their own daily limit.
+14. Transfers need enough balance, cannot go to yourself, and only reach active, eligible wallet holders.
+15. Money movements lock the affected wallet rows (both, in a fixed order, for transfers), so concurrent requests can never overspend or exceed a daily limit.
+16. Recipient suggestions need at least 3 characters, return at most 5 masked results and never include yourself.
 
 ## Getting started
 
@@ -108,7 +117,7 @@ Seeding is a single protected request, so it works on an empty database with no 
 
 1. Generate a token: `openssl rand -hex 32`.
 2. Set `SEED_TOKEN` to it and `SEED_PASSWORD` to the password the demo accounts should use (in dev: `seed-token` / `seed-password`).
-3. Call it from Postman:
+3. Call it from Postman, or in Swagger click **Authorize** and paste the token under `seedToken`:
 
 ```http
 POST /api/seed
@@ -175,9 +184,17 @@ Lists accept `page`, `size` (max 100) and `sort` (e.g. `sort=createdAt,desc`) an
 | PUT    | `/api/admin/users/{userId}/permissions/{permission}`    | Grant a permission               | Super admin   |
 | DELETE | `/api/admin/users/{userId}/permissions/{permission}`    | Revoke a permission              | Super admin   |
 | GET    | `/api/admin/audit-logs`                                 | List audit entries               | Super admin   |
+| GET    | `/api/wallet`                                           | Get my wallet                    | Wallet holder |
+| GET    | `/api/wallet/transactions`                              | List my transactions             | Wallet holder |
+| GET    | `/api/wallet/top-ups/options`                           | Get top-up sources and limits    | Wallet holder |
+| POST   | `/api/wallet/top-ups`                                   | Receive a bank transfer (simulated) | Wallet holder |
+| GET    | `/api/wallet/recipients/suggestions`                    | Suggest recipients               | Wallet holder |
+| GET    | `/api/wallet/recipients`                                | Find a recipient                 | Wallet holder |
+| GET    | `/api/wallet/transfers/options`                         | Get transfer limits              | Wallet holder |
+| POST   | `/api/wallet/transfers`                                 | Send money                       | Wallet holder |
 | POST   | `/api/seed`                                             | Seed demo data                   | Seed token    |
 
-"Signed in" endpoints work before email verification; every other non-public endpoint also requires a verified email.
+"Signed in" endpoints work before email verification; every other non-public endpoint also requires a verified email. "Wallet holder" means a merchant or a KYC-approved client.
 
 ## Architecture
 
@@ -196,7 +213,7 @@ frontend/src
 ├── app/          providers, router, route guards, layout, navigation
 ├── components/   shared components (ui/ is shadcn)
 ├── config/       env and route constants
-├── features/     auth, kyc, kyc-review, user-management, audit-log (api, components, hooks, schemas, types, utils, pages)
+├── features/     auth, kyc, kyc-review, user-management, audit-log, wallet (api, components, hooks, schemas, types, utils, pages)
 ├── hooks/        shared hooks
 ├── i18n/         i18next setup and en/ar translations
 └── lib/          HTTP client, query client, file helpers
