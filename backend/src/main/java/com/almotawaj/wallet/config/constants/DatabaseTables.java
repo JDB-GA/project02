@@ -7,6 +7,8 @@ public final class DatabaseTables {
     public static final String KYC_DOCUMENTS = "kyc_documents";
     public static final String USER_PERMISSIONS = "user_permissions";
     public static final String AUDIT_LOGS = "audit_logs";
+    public static final String WALLETS = "wallets";
+    public static final String WALLET_TRANSACTIONS = "wallet_transactions";
 
     private DatabaseTables() {
     }

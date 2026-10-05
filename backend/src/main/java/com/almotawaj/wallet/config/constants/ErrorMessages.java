@@ -31,6 +31,18 @@ public final class ErrorMessages {
     public static final String EXPIRY_DATE_REQUIRED = "Expiry date is required";
     public static final String REJECTION_REASON_REQUIRED = "Rejection reason is required";
     public static final String REJECTION_REASON_TOO_LONG = "Rejection reason must be at most {max} characters";
+    public static final String SENDER_NAME_REQUIRED = "Sender name is required";
+    public static final String SENDER_NAME_INVALID = "Sender name contains characters that are not allowed";
+    public static final String SENDER_NAME_TOO_LONG = "Sender name must be at most {max} characters";
+    public static final String IBAN_REQUIRED = "IBAN is required";
+    public static final String IBAN_INVALID = "IBAN is not valid";
+    public static final String BIC_REQUIRED = "Bank BIC/SWIFT code is required";
+    public static final String BIC_INVALID = "BIC/SWIFT code must be 8 or 11 characters, e.g. NBOBBHBM";
+    public static final String AMOUNT_REQUIRED = "Amount is required";
+    public static final String AMOUNT_TOO_SMALL = "Amount must be at least {value} BHD";
+    public static final String AMOUNT_TOO_LARGE = "Amount must be at most {value} BHD";
+    public static final String AMOUNT_PRECISION = "Amount can have at most 3 decimal places";
+    public static final String PAYMENT_REFERENCE_TOO_LONG = "Payment reference must be at most {max} characters";
 
     public static final String VALIDATION_FAILED = "Validation failed";
     public static final String VALIDATION_ERRORS_KEY = "errors";
@@ -67,9 +79,12 @@ public final class ErrorMessages {
     public static final String PASSWORD_REUSED = "New password must be different from the current one";
     public static final String ROLE_NOT_ASSIGNABLE = "This role cannot be assigned";
     public static final String SEED_PASSWORD_MISSING = "Set the SEED_PASSWORD environment variable before seeding";
+    public static final String WALLET_KYC_REQUIRED = "Verify your identity before using your wallet";
+    public static final String SELF_TRANSFER_NOT_ALLOWED = "The sender IBAN cannot be your own wallet IBAN";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String NOT_FOUND = "The requested resource was not found";
+    public static final String IBAN_GENERATION_FAILED = "Could not generate a unique IBAN";
     public static final String UNEXPECTED_PRINCIPAL = "Unexpected principal type after authentication";
 
     private ErrorMessages() {

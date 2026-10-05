@@ -30,6 +30,10 @@ public final class ApiPaths {
     public static final String ADMIN_USERS = "/api/admin/users";
     public static final String ADMIN_AUDIT_LOGS = "/api/admin/audit-logs";
     public static final String SEED = "/api/seed";
+    public static final String WALLET = "/api/wallet";
+    public static final String TRANSACTIONS = "/transactions";
+    public static final String TOP_UPS = "/top-ups";
+    public static final String WALLET_TOP_UPS = WALLET + TOP_UPS;
     public static final String USER_BY_ID = "/{userId}";
     public static final String USER_SUSPEND = "/{userId}/suspend";
     public static final String USER_REACTIVATE = "/{userId}/reactivate";

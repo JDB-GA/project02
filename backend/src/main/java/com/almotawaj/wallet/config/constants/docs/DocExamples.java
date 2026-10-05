@@ -21,6 +21,11 @@ public final class DocExamples {
     public static final String AREA = "Adliya";
     public static final String CPR_EXPIRY = "2029-06-30";
     public static final String PASSPORT_EXPIRY = "2031-03-31";
+    public static final String SENDER_NAME = "Ali Hasan";
+    public static final String SENDER_IBAN = "BH67 BMAG 0000 1299 1234 56";
+    public static final String SENDER_BIC = "BMAGBHBM";
+    public static final String AMOUNT = "150.500";
+    public static final String PAYMENT_REFERENCE = "Salary top-up October";
 
     private DocExamples() {
     }

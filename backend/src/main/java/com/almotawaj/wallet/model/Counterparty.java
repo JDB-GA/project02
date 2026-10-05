@@ -1,0 +1,4 @@
+package com.almotawaj.wallet.model;
+
+public record Counterparty(String name, String iban, String bic) {
+}

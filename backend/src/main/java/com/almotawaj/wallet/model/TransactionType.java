@@ -1,0 +1,9 @@
+package com.almotawaj.wallet.model;
+
+public enum TransactionType {
+    TOP_UP,
+    PAYMENT,
+    PAYMENT_RECEIVED,
+    REFUND,
+    REFUND_ISSUED
+}

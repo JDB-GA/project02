@@ -15,6 +15,16 @@ public final class ValidationLimits {
     public static final int CONTENT_TYPE_MAX = 50;
     public static final int AUDIT_ACTION_MAX = 40;
     public static final int AUDIT_DETAILS_MAX = 500;
+    public static final int IBAN_MAX = 34;
+    public static final int BIC_MAX = 11;
+    public static final int COUNTERPARTY_NAME_MAX = 70;
+    public static final int PAYMENT_REFERENCE_MAX = 140;
+    public static final int TRANSACTION_REFERENCE_MAX = 24;
+    public static final int MONEY_PRECISION = 19;
+    public static final int MONEY_SCALE = 3;
+    public static final int MONEY_INTEGER_DIGITS = 16;
+    public static final String TOP_UP_MIN = "0.100";
+    public static final String TOP_UP_MAX = "5000.000";
 
     private ValidationLimits() {
     }

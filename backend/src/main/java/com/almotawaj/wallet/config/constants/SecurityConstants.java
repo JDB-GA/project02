@@ -8,6 +8,7 @@ public final class SecurityConstants {
     public static final String EMAIL_VERIFIED_AUTHORITY = "EMAIL_VERIFIED";
     public static final String HAS_ROLE_CLIENT = "hasRole('CLIENT')";
     public static final String HAS_ROLE_SUPER_ADMIN = "hasRole('SUPER_ADMIN')";
+    public static final String HAS_WALLET_ROLE = "hasAnyRole('CLIENT', 'MERCHANT')";
     public static final String HAS_KYC_REVIEW = "hasAuthority('KYC_REVIEW')";
     public static final String HAS_USER_MANAGE = "hasAuthority('USER_MANAGE')";
     public static final String JWT_SECRET_PROPERTY = "${jwt-secret}";
