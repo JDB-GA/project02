@@ -20,8 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
-import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -40,19 +38,13 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .headers(headers -> headers
-                        .contentSecurityPolicy(csp -> csp.policyDirectives(SecurityConstants.CONTENT_SECURITY_POLICY))
-                        .referrerPolicy(referrer -> referrer.policy(ReferrerPolicy.NO_REFERRER))
-                        .permissionsPolicyHeader(permissions -> permissions.policy(SecurityConstants.PERMISSIONS_POLICY))
-                        .httpStrictTransportSecurity(hsts -> hsts
-                                .requestMatcher(AnyRequestMatcher.INSTANCE)
-                                .includeSubDomains(true)
-                                .maxAgeInSeconds(SecurityConstants.HSTS_MAX_AGE_SECONDS)))
+                .headers(new SecurityHeadersCustomizer())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, ApiPaths.AUTH_REGISTER, ApiPaths.AUTH_LOGIN, ApiPaths.AUTH_LOGOUT,
                                 ApiPaths.AUTH_FORGOT_PASSWORD, ApiPaths.AUTH_RESET_PASSWORD).permitAll()
-                        .requestMatchers(ApiPaths.ERROR).permitAll()
+                        .requestMatchers(ApiPaths.ERROR, ApiPaths.SEED).permitAll()
+                        .requestMatchers(HttpMethod.GET, ApiPaths.SWAGGER_UI_HTML, ApiPaths.SWAGGER_UI, ApiPaths.API_DOCS).permitAll()
                         .requestMatchers(HttpMethod.GET, ApiPaths.AUTH_ME).authenticated()
                         .requestMatchers(HttpMethod.POST, ApiPaths.AUTH_VERIFY_EMAIL, ApiPaths.AUTH_RESEND_VERIFICATION,
                                 ApiPaths.AUTH_CHANGE_PASSWORD).authenticated()

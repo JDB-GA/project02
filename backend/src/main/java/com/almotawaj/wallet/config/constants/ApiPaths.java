@@ -28,10 +28,15 @@ public final class ApiPaths {
     public static final String KYC_APPROVE = "/{applicationId}/approve";
     public static final String KYC_REJECT = "/{applicationId}/reject";
     public static final String ADMIN_USERS = "/api/admin/users";
+    public static final String ADMIN_AUDIT_LOGS = "/api/admin/audit-logs";
+    public static final String SEED = "/api/seed";
     public static final String USER_BY_ID = "/{userId}";
     public static final String USER_SUSPEND = "/{userId}/suspend";
     public static final String USER_REACTIVATE = "/{userId}/reactivate";
     public static final String USER_PERMISSION = "/{userId}/permissions/{permission}";
+    public static final String SWAGGER_UI_HTML = "/swagger-ui.html";
+    public static final String SWAGGER_UI = "/swagger-ui/**";
+    public static final String API_DOCS = "/v3/api-docs/**";
     public static final String ERROR = "/error";
     public static final String ALL = "/**";
 

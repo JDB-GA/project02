@@ -31,6 +31,14 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private final EmailVerificationService emailVerificationService;
 
+    /**
+     * Registers a new user after verifying that the email and mobile number are not already taken.
+     * Saves the user with a hashed password, sends an email verification code, and returns a JWT.
+     *
+     * @param request the registration details supplied by the user
+     * @param locale  the locale used to localise the verification email
+     * @return a login result containing the JWT token and the user profile
+     */
     @Transactional
     public LoginResult register(RegisterRequest request, Locale locale) {
         String email = LoginIdentifier.normalizeEmail(request.email());
@@ -54,6 +62,14 @@ public class UserService {
         return new LoginResult(jwtUtils.generateToken(new MyUserDetails(saved)), UserResponse.from(saved));
     }
 
+    /**
+     * Authenticates a user by their email or mobile number and password.
+     * Sends a verification code if none is currently active for the account.
+     *
+     * @param request the login credentials supplied by the user
+     * @param locale  the locale used to localise any verification email
+     * @return a login result containing the JWT token and the user profile
+     */
     public LoginResult login(LoginRequest request, Locale locale) {
         String identifier = LoginIdentifier.normalize(request.identifier());
         Authentication authentication = authenticationManager.authenticate(

@@ -1,6 +1,8 @@
 package com.almotawaj.wallet.controller;
 
 import com.almotawaj.wallet.config.constants.ApiPaths;
+import com.almotawaj.wallet.config.constants.docs.ApiDocs;
+import com.almotawaj.wallet.config.constants.docs.AuthDocs;
 import com.almotawaj.wallet.config.security.AuthCookieFactory;
 import com.almotawaj.wallet.config.security.MyUserDetails;
 import com.almotawaj.wallet.model.LoginResult;
@@ -8,6 +10,10 @@ import com.almotawaj.wallet.model.request.LoginRequest;
 import com.almotawaj.wallet.model.request.RegisterRequest;
 import com.almotawaj.wallet.model.response.UserResponse;
 import com.almotawaj.wallet.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -19,22 +25,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Locale;
 
 @RestController
+@Tag(name = AuthDocs.TAG, description = AuthDocs.TAG_DESCRIPTION)
 @RequestMapping(ApiPaths.AUTH_USERS)
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
     private final AuthCookieFactory authCookieFactory;
 
+    @Operation(summary = AuthDocs.REGISTER, description = AuthDocs.REGISTER_DESCRIPTION)
+    @SecurityRequirements
+    @ApiResponse(responseCode = ApiDocs.CREATED, description = AuthDocs.REGISTER_CREATED)
+    @ApiResponse(responseCode = ApiDocs.BAD_REQUEST, description = ApiDocs.VALIDATION_FAILED)
+    @ApiResponse(responseCode = ApiDocs.CONFLICT, description = AuthDocs.REGISTER_CONFLICT)
+    @ApiResponse(responseCode = ApiDocs.TOO_MANY_REQUESTS, description = ApiDocs.RATE_LIMITED)
     @PostMapping(ApiPaths.REGISTER)
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request, Locale locale) {
         return withAuthCookie(ResponseEntity.status(HttpStatus.CREATED), userService.register(request, locale));
     }
 
+    @Operation(summary = AuthDocs.LOGIN, description = AuthDocs.LOGIN_DESCRIPTION)
+    @SecurityRequirements
+    @ApiResponse(responseCode = ApiDocs.OK, description = AuthDocs.LOGIN_OK)
+    @ApiResponse(responseCode = ApiDocs.BAD_REQUEST, description = ApiDocs.VALIDATION_FAILED)
+    @ApiResponse(responseCode = ApiDocs.UNAUTHORIZED, description = AuthDocs.LOGIN_UNAUTHORIZED)
+    @ApiResponse(responseCode = ApiDocs.TOO_MANY_REQUESTS, description = ApiDocs.RATE_LIMITED)
     @PostMapping(ApiPaths.LOGIN)
     public ResponseEntity<UserResponse> login(@Valid @RequestBody LoginRequest request, Locale locale) {
         return withAuthCookie(ResponseEntity.ok(), userService.login(request, locale));
     }
 
+    @Operation(summary = AuthDocs.LOGOUT, description = AuthDocs.LOGOUT_DESCRIPTION)
+    @SecurityRequirements
+    @ApiResponse(responseCode = ApiDocs.NO_CONTENT, description = AuthDocs.LOGOUT_NO_CONTENT)
     @PostMapping(ApiPaths.LOGOUT)
     public ResponseEntity<Void> logout() {
         return ResponseEntity.noContent()
@@ -42,6 +64,8 @@ public class UserController {
                 .build();
     }
 
+    @Operation(summary = AuthDocs.ME, description = AuthDocs.ME_DESCRIPTION)
+    @ApiResponse(responseCode = ApiDocs.OK, description = AuthDocs.ME_OK)
     @GetMapping(ApiPaths.ME)
     public UserResponse me(@AuthenticationPrincipal MyUserDetails userDetails) {
         return UserResponse.from(userDetails.user());
