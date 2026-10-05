@@ -28,7 +28,7 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 
 - Branches: `feature-<name>` (e.g. `feature-auth`, `feature-layout`, `feature-identity-verify`); `deploy-setup` for infrastructure.
 - Commits: short Title Case messages describing the change (`Add KYC Review Repositories`).
-- Trello lists: **Backlog → To Do → In Progress → Review → Done**. Labels: `Backend`, `Frontend`, `Security`, `Docs`, `Deployment`.
+- Trello lists: **To Do → In Progress → Done**. Labels: `Backend`, `Frontend`, `Security`, `Docs`, `Deployment`.
 
 ## Timeline
 
