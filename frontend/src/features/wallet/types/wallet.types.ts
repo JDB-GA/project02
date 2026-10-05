@@ -1,4 +1,5 @@
 import type { z } from 'zod'
+import type { ALL_FILTER, TRANSACTION_DIRECTIONS, TRANSACTION_TYPES } from '../constants/wallet.constants'
 import type { topUpOptionsSchema, topUpSourceOptionSchema } from '../schemas/top-up-options.schema'
 import type { topUpSchema } from '../schemas/top-up.schema'
 import type { transactionPageSchema, transactionSchema, walletSchema } from '../schemas/wallet.schema'
@@ -16,3 +17,16 @@ export type TopUpOptions = z.infer<typeof topUpOptionsSchema>
 export type TopUpFormInput = z.input<typeof topUpSchema>
 
 export type TopUpFormValues = z.output<typeof topUpSchema>
+
+export type TransactionTypeFilter = (typeof TRANSACTION_TYPES)[number] | typeof ALL_FILTER
+
+export type TransactionDirectionFilter = (typeof TRANSACTION_DIRECTIONS)[number] | typeof ALL_FILTER
+
+export interface TransactionsQuery {
+  search: string
+  type: TransactionTypeFilter
+  direction: TransactionDirectionFilter
+  from: string
+  to: string
+  page: number
+}

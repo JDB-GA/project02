@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { LoadErrorAlert } from '@/components/LoadErrorAlert'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useWallet } from '../hooks/useWallet'
-import { TransactionsList } from './TransactionsList'
+import { TransactionsCard } from './TransactionsCard'
 import { WalletBalanceCard } from './WalletBalanceCard'
 
 export function WalletContent() {
@@ -28,16 +27,7 @@ export function WalletContent() {
   return (
     <>
       <WalletBalanceCard wallet={wallet} />
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            <h2>{t('transactions.title')}</h2>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <TransactionsList />
-        </CardContent>
-      </Card>
+      <TransactionsCard />
     </>
   )
 }

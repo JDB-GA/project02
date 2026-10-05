@@ -20,6 +20,7 @@ public final class ValidationLimits {
     public static final int COUNTERPARTY_NAME_MAX = 70;
     public static final int TRANSACTION_DESCRIPTION_MAX = 140;
     public static final int RECIPIENT_QUERY_MAX = 254;
+    public static final int TRANSACTION_SEARCH_MAX = 100;
     public static final int TRANSACTION_REFERENCE_MAX = 24;
     public static final int MONEY_PRECISION = 19;
     public static final int MONEY_SCALE = 3;

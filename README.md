@@ -27,7 +27,7 @@ Monorepo:
 - **Wallet** – every verified client and merchant gets one wallet with a unique, generated Bahraini IBAN (`BH` + check digits + `ALMT` + 14 digits, valid ISO 13616 mod-97). Balances are in BHD with 3 decimals and every movement is an append-only ledger entry.
 - **Receive transfers (simulated)** – choose one of five demo external accounts and an amount; the backend fills in the sender's name, IBAN and BIC.
 - **Send money** – send to another wallet by email, mobile number or IBAN, with autocomplete (masked suggestions) and a masked recipient preview before sending.
-- **Transactions** – paged history with the counterparty, type, reference and signed amount.
+- **Transactions** – paged history with the counterparty, type, reference and signed amount; search by name, reference or note and filter by type, direction and date range (the API also filters by amount range). Filters live in the URL, so a filtered view can be bookmarked.
 - **Permissions** – the super admin grants fine-grained permissions to admins with checkboxes.
 - **Audit log** – every administrative and security action is stored and listed for the super admin.
 - **Security** – BCrypt passwords, httpOnly `SameSite=Strict` JWT cookie, token revocation, HMAC-hashed one-time codes, rate limiting, strict CORS, CSP/HSTS and other security headers on both apps, file type checks by content.
@@ -185,7 +185,7 @@ Lists accept `page`, `size` (max 100) and `sort` (e.g. `sort=createdAt,desc`) an
 | DELETE | `/api/admin/users/{userId}/permissions/{permission}`    | Revoke a permission              | Super admin   |
 | GET    | `/api/admin/audit-logs`                                 | List audit entries               | Super admin   |
 | GET    | `/api/wallet`                                           | Get my wallet                    | Wallet holder |
-| GET    | `/api/wallet/transactions`                              | List my transactions             | Wallet holder |
+| GET    | `/api/wallet/transactions`                              | Search and filter my transactions | Wallet holder |
 | GET    | `/api/wallet/top-ups/options`                           | Get top-up sources and limits    | Wallet holder |
 | POST   | `/api/wallet/top-ups`                                   | Receive a bank transfer (simulated) | Wallet holder |
 | GET    | `/api/wallet/recipients/suggestions`                    | Suggest recipients               | Wallet holder |

@@ -5,8 +5,8 @@ import com.almotawaj.wallet.config.constants.SecurityConstants;
 import com.almotawaj.wallet.config.constants.docs.ApiDocs;
 import com.almotawaj.wallet.config.constants.docs.WalletDocs;
 import com.almotawaj.wallet.config.security.MyUserDetails;
-import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.request.TopUpRequest;
+import com.almotawaj.wallet.model.request.TransactionSearchRequest;
 import com.almotawaj.wallet.model.response.PageResponse;
 import com.almotawaj.wallet.model.response.TopUpOptionsResponse;
 import com.almotawaj.wallet.model.response.WalletResponse;
@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -48,9 +49,9 @@ public class WalletController {
     @GetMapping(ApiPaths.TRANSACTIONS)
     public PageResponse<WalletTransactionResponse> listTransactions(
             @AuthenticationPrincipal MyUserDetails userDetails,
-            @RequestParam(required = false) TransactionType type,
+            @ParameterObject @Valid TransactionSearchRequest filter,
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
-        return walletService.listTransactions(userDetails.user().getId(), type, pageable);
+        return walletService.listTransactions(userDetails.user().getId(), filter, pageable);
     }
 
     @Operation(summary = WalletDocs.TOP_UP_OPTIONS, description = WalletDocs.TOP_UP_OPTIONS_DESCRIPTION)
