@@ -1,6 +1,7 @@
 package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.ErrorCodes;
+import com.almotawaj.wallet.event.MoneyReceivedEvent;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.User;
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.ArgumentCaptor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
@@ -45,6 +48,8 @@ class TransferServiceTest {
     private WalletTransactionRepository transactionRepository;
     @Mock
     private TransactionReferenceGenerator referenceGenerator;
+    @Mock
+    private ApplicationEventPublisher eventPublisher;
 
     private TransferService transferService;
     private Wallet sender;
@@ -62,11 +67,13 @@ class TransferServiceTest {
     void setUp() {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
         DailyLimitPolicy limits = new DailyLimitPolicy(transactionRepository, Clock.systemUTC());
-        transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, limits, ledger);
+        transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, limits, ledger,
+                eventPublisher);
         sender = wallet("100.000");
         receiver = wallet("5.000");
         User recipient = new User();
         recipient.setId(UUID.randomUUID());
+        receiver.setUser(recipient);
         when(recipientResolver.resolve(SENDER_ID, RECIPIENT_EMAIL)).thenReturn(recipient);
         when(provisioner.getOrCreate(SENDER_ID)).thenReturn(sender);
         when(provisioner.getOrCreate(recipient.getId())).thenReturn(receiver);
@@ -85,6 +92,11 @@ class TransferServiceTest {
         assertThat(receiver.getBalance()).isEqualByComparingTo("45.000");
         assertThat(response.type()).isEqualTo(TransactionType.TRANSFER_OUT);
         assertThat(response.description()).isEqualTo("Dinner");
+        ArgumentCaptor<MoneyReceivedEvent> event = ArgumentCaptor.forClass(MoneyReceivedEvent.class);
+        verify(eventPublisher).publishEvent(event.capture());
+        assertThat(event.getValue().recipientUserId()).isEqualTo(receiver.getUser().getId());
+        assertThat(event.getValue().amount()).isEqualByComparingTo("40.000");
+        assertThat(event.getValue().senderName()).isEqualTo("Holder");
     }
 
     @Test

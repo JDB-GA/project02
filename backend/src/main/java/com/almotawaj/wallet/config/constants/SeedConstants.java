@@ -34,6 +34,10 @@ public final class SeedConstants {
     public static final String BUILDING = "1207";
     public static final String AREA = "Adliya";
 
+    public static Set<String> accountEmails() {
+        return ACCOUNTS.stream().map(SeedAccount::email).collect(java.util.stream.Collectors.toUnmodifiableSet());
+    }
+
     private SeedConstants() {
     }
 }

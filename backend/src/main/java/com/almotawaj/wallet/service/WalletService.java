@@ -2,6 +2,7 @@ package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.WalletConstants;
 import com.almotawaj.wallet.config.constants.WalletLimits;
+import com.almotawaj.wallet.event.MoneyReceivedEvent;
 import com.almotawaj.wallet.model.Counterparty;
 import com.almotawaj.wallet.model.TopUpSource;
 import com.almotawaj.wallet.model.TransactionType;
@@ -13,6 +14,7 @@ import com.almotawaj.wallet.model.response.*;
 import com.almotawaj.wallet.repository.WalletTransactionRepository;
 import com.almotawaj.wallet.repository.specification.WalletTransactionSpecifications;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,7 @@ public class WalletService {
     private final WalletTransactionRepository transactionRepository;
     private final WalletLedger ledger;
     private final DailyLimitPolicy dailyLimitPolicy;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public WalletResponse getMine(UUID userId) {
@@ -66,6 +69,8 @@ public class WalletService {
         Counterparty sender = new Counterparty(source.getHolderName(), source.getIban(), source.getBic());
         WalletTransaction transaction = ledger.credit(wallet, TransactionType.TOP_UP, request.amount(), sender,
                 source.getBankName());
+        eventPublisher.publishEvent(new MoneyReceivedEvent(userId, transaction.getAmount(), sender.name(),
+                transaction.getReference()));
         return WalletTransactionResponse.from(transaction);
     }
 }

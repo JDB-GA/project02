@@ -25,9 +25,9 @@ export function WalletContent() {
   }
 
   return (
-    <>
+    <div className="flex min-h-0 flex-1 flex-col gap-4">
       <WalletBalanceCard wallet={wallet} />
       <TransactionsCard />
-    </>
+    </div>
   )
 }

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Modifying;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -34,4 +35,12 @@ public interface KycApplicationRepository extends JpaRepository<KycApplication, 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select a from KycApplication a where a.id = :id")
     Optional<KycApplication> findByIdForUpdate(UUID id);
+
+    @Modifying
+    @Query("update KycApplication application set application.reviewedBy = null where application.reviewedBy.id in :userIds")
+    void clearReviewersByIdIn(Collection<UUID> userIds);
+
+    @Modifying
+    @Query("delete from KycApplication application where application.user.id in :userIds")
+    void deleteAllByUserIdIn(Collection<UUID> userIds);
 }

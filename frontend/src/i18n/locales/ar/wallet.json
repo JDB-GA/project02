@@ -69,5 +69,11 @@
     "from": "من تاريخ",
     "to": "إلى تاريخ",
     "clear": "مسح عوامل التصفية"
+  },
+  "notifications": {
+    "moneyReceived": {
+      "title": "تم استلام أموال",
+      "description": "تم استلام {{amount}} من {{sender}}."
+    }
   }
 }

@@ -9,14 +9,14 @@ export function TransactionsCard() {
   const { query, hasFilters, update, setPage, reset } = useTransactionsFilters()
 
   return (
-    <Card>
-      <CardHeader className="flex flex-col gap-4">
+    <Card className="min-h-0 flex-1">
+      <CardHeader className="shrink-0 flex flex-col gap-4">
         <CardTitle>
           <h2>{t('transactions.title')}</h2>
         </CardTitle>
         <TransactionsFilters query={query} hasFilters={hasFilters} onChange={update} onReset={reset} />
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex min-h-0 flex-1 flex-col">
         <TransactionsList query={query} hasFilters={hasFilters} onPageChange={setPage} />
       </CardContent>
     </Card>

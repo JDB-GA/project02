@@ -5,15 +5,18 @@ import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.config.constants.WalletConstants;
 import com.almotawaj.wallet.config.constants.WalletLimits;
 import com.almotawaj.wallet.exception.BusinessRuleException;
+import com.almotawaj.wallet.event.MoneyReceivedEvent;
 import com.almotawaj.wallet.model.Counterparty;
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.Wallet;
+import com.almotawaj.wallet.model.WalletTransaction;
 import com.almotawaj.wallet.model.request.TransferRequest;
 import com.almotawaj.wallet.model.response.RecipientResponse;
 import com.almotawaj.wallet.model.response.TransferOptionsResponse;
 import com.almotawaj.wallet.model.response.WalletTransactionResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +32,7 @@ public class TransferService {
     private final WalletHolderNames holderNames;
     private final DailyLimitPolicy dailyLimitPolicy;
     private final WalletLedger ledger;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional(readOnly = true)
     public RecipientResponse findRecipient(UUID senderId, String query) {
@@ -58,7 +62,10 @@ public class TransferService {
         }
         dailyLimitPolicy.ensureTransferAllowed(sender.getId(), amount);
         String note = request.note() == null || request.note().isBlank() ? null : request.note().strip();
-        ledger.credit(receiver, TransactionType.TRANSFER_IN, amount, counterparty(sender), note);
+        Counterparty senderDetails = counterparty(sender);
+        WalletTransaction received = ledger.credit(receiver, TransactionType.TRANSFER_IN, amount, senderDetails, note);
+        eventPublisher.publishEvent(new MoneyReceivedEvent(recipient.getId(), received.getAmount(), senderDetails.name(),
+                received.getReference()));
         return WalletTransactionResponse.from(
                 ledger.debit(sender, TransactionType.TRANSFER_OUT, amount, counterparty(receiver), note));
     }

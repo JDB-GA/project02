@@ -69,5 +69,11 @@
     "from": "From date",
     "to": "To date",
     "clear": "Clear filters"
+  },
+  "notifications": {
+    "moneyReceived": {
+      "title": "Money received",
+      "description": "You received {{amount}} from {{sender}}."
+    }
   }
 }

@@ -28,9 +28,11 @@ public final class ApiPaths {
     public static final String KYC_APPROVE = "/{applicationId}/approve";
     public static final String KYC_REJECT = "/{applicationId}/reject";
     public static final String ADMIN_USERS = "/api/admin/users";
+    public static final String ADMIN_SEED_DATA = "/api/admin/seed-data";
     public static final String ADMIN_AUDIT_LOGS = "/api/admin/audit-logs";
     public static final String SEED = "/api/seed";
     public static final String WALLET = "/api/wallet";
+    public static final String NOTIFICATIONS_STREAM = "/api/notifications/stream";
     public static final String TRANSACTIONS = "/transactions";
     public static final String TOP_UPS = "/top-ups";
     public static final String TOP_UP_OPTIONS = "/top-ups/options";

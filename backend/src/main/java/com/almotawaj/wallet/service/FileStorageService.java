@@ -44,6 +44,19 @@ public class FileStorageService {
         return new FileSystemResource(resolve(key));
     }
 
+    public void deleteAfterCommit(String key) {
+        if (!TransactionSynchronizationManager.isSynchronizationActive()) {
+            delete(key);
+            return;
+        }
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCommit() {
+                delete(key);
+            }
+        });
+    }
+
     private void deleteOnRollback(String key) {
         if (!TransactionSynchronizationManager.isSynchronizationActive()) {
             return;

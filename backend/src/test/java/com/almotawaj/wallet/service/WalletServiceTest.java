@@ -1,6 +1,7 @@
 package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.ErrorCodes;
+import com.almotawaj.wallet.event.MoneyReceivedEvent;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.model.TopUpSource;
 import com.almotawaj.wallet.model.TransactionType;
@@ -12,7 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.ArgumentCaptor;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.time.Clock;
@@ -42,6 +45,8 @@ class WalletServiceTest {
     private WalletTransactionRepository transactionRepository;
     @Mock
     private TransactionReferenceGenerator referenceGenerator;
+    @Mock
+    private ApplicationEventPublisher eventPublisher;
 
     private WalletService walletService;
     private Wallet wallet;
@@ -50,7 +55,8 @@ class WalletServiceTest {
     void setUp() {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
         DailyLimitPolicy limiter = new DailyLimitPolicy(transactionRepository, CLOCK);
-        walletService = new WalletService(provisioner, walletLocker, transactionRepository, ledger, limiter);
+        walletService = new WalletService(provisioner, walletLocker, transactionRepository, ledger, limiter,
+                eventPublisher);
         wallet = new Wallet();
         wallet.setId(WALLET_ID);
         wallet.setBalance(new BigDecimal("10.000"));
@@ -76,6 +82,11 @@ class WalletServiceTest {
         assertThat(response.counterpartyName()).isEqualTo(TopUpSource.NBB_SALARY.getHolderName());
         assertThat(response.counterpartyIban()).isEqualTo(TopUpSource.NBB_SALARY.getIban());
         assertThat(response.description()).isEqualTo(TopUpSource.NBB_SALARY.getBankName());
+        ArgumentCaptor<MoneyReceivedEvent> event = ArgumentCaptor.forClass(MoneyReceivedEvent.class);
+        verify(eventPublisher).publishEvent(event.capture());
+        assertThat(event.getValue().recipientUserId()).isEqualTo(USER_ID);
+        assertThat(event.getValue().amount()).isEqualByComparingTo("150.500");
+        assertThat(event.getValue().senderName()).isEqualTo(TopUpSource.NBB_SALARY.getHolderName());
     }
 
     @Test

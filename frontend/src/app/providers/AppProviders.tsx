@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { useLanguage } from '@/hooks/useLanguage'
 import { queryClient } from '@/lib/query/query-client'
+import { LiveNotifications } from '@/features/notifications/components/LiveNotifications'
 
 export function AppProviders({ children }: PropsWithChildren) {
   const { direction } = useLanguage()
@@ -14,6 +15,7 @@ export function AppProviders({ children }: PropsWithChildren) {
       <DirectionProvider dir={direction}>
         <TooltipProvider>
           {children}
+          <LiveNotifications />
           <Toaster position="top-center" dir={direction} richColors />
         </TooltipProvider>
       </DirectionProvider>

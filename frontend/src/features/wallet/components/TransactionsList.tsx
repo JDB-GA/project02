@@ -37,8 +37,10 @@ export function TransactionsList({ query, hasFilters, onPageChange }: Transactio
   }
 
   return (
-    <div className="flex flex-col gap-4" aria-busy={isPlaceholderData}>
-      <TransactionsTable transactions={data.content} />
+    <div className="flex min-h-0 flex-1 flex-col gap-4" aria-busy={isPlaceholderData}>
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+        <TransactionsTable transactions={data.content} />
+      </div>
       <PaginationControls page={data.page} totalPages={data.totalPages} disabled={isPlaceholderData} onPageChange={onPageChange} />
     </div>
   )
