@@ -1,12 +1,12 @@
 # Planning
 
-How the Almotawaj Digital Wallet is planned, built and tracked. User stories live in [`docs/user-stories.md`](docs/user-stories.md) and on the Trello board.
+How the Almotawaj Digital Wallet is planned, built and tracked. User stories live in [`docs/user-stories.md`](docs/user-stories.md) and progress on [Trello](https://trello.com/b/JuK0qiqf/project-02-jdb).
 
 ## Process
 
 Every feature is built as one vertical slice, backend first, on its own branch:
 
-1. **Stories** – write the user stories and business rules as Trello cards with acceptance criteria.
+1. **Stories** – write the user stories with acceptance criteria and add the work to Trello.
 2. **Schema** – update the ERD ([`docs/erd.dbml`](docs/erd.dbml)) for the feature only.
 3. **Model and repository** – entities, enums and queries.
 4. **Service and tests** – business rules in services, one unit test per rule.
@@ -28,7 +28,7 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 
 - Branches: `feature-<name>` (e.g. `feature-auth`, `feature-layout`, `feature-identity-verify`); `deploy-setup` for infrastructure.
 - Commits: short Title Case messages describing the change (`Add KYC Review Repositories`).
-- Trello lists: **To Do → In Progress → Done**. Labels: `Backend`, `Frontend`, `Security`, `Docs`, `Deployment`.
+- Trello lists: **To Do → In Progress → Done**.
 
 ## Timeline
 
