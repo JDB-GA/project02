@@ -1,0 +1,27 @@
+package com.almotawaj.wallet.config.constants.docs;
+
+public final class DocExamples {
+    public static final String EMAIL = "ali.hasan@example.com";
+    public static final String IDENTIFIER = "ali.hasan@example.com";
+    public static final String MOBILE = "33123456";
+    public static final String PASSWORD = "Str0ngPass!";
+    public static final String NEW_PASSWORD = "N3wStr0ngPass!";
+    public static final String OTP_CODE = "482913";
+    public static final String ROLE = "MERCHANT";
+    public static final String PERMISSIONS = "[]";
+    public static final String REJECTION_REASON = "The CPR copy is blurry. Please upload a clearer scan.";
+    public static final String FULL_NAME = "Ali Hasan";
+    public static final String CPR = "990101234";
+    public static final String DATE_OF_BIRTH = "1995-01-15";
+    public static final String NATIONALITY = "BH";
+    public static final String BLOCK = "338";
+    public static final String ROAD = "3803";
+    public static final String BUILDING = "1207";
+    public static final String FLAT = "21";
+    public static final String AREA = "Adliya";
+    public static final String CPR_EXPIRY = "2029-06-30";
+    public static final String PASSPORT_EXPIRY = "2031-03-31";
+
+    private DocExamples() {
+    }
+}

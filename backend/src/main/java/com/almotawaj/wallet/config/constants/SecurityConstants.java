@@ -24,6 +24,8 @@ public final class SecurityConstants {
     public static final long CORS_MAX_AGE_SECONDS = 3600;
 
     public static final String CONTENT_SECURITY_POLICY = "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'";
+    public static final String DOCS_CONTENT_SECURITY_POLICY = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+    public static final String CONTENT_SECURITY_POLICY_HEADER = "Content-Security-Policy";
     public static final String PERMISSIONS_POLICY = "camera=(), microphone=(), geolocation=(), payment=(), usb=()";
     public static final long HSTS_MAX_AGE_SECONDS = 63072000;
 
