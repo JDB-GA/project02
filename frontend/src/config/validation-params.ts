@@ -12,6 +12,7 @@ import {
   MAX_FILE_SIZE_MB,
   MINIMUM_AGE_YEARS,
 } from '@/features/kyc/constants/kyc.constants'
+import { REJECTION_REASON_MAX_LENGTH } from '@/features/kyc-review/constants/kyc-review.constants'
 
 export const VALIDATION_PARAMS = {
   mobileLength: MOBILE_NUMBER_LENGTH,
@@ -24,4 +25,5 @@ export const VALIDATION_PARAMS = {
   areaMax: AREA_MAX_LENGTH,
   minimumAge: MINIMUM_AGE_YEARS,
   maxFileSizeMb: MAX_FILE_SIZE_MB,
+  rejectionReasonMax: REJECTION_REASON_MAX_LENGTH,
 } as const

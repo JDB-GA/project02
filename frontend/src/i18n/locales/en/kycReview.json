@@ -1,0 +1,47 @@
+{
+  "filters": {
+    "label": "Filter by status",
+    "PENDING": "Pending",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected",
+    "ALL": "All"
+  },
+  "table": {
+    "fullName": "Applicant",
+    "cprNumber": "CPR",
+    "email": "Email",
+    "submittedAt": "Submitted",
+    "status": "Status",
+    "actions": "Actions",
+    "review": "Review",
+    "reviewApplication": "Review application of {{name}}"
+  },
+  "empty": {
+    "title": "No requests here",
+    "description": "There are no verification requests with this status."
+  },
+  "loadError": "Could not load verification requests.",
+  "retry": "Try again",
+  "detail": {
+    "back": "Back to requests",
+    "applicant": "Applicant",
+    "email": "Email",
+    "mobileNumber": "Mobile number",
+    "reviewedBy": "Reviewed by",
+    "notFound": "This verification request was not found.",
+    "rejectionReason": "Rejection reason"
+  },
+  "actions": {
+    "approve": "Approve",
+    "reject": "Reject",
+    "cancel": "Cancel",
+    "approveTitle": "Approve this request?",
+    "approveDescription": "{{name}} will be marked as verified and notified by email.",
+    "rejectTitle": "Reject this request",
+    "rejectDescription": "The applicant will see this reason and be notified by email.",
+    "reason": "Reason",
+    "reasonPlaceholder": "Explain what the applicant needs to fix",
+    "approved": "Request approved",
+    "rejected": "Request rejected"
+  }
+}

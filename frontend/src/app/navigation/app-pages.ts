@@ -1,4 +1,4 @@
-import { LayoutDashboardIcon, ShieldCheckIcon, StoreIcon, WalletIcon } from 'lucide-react'
+import { ClipboardCheckIcon, LayoutDashboardIcon, ShieldCheckIcon, StoreIcon, WalletIcon } from 'lucide-react'
 import { ROUTES } from '@/config/routes'
 import type { AppPage } from './app-page.types'
 
@@ -34,5 +34,24 @@ export const APP_PAGES: readonly AppPage[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
     showInSidebar: true,
     lazy: async () => ({ Component: (await import('@/features/admin/pages/AdminPage')).AdminPage }),
+  },
+  {
+    id: 'kycReviews',
+    path: ROUTES.kycReviews,
+    icon: ClipboardCheckIcon,
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+    permission: 'KYC_REVIEW',
+    showInSidebar: true,
+    lazy: async () => ({ Component: (await import('@/features/kyc-review/pages/KycReviewsPage')).KycReviewsPage }),
+  },
+  {
+    id: 'kycReview',
+    path: ROUTES.kycReview,
+    icon: ClipboardCheckIcon,
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+    permission: 'KYC_REVIEW',
+    parentId: 'kycReviews',
+    showInSidebar: false,
+    lazy: async () => ({ Component: (await import('@/features/kyc-review/pages/KycReviewPage')).KycReviewPage }),
   },
 ]

@@ -34,5 +34,7 @@
   "fileRequired": "أرفق هذا الملف",
   "pdfOnly": "يُسمح بملفات PDF فقط",
   "imageOnly": "يُسمح بصور JPG أو PNG فقط",
-  "fileTooLarge": "يجب ألا يتجاوز حجم الملف {{maxFileSizeMb}} ميجابايت"
+  "fileTooLarge": "يجب ألا يتجاوز حجم الملف {{maxFileSizeMb}} ميجابايت",
+  "rejectionReasonRequired": "أدخل سبب الرفض",
+  "rejectionReasonTooLong": "يجب ألا يتجاوز السبب {{rejectionReasonMax}} حرفاً"
 }

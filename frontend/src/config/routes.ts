@@ -7,4 +7,6 @@ export const ROUTES = {
   verification: '/verification',
   merchant: '/merchant',
   admin: '/admin',
+  kycReviews: '/admin/kyc',
+  kycReview: '/admin/kyc/:applicationId',
 } as const

@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
       {
         element: <AppLayout />,
         children: APP_PAGES.map((page) => ({
-          element: <RoleRoute roles={page.roles} />,
+          element: <RoleRoute roles={page.roles} permission={page.permission} />,
           children: [{ path: page.path, lazy: page.lazy }],
         })),
       },

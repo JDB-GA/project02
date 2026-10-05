@@ -1,8 +1,9 @@
-import type { UserRole } from '@/features/auth/types/user.types'
+import type { User } from '@/features/auth/types/user.types'
 import type { AppPage } from './app-page.types'
 import { APP_PAGES } from './app-pages'
 
-export const canAccessPage = (page: AppPage, role: UserRole): boolean => page.roles.includes(role)
+export const canAccessPage = (page: AppPage, user: User): boolean =>
+  page.roles.includes(user.role) && (!page.permission || user.permissions.includes(page.permission))
 
-export const getSidebarPages = (role: UserRole): AppPage[] =>
-  APP_PAGES.filter((page) => page.showInSidebar && canAccessPage(page, role))
+export const getSidebarPages = (user: User): AppPage[] =>
+  APP_PAGES.filter((page) => page.showInSidebar && canAccessPage(page, user))

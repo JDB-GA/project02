@@ -1,0 +1,47 @@
+{
+  "filters": {
+    "label": "تصفية حسب الحالة",
+    "PENDING": "قيد المراجعة",
+    "APPROVED": "مقبولة",
+    "REJECTED": "مرفوضة",
+    "ALL": "الكل"
+  },
+  "table": {
+    "fullName": "مقدم الطلب",
+    "cprNumber": "الرقم الشخصي",
+    "email": "البريد الإلكتروني",
+    "submittedAt": "تاريخ الإرسال",
+    "status": "الحالة",
+    "actions": "الإجراءات",
+    "review": "مراجعة",
+    "reviewApplication": "مراجعة طلب {{name}}"
+  },
+  "empty": {
+    "title": "لا توجد طلبات",
+    "description": "لا توجد طلبات تحقق بهذه الحالة."
+  },
+  "loadError": "تعذّر تحميل طلبات التحقق.",
+  "retry": "إعادة المحاولة",
+  "detail": {
+    "back": "العودة إلى الطلبات",
+    "applicant": "مقدم الطلب",
+    "email": "البريد الإلكتروني",
+    "mobileNumber": "رقم الجوال",
+    "reviewedBy": "راجعه",
+    "notFound": "لم يتم العثور على طلب التحقق هذا.",
+    "rejectionReason": "سبب الرفض"
+  },
+  "actions": {
+    "approve": "قبول",
+    "reject": "رفض",
+    "cancel": "إلغاء",
+    "approveTitle": "قبول هذا الطلب؟",
+    "approveDescription": "سيتم اعتماد هوية {{name}} وإشعاره عبر البريد الإلكتروني.",
+    "rejectTitle": "رفض هذا الطلب",
+    "rejectDescription": "سيرى مقدم الطلب هذا السبب وسيتم إشعاره عبر البريد الإلكتروني.",
+    "reason": "السبب",
+    "reasonPlaceholder": "وضّح ما يحتاج مقدم الطلب إلى تصحيحه",
+    "approved": "تم قبول الطلب",
+    "rejected": "تم رفض الطلب"
+  }
+}

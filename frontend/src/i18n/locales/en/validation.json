@@ -34,5 +34,7 @@
   "fileRequired": "Attach this file",
   "pdfOnly": "Only PDF files are allowed",
   "imageOnly": "Only JPG or PNG images are allowed",
-  "fileTooLarge": "File must be {{maxFileSizeMb}} MB or smaller"
+  "fileTooLarge": "File must be {{maxFileSizeMb}} MB or smaller",
+  "rejectionReasonRequired": "Enter a reason for the rejection",
+  "rejectionReasonTooLong": "Reason must be at most {{rejectionReasonMax}} characters"
 }

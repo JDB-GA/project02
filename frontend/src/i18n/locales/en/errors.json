@@ -23,5 +23,7 @@
   "DOCUMENT_EXPIRED": "Your identity documents must not be expired",
   "FILE_REQUIRED": "Please attach all required files",
   "FILE_TYPE_INVALID": "One of the files has an unsupported type",
-  "FILE_TOO_LARGE": "One of the files is larger than 5 MB"
+  "FILE_TOO_LARGE": "One of the files is larger than 5 MB",
+  "KYC_ALREADY_REVIEWED": "This request has already been reviewed",
+  "INVALID_REQUEST_PARAMETER": "One of the request parameters is invalid"
 }

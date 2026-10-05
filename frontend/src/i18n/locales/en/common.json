@@ -32,6 +32,14 @@
     "verification": {
       "title": "Identity Verification",
       "heading": "Verify your identity"
+    },
+    "kycReviews": {
+      "title": "KYC Reviews",
+      "heading": "Identity verification requests"
+    },
+    "kycReview": {
+      "title": "Review Application",
+      "heading": "Review application"
     }
   },
   "nav": {
@@ -50,5 +58,12 @@
     "retry": "Try again",
     "download": "Download",
     "unsupported": "Preview isn't available for this file type. Download it instead."
-  }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{page}} of {{total}}",
+    "label": "Pagination"
+  },
+  "retry": "Try again"
 }
