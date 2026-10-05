@@ -45,6 +45,8 @@ class KycReviewServiceTest {
     private FileStorageService fileStorageService;
     @Mock
     private ApplicationEventPublisher eventPublisher;
+    @Mock
+    private AuditService auditService;
 
     private KycReviewService service;
     private KycApplication application;
@@ -54,7 +56,7 @@ class KycReviewServiceTest {
     @BeforeEach
     void setUp() {
         service = new KycReviewService(applicationRepository, documentRepository, userRepository,
-                fileStorageService, eventPublisher, Clock.fixed(NOW, ZoneOffset.UTC));
+                fileStorageService, eventPublisher, Clock.fixed(NOW, ZoneOffset.UTC), auditService);
         applicant = new User();
         applicant.setId(UUID.randomUUID());
         applicant.setEmailAddress("client@example.com");

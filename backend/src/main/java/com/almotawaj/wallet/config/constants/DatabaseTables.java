@@ -6,6 +6,7 @@ public final class DatabaseTables {
     public static final String KYC_APPLICATIONS = "kyc_applications";
     public static final String KYC_DOCUMENTS = "kyc_documents";
     public static final String USER_PERMISSIONS = "user_permissions";
+    public static final String AUDIT_LOGS = "audit_logs";
 
     private DatabaseTables() {
     }

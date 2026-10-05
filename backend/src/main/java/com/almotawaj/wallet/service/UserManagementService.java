@@ -4,8 +4,9 @@ import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.exception.BusinessRuleException;
-import com.almotawaj.wallet.exception.InformationExistException;
 import com.almotawaj.wallet.exception.InformationNotFoundException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.UserRole;
 import com.almotawaj.wallet.model.UserStatus;
@@ -15,7 +16,6 @@ import com.almotawaj.wallet.model.response.AdminUserSummaryResponse;
 import com.almotawaj.wallet.model.response.PageResponse;
 import com.almotawaj.wallet.repository.UserRepository;
 import com.almotawaj.wallet.repository.specification.UserSpecifications;
-import com.almotawaj.wallet.util.LoginIdentifier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +32,8 @@ public class UserManagementService {
     private final UserRepository userRepository;
     private final UserManagementPolicy policy;
     private final AdminUserMapper mapper;
+    private final UserContactUpdater contactUpdater;
+    private final AuditService auditService;
 
     @Transactional(readOnly = true)
     public PageResponse<AdminUserSummaryResponse> list(String search, UserRole role, UserStatus status, Pageable pageable) {
@@ -41,38 +43,39 @@ public class UserManagementService {
 
     @Transactional(readOnly = true)
     public AdminUserResponse get(UUID userId) {
-        return mapper.toResponse(findUser(userId));
+        return mapper.toResponse(userRepository.findById(userId)
+                .orElseThrow(() -> new InformationNotFoundException(ErrorMessages.USER_NOT_FOUND)));
     }
 
     @Transactional
     public AdminUserResponse updateContact(User actor, UUID userId, UpdateUserContactRequest request) {
         User target = findManageableUser(actor, userId);
-        if (request.email() != null) {
-            changeEmail(target, LoginIdentifier.normalizeEmail(request.email()));
-        }
-        if (request.mobileNumber() != null) {
-            changeMobile(target, LoginIdentifier.normalizeMobile(request.mobileNumber()));
-        }
+        contactUpdater.apply(target, request);
         log.info(LogMessages.USER_CONTACT_UPDATED, actor.getId(), userId);
+        auditService.record(actor.getId(), AuditAction.USER_CONTACT_UPDATED, AuditTargetType.USER, userId, null);
         return mapper.toResponse(target);
     }
 
     @Transactional
     public AdminUserResponse suspend(User actor, UUID userId) {
-        return changeStatus(actor, userId, Set.of(UserStatus.ACTIVE, UserStatus.LOCKED), UserStatus.SUSPENDED);
+        return changeStatus(actor, userId, Set.of(UserStatus.ACTIVE, UserStatus.LOCKED), UserStatus.SUSPENDED,
+                AuditAction.USER_SUSPENDED);
     }
 
     @Transactional
     public AdminUserResponse reactivate(User actor, UUID userId) {
-        return changeStatus(actor, userId, Set.of(UserStatus.SUSPENDED, UserStatus.LOCKED), UserStatus.ACTIVE);
+        return changeStatus(actor, userId, Set.of(UserStatus.SUSPENDED, UserStatus.LOCKED), UserStatus.ACTIVE,
+                AuditAction.USER_REACTIVATED);
     }
 
     @Transactional
     public void close(User actor, UUID userId) {
-        changeStatus(actor, userId, Set.of(UserStatus.ACTIVE, UserStatus.SUSPENDED, UserStatus.LOCKED), UserStatus.CLOSED);
+        changeStatus(actor, userId, Set.of(UserStatus.ACTIVE, UserStatus.SUSPENDED, UserStatus.LOCKED), UserStatus.CLOSED,
+                AuditAction.USER_CLOSED);
     }
 
-    private AdminUserResponse changeStatus(User actor, UUID userId, Set<UserStatus> allowedFrom, UserStatus next) {
+    private AdminUserResponse changeStatus(User actor, UUID userId, Set<UserStatus> allowedFrom, UserStatus next,
+                                           AuditAction action) {
         User target = findManageableUser(actor, userId);
         UserStatus previous = target.getStatus();
         if (!allowedFrom.contains(previous)) {
@@ -80,28 +83,8 @@ public class UserManagementService {
         }
         target.setStatus(next);
         log.info(LogMessages.USER_STATUS_CHANGED, actor.getId(), userId, previous, next);
+        auditService.record(actor.getId(), action, AuditTargetType.USER, userId, previous + " -> " + next);
         return mapper.toResponse(target);
-    }
-
-    private void changeEmail(User target, String email) {
-        if (email.equals(target.getEmailAddress())) {
-            return;
-        }
-        if (userRepository.existsByEmailAddress(email)) {
-            throw new InformationExistException(ErrorMessages.EMAIL_ALREADY_REGISTERED, ErrorCodes.EMAIL_ALREADY_REGISTERED);
-        }
-        target.setEmailAddress(email);
-        target.setEmailVerified(false);
-    }
-
-    private void changeMobile(User target, String mobileNumber) {
-        if (mobileNumber.equals(target.getMobileNumber())) {
-            return;
-        }
-        if (userRepository.existsByMobileNumber(mobileNumber)) {
-            throw new InformationExistException(ErrorMessages.MOBILE_ALREADY_REGISTERED, ErrorCodes.MOBILE_ALREADY_REGISTERED);
-        }
-        target.setMobileNumber(mobileNumber);
     }
 
     private User findManageableUser(User actor, UUID userId) {
@@ -109,10 +92,5 @@ public class UserManagementService {
                 .orElseThrow(() -> new InformationNotFoundException(ErrorMessages.USER_NOT_FOUND));
         policy.ensureCanManage(actor, target);
         return target;
-    }
-
-    private User findUser(UUID userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new InformationNotFoundException(ErrorMessages.USER_NOT_FOUND));
     }
 }

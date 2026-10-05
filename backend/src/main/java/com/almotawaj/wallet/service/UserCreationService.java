@@ -4,6 +4,8 @@ import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.exception.InformationExistException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.request.CreateUserRequest;
 import com.almotawaj.wallet.model.response.AdminUserResponse;
@@ -29,6 +31,7 @@ public class UserCreationService {
     private final PasswordEncoder passwordEncoder;
     private final PasswordResetService passwordResetService;
     private final AdminUserMapper mapper;
+    private final AuditService auditService;
     private final SecureRandom secureRandom = new SecureRandom();
 
     @Transactional
@@ -53,6 +56,7 @@ public class UserCreationService {
 
         passwordResetService.sendInvitation(saved);
         log.info(LogMessages.USER_CREATED, actor.getId(), saved.getId(), saved.getRole());
+        auditService.record(actor.getId(), AuditAction.USER_CREATED, AuditTargetType.USER, saved.getId(), saved.getRole().name());
         return mapper.toResponse(saved);
     }
 
