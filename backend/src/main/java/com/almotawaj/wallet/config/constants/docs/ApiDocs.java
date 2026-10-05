@@ -36,6 +36,9 @@ public final class ApiDocs {
 
             Errors use RFC 9457 Problem Details with a machine-readable `code` property.""";
     public static final String SECURITY_SCHEME_NAME = "cookieAuth";
+    public static final String SEED_SCHEME_NAME = "seedToken";
+    public static final String SEED_SCHEME_DESCRIPTION = "Paste the SEED_TOKEN value only (Swagger adds the Bearer prefix)";
+    public static final String BEARER = "bearer";
     public static final String SECURITY_SCHEME_DESCRIPTION = "JWT stored in the httpOnly access_token cookie, set by the login endpoint";
 
     private ApiDocs() {

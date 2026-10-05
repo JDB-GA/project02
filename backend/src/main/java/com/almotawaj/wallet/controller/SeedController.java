@@ -6,8 +6,9 @@ import com.almotawaj.wallet.config.constants.docs.SystemDocs;
 import com.almotawaj.wallet.config.security.SeedTokenGuard;
 import com.almotawaj.wallet.service.DatabaseSeedService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -27,7 +28,7 @@ public class SeedController {
     private final SeedTokenGuard seedTokenGuard;
 
     @Operation(summary = SystemDocs.SEED, description = SystemDocs.SEED_DESCRIPTION)
-    @SecurityRequirements
+    @SecurityRequirement(name = ApiDocs.SEED_SCHEME_NAME)
     @ApiResponse(responseCode = ApiDocs.CREATED, description = SystemDocs.SEED_CREATED)
     @ApiResponse(responseCode = ApiDocs.FORBIDDEN, description = SystemDocs.SEED_FORBIDDEN)
     @ApiResponse(responseCode = ApiDocs.NOT_FOUND, description = SystemDocs.SEED_NOT_FOUND)
@@ -35,7 +36,7 @@ public class SeedController {
     @ApiResponse(responseCode = ApiDocs.TOO_MANY_REQUESTS, description = ApiDocs.RATE_LIMITED)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void seedData(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
+    public void seedData(@Parameter(hidden = true) @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
         seedTokenGuard.verify(authorization);
         seedService.seedBasicData();
     }

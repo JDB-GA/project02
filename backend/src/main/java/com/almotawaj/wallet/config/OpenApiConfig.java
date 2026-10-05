@@ -25,6 +25,10 @@ public class OpenApiConfig {
                                 .name(SecurityConstants.AUTH_COOKIE_NAME)
                                 .type(SecurityScheme.Type.APIKEY)
                                 .in(SecurityScheme.In.COOKIE)
-                                .description(ApiDocs.SECURITY_SCHEME_DESCRIPTION)));
+                                .description(ApiDocs.SECURITY_SCHEME_DESCRIPTION))
+                        .addSecuritySchemes(ApiDocs.SEED_SCHEME_NAME, new SecurityScheme()
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme(ApiDocs.BEARER)
+                                .description(ApiDocs.SEED_SCHEME_DESCRIPTION)));
     }
 }
