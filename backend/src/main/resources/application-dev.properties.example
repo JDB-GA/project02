@@ -1,4 +1,4 @@
-server.error.include-stacktrace=ALWAYS
+server.error.include-stacktrace=never
 spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url=jdbc:postgresql://localhost:5432/digital-wallet
 spring.datasource.username=postgres
@@ -19,3 +19,5 @@ mail-logo-url=https://almotawaj.com/logo/logo.png
 
 storage-root=uploads
 app-url=http://localhost:5173
+seed-token=
+seed-password=

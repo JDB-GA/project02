@@ -34,6 +34,7 @@ public final class ErrorCodes {
     public static final String INVALID_CURRENT_PASSWORD = "INVALID_CURRENT_PASSWORD";
     public static final String PASSWORD_REUSED = "PASSWORD_REUSED";
     public static final String ROLE_NOT_ASSIGNABLE = "ROLE_NOT_ASSIGNABLE";
+    public static final String SEED_PASSWORD_MISSING = "SEED_PASSWORD_MISSING";
 
     private ErrorCodes() {
     }
