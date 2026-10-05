@@ -13,6 +13,7 @@ import {
   MINIMUM_AGE_YEARS,
 } from '@/features/kyc/constants/kyc.constants'
 import { REJECTION_REASON_MAX_LENGTH } from '@/features/kyc-review/constants/kyc-review.constants'
+import { TOP_UP_MAX, TOP_UP_MIN } from '@/features/wallet/constants/wallet.constants'
 
 export const VALIDATION_PARAMS = {
   mobileLength: MOBILE_NUMBER_LENGTH,
@@ -26,4 +27,6 @@ export const VALIDATION_PARAMS = {
   minimumAge: MINIMUM_AGE_YEARS,
   maxFileSizeMb: MAX_FILE_SIZE_MB,
   rejectionReasonMax: REJECTION_REASON_MAX_LENGTH,
+  topUpMin: TOP_UP_MIN,
+  topUpMax: TOP_UP_MAX,
 } as const

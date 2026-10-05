@@ -33,5 +33,7 @@
   "SUPER_ADMIN_PERMISSIONS_FIXED": "Super admin permissions cannot be changed",
   "INVALID_CURRENT_PASSWORD": "Current password is incorrect",
   "PASSWORD_REUSED": "Choose a password different from your current one",
-  "ROLE_NOT_ASSIGNABLE": "This role can't be assigned"
+  "ROLE_NOT_ASSIGNABLE": "This role can't be assigned",
+  "WALLET_KYC_REQUIRED": "Verify your identity before using your wallet",
+  "DAILY_TOP_UP_LIMIT_EXCEEDED": "This transfer exceeds your daily receiving limit"
 }

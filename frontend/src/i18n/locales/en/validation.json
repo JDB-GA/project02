@@ -40,5 +40,11 @@
   "currentPasswordRequired": "Enter your current password",
   "currentPasswordIncorrect": "Current password is incorrect",
   "passwordReused": "Choose a password different from your current one",
-  "roleRequired": "Select a role"
+  "roleRequired": "Select a role",
+  "amountRequired": "Amount is required",
+  "amountInvalid": "Enter an amount with up to 3 decimal places",
+  "amountTooSmall": "Amount must be at least {{topUpMin}} BHD",
+  "amountTooLarge": "Amount must be at most {{topUpMax}} BHD",
+  "topUpSourceRequired": "Choose the account to receive from",
+  "amountOverDailyLimit": "This exceeds what you can still receive today"
 }

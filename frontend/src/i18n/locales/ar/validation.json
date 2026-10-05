@@ -40,5 +40,11 @@
   "currentPasswordRequired": "أدخل كلمة المرور الحالية",
   "currentPasswordIncorrect": "كلمة المرور الحالية غير صحيحة",
   "passwordReused": "اختر كلمة مرور مختلفة عن الحالية",
-  "roleRequired": "اختر الدور"
+  "roleRequired": "اختر الدور",
+  "amountRequired": "المبلغ مطلوب",
+  "amountInvalid": "أدخل مبلغاً بثلاث خانات عشرية كحد أقصى",
+  "amountTooSmall": "يجب ألا يقل المبلغ عن {{topUpMin}} د.ب",
+  "amountTooLarge": "يجب ألا يزيد المبلغ عن {{topUpMax}} د.ب",
+  "topUpSourceRequired": "اختر الحساب الذي ستستلم منه",
+  "amountOverDailyLimit": "المبلغ يتجاوز ما يمكنك استلامه اليوم"
 }

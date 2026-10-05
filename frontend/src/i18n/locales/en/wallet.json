@@ -1,0 +1,41 @@
+{
+  "loadError": "Could not load your wallet.",
+  "balance": {
+    "label": "Available balance",
+    "iban": "Your IBAN",
+    "copyIban": "Copy IBAN",
+    "ibanCopied": "IBAN copied",
+    "copyFailed": "Could not copy the IBAN"
+  },
+  "topUp": {
+    "open": "Receive transfer",
+    "title": "Receive a bank transfer",
+    "description": "Simulates an incoming transfer from one of your demo accounts at other banks. The sender details are filled in automatically.",
+    "source": "Receive from",
+    "sourcePlaceholder": "Choose an account",
+    "amount": "Amount ({{currency}})",
+    "limits": "Up to {{max}} per transfer · {{remaining}} of {{daily}} left today",
+    "cancel": "Cancel",
+    "submit": "Receive transfer",
+    "success": "Transfer received and added to your balance",
+    "loadError": "Could not load the transfer options."
+  },
+  "transactions": {
+    "title": "Transactions",
+    "date": "Date",
+    "counterparty": "From / to",
+    "type": "Type",
+    "reference": "Reference",
+    "amount": "Amount",
+    "emptyTitle": "No transactions yet",
+    "emptyDescription": "Transfers and payments will appear here.",
+    "loadError": "Could not load your transactions."
+  },
+  "types": {
+    "TOP_UP": "Bank transfer",
+    "PAYMENT": "Payment",
+    "PAYMENT_RECEIVED": "Payment received",
+    "REFUND": "Refund",
+    "REFUND_ISSUED": "Refund issued"
+  }
+}

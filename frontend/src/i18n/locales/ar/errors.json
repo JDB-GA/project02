@@ -33,5 +33,7 @@
   "SUPER_ADMIN_PERMISSIONS_FIXED": "لا يمكن تغيير صلاحيات المسؤول الأعلى",
   "INVALID_CURRENT_PASSWORD": "كلمة المرور الحالية غير صحيحة",
   "PASSWORD_REUSED": "اختر كلمة مرور مختلفة عن الحالية",
-  "ROLE_NOT_ASSIGNABLE": "لا يمكن إسناد هذا الدور"
+  "ROLE_NOT_ASSIGNABLE": "لا يمكن إسناد هذا الدور",
+  "WALLET_KYC_REQUIRED": "تحقق من هويتك قبل استخدام محفظتك",
+  "DAILY_TOP_UP_LIMIT_EXCEEDED": "هذا التحويل يتجاوز حد الاستلام اليومي"
 }
