@@ -1,6 +1,6 @@
 # Planning
 
-How the Almotawaj Digital Wallet is planned, built and tracked. User stories live in [`docs/user-stories.md`](docs/user-stories.md) and progress on [Trello](https://trello.com/b/JuK0qiqf/project-02-jdb).
+How the Almotawaj Digital Wallet is planned, built and tracked. User stories live in [`docs/user-stories.md`](docs/user-stories.md) and progress on [Trello](https://trello.com/b/81cjvTR6/project-02-jdb).
 
 ## Process
 

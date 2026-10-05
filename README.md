@@ -9,7 +9,7 @@ A bilingual (English / Arabic) digital wallet for Bahrain. Clients register, ver
 | Swagger UI | https://api.almotawaj.com/swagger-ui.html                                                                                 |
 | ERD        | [dbdiagram.io](https://dbdiagram.io/d/Digital-Wallet-6aba3c4e0f25a52d012826f8) · source: [`docs/erd.dbml`](docs/erd.dbml) |
 | Planning   | [`Planning.md`](Planning.md) · user stories: [`docs/user-stories.md`](docs/user-stories.md)                               |
-| Trello     | https://trello.com/b/JuK0qiqf/project-02-jdb                                                                              |
+| Trello     | https://trello.com/b/81cjvTR6/project-02-jdb                                                                              |
 
 Monorepo:
 
@@ -232,4 +232,4 @@ Email is sent through Resend's HTTPS API because Railway blocks outbound SMTP on
 
 ## Project management
 
-Development follows feature branches (`feature-auth`, `feature-layout`, `feature-identity-verify`, …) with short Title Case commits. The process, timeline and remaining work are in [`Planning.md`](Planning.md); user stories with acceptance criteria are in [`docs/user-stories.md`](docs/user-stories.md); progress is tracked on [Trello](https://trello.com/b/JuK0qiqf/project-02-jdb).
+Development follows feature branches (`feature-auth`, `feature-layout`, `feature-identity-verify`, …) with short Title Case commits. The process, timeline and remaining work are in [`Planning.md`](Planning.md); user stories with acceptance criteria are in [`docs/user-stories.md`](docs/user-stories.md); progress is tracked on [Trello](https://trello.com/b/81cjvTR6/project-02-jdb).
