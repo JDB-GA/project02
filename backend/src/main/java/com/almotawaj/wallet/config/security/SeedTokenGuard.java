@@ -26,7 +26,7 @@ public class SeedTokenGuard {
         if (expectedToken.length == 0) {
             throw new InformationNotFoundException(ErrorMessages.NOT_FOUND);
         }
-        String provided = authorizationHeader.startsWith(SecurityConstants.BEARER_PREFIX)
+        String provided = authorizationHeader != null && authorizationHeader.startsWith(SecurityConstants.BEARER_PREFIX)
                 ? authorizationHeader.substring(SecurityConstants.BEARER_PREFIX.length())
                 : "";
         if (!MessageDigest.isEqual(provided.getBytes(StandardCharsets.UTF_8), expectedToken)) {
