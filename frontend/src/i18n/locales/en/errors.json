@@ -25,5 +25,10 @@
   "FILE_TYPE_INVALID": "One of the files has an unsupported type",
   "FILE_TOO_LARGE": "One of the files is larger than 5 MB",
   "KYC_ALREADY_REVIEWED": "This request has already been reviewed",
-  "INVALID_REQUEST_PARAMETER": "One of the request parameters is invalid"
+  "INVALID_REQUEST_PARAMETER": "One of the request parameters is invalid",
+  "CANNOT_MANAGE_SELF": "You cannot manage your own account here",
+  "USER_CLOSED": "This account is closed and cannot be changed",
+  "INVALID_STATUS_TRANSITION": "This status change is not allowed",
+  "PERMISSION_NOT_GRANTABLE": "This permission can't be given to this user's role",
+  "SUPER_ADMIN_PERMISSIONS_FIXED": "Super admin permissions cannot be changed"
 }

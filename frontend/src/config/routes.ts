@@ -9,4 +9,6 @@ export const ROUTES = {
   admin: '/admin',
   kycReviews: '/admin/kyc',
   kycReview: '/admin/kyc/:applicationId',
+  users: '/admin/users',
+  user: '/admin/users/:userId',
 } as const

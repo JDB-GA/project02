@@ -1,0 +1,94 @@
+{
+  "filters": {
+    "search": "Search users",
+    "searchPlaceholder": "Email, mobile or name",
+    "role": "Role",
+    "status": "Status",
+    "ALL": "All"
+  },
+  "status": {
+    "ACTIVE": "Active",
+    "SUSPENDED": "Suspended",
+    "LOCKED": "Locked",
+    "CLOSED": "Closed"
+  },
+  "kycStatus": {
+    "NOT_SUBMITTED": "Not submitted",
+    "PENDING": "Under review",
+    "APPROVED": "Verified",
+    "REJECTED": "Rejected"
+  },
+  "table": {
+    "email": "Email",
+    "mobileNumber": "Mobile",
+    "role": "Role",
+    "status": "Status",
+    "kyc": "KYC",
+    "joined": "Joined",
+    "actions": "Actions",
+    "view": "View",
+    "viewUser": "View {{email}}"
+  },
+  "empty": {
+    "title": "No users found",
+    "description": "Try a different search or filter."
+  },
+  "loadError": "Could not load users.",
+  "detail": {
+    "back": "Back to users",
+    "notFound": "This user was not found.",
+    "profile": "Profile",
+    "fullName": "Full name",
+    "noName": "No KYC submitted",
+    "email": "Email",
+    "emailUnverified": "Not verified",
+    "mobileNumber": "Mobile number",
+    "role": "Role",
+    "kyc": "Identity verification",
+    "joined": "Joined",
+    "updated": "Last updated"
+  },
+  "contact": {
+    "title": "Contact details",
+    "description": "Changing the email requires the user to verify it again.",
+    "email": "Email",
+    "mobileNumber": "Mobile number",
+    "save": "Save changes",
+    "saved": "Contact details updated"
+  },
+  "permissions": {
+    "title": "Permissions",
+    "description": "Choose what this user is allowed to do.",
+    "superAdmin": "Super admins always have every permission.",
+    "readOnly": "Only a super admin can change permissions.",
+    "notGrantable": "Not available for this role",
+    "granted": "Permission granted",
+    "revoked": "Permission removed",
+    "KYC_REVIEW": {
+      "label": "Review identity verifications",
+      "description": "Approve or reject KYC requests."
+    },
+    "USER_MANAGE": {
+      "label": "Manage users",
+      "description": "Search users, edit contact details, suspend and close accounts."
+    }
+  },
+  "account": {
+    "title": "Account",
+    "description": "Suspended users can't sign in until reactivated. Closing an account is permanent.",
+    "readOnly": "You can't change this account.",
+    "suspend": "Suspend",
+    "reactivate": "Reactivate",
+    "close": "Close account",
+    "cancel": "Cancel",
+    "suspendTitle": "Suspend this account?",
+    "suspendDescription": "{{email}} will be signed out and won't be able to sign in until reactivated.",
+    "reactivateTitle": "Reactivate this account?",
+    "reactivateDescription": "{{email}} will be able to sign in again.",
+    "closeTitle": "Close this account permanently?",
+    "closeDescription": "{{email}} will be signed out for good. The data is kept but the account can't be reopened.",
+    "suspended": "Account suspended",
+    "reactivated": "Account reactivated",
+    "closed": "Account closed"
+  }
+}

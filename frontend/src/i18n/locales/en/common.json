@@ -40,6 +40,14 @@
     "kycReview": {
       "title": "Review Application",
       "heading": "Review application"
+    },
+    "users": {
+      "title": "Users",
+      "heading": "Users management"
+    },
+    "user": {
+      "title": "User Details",
+      "heading": "User details"
     }
   },
   "nav": {

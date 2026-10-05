@@ -25,5 +25,10 @@
   "FILE_TYPE_INVALID": "أحد الملفات بصيغة غير مدعومة",
   "FILE_TOO_LARGE": "حجم أحد الملفات أكبر من 5 ميجابايت",
   "KYC_ALREADY_REVIEWED": "تمت مراجعة هذا الطلب بالفعل",
-  "INVALID_REQUEST_PARAMETER": "أحد معاملات الطلب غير صالح"
+  "INVALID_REQUEST_PARAMETER": "أحد معاملات الطلب غير صالح",
+  "CANNOT_MANAGE_SELF": "لا يمكنك إدارة حسابك من هنا",
+  "USER_CLOSED": "هذا الحساب مغلق ولا يمكن تعديله",
+  "INVALID_STATUS_TRANSITION": "تغيير الحالة هذا غير مسموح",
+  "PERMISSION_NOT_GRANTABLE": "لا يمكن منح هذه الصلاحية لدور هذا المستخدم",
+  "SUPER_ADMIN_PERMISSIONS_FIXED": "لا يمكن تغيير صلاحيات المسؤول الأعلى"
 }

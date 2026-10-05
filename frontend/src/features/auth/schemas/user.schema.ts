@@ -6,7 +6,7 @@ export const userStatusSchema = z.enum(['ACTIVE', 'LOCKED', 'SUSPENDED', 'CLOSED
 
 export const kycStatusSchema = z.enum(['NOT_SUBMITTED', 'PENDING', 'APPROVED', 'REJECTED'])
 
-export const permissionSchema = z.enum(['KYC_REVIEW'])
+export const permissionSchema = z.enum(['KYC_REVIEW', 'USER_MANAGE'])
 
 export const userSchema = z.object({
   id: z.uuid(),
