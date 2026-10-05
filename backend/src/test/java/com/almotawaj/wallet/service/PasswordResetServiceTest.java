@@ -39,6 +39,8 @@ class PasswordResetServiceTest {
     private OtpService otpService;
     @Mock
     private CodeEmailService codeEmailService;
+    @Mock
+    private AuditService auditService;
 
     private PasswordResetService service;
     private User user;
@@ -46,7 +48,7 @@ class PasswordResetServiceTest {
     @BeforeEach
     void setUp() {
         service = new PasswordResetService(userRepository, otpService, codeEmailService, passwordEncoder,
-                Clock.fixed(NOW, ZoneOffset.UTC));
+                Clock.fixed(NOW, ZoneOffset.UTC), auditService);
         user = new User();
         user.setId(UUID.randomUUID());
         user.setEmailAddress(EMAIL);

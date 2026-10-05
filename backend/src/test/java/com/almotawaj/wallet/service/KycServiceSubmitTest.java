@@ -43,6 +43,8 @@ class KycServiceSubmitTest {
     private KycApplicationFactory applicationFactory;
     @Mock
     private FileStorageService fileStorageService;
+    @Mock
+    private AuditService auditService;
 
     private KycService kycService;
     private User user;
@@ -51,7 +53,7 @@ class KycServiceSubmitTest {
     void setUp() {
         Clock clock = Clock.fixed(Instant.parse("2026-10-04T08:00:00Z"), ZoneOffset.UTC);
         kycService = new KycService(applicationRepository, documentRepository, userRepository,
-                applicationFactory, fileStorageService, clock);
+                applicationFactory, fileStorageService, clock, auditService);
         user = new User();
         user.setId(USER_ID);
         when(userRepository.findByIdForUpdate(USER_ID)).thenReturn(Optional.of(user));

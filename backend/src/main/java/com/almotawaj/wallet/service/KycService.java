@@ -7,6 +7,8 @@ import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.exception.InformationExistException;
 import com.almotawaj.wallet.exception.InformationNotFoundException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.DocumentContent;
 import com.almotawaj.wallet.model.KycApplication;
 import com.almotawaj.wallet.model.KycDocument;
@@ -36,6 +38,7 @@ public class KycService {
     private final KycApplicationFactory applicationFactory;
     private final FileStorageService fileStorageService;
     private final Clock clock;
+    private final AuditService auditService;
 
     @Transactional(readOnly = true)
     public KycApplicationResponse getLatest(UUID userId) {
@@ -53,6 +56,7 @@ public class KycService {
         KycApplication application = applicationRepository.saveAndFlush(applicationFactory.create(user, request));
         user.setKycStatus(KycStatus.PENDING);
         log.info(LogMessages.KYC_SUBMITTED, userId, application.getId());
+        auditService.record(userId, AuditAction.KYC_SUBMITTED, AuditTargetType.KYC_APPLICATION, application.getId(), null);
         return KycApplicationResponse.from(application);
     }
 

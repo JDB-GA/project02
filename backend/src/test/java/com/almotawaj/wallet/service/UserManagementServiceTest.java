@@ -26,6 +26,8 @@ class UserManagementServiceTest {
     private UserRepository userRepository;
     @Mock
     private AdminUserMapper mapper;
+    @Mock
+    private AuditService auditService;
 
     private UserManagementService service;
     private User actor;
@@ -33,7 +35,8 @@ class UserManagementServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new UserManagementService(userRepository, new UserManagementPolicy(), mapper);
+        service = new UserManagementService(userRepository, new UserManagementPolicy(), mapper,
+                new UserContactUpdater(userRepository), auditService);
         actor = new User();
         actor.setId(UUID.randomUUID());
         actor.setRole(UserRole.ADMIN);

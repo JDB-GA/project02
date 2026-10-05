@@ -13,6 +13,8 @@ public final class ValidationLimits {
     public static final int REJECTION_REASON_MAX = 500;
     public static final int STORAGE_KEY_MAX = 255;
     public static final int CONTENT_TYPE_MAX = 50;
+    public static final int AUDIT_ACTION_MAX = 40;
+    public static final int AUDIT_DETAILS_MAX = 500;
 
     private ValidationLimits() {
     }

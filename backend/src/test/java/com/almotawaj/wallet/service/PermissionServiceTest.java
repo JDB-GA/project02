@@ -27,6 +27,8 @@ class PermissionServiceTest {
     private UserRepository userRepository;
     @Mock
     private AdminUserMapper mapper;
+    @Mock
+    private AuditService auditService;
 
     @InjectMocks
     private PermissionService permissionService;

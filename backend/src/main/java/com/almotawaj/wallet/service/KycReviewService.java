@@ -6,6 +6,8 @@ import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.event.KycReviewedEvent;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.exception.InformationNotFoundException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.DocumentContent;
 import com.almotawaj.wallet.model.KycApplication;
 import com.almotawaj.wallet.model.KycApplicationStatus;
@@ -39,6 +41,7 @@ public class KycReviewService {
     private final FileStorageService fileStorageService;
     private final ApplicationEventPublisher eventPublisher;
     private final Clock clock;
+    private final AuditService auditService;
 
     @Transactional(readOnly = true)
     public PageResponse<KycApplicationSummaryResponse> list(KycApplicationStatus status, Pageable pageable) {
@@ -86,6 +89,8 @@ public class KycReviewService {
         application.getUser().setKycStatus(KycStatus.valueOf(decision.name()));
 
         log.info(LogMessages.KYC_REVIEWED, reviewerId, applicationId, decision);
+        AuditAction action = decision == KycApplicationStatus.APPROVED ? AuditAction.KYC_APPROVED : AuditAction.KYC_REJECTED;
+        auditService.record(reviewerId, action, AuditTargetType.KYC_APPLICATION, applicationId, reason);
         eventPublisher.publishEvent(new KycReviewedEvent(
                 application.getUser().getId(), application.getUser().getEmailAddress(), decision, reason));
         return KycReviewResponse.from(application);

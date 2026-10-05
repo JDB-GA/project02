@@ -7,6 +7,8 @@ import com.almotawaj.wallet.config.security.JwtUtils;
 import com.almotawaj.wallet.config.security.MyUserDetails;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.exception.InformationNotFoundException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.LoginResult;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.request.ChangePasswordRequest;
@@ -29,6 +31,7 @@ public class AccountPasswordService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
     private final Clock clock;
+    private final AuditService auditService;
 
     @Transactional
     public LoginResult changePassword(UUID userId, ChangePasswordRequest request) {
@@ -44,6 +47,7 @@ public class AccountPasswordService {
         user.setPassword(passwordEncoder.encode(request.newPassword()));
         user.setCredentialsChangedAt(clock.instant());
         log.info(LogMessages.PASSWORD_CHANGED, userId);
+        auditService.record(userId, AuditAction.PASSWORD_CHANGED, AuditTargetType.USER, userId, null);
         return new LoginResult(jwtUtils.generateToken(new MyUserDetails(user)), UserResponse.from(user));
     }
 }

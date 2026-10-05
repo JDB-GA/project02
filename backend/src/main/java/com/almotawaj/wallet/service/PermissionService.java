@@ -5,6 +5,8 @@ import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.exception.InformationNotFoundException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.Permission;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.UserRole;
@@ -23,6 +25,7 @@ import java.util.UUID;
 public class PermissionService {
     private final UserRepository userRepository;
     private final AdminUserMapper mapper;
+    private final AuditService auditService;
 
     @Transactional
     public AdminUserResponse grant(UUID actorId, UUID userId, Permission permission) {
@@ -32,6 +35,7 @@ public class PermissionService {
         }
         if (user.getPermissions().add(permission)) {
             log.info(LogMessages.PERMISSION_GRANTED, actorId, permission, userId);
+            auditService.record(actorId, AuditAction.PERMISSION_GRANTED, AuditTargetType.USER, userId, permission.name());
         }
         return mapper.toResponse(user);
     }
@@ -41,6 +45,7 @@ public class PermissionService {
         User user = findEditableUser(userId);
         if (user.getPermissions().remove(permission)) {
             log.info(LogMessages.PERMISSION_REVOKED, actorId, permission, userId);
+            auditService.record(actorId, AuditAction.PERMISSION_REVOKED, AuditTargetType.USER, userId, permission.name());
         }
         return mapper.toResponse(user);
     }

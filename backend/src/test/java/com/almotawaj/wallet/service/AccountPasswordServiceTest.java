@@ -33,13 +33,15 @@ class AccountPasswordServiceTest {
     private UserRepository userRepository;
     @Mock
     private JwtUtils jwtUtils;
+    @Mock
+    private AuditService auditService;
 
     private AccountPasswordService service;
     private User user;
 
     @BeforeEach
     void setUp() {
-        service = new AccountPasswordService(userRepository, passwordEncoder, jwtUtils, Clock.fixed(NOW, ZoneOffset.UTC));
+        service = new AccountPasswordService(userRepository, passwordEncoder, jwtUtils, Clock.fixed(NOW, ZoneOffset.UTC), auditService);
         user = new User();
         user.setId(UUID.randomUUID());
         user.setPassword(passwordEncoder.encode("OldPassword1"));

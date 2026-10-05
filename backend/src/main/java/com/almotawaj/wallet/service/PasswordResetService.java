@@ -5,6 +5,8 @@ import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.config.constants.OtpConstants;
 import com.almotawaj.wallet.exception.OtpVerificationException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.OtpPurpose;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.UserStatus;
@@ -34,6 +36,7 @@ public class PasswordResetService {
     private final CodeEmailService codeEmailService;
     private final PasswordEncoder passwordEncoder;
     private final Clock clock;
+    private final AuditService auditService;
 
     @Transactional
     public void requestReset(String email, Locale locale) {
@@ -60,6 +63,7 @@ public class PasswordResetService {
         user.setEmailVerified(true);
         user.setCredentialsChangedAt(clock.instant());
         log.info(LogMessages.PASSWORD_RESET, user.getId());
+        auditService.record(user.getId(), AuditAction.PASSWORD_RESET, AuditTargetType.USER, user.getId(), null);
     }
 
     private Optional<User> findResettableUser(String email) {

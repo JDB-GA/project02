@@ -1,0 +1,16 @@
+package com.almotawaj.wallet.model;
+
+public enum AuditAction {
+    KYC_SUBMITTED,
+    KYC_APPROVED,
+    KYC_REJECTED,
+    PERMISSION_GRANTED,
+    PERMISSION_REVOKED,
+    USER_CREATED,
+    USER_CONTACT_UPDATED,
+    USER_SUSPENDED,
+    USER_REACTIVATED,
+    USER_CLOSED,
+    PASSWORD_CHANGED,
+    PASSWORD_RESET
+}
