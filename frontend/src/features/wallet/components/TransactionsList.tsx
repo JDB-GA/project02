@@ -1,16 +1,21 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LoadErrorAlert } from '@/components/LoadErrorAlert'
 import { PaginationControls } from '@/components/PaginationControls'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useTransactions } from '../hooks/useTransactions'
+import type { TransactionsQuery } from '../types/wallet.types'
 import { TransactionsEmpty } from './TransactionsEmpty'
 import { TransactionsTable } from './TransactionsTable'
 
-export function TransactionsList() {
+interface TransactionsListProps {
+  query: TransactionsQuery
+  hasFilters: boolean
+  onPageChange: (page: number) => void
+}
+
+export function TransactionsList({ query, hasFilters, onPageChange }: TransactionsListProps) {
   const { t } = useTranslation('wallet')
-  const [page, setPage] = useState(0)
-  const { data, isPending, isError, isPlaceholderData, refetch } = useTransactions(page)
+  const { data, isPending, isError, isPlaceholderData, refetch } = useTransactions(query)
 
   if (isPending) {
     return <Skeleton className="h-64 w-full rounded-xl" />
@@ -28,13 +33,13 @@ export function TransactionsList() {
   }
 
   if (data.content.length === 0) {
-    return <TransactionsEmpty />
+    return <TransactionsEmpty filtered={hasFilters} />
   }
 
   return (
     <div className="flex flex-col gap-4" aria-busy={isPlaceholderData}>
       <TransactionsTable transactions={data.content} />
-      <PaginationControls page={data.page} totalPages={data.totalPages} disabled={isPlaceholderData} onPageChange={setPage} />
+      <PaginationControls page={data.page} totalPages={data.totalPages} disabled={isPlaceholderData} onPageChange={onPageChange} />
     </div>
   )
 }

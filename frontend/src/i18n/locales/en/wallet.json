@@ -29,7 +29,9 @@
     "amount": "Amount",
     "emptyTitle": "No transactions yet",
     "emptyDescription": "Transfers and payments will appear here.",
-    "loadError": "Could not load your transactions."
+    "loadError": "Could not load your transactions.",
+    "noMatchesTitle": "No matching transactions",
+    "noMatchesDescription": "Try different filters or clear them."
   },
   "types": {
     "TOP_UP": "Bank transfer",
@@ -52,5 +54,20 @@
     "submit": "Send",
     "success": "Money sent",
     "loadError": "Could not load your transfer limits."
+  },
+  "filters": {
+    "search": "Search transactions",
+    "searchPlaceholder": "Name, reference or note",
+    "type": "Filter by type",
+    "allTypes": "All types",
+    "direction": "Filter by direction",
+    "directions": {
+      "ALL": "In and out",
+      "CREDIT": "Money in",
+      "DEBIT": "Money out"
+    },
+    "from": "From date",
+    "to": "To date",
+    "clear": "Clear filters"
   }
 }

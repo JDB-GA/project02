@@ -1,3 +1,5 @@
+import type { TransactionsQuery } from '../types/wallet.types'
+
 export const WALLET_ENDPOINTS = {
   wallet: '/api/wallet',
   transactions: '/api/wallet/transactions',
@@ -13,7 +15,7 @@ export const WALLET_QUERY_KEYS = {
   all: ['wallet'],
   wallet: ['wallet', 'details'],
   transactions: ['wallet', 'transactions'],
-  transactionsPage: (page: number) => ['wallet', 'transactions', page],
+  transactionsPage: (query: TransactionsQuery) => ['wallet', 'transactions', query],
   topUpOptions: ['wallet', 'top-up-options'],
   transferOptions: ['wallet', 'transfer-options'],
   recipient: (query: string) => ['wallet', 'recipient', query],
@@ -43,3 +45,15 @@ export const EMAIL_MARKER = '@'
 export const AMOUNT_PATTERN = /^\d{1,16}(\.\d{1,3})?$/
 export const COPY_FEEDBACK_MS = 2000
 export const AMOUNT_PLACEHOLDER = '0.000'
+export const ALL_FILTER = 'ALL'
+export const TRANSACTION_SEARCH_MAX_LENGTH = 100
+export const TRANSACTION_SEARCH_DEBOUNCE_MS = 400
+
+export const TRANSACTIONS_SEARCH_PARAMS = {
+  search: 'q',
+  type: 'type',
+  direction: 'direction',
+  from: 'from',
+  to: 'to',
+  page: 'page',
+} as const
