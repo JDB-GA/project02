@@ -12,9 +12,9 @@ public final class WalletDocs {
     public static final String KYC_REQUIRED = "Client identity is not verified yet (WALLET_KYC_REQUIRED)";
 
     public static final String TRANSACTIONS = "List my transactions";
-    public static final String TRANSACTIONS_DESCRIPTION = "Newest first. Optional `type` filter: TOP_UP, TRANSFER_IN, TRANSFER_OUT, PAYMENT, PAYMENT_RECEIVED, REFUND, REFUND_ISSUED.";
+    public static final String TRANSACTIONS_DESCRIPTION = "Newest first. Optional filters: `search` (counterparty, reference or note), `type`, `direction` (CREDIT/DEBIT), `from`/`to` dates (inclusive, Bahrain time) and `minAmount`/`maxAmount`.";
     public static final String TRANSACTIONS_OK = "Page of transactions";
-    public static final String TRANSACTIONS_BAD_REQUEST = "Unknown type or sort field";
+    public static final String TRANSACTIONS_BAD_REQUEST = "Invalid filter value, start date after end date, minimum above maximum, or unknown sort field";
 
     public static final String TOP_UP = "Receive a bank transfer (simulated)";
     public static final String TOP_UP_DESCRIPTION = "Simulates an incoming transfer from one of the demo external accounts (see top-up options). "
