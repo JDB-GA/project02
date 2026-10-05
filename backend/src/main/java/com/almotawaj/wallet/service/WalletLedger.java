@@ -39,6 +39,6 @@ public class WalletLedger {
         transaction.setCounterpartyIban(counterparty.iban());
         transaction.setCounterpartyBic(counterparty.bic());
         transaction.setDescription(description);
-        return transactionRepository.save(transaction);
+        return transactionRepository.saveAndFlush(transaction);
     }
 }

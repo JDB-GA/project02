@@ -36,7 +36,7 @@ public final class ErrorCodes {
     public static final String ROLE_NOT_ASSIGNABLE = "ROLE_NOT_ASSIGNABLE";
     public static final String SEED_PASSWORD_MISSING = "SEED_PASSWORD_MISSING";
     public static final String WALLET_KYC_REQUIRED = "WALLET_KYC_REQUIRED";
-    public static final String SELF_TRANSFER_NOT_ALLOWED = "SELF_TRANSFER_NOT_ALLOWED";
+    public static final String DAILY_TOP_UP_LIMIT_EXCEEDED = "DAILY_TOP_UP_LIMIT_EXCEEDED";
 
     private ErrorCodes() {
     }

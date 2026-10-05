@@ -52,7 +52,7 @@ public class WalletTransaction {
     @Column(updatable = false, length = ValidationLimits.BIC_MAX)
     private String counterpartyBic;
 
-    @Column(updatable = false, length = ValidationLimits.PAYMENT_REFERENCE_MAX)
+    @Column(updatable = false, length = ValidationLimits.TRANSACTION_DESCRIPTION_MAX)
     private String description;
 
     @CreationTimestamp

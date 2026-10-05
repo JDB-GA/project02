@@ -33,6 +33,7 @@ public final class ApiPaths {
     public static final String WALLET = "/api/wallet";
     public static final String TRANSACTIONS = "/transactions";
     public static final String TOP_UPS = "/top-ups";
+    public static final String TOP_UP_OPTIONS = "/top-ups/options";
     public static final String WALLET_TOP_UPS = WALLET + TOP_UPS;
     public static final String USER_BY_ID = "/{userId}";
     public static final String USER_SUSPEND = "/{userId}/suspend";

@@ -12,8 +12,6 @@ public final class ValidationPatterns {
     public static final String ROAD = "^\\d{1,5}$";
     public static final String BUILDING = "^[0-9A-Za-z]{1,6}$";
     public static final String FLAT = "^[0-9A-Za-z]{0,6}$";
-    public static final String BIC = "^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$";
-    public static final String COUNTERPARTY_NAME = "^[\\p{L}0-9 .,'&()-]+$";
 
     private ValidationPatterns() {
     }

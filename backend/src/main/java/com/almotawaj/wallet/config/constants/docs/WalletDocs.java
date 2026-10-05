@@ -15,9 +15,13 @@ public final class WalletDocs {
     public static final String TRANSACTIONS_BAD_REQUEST = "Unknown type or sort field";
 
     public static final String TOP_UP = "Receive a bank transfer (simulated)";
-    public static final String TOP_UP_DESCRIPTION = "Simulates an incoming transfer from an external bank account. The sender IBAN must pass the ISO 13616 checksum and the BIC must be 8 or 11 characters. Amount 0.001 – 5000.000 BHD with up to 3 decimals.";
+    public static final String TOP_UP_DESCRIPTION = "Simulates an incoming transfer from one of the demo external accounts (see top-up options). Only the source and amount are sent; the sender name, IBAN and BIC come from the server. Amount 0.001 – 5000.000 BHD per transfer, at most 10,000.000 BHD received per day (Bahrain time).";
     public static final String TOP_UP_CREATED = "Transfer credited; returns the transaction";
-    public static final String TOP_UP_UNPROCESSABLE = "Identity not verified (WALLET_KYC_REQUIRED) or sender IBAN is the wallet's own (SELF_TRANSFER_NOT_ALLOWED)";
+    public static final String TOP_UP_UNPROCESSABLE = "Identity not verified (WALLET_KYC_REQUIRED) or daily receiving limit exceeded (DAILY_TOP_UP_LIMIT_EXCEEDED)";
+
+    public static final String TOP_UP_OPTIONS = "Get top-up options";
+    public static final String TOP_UP_OPTIONS_DESCRIPTION = "Demo external accounts to receive from, per-transfer limits, the daily limit and how much can still be received today.";
+    public static final String TOP_UP_OPTIONS_OK = "Top-up sources and limits";
 
     private WalletDocs() {
     }

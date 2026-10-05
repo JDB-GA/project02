@@ -2,6 +2,7 @@ package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.exception.BusinessRuleException;
+import com.almotawaj.wallet.model.TopUpSource;
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.Wallet;
 import com.almotawaj.wallet.model.WalletTransaction;
@@ -15,12 +16,16 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,8 +33,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class WalletServiceTest {
     private static final UUID USER_ID = UUID.randomUUID();
-    private static final String WALLET_IBAN = "BH02ALMT00000000001234";
-    private static final String SENDER_IBAN = "BH67 BMAG 0000 1299 1234 56";
+    private static final UUID WALLET_ID = UUID.randomUUID();
+    private static final Clock CLOCK = Clock.fixed(Instant.parse("2026-10-05T09:00:00Z"), ZoneOffset.UTC);
 
     @Mock
     private WalletProvisioner provisioner;
@@ -46,38 +51,42 @@ class WalletServiceTest {
     @BeforeEach
     void setUp() {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
-        walletService = new WalletService(provisioner, walletRepository, transactionRepository, ledger);
+        TopUpLimiter limiter = new TopUpLimiter(transactionRepository, CLOCK);
+        walletService = new WalletService(provisioner, walletRepository, transactionRepository, ledger, limiter);
         wallet = new Wallet();
-        wallet.setIban(WALLET_IBAN);
+        wallet.setId(WALLET_ID);
         wallet.setBalance(new BigDecimal("10.000"));
         when(walletRepository.findByUserIdForUpdate(USER_ID)).thenReturn(Optional.of(wallet));
     }
 
-    private static TopUpRequest request(String senderIban, String amount) {
-        return new TopUpRequest("Ali Hasan", senderIban, "BMAGBHBM", new BigDecimal(amount), "  ");
+    private void receivedToday(String amount) {
+        when(transactionRepository.sumAmountSince(eq(WALLET_ID), eq(TransactionType.TOP_UP), any()))
+                .thenReturn(new BigDecimal(amount));
     }
 
     @Test
-    void topUp_creditsBalanceAndRecordsTransaction() {
+    void topUp_creditsBalanceWithSourceDetails() {
+        receivedToday("0");
         when(referenceGenerator.next()).thenReturn("TXN-20261005-ABCDEFGH");
-        when(transactionRepository.save(any(WalletTransaction.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(transactionRepository.saveAndFlush(any(WalletTransaction.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        var response = walletService.topUp(USER_ID, request(SENDER_IBAN, "150.5"));
+        var response = walletService.topUp(USER_ID, new TopUpRequest(TopUpSource.NBB_SALARY, new BigDecimal("150.5")));
 
         assertThat(wallet.getBalance()).isEqualByComparingTo("160.500");
-        assertThat(response.type()).isEqualTo(TransactionType.TOP_UP);
         assertThat(response.amount()).isEqualTo(new BigDecimal("150.500"));
-        assertThat(response.balanceAfter()).isEqualByComparingTo("160.500");
-        assertThat(response.counterpartyIban()).isEqualTo("BH67BMAG00001299123456");
-        assertThat(response.description()).isNull();
+        assertThat(response.counterpartyName()).isEqualTo(TopUpSource.NBB_SALARY.getHolderName());
+        assertThat(response.counterpartyIban()).isEqualTo(TopUpSource.NBB_SALARY.getIban());
+        assertThat(response.description()).isEqualTo(TopUpSource.NBB_SALARY.getBankName());
     }
 
     @Test
-    void topUp_rejectsOwnWalletIban() {
-        assertThatThrownBy(() -> walletService.topUp(USER_ID, request(WALLET_IBAN, "5")))
+    void topUp_rejectsAmountAboveRemainingDailyLimit() {
+        receivedToday("9000.000");
+
+        assertThatThrownBy(() -> walletService.topUp(USER_ID, new TopUpRequest(TopUpSource.BBK_SAVINGS, new BigDecimal("1000.001"))))
                 .isInstanceOf(BusinessRuleException.class)
-                .hasFieldOrPropertyWithValue("code", ErrorCodes.SELF_TRANSFER_NOT_ALLOWED);
+                .hasFieldOrPropertyWithValue("code", ErrorCodes.DAILY_TOP_UP_LIMIT_EXCEEDED);
         assertThat(wallet.getBalance()).isEqualByComparingTo("10.000");
-        verify(transactionRepository, never()).save(any());
+        verify(transactionRepository, never()).saveAndFlush(any());
     }
 }

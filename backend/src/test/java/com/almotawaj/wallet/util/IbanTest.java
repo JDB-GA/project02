@@ -1,6 +1,7 @@
 package com.almotawaj.wallet.util;
 
 import com.almotawaj.wallet.config.constants.WalletConstants;
+import com.almotawaj.wallet.model.TopUpSource;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,6 +27,11 @@ class IbanTest {
         assertThat(Iban.isValid("BH67")).isFalse();
         assertThat(Iban.isValid("1234BMAG00001299123456")).isFalse();
         assertThat(Iban.isValid(null)).isFalse();
+    }
+
+    @Test
+    void topUpSources_haveValidIbans() {
+        assertThat(TopUpSource.values()).allSatisfy(source -> assertThat(Iban.isValid(source.getIban())).isTrue());
     }
 
     @Test

@@ -8,6 +8,7 @@ import com.almotawaj.wallet.config.security.MyUserDetails;
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.request.TopUpRequest;
 import com.almotawaj.wallet.model.response.PageResponse;
+import com.almotawaj.wallet.model.response.TopUpOptionsResponse;
 import com.almotawaj.wallet.model.response.WalletResponse;
 import com.almotawaj.wallet.model.response.WalletTransactionResponse;
 import com.almotawaj.wallet.service.WalletService;
@@ -50,6 +51,14 @@ public class WalletController {
             @RequestParam(required = false) TransactionType type,
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return walletService.listTransactions(userDetails.user().getId(), type, pageable);
+    }
+
+    @Operation(summary = WalletDocs.TOP_UP_OPTIONS, description = WalletDocs.TOP_UP_OPTIONS_DESCRIPTION)
+    @ApiResponse(responseCode = ApiDocs.OK, description = WalletDocs.TOP_UP_OPTIONS_OK)
+    @ApiResponse(responseCode = ApiDocs.UNPROCESSABLE, description = WalletDocs.KYC_REQUIRED)
+    @GetMapping(ApiPaths.TOP_UP_OPTIONS)
+    public TopUpOptionsResponse getTopUpOptions(@AuthenticationPrincipal MyUserDetails userDetails) {
+        return walletService.getTopUpOptions(userDetails.user().getId());
     }
 
     @Operation(summary = WalletDocs.TOP_UP, description = WalletDocs.TOP_UP_DESCRIPTION)
