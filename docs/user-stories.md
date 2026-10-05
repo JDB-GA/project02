@@ -98,7 +98,9 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 **US-27 – Transaction history.** As a wallet holder, I want to see my transactions with the counterparty and reference, so that I can track my money.
 - [ ] Paged, newest first, credits and debits clearly marked.
 
-**US-28 – Search transactions (planned).** As a wallet holder, I want to search and filter my transactions, so that I can find a payment quickly.
+**US-28 – Search transactions.** As a wallet holder, I want to search and filter my transactions, so that I can find a payment quickly.
+- [ ] Search by counterparty name, reference or note (case-insensitive).
+- [ ] Filter by type, money in/out and date range; filters stay in the URL.
 
 **US-29 – Request money (planned).** As a wallet holder, I want to request money from another user, so that they can pay me with one tap.
 

@@ -39,7 +39,7 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 | 2026-10-02 | Secret handling: dev properties untracked, `.gitignore` hardened |
 | 2026-10-03 | Deployment to Railway and Vercel on `almotawaj.com`, email via Resend API, security headers |
 | 2026-10-04 | KYC submission (backend and client UI), file storage, permission model |
-| 2026-10-05 | KYC review, permissions, user management, create user by invitation, forgot/reset/change password, document preview, seeding, Swagger docs, test profile, audit log API and screen; wallets with generated IBANs, simulated incoming transfers with daily limits, wallet-to-wallet transfers with recipient autocomplete |
+| 2026-10-05 | KYC review, permissions, user management, create user by invitation, forgot/reset/change password, document preview, seeding, Swagger docs, test profile, audit log API and screen; wallets with generated IBANs, simulated incoming transfers with daily limits, wallet-to-wallet transfers with recipient autocomplete, transaction search and filters |
 
 ## Requirement coverage
 
@@ -76,9 +76,8 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 
 In order of priority:
 
-1. **Transaction search and filters** – by type, date range, amount and counterparty.
-2. **Real-time notifications** – Server-Sent Events: money received, KYC decisions, payments.
-3. **Payment gateway** – merchant API keys and checkout sessions (`PENDING → PAID / CANCELLED / EXPIRED`, `PAID → REFUNDED`) with double-payment prevention and their own daily limit; covers the booking requirement.
-4. **Request money** – ask another user for money; accepting it is a transfer from them (transfer limit applies).
-5. **Profile picture** – upload, preview and replace.
-6. **Final pass** – README, ERD, Swagger and tests updated; presentation.
+1. **Real-time notifications** – Server-Sent Events: money received, KYC decisions, payments.
+2. **Payment gateway** – merchant API keys and checkout sessions (`PENDING → PAID / CANCELLED / EXPIRED`, `PAID → REFUNDED`) with double-payment prevention and their own daily limit; covers the booking requirement.
+3. **Request money** – ask another user for money; accepting it is a transfer from them (transfer limit applies).
+4. **Profile picture** – upload, preview and replace.
+5. **Final pass** – README, ERD, Swagger and tests updated; presentation.
