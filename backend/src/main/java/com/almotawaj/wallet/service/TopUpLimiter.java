@@ -2,7 +2,7 @@ package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.config.constants.ErrorMessages;
-import com.almotawaj.wallet.config.constants.ValidationLimits;
+import com.almotawaj.wallet.config.constants.WalletLimits;
 import com.almotawaj.wallet.config.constants.WalletConstants;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.model.TransactionType;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class TopUpLimiter {
-    public static final BigDecimal DAILY_LIMIT = new BigDecimal(ValidationLimits.DAILY_TOP_UP_LIMIT);
+    public static final BigDecimal DAILY_LIMIT = new BigDecimal(WalletLimits.DAILY_TOP_UP_LIMIT);
     private static final ZoneId ZONE = ZoneId.of(WalletConstants.TIME_ZONE);
 
     private final WalletTransactionRepository transactionRepository;

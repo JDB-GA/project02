@@ -23,9 +23,6 @@ public final class ValidationLimits {
     public static final int MONEY_PRECISION = 19;
     public static final int MONEY_SCALE = 3;
     public static final int MONEY_INTEGER_DIGITS = 16;
-    public static final String TOP_UP_MIN = "0.100";
-    public static final String TOP_UP_MAX = "5000.000";
-    public static final String DAILY_TOP_UP_LIMIT = "10000.000";
 
     private ValidationLimits() {
     }

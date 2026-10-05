@@ -1,7 +1,7 @@
 package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.ErrorMessages;
-import com.almotawaj.wallet.config.constants.ValidationLimits;
+import com.almotawaj.wallet.config.constants.WalletLimits;
 import com.almotawaj.wallet.exception.InformationNotFoundException;
 import com.almotawaj.wallet.model.Counterparty;
 import com.almotawaj.wallet.model.TopUpSource;
@@ -50,8 +50,8 @@ public class WalletService {
         Wallet wallet = provisioner.getOrCreate(userId);
         return new TopUpOptionsResponse(
                 Arrays.stream(TopUpSource.values()).map(TopUpSourceResponse::from).toList(),
-                new BigDecimal(ValidationLimits.TOP_UP_MIN),
-                new BigDecimal(ValidationLimits.TOP_UP_MAX),
+                new BigDecimal(WalletLimits.TOP_UP_MIN),
+                new BigDecimal(WalletLimits.TOP_UP_MAX),
                 TopUpLimiter.DAILY_LIMIT,
                 topUpLimiter.remainingToday(wallet.getId()));
     }

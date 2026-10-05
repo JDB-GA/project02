@@ -1,5 +1,7 @@
 package com.almotawaj.wallet.config.constants.docs;
 
+import com.almotawaj.wallet.config.constants.WalletLimits;
+
 public final class WalletDocs {
     public static final String TAG = "Wallet";
     public static final String TAG_DESCRIPTION = "Wallet balance, IBAN, transaction history and simulated incoming bank transfers (clients with approved KYC and merchants)";
@@ -15,7 +17,10 @@ public final class WalletDocs {
     public static final String TRANSACTIONS_BAD_REQUEST = "Unknown type or sort field";
 
     public static final String TOP_UP = "Receive a bank transfer (simulated)";
-    public static final String TOP_UP_DESCRIPTION = "Simulates an incoming transfer from one of the demo external accounts (see top-up options). Only the source and amount are sent; the sender name, IBAN and BIC come from the server. Amount 0.001 – 5000.000 BHD per transfer, at most 10,000.000 BHD received per day (Bahrain time).";
+    public static final String TOP_UP_DESCRIPTION = "Simulates an incoming transfer from one of the demo external accounts (see top-up options). "
+            + "Only the source and amount are sent; the sender name, IBAN and BIC come from the server. Amount "
+            + WalletLimits.TOP_UP_MIN + " – " + WalletLimits.TOP_UP_MAX + " BHD per transfer, at most "
+            + WalletLimits.DAILY_TOP_UP_LIMIT + " BHD received per day (Bahrain time).";
     public static final String TOP_UP_CREATED = "Transfer credited; returns the transaction";
     public static final String TOP_UP_UNPROCESSABLE = "Identity not verified (WALLET_KYC_REQUIRED) or daily receiving limit exceeded (DAILY_TOP_UP_LIMIT_EXCEEDED)";
 

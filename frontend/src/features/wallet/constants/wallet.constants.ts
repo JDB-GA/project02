@@ -22,7 +22,7 @@ export const CURRENCY_DECIMALS = 3
 export const TRANSACTIONS_PAGE_SIZE = 10
 export const TRANSACTIONS_SORT = 'createdAt,desc'
 
-export const TOP_UP_MIN = 0.001
+export const TOP_UP_MIN = 0.1
 export const TOP_UP_MAX = 5000
 export const AMOUNT_PATTERN = /^\d{1,16}(\.\d{1,3})?$/
 export const COPY_FEEDBACK_MS = 2000

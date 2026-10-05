@@ -2,6 +2,7 @@ package com.almotawaj.wallet.model.request;
 
 import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.config.constants.ValidationLimits;
+import com.almotawaj.wallet.config.constants.WalletLimits;
 import com.almotawaj.wallet.config.constants.docs.DocExamples;
 import com.almotawaj.wallet.model.TopUpSource;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,8 +20,8 @@ public record TopUpRequest(
 
         @Schema(example = DocExamples.AMOUNT)
         @NotNull(message = ErrorMessages.AMOUNT_REQUIRED)
-        @DecimalMin(value = ValidationLimits.TOP_UP_MIN, message = ErrorMessages.AMOUNT_TOO_SMALL)
-        @DecimalMax(value = ValidationLimits.TOP_UP_MAX, message = ErrorMessages.AMOUNT_TOO_LARGE)
+        @DecimalMin(value = WalletLimits.TOP_UP_MIN, message = ErrorMessages.AMOUNT_TOO_SMALL)
+        @DecimalMax(value = WalletLimits.TOP_UP_MAX, message = ErrorMessages.AMOUNT_TOO_LARGE)
         @Digits(integer = ValidationLimits.MONEY_INTEGER_DIGITS, fraction = ValidationLimits.MONEY_SCALE,
                 message = ErrorMessages.AMOUNT_PRECISION)
         BigDecimal amount
