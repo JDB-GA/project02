@@ -19,6 +19,14 @@ export const router = createBrowserRouter([
     children: [
       { path: ROUTES.login, lazy: async () => ({ Component: (await import('@/features/auth/pages/LoginPage')).LoginPage }) },
       { path: ROUTES.register, lazy: async () => ({ Component: (await import('@/features/auth/pages/RegisterPage')).RegisterPage }) },
+      {
+        path: ROUTES.forgotPassword,
+        lazy: async () => ({ Component: (await import('@/features/auth/pages/ForgotPasswordPage')).ForgotPasswordPage }),
+      },
+      {
+        path: ROUTES.resetPassword,
+        lazy: async () => ({ Component: (await import('@/features/auth/pages/ResetPasswordPage')).ResetPasswordPage }),
+      },
     ],
   },
   {

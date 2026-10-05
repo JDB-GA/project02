@@ -18,3 +18,4 @@ mail-from=Digital Wallet <onboarding@resend.dev>
 mail-logo-url=https://almotawaj.com/logo/logo.png
 
 storage-root=uploads
+app-url=http://localhost:5173

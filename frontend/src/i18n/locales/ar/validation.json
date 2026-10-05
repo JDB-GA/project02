@@ -36,5 +36,9 @@
   "imageOnly": "يُسمح بصور JPG أو PNG فقط",
   "fileTooLarge": "يجب ألا يتجاوز حجم الملف {{maxFileSizeMb}} ميجابايت",
   "rejectionReasonRequired": "أدخل سبب الرفض",
-  "rejectionReasonTooLong": "يجب ألا يتجاوز السبب {{rejectionReasonMax}} حرفاً"
+  "rejectionReasonTooLong": "يجب ألا يتجاوز السبب {{rejectionReasonMax}} حرفاً",
+  "currentPasswordRequired": "أدخل كلمة المرور الحالية",
+  "currentPasswordIncorrect": "كلمة المرور الحالية غير صحيحة",
+  "passwordReused": "اختر كلمة مرور مختلفة عن الحالية",
+  "roleRequired": "اختر الدور"
 }

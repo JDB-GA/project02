@@ -90,5 +90,17 @@
     "suspended": "Account suspended",
     "reactivated": "Account reactivated",
     "closed": "Account closed"
+  },
+  "create": {
+    "button": "Create user",
+    "description": "The user receives an email invitation with a code to set their own password.",
+    "email": "Email",
+    "mobileNumber": "Mobile number",
+    "role": "Role",
+    "rolePlaceholder": "Select a role",
+    "permissions": "Permissions",
+    "permissionsHint": "Only available for admins.",
+    "submit": "Create and send invitation",
+    "success": "User created. Invitation email sent."
   }
 }

@@ -30,6 +30,11 @@ public class OtpService {
 
     @Transactional
     public String issue(User user, OtpPurpose purpose) {
+        return issue(user, purpose, OtpConstants.EXPIRY);
+    }
+
+    @Transactional
+    public String issue(User user, OtpPurpose purpose, Duration expiry) {
         otpChallengeRepository.deleteByUser_IdAndPurpose(user.getId(), purpose);
 
         String code = String.format(OtpConstants.CODE_FORMAT, secureRandom.nextInt(OtpConstants.CODE_BOUND));
@@ -40,7 +45,7 @@ public class OtpService {
         challenge.setPurpose(purpose);
         challenge.setCodeHash(otpHasher.hash(user.getId(), purpose, code));
         challenge.setCreatedAt(now);
-        challenge.setExpiresAt(now.plus(OtpConstants.EXPIRY));
+        challenge.setExpiresAt(now.plus(expiry));
         otpChallengeRepository.save(challenge);
 
         return code;
@@ -58,12 +63,25 @@ public class OtpService {
 
     @Transactional(readOnly = true)
     public void ensureResendAllowed(UUID userId, OtpPurpose purpose) {
-        otpChallengeRepository.findFirstByUser_IdAndPurposeOrderByCreatedAtDesc(userId, purpose).ifPresent(challenge -> {
-            Duration remaining = Duration.between(clock.instant(), challenge.getCreatedAt().plus(OtpConstants.RESEND_COOLDOWN));
-            if (remaining.compareTo(Duration.ZERO) > 0) {
-                throw new OtpResendCooldownException(remaining);
-            }
-        });
+        Duration remaining = remainingCooldown(userId, purpose);
+        if (isPositive(remaining)) {
+            throw new OtpResendCooldownException(remaining);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isResendAllowed(UUID userId, OtpPurpose purpose) {
+        return !isPositive(remainingCooldown(userId, purpose));
+    }
+
+    private static boolean isPositive(Duration duration) {
+        return duration.compareTo(Duration.ZERO) > 0;
+    }
+
+    private Duration remainingCooldown(UUID userId, OtpPurpose purpose) {
+        return otpChallengeRepository.findFirstByUser_IdAndPurposeOrderByCreatedAtDesc(userId, purpose)
+                .map(challenge -> Duration.between(clock.instant(), challenge.getCreatedAt().plus(OtpConstants.RESEND_COOLDOWN)))
+                .orElse(Duration.ZERO);
     }
 
     @Transactional(noRollbackFor = OtpVerificationException.class)

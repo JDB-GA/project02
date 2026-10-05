@@ -9,6 +9,8 @@ public final class ErrorMessages {
     public static final String IDENTIFIER_REQUIRED = "Email or mobile number is required";
     public static final String PASSWORD_REQUIRED = "Password is required";
     public static final String PASSWORD_LENGTH = "Password must be between {min} and {max} characters";
+    public static final String CURRENT_PASSWORD_REQUIRED = "Current password is required";
+    public static final String ROLE_REQUIRED = "Role is required";
     public static final String OTP_REQUIRED = "Verification code is required";
     public static final String OTP_FORMAT_INVALID = "Verification code must be 6 digits";
     public static final String FULL_NAME_REQUIRED = "Full name is required";
@@ -61,6 +63,9 @@ public final class ErrorMessages {
     public static final String CANNOT_MANAGE_SELF = "You cannot manage your own account here";
     public static final String USER_CLOSED = "This account is closed and cannot be changed";
     public static final String INVALID_STATUS_TRANSITION = "This status change is not allowed";
+    public static final String INVALID_CURRENT_PASSWORD = "Current password is incorrect";
+    public static final String PASSWORD_REUSED = "New password must be different from the current one";
+    public static final String ROLE_NOT_ASSIGNABLE = "This role cannot be assigned";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String UNEXPECTED_PRINCIPAL = "Unexpected principal type after authentication";

@@ -20,7 +20,7 @@ class JwtUtilsTest {
     void generatedToken_containsTheUsersEmail() {
         String token = jwtUtils.generateToken(userWithEmail("test@mail.com"));
 
-        assertThat(jwtUtils.getUsernameFromToken(token)).contains("test@mail.com");
+        assertThat(jwtUtils.parseToken(token).map(TokenClaims::username)).contains("test@mail.com");
     }
 
     @Test
@@ -28,7 +28,7 @@ class JwtUtilsTest {
         JwtUtils otherServer = new JwtUtils("a-completely-different-secret-of-32-bytes!!", 60_000);
         String token = otherServer.generateToken(userWithEmail("test@mail.com"));
 
-        assertThat(jwtUtils.getUsernameFromToken(token)).isEmpty();
+        assertThat(jwtUtils.parseToken(token)).isEmpty();
     }
 
     @Test
@@ -36,11 +36,11 @@ class JwtUtilsTest {
         JwtUtils alreadyExpired = new JwtUtils(SECRET, -1_000);
         String token = alreadyExpired.generateToken(userWithEmail("test@mail.com"));
 
-        assertThat(jwtUtils.getUsernameFromToken(token)).isEmpty();
+        assertThat(jwtUtils.parseToken(token)).isEmpty();
     }
 
     @Test
     void garbageToken_isRejected() {
-        assertThat(jwtUtils.getUsernameFromToken("not-a-jwt")).isEmpty();
+        assertThat(jwtUtils.parseToken("not-a-jwt")).isEmpty();
     }
 }

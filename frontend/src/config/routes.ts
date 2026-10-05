@@ -3,6 +3,9 @@ export const ROUTES = {
   login: '/login',
   register: '/register',
   verifyEmail: '/verify-email',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  changePassword: '/account/password',
   wallet: '/wallet',
   verification: '/verification',
   merchant: '/merchant',
@@ -10,5 +13,6 @@ export const ROUTES = {
   kycReviews: '/admin/kyc',
   kycReview: '/admin/kyc/:applicationId',
   users: '/admin/users',
+  userCreate: '/admin/users/new',
   user: '/admin/users/:userId',
 } as const

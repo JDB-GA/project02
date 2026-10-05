@@ -8,7 +8,8 @@
     "email": "Email",
     "mobileNumber": "Mobile number",
     "role": "Role",
-    "logout": "Log out"
+    "logout": "Log out",
+    "changePassword": "Change password"
   },
   "roles": {
     "CLIENT": "Client",
@@ -48,6 +49,14 @@
     "user": {
       "title": "User Details",
       "heading": "User details"
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "heading": "Change password"
+    },
+    "userCreate": {
+      "title": "Create User",
+      "heading": "Create user"
     }
   },
   "nav": {

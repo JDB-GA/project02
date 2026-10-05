@@ -2,6 +2,7 @@ package com.almotawaj.wallet.config.security;
 
 import com.almotawaj.wallet.config.constants.LogMessages;
 import com.almotawaj.wallet.config.constants.SecurityConstants;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -38,16 +39,16 @@ public class JwtUtils {
                 .compact();
     }
 
-    public Optional<String> getUsernameFromToken(String token) {
+    public Optional<TokenClaims> parseToken(String token) {
         try {
-            String username = Jwts.parser()
+            Claims claims = Jwts.parser()
                     .verifyWith(signingKey)
                     .build()
                     .parseSignedClaims(token)
-                    .getPayload()
-                    .getSubject();
+                    .getPayload();
 
-            return Optional.ofNullable(username);
+            return Optional.ofNullable(claims.getSubject())
+                    .map(subject -> new TokenClaims(subject, claims.getIssuedAt().toInstant()));
         } catch (JwtException | IllegalArgumentException e) {
             log.warn(LogMessages.INVALID_JWT, e.getMessage());
             return Optional.empty();

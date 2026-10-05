@@ -5,6 +5,9 @@ export const AUTH_ENDPOINTS = {
   me: '/auth/users/me',
   verifyEmail: '/auth/users/verify-email',
   resendVerification: '/auth/users/verify-email/resend',
+  forgotPassword: '/auth/users/password/forgot',
+  resetPassword: '/auth/users/password/reset',
+  changePassword: '/auth/users/password/change',
 } as const
 
 export const AUTH_QUERY_KEYS = {

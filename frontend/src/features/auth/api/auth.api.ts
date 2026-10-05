@@ -3,7 +3,14 @@ import { HTTP_STATUS } from '@/lib/api/http.constants'
 import { requestJson, requestVoid } from '@/lib/api/http-client'
 import { AUTH_ENDPOINTS } from '../constants/auth.constants'
 import { userSchema } from '../schemas/user.schema'
-import type { LoginPayload, RegisterPayload, VerifyEmailPayload } from '../types/auth.types'
+import type {
+  ChangePasswordPayload,
+  ForgotPasswordPayload,
+  LoginPayload,
+  RegisterPayload,
+  ResetPasswordPayload,
+  VerifyEmailPayload,
+} from '../types/auth.types'
 import type { User } from '../types/user.types'
 
 export const authApi = {
@@ -19,6 +26,15 @@ export const authApi = {
     requestJson(AUTH_ENDPOINTS.verifyEmail, userSchema, { method: 'POST', body: payload }),
 
   resendVerification: (): Promise<void> => requestVoid(AUTH_ENDPOINTS.resendVerification, { method: 'POST' }),
+
+  forgotPassword: (payload: ForgotPasswordPayload): Promise<void> =>
+    requestVoid(AUTH_ENDPOINTS.forgotPassword, { method: 'POST', body: payload }),
+
+  resetPassword: (payload: ResetPasswordPayload): Promise<void> =>
+    requestVoid(AUTH_ENDPOINTS.resetPassword, { method: 'POST', body: payload }),
+
+  changePassword: (payload: ChangePasswordPayload): Promise<User> =>
+    requestJson(AUTH_ENDPOINTS.changePassword, userSchema, { method: 'POST', body: payload }),
 
   getCurrentUser: async (signal?: AbortSignal): Promise<User | null> => {
     try {

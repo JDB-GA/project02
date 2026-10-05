@@ -30,5 +30,8 @@
   "USER_CLOSED": "This account is closed and cannot be changed",
   "INVALID_STATUS_TRANSITION": "This status change is not allowed",
   "PERMISSION_NOT_GRANTABLE": "This permission can't be given to this user's role",
-  "SUPER_ADMIN_PERMISSIONS_FIXED": "Super admin permissions cannot be changed"
+  "SUPER_ADMIN_PERMISSIONS_FIXED": "Super admin permissions cannot be changed",
+  "INVALID_CURRENT_PASSWORD": "Current password is incorrect",
+  "PASSWORD_REUSED": "Choose a password different from your current one",
+  "ROLE_NOT_ASSIGNABLE": "This role can't be assigned"
 }

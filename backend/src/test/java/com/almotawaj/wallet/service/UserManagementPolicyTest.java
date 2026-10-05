@@ -2,12 +2,14 @@ package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.exception.BusinessRuleException;
+import com.almotawaj.wallet.model.Permission;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.UserRole;
 import com.almotawaj.wallet.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.access.AccessDeniedException;
 
+import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -61,5 +63,19 @@ class UserManagementPolicyTest {
         assertThatThrownBy(() -> policy.ensureCanManage(user(UserRole.ADMIN), target))
                 .isInstanceOf(BusinessRuleException.class)
                 .hasFieldOrPropertyWithValue("code", ErrorCodes.USER_CLOSED);
+    }
+
+    @Test
+    void createRules() {
+        User admin = user(UserRole.ADMIN);
+        User superAdmin = user(UserRole.SUPER_ADMIN);
+
+        assertThatCode(() -> policy.ensureCanCreate(admin, UserRole.MERCHANT, Set.of())).doesNotThrowAnyException();
+        assertThatThrownBy(() -> policy.ensureCanCreate(admin, UserRole.ADMIN, Set.of())).isInstanceOf(AccessDeniedException.class);
+        assertThatCode(() -> policy.ensureCanCreate(superAdmin, UserRole.ADMIN, Set.of(Permission.KYC_REVIEW))).doesNotThrowAnyException();
+        assertThatThrownBy(() -> policy.ensureCanCreate(superAdmin, UserRole.SUPER_ADMIN, Set.of()))
+                .hasFieldOrPropertyWithValue("code", ErrorCodes.ROLE_NOT_ASSIGNABLE);
+        assertThatThrownBy(() -> policy.ensureCanCreate(superAdmin, UserRole.CLIENT, Set.of(Permission.USER_MANAGE)))
+                .hasFieldOrPropertyWithValue("code", ErrorCodes.PERMISSION_NOT_GRANTABLE);
     }
 }

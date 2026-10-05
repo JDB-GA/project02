@@ -2,12 +2,21 @@ import type { Permission } from '@/features/auth/types/user.types'
 import { requestJson, requestVoid } from '@/lib/api/http-client'
 import { USER_MANAGEMENT_ENDPOINTS } from '../constants/user-management.constants'
 import { adminUserPageSchema, adminUserSchema } from '../schemas/admin-user.schema'
-import type { AdminUser, AdminUserPage, UserContactFormValues, UsersQuery } from '../types/user-management.types'
+import type {
+  AdminUser,
+  AdminUserPage,
+  CreateUserFormValues,
+  UserContactFormValues,
+  UsersQuery,
+} from '../types/user-management.types'
 import { toUsersSearchParams } from '../utils/to-users-search-params'
 
 export const userManagementApi = {
   list: (query: UsersQuery, signal?: AbortSignal): Promise<AdminUserPage> =>
     requestJson(`${USER_MANAGEMENT_ENDPOINTS.list}?${toUsersSearchParams(query)}`, adminUserPageSchema, { signal }),
+
+  create: (payload: CreateUserFormValues): Promise<AdminUser> =>
+    requestJson(USER_MANAGEMENT_ENDPOINTS.list, adminUserSchema, { method: 'POST', body: payload }),
 
   get: (userId: string, signal?: AbortSignal): Promise<AdminUser> =>
     requestJson(USER_MANAGEMENT_ENDPOINTS.detail(userId), adminUserSchema, { signal }),

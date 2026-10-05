@@ -1,4 +1,12 @@
-import { ClipboardCheckIcon, LayoutDashboardIcon, ShieldCheckIcon, StoreIcon, UsersIcon, WalletIcon } from 'lucide-react'
+import {
+  ClipboardCheckIcon,
+  KeyRoundIcon,
+  LayoutDashboardIcon,
+  ShieldCheckIcon,
+  StoreIcon,
+  UsersIcon,
+  WalletIcon,
+} from 'lucide-react'
 import { ROUTES } from '@/config/routes'
 import type { AppPage } from './app-page.types'
 
@@ -64,6 +72,16 @@ export const APP_PAGES: readonly AppPage[] = [
     lazy: async () => ({ Component: (await import('@/features/user-management/pages/UsersPage')).UsersPage }),
   },
   {
+    id: 'userCreate',
+    path: ROUTES.userCreate,
+    icon: UsersIcon,
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+    permission: 'USER_MANAGE',
+    parentId: 'users',
+    showInSidebar: false,
+    lazy: async () => ({ Component: (await import('@/features/user-management/pages/CreateUserPage')).CreateUserPage }),
+  },
+  {
     id: 'user',
     path: ROUTES.user,
     icon: UsersIcon,
@@ -72,5 +90,13 @@ export const APP_PAGES: readonly AppPage[] = [
     parentId: 'users',
     showInSidebar: false,
     lazy: async () => ({ Component: (await import('@/features/user-management/pages/UserDetailPage')).UserDetailPage }),
+  },
+  {
+    id: 'changePassword',
+    path: ROUTES.changePassword,
+    icon: KeyRoundIcon,
+    roles: ['CLIENT', 'MERCHANT', 'ADMIN', 'SUPER_ADMIN'],
+    showInSidebar: false,
+    lazy: async () => ({ Component: (await import('@/features/auth/pages/ChangePasswordPage')).ChangePasswordPage }),
   },
 ]

@@ -10,6 +10,10 @@ public final class LogMessages {
     public static final String PERMISSION_REVOKED = "Super admin {} revoked {} from user {}";
     public static final String USER_STATUS_CHANGED = "Actor {} changed user {} status from {} to {}";
     public static final String USER_CONTACT_UPDATED = "Actor {} updated contact details of user {}";
+    public static final String USER_CREATED = "Actor {} created user {} with role {}";
+    public static final String PASSWORD_RESET_REQUESTED = "Password reset code issued for user {}";
+    public static final String PASSWORD_RESET = "User {} reset their password";
+    public static final String PASSWORD_CHANGED = "User {} changed their password";
     public static final String FILE_DELETE_FAILED = "Failed to delete stored file {}";
 
     private LogMessages() {

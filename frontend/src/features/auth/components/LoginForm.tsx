@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router'
+import { ROUTES } from '@/config/routes'
 import { FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { useLoginForm } from '../hooks/useLoginForm'
@@ -22,6 +24,9 @@ export function LoginForm() {
         <FormField control={form.control} name="password" label={t('fields.password')}>
           {(props) => <PasswordInput {...props} autoComplete="current-password" />}
         </FormField>
+        <Link to={ROUTES.forgotPassword} className="-mt-3 self-end text-sm underline-offset-4 hover:underline">
+          {t('forgot.link')}
+        </Link>
         <FormErrorMessage errorKey={errorKey} />
         <SubmitButton isPending={isPending}>{t('login.submit')}</SubmitButton>
       </FieldGroup>

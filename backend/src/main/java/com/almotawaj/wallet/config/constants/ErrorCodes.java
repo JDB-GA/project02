@@ -31,6 +31,9 @@ public final class ErrorCodes {
     public static final String CANNOT_MANAGE_SELF = "CANNOT_MANAGE_SELF";
     public static final String USER_CLOSED = "USER_CLOSED";
     public static final String INVALID_STATUS_TRANSITION = "INVALID_STATUS_TRANSITION";
+    public static final String INVALID_CURRENT_PASSWORD = "INVALID_CURRENT_PASSWORD";
+    public static final String PASSWORD_REUSED = "PASSWORD_REUSED";
+    public static final String ROLE_NOT_ASSIGNABLE = "ROLE_NOT_ASSIGNABLE";
 
     private ErrorCodes() {
     }

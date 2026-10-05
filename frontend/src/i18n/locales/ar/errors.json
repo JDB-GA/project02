@@ -30,5 +30,8 @@
   "USER_CLOSED": "هذا الحساب مغلق ولا يمكن تعديله",
   "INVALID_STATUS_TRANSITION": "تغيير الحالة هذا غير مسموح",
   "PERMISSION_NOT_GRANTABLE": "لا يمكن منح هذه الصلاحية لدور هذا المستخدم",
-  "SUPER_ADMIN_PERMISSIONS_FIXED": "لا يمكن تغيير صلاحيات المسؤول الأعلى"
+  "SUPER_ADMIN_PERMISSIONS_FIXED": "لا يمكن تغيير صلاحيات المسؤول الأعلى",
+  "INVALID_CURRENT_PASSWORD": "كلمة المرور الحالية غير صحيحة",
+  "PASSWORD_REUSED": "اختر كلمة مرور مختلفة عن الحالية",
+  "ROLE_NOT_ASSIGNABLE": "لا يمكن إسناد هذا الدور"
 }

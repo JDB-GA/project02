@@ -36,5 +36,9 @@
   "imageOnly": "Only JPG or PNG images are allowed",
   "fileTooLarge": "File must be {{maxFileSizeMb}} MB or smaller",
   "rejectionReasonRequired": "Enter a reason for the rejection",
-  "rejectionReasonTooLong": "Reason must be at most {{rejectionReasonMax}} characters"
+  "rejectionReasonTooLong": "Reason must be at most {{rejectionReasonMax}} characters",
+  "currentPasswordRequired": "Enter your current password",
+  "currentPasswordIncorrect": "Current password is incorrect",
+  "passwordReused": "Choose a password different from your current one",
+  "roleRequired": "Select a role"
 }

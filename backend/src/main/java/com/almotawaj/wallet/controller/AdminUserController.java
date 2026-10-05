@@ -5,10 +5,12 @@ import com.almotawaj.wallet.config.constants.SecurityConstants;
 import com.almotawaj.wallet.config.security.MyUserDetails;
 import com.almotawaj.wallet.model.UserRole;
 import com.almotawaj.wallet.model.UserStatus;
+import com.almotawaj.wallet.model.request.CreateUserRequest;
 import com.almotawaj.wallet.model.request.UpdateUserContactRequest;
 import com.almotawaj.wallet.model.response.AdminUserResponse;
 import com.almotawaj.wallet.model.response.AdminUserSummaryResponse;
 import com.almotawaj.wallet.model.response.PageResponse;
+import com.almotawaj.wallet.service.UserCreationService;
 import com.almotawaj.wallet.service.UserManagementService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AdminUserController {
     private final UserManagementService userManagementService;
+    private final UserCreationService userCreationService;
 
     @GetMapping
     public PageResponse<AdminUserSummaryResponse> list(
@@ -36,6 +39,12 @@ public class AdminUserController {
             @RequestParam(required = false) UserStatus status,
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return userManagementService.list(search, role, status, pageable);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public AdminUserResponse create(@AuthenticationPrincipal MyUserDetails actor, @Valid @RequestBody CreateUserRequest request) {
+        return userCreationService.create(actor.user(), request);
     }
 
     @GetMapping(ApiPaths.USER_BY_ID)

@@ -62,6 +62,8 @@ public class User {
     @Column(nullable = false)
     private boolean mobileVerified = true;
 
+    private Instant credentialsChangedAt;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Instant createdAt;

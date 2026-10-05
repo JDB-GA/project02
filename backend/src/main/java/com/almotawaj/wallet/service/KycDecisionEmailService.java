@@ -44,7 +44,7 @@ public class KycDecisionEmailService {
                 locale.getLanguage(),
                 LocaleConstants.ARABIC.getLanguage().equals(locale.getLanguage())
                         ? MailConstants.DIRECTION_RTL : MailConstants.DIRECTION_LTR,
-                messageSource.getMessage(key + MailConstants.KYC_HEADING_SUFFIX, null, locale),
+                messageSource.getMessage(key + MailConstants.HEADING_SUFFIX, null, locale),
                 messageSource.getMessage(key + MailConstants.KYC_BODY_SUFFIX, null, locale),
                 messageSource.getMessage(MailConstants.KYC_REASON_LABEL_KEY, null, locale));
     }

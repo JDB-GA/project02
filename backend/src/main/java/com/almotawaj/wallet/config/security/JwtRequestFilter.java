@@ -13,7 +13,6 @@ import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -21,6 +20,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @Component
@@ -33,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = extractToken(request);
         if (token != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            jwtUtils.getUsernameFromToken(token).ifPresent(username -> authenticate(username, request));
+            jwtUtils.parseToken(token).ifPresent(claims -> authenticate(claims, request));
         }
 
         filterChain.doFilter(request, response);
@@ -49,11 +50,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         return cookie != null && !cookie.getValue().isBlank() ? cookie.getValue() : null;
     }
 
-    private void authenticate(String username, HttpServletRequest request) {
+    private void authenticate(TokenClaims claims, HttpServletRequest request) {
         try {
-            UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
+            MyUserDetails userDetails = myUserDetailsService.loadUserByUsername(claims.username());
 
-            if (!userDetails.isEnabled() || !userDetails.isAccountNonLocked()) {
+            if (!userDetails.isEnabled() || !userDetails.isAccountNonLocked() || isRevoked(claims, userDetails)) {
                 return;
             }
 
@@ -61,7 +62,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (UsernameNotFoundException e) {
-            log.warn(LogMessages.TOKEN_USER_NOT_FOUND, username);
+            log.warn(LogMessages.TOKEN_USER_NOT_FOUND, claims.username());
         }
+    }
+
+    private static boolean isRevoked(TokenClaims claims, MyUserDetails userDetails) {
+        Instant changedAt = userDetails.user().getCredentialsChangedAt();
+        return changedAt != null && claims.issuedAt().isBefore(changedAt.truncatedTo(ChronoUnit.SECONDS));
     }
 }
