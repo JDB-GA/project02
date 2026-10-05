@@ -66,8 +66,10 @@ public final class ErrorMessages {
     public static final String INVALID_CURRENT_PASSWORD = "Current password is incorrect";
     public static final String PASSWORD_REUSED = "New password must be different from the current one";
     public static final String ROLE_NOT_ASSIGNABLE = "This role cannot be assigned";
+    public static final String SEED_PASSWORD_MISSING = "Set the SEED_PASSWORD environment variable before seeding";
 
     public static final String USER_NOT_FOUND = "User not found";
+    public static final String NOT_FOUND = "The requested resource was not found";
     public static final String UNEXPECTED_PRINCIPAL = "Unexpected principal type after authentication";
 
     private ErrorMessages() {

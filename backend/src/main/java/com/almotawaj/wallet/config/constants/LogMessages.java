@@ -15,6 +15,8 @@ public final class LogMessages {
     public static final String PASSWORD_RESET = "User {} reset their password";
     public static final String PASSWORD_CHANGED = "User {} changed their password";
     public static final String FILE_DELETE_FAILED = "Failed to delete stored file {}";
+    public static final String SEED_COMPLETED = "Basic database seeding completed";
+    public static final String SEED_TOKEN_REJECTED = "Rejected seed request with an invalid token";
 
     private LogMessages() {
     }
