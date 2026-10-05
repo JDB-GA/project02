@@ -41,6 +41,21 @@ Enum permission {
   USER_MANAGE
 }
 
+Enum transaction_type {
+  TOP_UP
+  PAYMENT
+  PAYMENT_RECEIVED
+  REFUND
+  REFUND_ISSUED
+  TRANSFER_IN
+  TRANSFER_OUT
+}
+
+Enum transaction_direction {
+  CREDIT
+  DEBIT
+}
+
 Table users {
   id                      uuid         [pk]
   email_address           varchar(254) [not null, unique]
@@ -133,5 +148,34 @@ Table audit_logs {
     created_at
     action
     target_id
+  }
+}
+
+Table wallets {
+  id          uuid           [pk]
+  user_id     uuid           [not null, unique, ref: - users.id, note: 'One wallet per user']
+  iban        varchar(22)    [not null, unique, note: 'Generated BH IBAN, never changes']
+  balance     numeric(19,3)  [not null, note: 'BHD']
+  currency    varchar(3)     [not null, note: 'BHD']
+  created_at  timestamptz    [not null]
+  updated_at  timestamptz    [not null]
+}
+
+Table wallet_transactions {
+  id                 uuid                   [pk]
+  wallet_id          uuid                   [not null, ref: > wallets.id]
+  reference          varchar(24)            [not null, unique, note: 'TXN-yyyyMMdd-XXXXXXXX']
+  type               transaction_type       [not null]
+  direction          transaction_direction  [not null]
+  amount             numeric(19,3)          [not null]
+  balance_after      numeric(19,3)          [not null]
+  counterparty_name  varchar(70)            [not null]
+  counterparty_iban  varchar(34)
+  counterparty_bic   varchar(11)
+  description        varchar(140)
+  created_at         timestamptz            [not null]
+
+  indexes {
+    (wallet_id, created_at)
   }
 }
