@@ -36,6 +36,21 @@
     "PAYMENT": "Payment",
     "PAYMENT_RECEIVED": "Payment received",
     "REFUND": "Refund",
-    "REFUND_ISSUED": "Refund issued"
+    "REFUND_ISSUED": "Refund issued",
+    "TRANSFER_IN": "Money received",
+    "TRANSFER_OUT": "Money sent"
+  },
+  "transfer": {
+    "open": "Send money",
+    "title": "Send money",
+    "description": "Send money to another wallet using their email, mobile number or IBAN.",
+    "recipient": "Recipient",
+    "recipientHint": "Start typing an email or mobile number, or paste an IBAN",
+    "searching": "Looking up recipient…",
+    "note": "Note (optional)",
+    "limits": "Balance {{balance}} · up to {{max}} per transfer · {{remaining}} left today",
+    "submit": "Send",
+    "success": "Money sent",
+    "loadError": "Could not load your transfer limits."
   }
 }

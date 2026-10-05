@@ -12,6 +12,10 @@ public final class TransferDocs {
     public static final String RECIPIENT_NOT_FOUND = "No wallet holder matches (RECIPIENT_NOT_FOUND)";
     public static final String RECIPIENT_UNPROCESSABLE = "Sending to yourself (SELF_TRANSFER_NOT_ALLOWED) or recipient cannot receive yet (RECIPIENT_UNAVAILABLE)";
 
+    public static final String SUGGESTIONS = "Suggest recipients";
+    public static final String SUGGESTIONS_DESCRIPTION = "Autocomplete by case-insensitive email or mobile prefix (at least 3 characters). Returns up to 5 masked wallet holders who can receive money; select one to send by its IBAN.";
+    public static final String SUGGESTIONS_OK = "Up to 5 masked suggestions (empty for short queries)";
+
     public static final String OPTIONS = "Get transfer options";
     public static final String OPTIONS_DESCRIPTION = "Current balance, per-transfer limits, the daily sending limit and how much can still be sent today.";
     public static final String OPTIONS_OK = "Balance and transfer limits";

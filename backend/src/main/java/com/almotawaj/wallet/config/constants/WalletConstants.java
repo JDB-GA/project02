@@ -20,6 +20,10 @@ public final class WalletConstants {
     public static final String TRANSACTION_REFERENCE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     public static final int TRANSACTION_REFERENCE_RANDOM_LENGTH = 8;
     public static final int IBAN_GENERATION_ATTEMPTS = 5;
+    public static final int SUGGESTION_MIN_QUERY = 3;
+    public static final int SUGGESTION_LIMIT = 5;
+    public static final int MOBILE_VISIBLE_DIGITS = 4;
+    public static final String LIKE_SUFFIX = "%";
     public static final String TIME_ZONE = "Asia/Bahrain";
 
     private WalletConstants() {

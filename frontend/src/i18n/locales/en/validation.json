@@ -46,5 +46,12 @@
   "amountTooSmall": "Amount must be at least {{topUpMin}} BHD",
   "amountTooLarge": "Amount must be at most {{topUpMax}} BHD",
   "topUpSourceRequired": "Choose the account to receive from",
-  "amountOverDailyLimit": "This exceeds what you can still receive today"
+  "amountOverDailyLimit": "This exceeds what you can still receive today",
+  "recipientRequired": "Enter an email, mobile number or IBAN",
+  "recipientNotFound": "No wallet found for this email, mobile number or IBAN",
+  "recipientUnavailable": "This user can't receive money yet",
+  "recipientSelf": "You can't send money to yourself",
+  "insufficientBalance": "Your balance is not enough",
+  "amountOverDailySendLimit": "This exceeds what you can still send today",
+  "noteTooLong": "Note must be at most {{noteMax}} characters"
 }

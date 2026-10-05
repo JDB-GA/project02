@@ -8,8 +8,10 @@ import com.almotawaj.wallet.config.constants.docs.WalletDocs;
 import com.almotawaj.wallet.config.security.MyUserDetails;
 import com.almotawaj.wallet.model.request.TransferRequest;
 import com.almotawaj.wallet.model.response.RecipientResponse;
+import com.almotawaj.wallet.model.response.RecipientSuggestionResponse;
 import com.almotawaj.wallet.model.response.TransferOptionsResponse;
 import com.almotawaj.wallet.model.response.WalletTransactionResponse;
+import com.almotawaj.wallet.service.RecipientSuggestionService;
 import com.almotawaj.wallet.service.TransferService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,6 +23,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Tag(name = TransferDocs.TAG, description = TransferDocs.TAG_DESCRIPTION)
 @RequestMapping(ApiPaths.WALLET)
@@ -28,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TransferController {
     private final TransferService transferService;
+    private final RecipientSuggestionService suggestionService;
 
     @Operation(summary = TransferDocs.RECIPIENT, description = TransferDocs.RECIPIENT_DESCRIPTION)
     @ApiResponse(responseCode = ApiDocs.OK, description = TransferDocs.RECIPIENT_OK)
@@ -37,6 +42,15 @@ public class TransferController {
     @GetMapping(ApiPaths.RECIPIENTS)
     public RecipientResponse findRecipient(@AuthenticationPrincipal MyUserDetails userDetails, @RequestParam String query) {
         return transferService.findRecipient(userDetails.user().getId(), query);
+    }
+
+    @Operation(summary = TransferDocs.SUGGESTIONS, description = TransferDocs.SUGGESTIONS_DESCRIPTION)
+    @ApiResponse(responseCode = ApiDocs.OK, description = TransferDocs.SUGGESTIONS_OK)
+    @ApiResponse(responseCode = ApiDocs.UNPROCESSABLE, description = WalletDocs.KYC_REQUIRED)
+    @GetMapping(ApiPaths.RECIPIENT_SUGGESTIONS)
+    public List<RecipientSuggestionResponse> suggestRecipients(@AuthenticationPrincipal MyUserDetails userDetails,
+                                                               @RequestParam String query) {
+        return suggestionService.suggest(userDetails.user().getId(), query);
     }
 
     @Operation(summary = TransferDocs.OPTIONS, description = TransferDocs.OPTIONS_DESCRIPTION)

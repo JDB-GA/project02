@@ -37,6 +37,7 @@ public final class ApiPaths {
     public static final String TRANSFERS = "/transfers";
     public static final String TRANSFER_OPTIONS = "/transfers/options";
     public static final String RECIPIENTS = "/recipients";
+    public static final String RECIPIENT_SUGGESTIONS = "/recipients/suggestions";
     public static final String WALLET_TRANSFERS = WALLET + TRANSFERS;
     public static final String WALLET_RECIPIENTS = WALLET + RECIPIENTS;
     public static final String WALLET_TOP_UPS = WALLET + TOP_UPS;

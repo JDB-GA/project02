@@ -5,6 +5,7 @@ import type { Wallet } from '../types/wallet.types'
 import { formatMoney } from '../utils/format-money'
 import { formatIban } from '../utils/iban'
 import { IbanCopyButton } from './IbanCopyButton'
+import { SendMoneyDialog } from './SendMoneyDialog'
 import { TopUpDialog } from './TopUpDialog'
 
 interface WalletBalanceCardProps {
@@ -22,7 +23,8 @@ export function WalletBalanceCard({ wallet }: WalletBalanceCardProps) {
         <CardTitle className="text-3xl font-semibold tabular-nums">
           <bdi>{formatMoney(wallet.balance, language)}</bdi>
         </CardTitle>
-        <CardAction>
+        <CardAction className="flex flex-wrap justify-end gap-2">
+          <SendMoneyDialog />
           <TopUpDialog />
         </CardAction>
       </CardHeader>

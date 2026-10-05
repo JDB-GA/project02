@@ -35,5 +35,10 @@
   "PASSWORD_REUSED": "اختر كلمة مرور مختلفة عن الحالية",
   "ROLE_NOT_ASSIGNABLE": "لا يمكن إسناد هذا الدور",
   "WALLET_KYC_REQUIRED": "تحقق من هويتك قبل استخدام محفظتك",
-  "DAILY_TOP_UP_LIMIT_EXCEEDED": "هذا التحويل يتجاوز حد الاستلام اليومي"
+  "DAILY_TOP_UP_LIMIT_EXCEEDED": "هذا التحويل يتجاوز حد الاستلام اليومي",
+  "DAILY_TRANSFER_LIMIT_EXCEEDED": "هذا التحويل يتجاوز حد الإرسال اليومي",
+  "INSUFFICIENT_BALANCE": "رصيدك غير كافٍ لهذا التحويل",
+  "SELF_TRANSFER_NOT_ALLOWED": "لا يمكنك إرسال الأموال إلى نفسك",
+  "RECIPIENT_NOT_FOUND": "لا توجد محفظة بهذا البريد أو الرقم أو الآيبان",
+  "RECIPIENT_UNAVAILABLE": "لا يمكن لهذا المستخدم استلام الأموال بعد"
 }

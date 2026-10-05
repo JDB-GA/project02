@@ -46,5 +46,12 @@
   "amountTooSmall": "يجب ألا يقل المبلغ عن {{topUpMin}} د.ب",
   "amountTooLarge": "يجب ألا يزيد المبلغ عن {{topUpMax}} د.ب",
   "topUpSourceRequired": "اختر الحساب الذي ستستلم منه",
-  "amountOverDailyLimit": "المبلغ يتجاوز ما يمكنك استلامه اليوم"
+  "amountOverDailyLimit": "المبلغ يتجاوز ما يمكنك استلامه اليوم",
+  "recipientRequired": "أدخل البريد الإلكتروني أو رقم الهاتف أو الآيبان",
+  "recipientNotFound": "لا توجد محفظة بهذا البريد أو الرقم أو الآيبان",
+  "recipientUnavailable": "لا يمكن لهذا المستخدم استلام الأموال بعد",
+  "recipientSelf": "لا يمكنك إرسال الأموال إلى نفسك",
+  "insufficientBalance": "رصيدك غير كافٍ",
+  "amountOverDailySendLimit": "المبلغ يتجاوز ما يمكنك إرساله اليوم",
+  "noteTooLong": "يجب ألا تزيد الملاحظة عن {{noteMax}} حرفاً"
 }

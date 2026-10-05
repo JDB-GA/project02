@@ -35,5 +35,10 @@
   "PASSWORD_REUSED": "Choose a password different from your current one",
   "ROLE_NOT_ASSIGNABLE": "This role can't be assigned",
   "WALLET_KYC_REQUIRED": "Verify your identity before using your wallet",
-  "DAILY_TOP_UP_LIMIT_EXCEEDED": "This transfer exceeds your daily receiving limit"
+  "DAILY_TOP_UP_LIMIT_EXCEEDED": "This transfer exceeds your daily receiving limit",
+  "DAILY_TRANSFER_LIMIT_EXCEEDED": "This transfer exceeds your daily sending limit",
+  "INSUFFICIENT_BALANCE": "Your balance is not enough for this transfer",
+  "SELF_TRANSFER_NOT_ALLOWED": "You can't send money to yourself",
+  "RECIPIENT_NOT_FOUND": "No wallet found for this email, mobile number or IBAN",
+  "RECIPIENT_UNAVAILABLE": "This user can't receive money yet"
 }
