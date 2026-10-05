@@ -1,5 +1,6 @@
 package com.almotawaj.wallet.model;
 
+import java.util.EnumSet;
 import java.util.Set;
 
 public enum Permission {
@@ -13,5 +14,9 @@ public enum Permission {
 
     public boolean isGrantableTo(UserRole role) {
         return grantableTo.contains(role);
+    }
+
+    public static Set<Permission> effectiveFor(User user) {
+        return user.getRole() == UserRole.SUPER_ADMIN ? EnumSet.allOf(Permission.class) : Set.copyOf(user.getPermissions());
     }
 }
