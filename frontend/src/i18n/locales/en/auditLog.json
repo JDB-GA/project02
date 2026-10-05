@@ -1,0 +1,37 @@
+{
+  "filters": {
+    "action": "Filter by action"
+  },
+  "actions": {
+    "ALL": "All actions",
+    "KYC_SUBMITTED": "KYC submitted",
+    "KYC_APPROVED": "KYC approved",
+    "KYC_REJECTED": "KYC rejected",
+    "PERMISSION_GRANTED": "Permission granted",
+    "PERMISSION_REVOKED": "Permission revoked",
+    "USER_CREATED": "User created",
+    "USER_CONTACT_UPDATED": "Contact updated",
+    "USER_SUSPENDED": "User suspended",
+    "USER_REACTIVATED": "User reactivated",
+    "USER_CLOSED": "User closed",
+    "PASSWORD_CHANGED": "Password changed",
+    "PASSWORD_RESET": "Password reset"
+  },
+  "targets": {
+    "USER": "User",
+    "KYC_APPLICATION": "KYC application"
+  },
+  "table": {
+    "time": "Time",
+    "actor": "Performed by",
+    "action": "Action",
+    "target": "Target",
+    "details": "Details",
+    "system": "System"
+  },
+  "empty": {
+    "title": "No activity yet",
+    "description": "There are no audit records for this action."
+  },
+  "loadError": "Could not load the audit log."
+}

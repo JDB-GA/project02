@@ -57,6 +57,10 @@
     "userCreate": {
       "title": "Create User",
       "heading": "Create user"
+    },
+    "auditLog": {
+      "title": "Audit Log",
+      "heading": "Audit log"
     }
   },
   "nav": {

@@ -57,6 +57,10 @@
     "userCreate": {
       "title": "إنشاء مستخدم",
       "heading": "إنشاء مستخدم"
+    },
+    "auditLog": {
+      "title": "سجل التدقيق",
+      "heading": "سجل التدقيق"
     }
   },
   "nav": {
