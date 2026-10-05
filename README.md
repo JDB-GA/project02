@@ -207,12 +207,6 @@ frontend/src
 
 1. Attach a **Volume** mounted at `/data` (uploaded KYC files live in `/data/uploads`).
 2. Set the variables below and deploy.
-3. On an existing database, run once in Postgres → Data → Query (Hibernate never updates old enum check constraints):
-
-```sql
-ALTER TABLE user_permissions DROP CONSTRAINT IF EXISTS user_permissions_permission_check;
-ALTER TABLE otp_challenges DROP CONSTRAINT IF EXISTS otp_challenges_purpose_check;
-```
 
 | Variable                       | Value                                                                                  |
 | ------------------------------ | -------------------------------------------------------------------------------------- |

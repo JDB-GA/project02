@@ -1,102 +1,102 @@
 # User Stories
 
-Format: *As a [user], I want to [action], so that [reason].* Each story is one Trello card: the story is the card title, the acceptance criteria are its checklist, and the label shows the epic. Status: ✅ done · 🔜 planned.
+Format: *As a [user], I want to [action], so that [reason].* Each story is one Trello card: the story is the card title, the acceptance criteria are its checklist, and the label shows the epic. Stories marked (planned) are not built yet.
 
 ## Epic: Accounts
 
-**✅ US-01 – Register.** As a visitor, I want to create an account with my email, mobile and password, so that I can use the wallet.
+**US-01 – Register.** As a visitor, I want to create an account with my email, mobile and password, so that I can use the wallet.
 - [ ] Email and 8-digit Bahraini mobile must be unique; password 8–72 characters.
 - [ ] A 6-digit verification code is emailed in my language.
 - [ ] I am signed in right after registering.
 
-**✅ US-02 – Verify email.** As a new client, I want to confirm my email with a code, so that my account is trusted.
+**US-02 – Verify email.** As a new client, I want to confirm my email with a code, so that my account is trusted.
 - [ ] Codes expire after 10 minutes and allow 5 attempts.
 - [ ] I can resend a code once every 60 seconds.
 - [ ] Until verified I can only reach the verification page.
 
-**✅ US-03 – Log in.** As a user, I want to sign in with my email or mobile number, so that I can reach my account from any device.
+**US-03 – Log in.** As a user, I want to sign in with my email or mobile number, so that I can reach my account from any device.
 - [ ] Wrong credentials and suspended/closed accounts are rejected with the same message.
 - [ ] The session is an httpOnly cookie; I land on the page for my role.
 
-**✅ US-04 – Forgot password.** As a user who forgot my password, I want to reset it with a code sent to my email, so that I can get back into my account.
+**US-04 – Forgot password.** As a user who forgot my password, I want to reset it with a code sent to my email, so that I can get back into my account.
 - [ ] The response never reveals whether the email exists.
 - [ ] Resetting signs me out on every other device.
 
-**✅ US-05 – Change password.** As a signed-in user, I want to change my password, so that I can keep my account secure.
+**US-05 – Change password.** As a signed-in user, I want to change my password, so that I can keep my account secure.
 - [ ] The current password is required; the new one must be different.
 - [ ] Other devices are signed out; I stay signed in.
 
 ## Epic: Identity verification (KYC)
 
-**✅ US-06 – Submit KYC.** As a client, I want to submit my personal details, address, CPR, passport and photo, so that my identity can be verified.
+**US-06 – Submit KYC.** As a client, I want to submit my personal details, address, CPR, passport and photo, so that my identity can be verified.
 - [ ] CPR and passport must be PDFs, the photo JPEG/PNG, each up to 5 MB, checked by real content.
 - [ ] I must be 18+ and both documents unexpired.
 - [ ] A CPR can belong to only one pending or approved application.
 
-**✅ US-07 – Track my verification.** As a client, I want to see my application status and documents, so that I know where my verification stands.
+**US-07 – Track my verification.** As a client, I want to see my application status and documents, so that I know where my verification stands.
 - [ ] I see Under review / Verified / Rejected with the reason.
 - [ ] I can preview and download my own documents only.
 - [ ] After a rejection the form is pre-filled so I only fix what was wrong.
 
-**✅ US-08 – Get notified of the decision.** As a client, I want an email when my identity is approved or rejected, so that I don't have to keep checking.
+**US-08 – Get notified of the decision.** As a client, I want an email when my identity is approved or rejected, so that I don't have to keep checking.
 - [ ] The email is in English and Arabic and includes the rejection reason.
 
 ## Epic: KYC review
 
-**✅ US-09 – Review queue.** As a reviewer, I want to list applications filtered by status, so that I can work through pending requests.
+**US-09 – Review queue.** As a reviewer, I want to list applications filtered by status, so that I can work through pending requests.
 - [ ] Requires the `KYC_REVIEW` permission; paged, newest first.
 
-**✅ US-10 – Decide an application.** As a reviewer, I want to inspect documents and approve or reject with a reason, so that only real identities are verified.
+**US-10 – Decide an application.** As a reviewer, I want to inspect documents and approve or reject with a reason, so that only real identities are verified.
 - [ ] Only pending applications can be decided; a reason is required to reject.
 - [ ] Two reviewers cannot decide the same application.
 - [ ] My name and the time are recorded on the decision.
 
 ## Epic: User management
 
-**✅ US-11 – Find users.** As an admin with `USER_MANAGE`, I want to search users by email, mobile or name and filter by role and status, so that I can find any account quickly.
+**US-11 – Find users.** As an admin with `USER_MANAGE`, I want to search users by email, mobile or name and filter by role and status, so that I can find any account quickly.
 
-**✅ US-12 – Create users.** As an admin, I want to create users who then set their own password from an invitation email, so that I never handle their passwords.
+**US-12 – Create users.** As an admin, I want to create users who then set their own password from an invitation email, so that I never handle their passwords.
 - [ ] Admins create clients and merchants; only the super admin creates admins and sets permissions.
 - [ ] The invitation code is valid for 48 hours.
 
-**✅ US-13 – Edit contact details.** As an admin, I want to correct a user's email or mobile, so that their account stays reachable.
+**US-13 – Edit contact details.** As an admin, I want to correct a user's email or mobile, so that their account stays reachable.
 - [ ] Duplicates are rejected; a changed email must be verified again.
 
-**✅ US-14 – Suspend, reactivate and close.** As an admin, I want to suspend, reactivate or close (soft delete) accounts, so that I can stop misuse without losing data.
+**US-14 – Suspend, reactivate and close.** As an admin, I want to suspend, reactivate or close (soft delete) accounts, so that I can stop misuse without losing data.
 - [ ] Changes take effect on the user's next request.
 - [ ] Closed accounts stay in the database and cannot be reopened.
 - [ ] I cannot manage myself, a super admin, or (unless super admin) another admin.
 
-**✅ US-15 – Manage permissions.** As the super admin, I want to grant and revoke permissions with checkboxes, so that each admin can do exactly their job.
+**US-15 – Manage permissions.** As the super admin, I want to grant and revoke permissions with checkboxes, so that each admin can do exactly their job.
 - [ ] Permissions can only be given to roles allowed to hold them.
 
 ## Epic: Administration and operations
 
-**✅ US-16 – Audit trail (API).** As the super admin, I want every administrative and security action recorded, so that I can see who did what and when.
+**US-16 – Audit trail (API).** As the super admin, I want every administrative and security action recorded, so that I can see who did what and when.
 - [ ] KYC decisions, permission changes, user creation, edits, status changes and password changes are stored.
 
-**🔜 US-17 – Audit log screen.** As the super admin, I want to browse and filter the audit log in the app, so that I don't need direct API access.
+**US-17 – Audit log screen (planned).** As the super admin, I want to browse and filter the audit log in the app, so that I don't need direct API access.
 
-**✅ US-18 – Seed demo data.** As a developer or grader, I want to load demo accounts with one request, so that I can try every role immediately.
+**US-18 – Seed demo data.** As a developer or grader, I want to load demo accounts with one request, so that I can try every role immediately.
 - [ ] Protected by a seed token; safe to run repeatedly; disabled when no token is configured.
 
 ## Epic: Profile
 
-**🔜 US-19 – Profile picture.** As a user, I want to upload and change my profile picture, so that my account feels personal.
+**US-19 – Profile picture (planned).** As a user, I want to upload and change my profile picture, so that my account feels personal.
 - [ ] JPEG/PNG only, size-limited, checked by content.
 
 ## Epic: Payments
 
-**🔜 US-20 – Merchant API keys.** As a merchant, I want an API key for my store, so that my website can create payments.
+**US-20 – Merchant API keys (planned).** As a merchant, I want an API key for my store, so that my website can create payments.
 
-**🔜 US-21 – Checkout session.** As a merchant, I want to create a checkout session for an order, so that my customer can pay with the wallet.
+**US-21 – Checkout session (planned).** As a merchant, I want to create a checkout session for an order, so that my customer can pay with the wallet.
 - [ ] Statuses: `PENDING → PAID / CANCELLED / EXPIRED`, `PAID → REFUNDED`.
 - [ ] One order reference can only be paid once (double-payment prevention).
 
-**🔜 US-22 – Pay a checkout.** As a client, I want to pay a merchant's checkout from my wallet, so that I can buy online.
+**US-22 – Pay a checkout (planned).** As a client, I want to pay a merchant's checkout from my wallet, so that I can buy online.
 - [ ] Only verified (KYC approved) clients can pay.
 
 ## Epic: Notifications
 
-**🔜 US-23 – Live updates.** As a user, I want to see KYC decisions and payment results instantly, so that I don't need to refresh.
+**US-23 – Live updates (planned).** As a user, I want to see KYC decisions and payment results instantly, so that I don't need to refresh.
 - [ ] Delivered with Server-Sent Events.
