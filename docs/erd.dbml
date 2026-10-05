@@ -1,0 +1,137 @@
+Enum user_role {
+  CLIENT
+  MERCHANT
+  ADMIN
+  SUPER_ADMIN
+}
+
+Enum user_status {
+  ACTIVE
+  LOCKED
+  SUSPENDED
+  CLOSED
+}
+
+Enum kyc_status {
+  NOT_SUBMITTED
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+Enum kyc_application_status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+Enum kyc_document_type {
+  CPR
+  PASSPORT
+  PHOTO
+}
+
+Enum otp_purpose {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+Enum permission {
+  KYC_REVIEW
+  USER_MANAGE
+}
+
+Table users {
+  id                      uuid         [pk]
+  email_address           varchar(254) [not null, unique]
+  mobile_number           varchar(12)  [not null, unique, note: '+973 followed by 8 digits']
+  password                varchar(255) [not null, note: 'BCrypt hash']
+  role                    user_role    [not null, default: 'CLIENT']
+  status                  user_status  [not null, default: 'ACTIVE', note: 'CLOSED = soft deleted']
+  kyc_status              kyc_status   [not null, default: 'NOT_SUBMITTED']
+  email_verified          boolean      [not null, default: false]
+  mobile_verified         boolean      [not null]
+  credentials_changed_at  timestamptz  [note: 'Tokens issued before this are rejected']
+  created_at              timestamptz  [not null]
+  updated_at              timestamptz  [not null]
+}
+
+Table user_permissions {
+  user_id     uuid        [not null, ref: > users.id]
+  permission  permission  [not null]
+
+  indexes {
+    (user_id, permission) [unique]
+  }
+}
+
+Table otp_challenges {
+  id           uuid         [pk]
+  user_id      uuid         [not null, ref: > users.id]
+  purpose      otp_purpose  [not null]
+  code_hash    varchar(64)  [not null, note: 'HMAC-SHA256 of user, purpose and code']
+  attempts     integer      [not null, default: 0]
+  expires_at   timestamptz  [not null]
+  consumed_at  timestamptz
+  created_at   timestamptz  [not null]
+
+  indexes {
+    (user_id, purpose)
+  }
+}
+
+Table kyc_applications {
+  id                uuid                    [pk]
+  user_id           uuid                    [not null, ref: > users.id]
+  status            kyc_application_status  [not null, default: 'PENDING']
+  full_name         varchar(150)            [not null]
+  cpr_number        varchar(9)              [not null]
+  date_of_birth     date                    [not null]
+  nationality       varchar(2)              [not null, note: 'ISO 3166-1 alpha-2']
+  block             varchar(10)             [not null]
+  road              varchar(10)             [not null]
+  building          varchar(10)             [not null]
+  flat              varchar(10)
+  area              varchar(100)            [not null]
+  rejection_reason  varchar(500)
+  reviewed_by       uuid                    [ref: > users.id]
+  reviewed_at       timestamptz
+  created_at        timestamptz             [not null]
+  updated_at        timestamptz             [not null]
+
+  indexes {
+    (user_id, status)
+    cpr_number
+  }
+}
+
+Table kyc_documents {
+  id              uuid               [pk]
+  application_id  uuid               [not null, ref: > kyc_applications.id]
+  type            kyc_document_type  [not null]
+  expiry_date     date               [note: 'Required for CPR and PASSPORT']
+  storage_key     varchar(255)       [not null, unique, note: 'Random file name on the storage volume']
+  content_type    varchar(50)        [not null]
+  size_bytes      bigint             [not null]
+  created_at      timestamptz        [not null]
+
+  indexes {
+    (application_id, type) [unique]
+  }
+}
+
+Table audit_logs {
+  id           uuid          [pk]
+  actor_id     uuid          [ref: > users.id, note: 'Who performed the action']
+  action       varchar(40)   [not null, note: 'AuditAction enum name']
+  target_type  varchar(40)   [not null, note: 'USER or KYC_APPLICATION']
+  target_id    uuid          [not null]
+  details      varchar(500)
+  created_at   timestamptz   [not null]
+
+  indexes {
+    created_at
+    action
+    target_id
+  }
+}
