@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface KycDocumentRepository extends JpaRepository<KycDocument, UUID> {
     Optional<KycDocument> findByIdAndApplicationUserId(UUID documentId, UUID userId);
+
+    Optional<KycDocument> findByIdAndApplicationId(UUID documentId, UUID applicationId);
 }
