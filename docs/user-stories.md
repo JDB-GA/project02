@@ -75,7 +75,7 @@ Format: *As a [user], I want to [action], so that [reason].* Each story is one T
 **US-16 – Audit trail (API).** As the super admin, I want every administrative and security action recorded, so that I can see who did what and when.
 - [ ] KYC decisions, permission changes, user creation, edits, status changes and password changes are stored.
 
-**US-17 – Audit log screen (planned).** As the super admin, I want to browse and filter the audit log in the app, so that I don't need direct API access.
+**US-17 – Audit log screen.** As the super admin, I want to browse and filter the audit log in the app, so that I don't need direct API access.
 
 **US-18 – Seed demo data.** As a developer or grader, I want to load demo accounts with one request, so that I can try every role immediately.
 - [ ] Protected by a seed token; safe to run repeatedly; disabled when no token is configured.

@@ -195,7 +195,7 @@ frontend/src
 ├── app/          providers, router, route guards, layout, navigation
 ├── components/   shared components (ui/ is shadcn)
 ├── config/       env and route constants
-├── features/     auth, kyc, kyc-review, user-management (api, components, hooks, schemas, types, utils, pages)
+├── features/     auth, kyc, kyc-review, user-management, audit-log (api, components, hooks, schemas, types, utils, pages)
 ├── hooks/        shared hooks
 ├── i18n/         i18next setup and en/ar translations
 └── lib/          HTTP client, query client, file helpers
