@@ -8,6 +8,7 @@ import com.almotawaj.wallet.model.KycDocumentType;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.request.KycSubmitRequest;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +25,15 @@ public class KycApplicationFactory {
         FileType passportType = fileTypeDetector.detect(request.passportFile(), KycConstants.IDENTITY_FILE_TYPES);
         FileType photoType = fileTypeDetector.detect(request.photo(), KycConstants.PHOTO_FILE_TYPES);
 
+        KycApplication application = createApplication(user, request);
+
+        application.addDocument(document(KycDocumentType.CPR, request.cprFile(), cprType, request.cprExpiryDate()));
+        application.addDocument(document(KycDocumentType.PASSPORT, request.passportFile(), passportType, request.passportExpiryDate()));
+        application.addDocument(document(KycDocumentType.PHOTO, request.photo(), photoType, null));
+        return application;
+    }
+
+    private static @NonNull KycApplication createApplication(User user, KycSubmitRequest request) {
         KycApplication application = new KycApplication();
         application.setUser(user);
         application.setFullName(request.fullName().strip());
@@ -35,10 +45,6 @@ public class KycApplicationFactory {
         application.setBuilding(request.building());
         application.setFlat(request.flat() == null || request.flat().isBlank() ? null : request.flat());
         application.setArea(request.area().strip());
-
-        application.addDocument(document(KycDocumentType.CPR, request.cprFile(), cprType, request.cprExpiryDate()));
-        application.addDocument(document(KycDocumentType.PASSPORT, request.passportFile(), passportType, request.passportExpiryDate()));
-        application.addDocument(document(KycDocumentType.PHOTO, request.photo(), photoType, null));
         return application;
     }
 
