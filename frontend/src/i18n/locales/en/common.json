@@ -43,5 +43,12 @@
     "choose": "Choose file",
     "replace": "Replace file",
     "empty": "No file selected"
+  },
+  "close": "Close",
+  "preview": {
+    "loadFailed": "Could not load the preview.",
+    "retry": "Try again",
+    "download": "Download",
+    "unsupported": "Preview isn't available for this file type. Download it instead."
   }
 }

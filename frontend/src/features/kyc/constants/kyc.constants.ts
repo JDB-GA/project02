@@ -6,6 +6,7 @@ export const KYC_ENDPOINTS = {
 
 export const KYC_QUERY_KEYS = {
   mine: ['kyc', 'mine'],
+  document: (documentId: string) => ['kyc', 'document', documentId],
 } as const
 
 export const FULL_NAME_MAX_LENGTH = 150

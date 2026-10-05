@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { saveBlob } from '@/lib/files/save-blob'
 import { kycApi } from '../api/kyc.api'
-import { DOCUMENT_FILE_EXTENSIONS } from '../constants/kyc.constants'
 import type { KycDocument } from '../types/kyc.types'
+import { getKycDocumentFileName } from '../utils/get-kyc-document-file-name'
 
 export function useDownloadKycDocument() {
   const { t } = useTranslation('kyc')
@@ -12,7 +12,7 @@ export function useDownloadKycDocument() {
   return useMutation({
     mutationFn: async (document: KycDocument) => ({
       blob: await kycApi.downloadDocument(document.id),
-      fileName: `${t(`documents.${document.type}`)}${DOCUMENT_FILE_EXTENSIONS[document.contentType] ?? ''}`,
+      fileName: getKycDocumentFileName(t, document),
     }),
     onSuccess: ({ blob, fileName }) => {
       saveBlob(blob, fileName)

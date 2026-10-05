@@ -56,7 +56,8 @@
     "downloadFailed": "Could not download the document. Please try again.",
     "CPR": "CPR card",
     "PASSPORT": "Passport",
-    "PHOTO": "Personal photo"
+    "PHOTO": "Personal photo",
+    "preview": "Preview {{name}}"
   },
   "prompt": {
     "title": "Verify your identity",
