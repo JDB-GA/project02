@@ -1,5 +1,6 @@
 import {
   ClipboardCheckIcon,
+  HistoryIcon,
   KeyRoundIcon,
   LayoutDashboardIcon,
   ShieldCheckIcon,
@@ -90,6 +91,14 @@ export const APP_PAGES: readonly AppPage[] = [
     parentId: 'users',
     showInSidebar: false,
     lazy: async () => ({ Component: (await import('@/features/user-management/pages/UserDetailPage')).UserDetailPage }),
+  },
+  {
+    id: 'auditLog',
+    path: ROUTES.auditLog,
+    icon: HistoryIcon,
+    roles: ['SUPER_ADMIN'],
+    showInSidebar: true,
+    lazy: async () => ({ Component: (await import('@/features/audit-log/pages/AuditLogPage')).AuditLogPage }),
   },
   {
     id: 'changePassword',

@@ -1,3 +1,4 @@
+import arAuditLog from './locales/ar/auditLog.json'
 import arAuth from './locales/ar/auth.json'
 import arCommon from './locales/ar/common.json'
 import arErrors from './locales/ar/errors.json'
@@ -5,6 +6,7 @@ import arKyc from './locales/ar/kyc.json'
 import arKycReview from './locales/ar/kycReview.json'
 import arUsers from './locales/ar/users.json'
 import arValidation from './locales/ar/validation.json'
+import enAuditLog from './locales/en/auditLog.json'
 import enAuth from './locales/en/auth.json'
 import enCommon from './locales/en/common.json'
 import enErrors from './locales/en/errors.json'
@@ -21,6 +23,7 @@ const en = {
   kyc: enKyc,
   kycReview: enKycReview,
   users: enUsers,
+  auditLog: enAuditLog,
 }
 
 const ar: typeof en = {
@@ -31,10 +34,11 @@ const ar: typeof en = {
   kyc: arKyc,
   kycReview: arKycReview,
   users: arUsers,
+  auditLog: arAuditLog,
 }
 
 export const resources = { en, ar }
 
-export const NAMESPACES = ['common', 'auth', 'validation', 'errors', 'kyc', 'kycReview', 'users'] as const
+export const NAMESPACES = ['common', 'auth', 'validation', 'errors', 'kyc', 'kycReview', 'users', 'auditLog'] as const
 
 export const DEFAULT_NAMESPACE = 'common'

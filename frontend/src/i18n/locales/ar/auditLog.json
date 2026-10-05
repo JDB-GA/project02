@@ -1,0 +1,37 @@
+{
+  "filters": {
+    "action": "التصفية حسب الإجراء"
+  },
+  "actions": {
+    "ALL": "جميع الإجراءات",
+    "KYC_SUBMITTED": "تقديم طلب التحقق",
+    "KYC_APPROVED": "قبول طلب التحقق",
+    "KYC_REJECTED": "رفض طلب التحقق",
+    "PERMISSION_GRANTED": "منح صلاحية",
+    "PERMISSION_REVOKED": "سحب صلاحية",
+    "USER_CREATED": "إنشاء مستخدم",
+    "USER_CONTACT_UPDATED": "تحديث بيانات التواصل",
+    "USER_SUSPENDED": "إيقاف مستخدم",
+    "USER_REACTIVATED": "إعادة تفعيل مستخدم",
+    "USER_CLOSED": "إغلاق مستخدم",
+    "PASSWORD_CHANGED": "تغيير كلمة المرور",
+    "PASSWORD_RESET": "إعادة تعيين كلمة المرور"
+  },
+  "targets": {
+    "USER": "مستخدم",
+    "KYC_APPLICATION": "طلب تحقق"
+  },
+  "table": {
+    "time": "الوقت",
+    "actor": "بواسطة",
+    "action": "الإجراء",
+    "target": "الهدف",
+    "details": "التفاصيل",
+    "system": "النظام"
+  },
+  "empty": {
+    "title": "لا يوجد نشاط بعد",
+    "description": "لا توجد سجلات تدقيق لهذا الإجراء."
+  },
+  "loadError": "تعذّر تحميل سجل التدقيق."
+}
