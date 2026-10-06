@@ -3,6 +3,8 @@ package com.almotawaj.wallet.service;
 import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.event.MoneyReceivedEvent;
 import com.almotawaj.wallet.exception.BusinessRuleException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.TopUpSource;
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.Wallet;
@@ -47,6 +49,8 @@ class WalletServiceTest {
     private TransactionReferenceGenerator referenceGenerator;
     @Mock
     private ApplicationEventPublisher eventPublisher;
+    @Mock
+    private AuditService auditService;
 
     private WalletService walletService;
     private Wallet wallet;
@@ -56,7 +60,7 @@ class WalletServiceTest {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
         DailyLimitPolicy limiter = new DailyLimitPolicy(transactionRepository, CLOCK);
         walletService = new WalletService(provisioner, walletLocker, transactionRepository, ledger, limiter,
-                eventPublisher);
+                eventPublisher, auditService);
         wallet = new Wallet();
         wallet.setId(WALLET_ID);
         wallet.setBalance(new BigDecimal("10.000"));
@@ -87,6 +91,7 @@ class WalletServiceTest {
         assertThat(event.getValue().recipientUserId()).isEqualTo(USER_ID);
         assertThat(event.getValue().amount()).isEqualByComparingTo("150.500");
         assertThat(event.getValue().senderName()).isEqualTo(TopUpSource.NBB_SALARY.getHolderName());
+        verify(auditService).record(USER_ID, AuditAction.TOP_UP_COMPLETED, AuditTargetType.WALLET_TRANSACTION, response.id(), null);
     }
 
     @Test

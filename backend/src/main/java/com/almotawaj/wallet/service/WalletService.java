@@ -3,6 +3,8 @@ package com.almotawaj.wallet.service;
 import com.almotawaj.wallet.config.constants.WalletConstants;
 import com.almotawaj.wallet.config.constants.WalletLimits;
 import com.almotawaj.wallet.event.MoneyReceivedEvent;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.Counterparty;
 import com.almotawaj.wallet.model.TopUpSource;
 import com.almotawaj.wallet.model.TransactionType;
@@ -36,6 +38,7 @@ public class WalletService {
     private final WalletLedger ledger;
     private final DailyLimitPolicy dailyLimitPolicy;
     private final ApplicationEventPublisher eventPublisher;
+    private final AuditService auditService;
 
     @Transactional
     public WalletResponse getMine(UUID userId) {
@@ -43,7 +46,8 @@ public class WalletService {
     }
 
     @Transactional
-    public PageResponse<WalletTransactionResponse> listTransactions(UUID userId, TransactionSearchRequest filter, Pageable pageable) {
+    public PageResponse<WalletTransactionResponse> listTransactions(UUID userId, TransactionSearchRequest filter,
+            Pageable pageable) {
         Wallet wallet = provisioner.getOrCreate(userId);
         Page<WalletTransaction> page = transactionRepository.findAll(
                 WalletTransactionSpecifications.matches(wallet.getId(), filter, ZONE), pageable);
@@ -69,6 +73,8 @@ public class WalletService {
         Counterparty sender = new Counterparty(source.getHolderName(), source.getIban(), source.getBic(), null, null);
         WalletTransaction transaction = ledger.credit(wallet, TransactionType.TOP_UP, request.amount(), sender,
                 source.getBankName());
+        auditService.record(userId, AuditAction.TOP_UP_COMPLETED, AuditTargetType.WALLET_TRANSACTION,
+                transaction.getId(), null);
         eventPublisher.publishEvent(new MoneyReceivedEvent(userId, transaction.getAmount(), sender.name(),
                 transaction.getReference()));
         return WalletTransactionResponse.from(transaction);

@@ -3,6 +3,8 @@ package com.almotawaj.wallet.service;
 import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.event.MoneyReceivedEvent;
 import com.almotawaj.wallet.exception.BusinessRuleException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.Wallet;
@@ -50,6 +52,8 @@ class TransferServiceTest {
     private TransactionReferenceGenerator referenceGenerator;
     @Mock
     private ApplicationEventPublisher eventPublisher;
+    @Mock
+    private AuditService auditService;
 
     private TransferService transferService;
     private Wallet sender;
@@ -68,7 +72,7 @@ class TransferServiceTest {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
         DailyLimitPolicy limits = new DailyLimitPolicy(transactionRepository, Clock.systemUTC());
         transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, limits, ledger,
-                eventPublisher);
+                eventPublisher, auditService);
         sender = wallet("100.000");
         receiver = wallet("5.000");
         User recipient = new User();
@@ -97,6 +101,7 @@ class TransferServiceTest {
         assertThat(event.getValue().recipientUserId()).isEqualTo(receiver.getUser().getId());
         assertThat(event.getValue().amount()).isEqualByComparingTo("40.000");
         assertThat(event.getValue().senderName()).isEqualTo("Holder");
+        verify(auditService).record(SENDER_ID, AuditAction.TRANSFER_COMPLETED, AuditTargetType.WALLET_TRANSACTION, response.id(), null);
     }
 
     @Test
