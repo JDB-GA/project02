@@ -19,6 +19,7 @@ type AppPageId =
   | 'userCreate'
   | 'auditLog'
   | 'changePassword'
+  | 'profile'
   | 'paymentRequests'
 
 export interface AppPage {

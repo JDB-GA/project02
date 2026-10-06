@@ -18,7 +18,7 @@ public class WalletHolderNames {
         String name = kycApplicationRepository
                 .findFirstByUserIdAndStatusOrderByCreatedAtDesc(user.getId(), KycApplicationStatus.APPROVED)
                 .map(KycApplication::getFullName)
-                .orElse(user.getEmailAddress());
+                .orElse(user.getDisplayName() == null ? user.getEmailAddress() : user.getDisplayName());
         return name.length() <= ValidationLimits.COUNTERPARTY_NAME_MAX
                 ? name
                 : name.substring(0, ValidationLimits.COUNTERPARTY_NAME_MAX);

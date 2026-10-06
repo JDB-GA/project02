@@ -9,6 +9,7 @@
   "TRANSACTION_NOT_FOUND": "لم يتم العثور على هذه المعاملة.",
   "PAYMENT_REQUEST_NOT_FOUND": "لم يتم العثور على طلب الدفع.",
   "PAYMENT_REQUEST_NOT_PENDING": "تم دفع طلب الدفع أو رفضه أو إلغاؤه مسبقاً.",
+  "PROFILE_PICTURE_NOT_FOUND": "لم يتم رفع صورة شخصية.",
   "API_KEY_NOT_FOUND": "لم يتم العثور على مفتاح API.",
   "API_KEY_LIMIT_REACHED": "لديك 5 مفاتيح API فعّالة. ألغِ أحدها أولاً.",
   "CHECKOUT_NOT_FOUND": "لم يتم العثور على هذه الدفعة.",

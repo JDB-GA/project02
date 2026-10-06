@@ -21,6 +21,7 @@ Monorepo:
 ## Features
 
 - **Accounts** – registration, login by email or mobile, email verification with 6-digit codes, forgot/reset password, change password. Changing or resetting a password signs out every other device.
+- **Profile** – clients and merchants have a profile page with their details and a picture; merchants set a business name that customers see.
 - **Identity verification (KYC)** – clients submit personal details, address, CPR and passport (PDF) and a photo; they can preview and download their own documents.
 - **KYC review** – reviewers filter applications, preview documents and approve or reject with a reason. Clients are emailed the decision in English and Arabic.
 - **User management** – search users, create users by invitation (they set their own password), edit contact details, suspend, reactivate and soft delete (close) accounts, and inspect a user's transactions.

@@ -1,0 +1,24 @@
+{
+  "loadError": "Could not load your profile.",
+  "picture": {
+    "alt": "Profile picture",
+    "upload": "Upload picture",
+    "replace": "Change picture",
+    "remove": "Remove",
+    "hint": "JPG or PNG, up to 5 MB.",
+    "updated": "Profile picture updated",
+    "removed": "Profile picture removed"
+  },
+  "business": {
+    "title": "Business name",
+    "description": "Shown to your customers on payments and transfers instead of your email.",
+    "name": "Business name",
+    "save": "Save",
+    "saved": "Business name saved"
+  },
+  "details": {
+    "title": "Account details",
+    "verification": "Identity verification",
+    "memberSince": "Member since"
+  }
+}

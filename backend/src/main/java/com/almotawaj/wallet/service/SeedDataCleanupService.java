@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -45,6 +46,7 @@ public class SeedDataCleanupService {
             return;
         }
 
+        users.stream().map(User::getPictureKey).filter(Objects::nonNull).forEach(fileStorageService::deleteAfterCommit);
         documentRepository.findAllByApplicationUserIdIn(userIds)
                 .forEach(document -> fileStorageService.deleteAfterCommit(document.getStorageKey()));
         auditLogRepository.clearActorsByIdIn(userIds);

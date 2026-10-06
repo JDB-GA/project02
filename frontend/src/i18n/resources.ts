@@ -5,6 +5,7 @@ import arErrors from './locales/ar/errors.json'
 import arKyc from './locales/ar/kyc.json'
 import arKycReview from './locales/ar/kycReview.json'
 import arMerchant from './locales/ar/merchant.json'
+import arProfile from './locales/ar/profile.json'
 import arStatistics from './locales/ar/statistics.json'
 import arUsers from './locales/ar/users.json'
 import arValidation from './locales/ar/validation.json'
@@ -16,6 +17,7 @@ import enErrors from './locales/en/errors.json'
 import enKyc from './locales/en/kyc.json'
 import enKycReview from './locales/en/kycReview.json'
 import enMerchant from './locales/en/merchant.json'
+import enProfile from './locales/en/profile.json'
 import enStatistics from './locales/en/statistics.json'
 import enUsers from './locales/en/users.json'
 import enValidation from './locales/en/validation.json'
@@ -33,6 +35,7 @@ const en = {
   wallet: enWallet,
   statistics: enStatistics,
   merchant: enMerchant,
+  profile: enProfile,
 }
 
 const ar: typeof en = {
@@ -47,10 +50,11 @@ const ar: typeof en = {
   wallet: arWallet,
   statistics: arStatistics,
   merchant: arMerchant,
+  profile: arProfile,
 }
 
 export const resources = { en, ar }
 
-export const NAMESPACES = ['common', 'auth', 'validation', 'errors', 'kyc', 'kycReview', 'users', 'auditLog', 'wallet', 'statistics', 'merchant'] as const
+export const NAMESPACES = ['common', 'auth', 'validation', 'errors', 'kyc', 'kycReview', 'users', 'auditLog', 'wallet', 'statistics', 'merchant', 'profile'] as const
 
 export const DEFAULT_NAMESPACE = 'common'

@@ -40,7 +40,7 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 | 2026-10-03 | Deployment to Railway and Vercel on `almotawaj.com`, email via Resend API, security headers |
 | 2026-10-04 | KYC submission (backend and client UI), file storage, permission model |
 | 2026-10-05 | KYC review, permissions, user management, create user by invitation, forgot/reset/change password, document preview, seeding, Swagger docs, test profile, audit log API and screen; wallets with generated IBANs, simulated incoming transfers with daily limits, wallet-to-wallet transfers with recipient autocomplete, transaction search and filters |
-| 2026-10-06 | Seeded data clean-up, live notifications over SSE, transactions page and details panel, request money; audit trail for sign-in, wallet and payment request activity with localized details, statistics permission with user counts and system transactions, user transactions for admins, JavaDoc on the main services, documentation split into guides; payment gateway with merchant API keys, checkout sessions, hosted checkout page, refunds and expiry; PDF receipts and statements in English and Arabic |
+| 2026-10-06 | Seeded data clean-up, live notifications over SSE, transactions page and details panel, request money; audit trail for sign-in, wallet and payment request activity with localized details, statistics permission with user counts and system transactions, user transactions for admins, JavaDoc on the main services, documentation split into guides; payment gateway with merchant API keys, checkout sessions, hosted checkout page, refunds and expiry; PDF receipts and statements in English and Arabic; wallet redesign, admin dashboard with statistics, profile with picture and business name |
 
 ## Requirement coverage
 
@@ -53,8 +53,8 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 | 7–9 | Spring Security, JWT, roles that change behaviour | Done – roles plus fine-grained permissions |
 | 10 | Registration and email verification | Done |
 | 11 | Forgot/reset and change password | Done |
-| 12 | User profile with profile picture | Planned |
-| 13 | File upload with validation | Done – KYC documents; profile picture planned |
+| 12 | User profile with profile picture | Done – profile page for clients and merchants, business name for merchants |
+| 13 | File upload with validation | Done – KYC documents and profile pictures |
 | 14 | Soft delete | Done – `CLOSED` status |
 | 15–16 | Booking workflow, statuses, double-booking prevention | Done – checkout sessions (`PENDING → PAID / CANCELLED / EXPIRED`, `PAID → REFUNDED`), one session per order reference, row locks |
 | 17 | Swagger / OpenAPI | Done |
@@ -77,5 +77,4 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 
 In order of priority:
 
-1. **Profile picture** – upload, preview and replace.
-2. **Final pass** – documentation, ERD, Swagger and tests updated; presentation.
+1. **Final pass** – documentation, ERD, Swagger and tests updated; presentation.

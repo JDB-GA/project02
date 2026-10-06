@@ -90,6 +90,10 @@ public final class ErrorMessages {
     public static final String TRANSACTION_NOT_FOUND = "Transaction not found";
     public static final String PAYMENT_REQUEST_NOT_FOUND = "Payment request not found";
     public static final String PAYMENT_REQUEST_NOT_PENDING = "This payment request is no longer pending";
+    public static final String DISPLAY_NAME_REQUIRED = "Business name is required";
+    public static final String DISPLAY_NAME_LENGTH = "Business name must be {min} to {max} characters";
+    public static final String DISPLAY_NAME_INVALID = "Business name can only contain letters, digits, spaces and . , & ' -";
+    public static final String PROFILE_PICTURE_NOT_FOUND = "No profile picture has been uploaded";
     public static final String API_KEY_NAME_REQUIRED = "Name is required";
     public static final String API_KEY_NAME_TOO_LONG = "Name must be at most {max} characters";
     public static final String API_KEY_NOT_FOUND = "API key not found";

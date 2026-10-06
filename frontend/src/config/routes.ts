@@ -6,6 +6,7 @@ export const ROUTES = {
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   changePassword: '/account/password',
+  profile: '/account/profile',
   wallet: '/wallet',
   transactions: '/transactions',
   verification: '/verification',

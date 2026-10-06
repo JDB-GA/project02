@@ -45,6 +45,7 @@ public final class ErrorCodes {
     public static final String TRANSACTION_NOT_FOUND = "TRANSACTION_NOT_FOUND";
     public static final String PAYMENT_REQUEST_NOT_FOUND = "PAYMENT_REQUEST_NOT_FOUND";
     public static final String PAYMENT_REQUEST_NOT_PENDING = "PAYMENT_REQUEST_NOT_PENDING";
+    public static final String PROFILE_PICTURE_NOT_FOUND = "PROFILE_PICTURE_NOT_FOUND";
     public static final String API_KEY_NOT_FOUND = "API_KEY_NOT_FOUND";
     public static final String API_KEY_LIMIT_REACHED = "API_KEY_LIMIT_REACHED";
     public static final String CHECKOUT_NOT_FOUND = "CHECKOUT_NOT_FOUND";

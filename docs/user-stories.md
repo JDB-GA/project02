@@ -123,8 +123,10 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 
 ## Epic: Profile
 
-**US-19 – Profile picture (planned).** As a user, I want to upload and change my profile picture, so that my account feels personal.
-- [ ] JPEG/PNG only, size-limited, checked by content.
+**US-19 – Profile.** As a client or merchant, I want a profile page with my details and a picture, so that my account feels personal.
+- [ ] I see my name, email, mobile number, verification status and join date.
+- [ ] I can upload, change and remove a picture: JPEG/PNG only, up to 5 MB, checked by content.
+- [ ] As a merchant I can set a business name that customers see instead of my email.
 
 ## Epic: Payments
 

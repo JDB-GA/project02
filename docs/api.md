@@ -31,6 +31,11 @@ Lists accept `page`, `size` (max 100) and `sort` (e.g. `sort=createdAt,desc`) an
 | POST   | `/auth/users/password/forgot`                           | Request a password reset code    | Public        |
 | POST   | `/auth/users/password/reset`                            | Reset the password               | Public        |
 | POST   | `/auth/users/password/change`                           | Change the password              | Signed in     |
+| GET    | `/api/profile`                                          | Get my profile                   | Client, merchant |
+| PATCH  | `/api/profile`                                          | Set my business name             | Merchant      |
+| GET    | `/api/profile/picture`                                  | Get my profile picture           | Client, merchant |
+| PUT    | `/api/profile/picture`                                  | Upload or replace my picture     | Client, merchant |
+| DELETE | `/api/profile/picture`                                  | Remove my picture                | Client, merchant |
 | POST   | `/api/kyc`                                              | Submit an application            | Client        |
 | GET    | `/api/kyc/me`                                           | Get my latest application        | Client        |
 | GET    | `/api/kyc/me/documents/{documentId}`                    | Download one of my documents     | Client        |
@@ -94,7 +99,7 @@ Sensitive endpoints allow 10 requests per minute for each client address and end
 | Limited | Endpoints |
 | --- | --- |
 | Every request | register, login, verify email and resend, forgot/reset/change password, top-ups, transfers, recipient lookup and suggestions, PDF receipts and statements, seeding and demo data clean-up |
-| Writes only | payment requests (create, pay, decline, cancel), API keys, merchant payments, gateway calls and checkout payments |
+| Writes only | payment requests (create, pay, decline, cancel), API keys, merchant payments, gateway calls, checkout payments and profile changes |
 
 ## Payment gateway
 

@@ -22,6 +22,7 @@ public final class ValidationLimits {
     public static final int RECIPIENT_QUERY_MAX = 254;
     public static final int TRANSACTION_SEARCH_MAX = 100;
     public static final int TRANSACTION_REFERENCE_MAX = 24;
+    public static final int DISPLAY_NAME_MIN = 2;
     public static final int API_KEY_NAME_MAX = 50;
     public static final int API_KEY_PREFIX_LENGTH = 12;
     public static final int API_KEY_HASH_LENGTH = 64;

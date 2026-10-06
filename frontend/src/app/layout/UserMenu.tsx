@@ -40,6 +40,14 @@ export function UserMenu() {
           <DropdownMenuContent side="top" align="start" className="w-(--radix-dropdown-menu-trigger-width) min-w-56">
             <DropdownMenuLabel dir="ltr" className="truncate font-normal text-muted-foreground">{user.email}</DropdownMenuLabel>
             <DropdownMenuSeparator />
+            {(user.role === 'CLIENT' || user.role === 'MERCHANT') && (
+              <DropdownMenuItem asChild>
+                <Link to={ROUTES.profile}>
+                  <UserIcon />
+                  {t('home.profile')}
+                </Link>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuItem asChild>
               <Link to={ROUTES.changePassword}>
                 <KeyRoundIcon />

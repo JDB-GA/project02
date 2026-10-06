@@ -64,6 +64,15 @@ public class User {
 
     private Instant credentialsChangedAt;
 
+    @Column(length = ValidationLimits.COUNTERPARTY_NAME_MAX)
+    private String displayName;
+
+    @Column(length = ValidationLimits.STORAGE_KEY_MAX)
+    private String pictureKey;
+
+    @Column(length = ValidationLimits.CONTENT_TYPE_MAX)
+    private String pictureContentType;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
