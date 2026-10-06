@@ -42,8 +42,7 @@
       "heading": "Payment Requests"
     },
     "merchant": {
-      "title": "Merchant",
-      "heading": "Welcome to your merchant dashboard"
+      "title": "Merchant"
     },
     "admin": {
       "title": "Admin",

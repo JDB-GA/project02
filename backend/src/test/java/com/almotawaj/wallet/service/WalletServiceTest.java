@@ -51,6 +51,8 @@ class WalletServiceTest {
     private ApplicationEventPublisher eventPublisher;
     @Mock
     private AuditService auditService;
+    @Mock
+    private WalletHolderNames holderNames;
 
     private WalletService walletService;
     private Wallet wallet;
@@ -60,7 +62,7 @@ class WalletServiceTest {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
         DailyLimitPolicy limiter = new DailyLimitPolicy(transactionRepository, CLOCK);
         walletService = new WalletService(provisioner, walletLocker, transactionRepository, ledger, limiter,
-                eventPublisher, auditService);
+                eventPublisher, auditService, holderNames);
         wallet = new Wallet();
         wallet.setId(WALLET_ID);
         wallet.setBalance(new BigDecimal("10.000"));

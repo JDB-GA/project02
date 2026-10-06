@@ -3,6 +3,7 @@ import { pageSchema } from '@/lib/api/page.schema'
 import { TRANSACTION_DIRECTIONS, TRANSACTION_TYPES } from '../constants/wallet.constants'
 
 export const walletSchema = z.object({
+  holderName: z.string(),
   iban: z.string(),
   balance: z.number(),
   currency: z.string(),

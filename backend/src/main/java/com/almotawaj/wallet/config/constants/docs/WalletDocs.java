@@ -7,7 +7,7 @@ public final class WalletDocs {
     public static final String TAG_DESCRIPTION = "Wallet balance, IBAN, transaction history and simulated incoming bank transfers (clients with approved KYC and merchants)";
 
     public static final String MINE = "Get my wallet";
-    public static final String MINE_DESCRIPTION = "Returns the IBAN and balance in BHD. The wallet is opened on first access. Clients need approved KYC.";
+    public static final String MINE_DESCRIPTION = "Returns the holder name, IBAN and balance in BHD. The wallet is opened on first access. Clients need approved KYC.";
     public static final String MINE_OK = "Wallet details";
     public static final String KYC_REQUIRED = "Client identity is not verified yet (WALLET_KYC_REQUIRED)";
 

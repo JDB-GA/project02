@@ -1,4 +1,5 @@
 {
+  "welcome": "Welcome,",
   "loadError": "Could not load your wallet.",
   "balance": {
     "label": "Available balance",
