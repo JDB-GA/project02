@@ -5,6 +5,8 @@ import com.almotawaj.wallet.config.security.JwtUtils;
 import com.almotawaj.wallet.config.security.MyUserDetails;
 import com.almotawaj.wallet.exception.InformationExistException;
 import com.almotawaj.wallet.config.constants.ErrorCodes;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.LoginResult;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.request.LoginRequest;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Locale;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +33,7 @@ public class UserService {
     private final JwtUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
     private final EmailVerificationService emailVerificationService;
+    private final AuditService auditService;
 
     /**
      * Registers a new user after verifying that the email and mobile number are not already taken.
@@ -58,6 +62,7 @@ public class UserService {
 
         User saved = userRepository.save(user);
         emailVerificationService.sendCode(saved, locale);
+        auditService.record(saved.getId(), AuditAction.USER_REGISTERED, AuditTargetType.USER, saved.getId(), null);
 
         return new LoginResult(jwtUtils.generateToken(new MyUserDetails(saved)), UserResponse.from(saved));
     }
@@ -79,8 +84,19 @@ public class UserService {
             throw new IllegalStateException(ErrorMessages.UNEXPECTED_PRINCIPAL);
         }
 
-        emailVerificationService.sendCodeIfNoneActive(userDetails.user(), locale);
+        User user = userDetails.user();
+        emailVerificationService.sendCodeIfNoneActive(user, locale);
+        auditService.record(user.getId(), AuditAction.USER_LOGGED_IN, AuditTargetType.USER, user.getId(), null);
 
-        return new LoginResult(jwtUtils.generateToken(userDetails), UserResponse.from(userDetails.user()));
+        return new LoginResult(jwtUtils.generateToken(userDetails), UserResponse.from(user));
+    }
+
+    /**
+     * Records that a signed-in user ended their session. The cookie itself is cleared by the controller.
+     *
+     * @param userId the id of the user who is signing out
+     */
+    public void logout(UUID userId) {
+        auditService.record(userId, AuditAction.USER_LOGGED_OUT, AuditTargetType.USER, userId, null);
     }
 }

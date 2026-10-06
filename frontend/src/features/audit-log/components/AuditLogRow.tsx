@@ -3,7 +3,9 @@ import { Badge } from '@/components/ui/badge'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { formatDateTime } from '@/features/kyc/utils/format-kyc-date'
 import { useLanguage } from '@/hooks/useLanguage'
+import { EMPTY_VALUE } from '../constants/audit-log.constants'
 import type { AuditLog } from '../types/audit-log.types'
+import { AuditLogDetails } from './AuditLogDetails'
 import { AuditLogTarget } from './AuditLogTarget'
 
 interface AuditLogRowProps {
@@ -27,7 +29,7 @@ export function AuditLogRow({ log }: AuditLogRowProps) {
         <AuditLogTarget log={log} />
       </TableCell>
       <TableCell className="hidden max-w-xs truncate text-muted-foreground lg:table-cell" title={log.details ?? undefined}>
-        {log.details === null ? '—' : <bdi dir="auto">{log.details}</bdi>}
+        {log.details === null ? EMPTY_VALUE : <AuditLogDetails details={log.details} />}
       </TableCell>
     </TableRow>
   )

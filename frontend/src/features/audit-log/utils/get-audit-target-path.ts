@@ -6,5 +6,8 @@ export const getAuditTargetPath = ({ targetType, targetId }: AuditLog): string |
   if (targetId === null) {
     return null
   }
-  return targetType === 'USER' ? getUserPath(targetId) : getKycReviewPath(targetId)
+  if (targetType === 'USER') {
+    return getUserPath(targetId)
+  }
+  return targetType === 'KYC_APPLICATION' ? getKycReviewPath(targetId) : null
 }

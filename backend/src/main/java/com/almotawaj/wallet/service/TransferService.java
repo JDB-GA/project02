@@ -6,6 +6,8 @@ import com.almotawaj.wallet.config.constants.WalletConstants;
 import com.almotawaj.wallet.config.constants.WalletLimits;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.event.MoneyReceivedEvent;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.Counterparty;
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.User;
@@ -33,11 +35,13 @@ public class TransferService {
     private final DailyLimitPolicy dailyLimitPolicy;
     private final WalletLedger ledger;
     private final ApplicationEventPublisher eventPublisher;
+    private final AuditService auditService;
 
     @Transactional(readOnly = true)
     public RecipientResponse findRecipient(UUID senderId, String query) {
         User recipient = recipientResolver.resolve(senderId, query);
-        return new RecipientResponse(holderNames.maskedName(recipient), holderNames.maskedEmail(recipient), recipient.getRole());
+        return new RecipientResponse(holderNames.maskedName(recipient), holderNames.maskedEmail(recipient),
+                recipient.getRole());
     }
 
     @Transactional
@@ -66,8 +70,11 @@ public class TransferService {
         WalletTransaction received = ledger.credit(receiver, TransactionType.TRANSFER_IN, amount, senderDetails, note);
         eventPublisher.publishEvent(new MoneyReceivedEvent(recipient.getId(), received.getAmount(), senderDetails.name(),
                 received.getReference()));
-        return WalletTransactionResponse.from(
-                ledger.debit(sender, TransactionType.TRANSFER_OUT, amount, counterparty(receiver), note));
+        WalletTransaction transaction = ledger.debit(sender, TransactionType.TRANSFER_OUT, amount,
+                counterparty(receiver), note);
+        auditService.record(senderId, AuditAction.TRANSFER_COMPLETED, AuditTargetType.WALLET_TRANSACTION,
+                transaction.getId(), null);
+        return WalletTransactionResponse.from(transaction);
     }
 
     private Counterparty counterparty(Wallet wallet) {

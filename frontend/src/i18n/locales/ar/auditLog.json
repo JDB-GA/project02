@@ -4,6 +4,10 @@
   },
   "actions": {
     "ALL": "جميع الإجراءات",
+    "USER_REGISTERED": "تسجيل مستخدم جديد",
+    "USER_LOGGED_IN": "تسجيل الدخول",
+    "USER_LOGGED_OUT": "تسجيل الخروج",
+    "EMAIL_VERIFIED": "تأكيد البريد الإلكتروني",
     "KYC_SUBMITTED": "تقديم طلب التحقق",
     "KYC_APPROVED": "قبول طلب التحقق",
     "KYC_REJECTED": "رفض طلب التحقق",
@@ -15,11 +19,19 @@
     "USER_REACTIVATED": "إعادة تفعيل مستخدم",
     "USER_CLOSED": "إغلاق مستخدم",
     "PASSWORD_CHANGED": "تغيير كلمة المرور",
-    "PASSWORD_RESET": "إعادة تعيين كلمة المرور"
+    "PASSWORD_RESET": "إعادة تعيين كلمة المرور",
+    "PAYMENT_REQUEST_CREATED": "إنشاء طلب دفع",
+    "PAYMENT_REQUEST_PAID": "دفع طلب الدفع",
+    "PAYMENT_REQUEST_DECLINED": "رفض طلب الدفع",
+    "PAYMENT_REQUEST_CANCELLED": "إلغاء طلب الدفع",
+    "TOP_UP_COMPLETED": "إكمال تحويل بنكي",
+    "TRANSFER_COMPLETED": "إكمال تحويل"
   },
   "targets": {
     "USER": "مستخدم",
-    "KYC_APPLICATION": "طلب تحقق"
+    "KYC_APPLICATION": "طلب تحقق",
+    "PAYMENT_REQUEST": "طلب دفع",
+    "WALLET_TRANSACTION": "معاملة محفظة"
   },
   "table": {
     "time": "الوقت",
@@ -28,6 +40,9 @@
     "target": "الهدف",
     "details": "التفاصيل",
     "system": "النظام"
+  },
+  "details": {
+    "statusChange": "{{from}} ← {{to}}"
   },
   "empty": {
     "title": "لا يوجد نشاط بعد",

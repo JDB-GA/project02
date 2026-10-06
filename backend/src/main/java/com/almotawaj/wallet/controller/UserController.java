@@ -58,7 +58,10 @@ public class UserController {
     @SecurityRequirements
     @ApiResponse(responseCode = ApiDocs.NO_CONTENT, description = AuthDocs.LOGOUT_NO_CONTENT)
     @PostMapping(ApiPaths.LOGOUT)
-    public ResponseEntity<Void> logout() {
+    public ResponseEntity<Void> logout(@AuthenticationPrincipal MyUserDetails userDetails) {
+        if (userDetails != null) {
+            userService.logout(userDetails.user().getId());
+        }
         return ResponseEntity.noContent()
                 .header(HttpHeaders.SET_COOKIE, authCookieFactory.clear().toString())
                 .build();
