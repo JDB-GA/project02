@@ -25,6 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+/**
+ * Wallet-to-wallet transfers: recipient preview, limits and the money movement itself.
+ */
 @Service
 @RequiredArgsConstructor
 public class TransferService {
@@ -37,6 +40,13 @@ public class TransferService {
     private final ApplicationEventPublisher eventPublisher;
     private final AuditService auditService;
 
+    /**
+     * Finds the wallet holder a sender is about to pay and returns a masked preview.
+     *
+     * @param senderId the user who is sending
+     * @param query    the recipient's email, mobile number or IBAN
+     * @return the recipient's masked name, masked email and role
+     */
     @Transactional(readOnly = true)
     public RecipientResponse findRecipient(UUID senderId, String query) {
         User recipient = recipientResolver.resolve(senderId, query);
@@ -44,6 +54,12 @@ public class TransferService {
                 recipient.getRole());
     }
 
+    /**
+     * Returns what the sender can transfer right now.
+     *
+     * @param senderId the user who is sending
+     * @return the balance, the per-transfer range, the daily limit and what is left of it today
+     */
     @Transactional
     public TransferOptionsResponse getOptions(UUID senderId) {
         Wallet wallet = provisioner.getOrCreate(senderId);
@@ -52,6 +68,15 @@ public class TransferService {
                 dailyLimitPolicy.remainingTransfer(wallet.getId()));
     }
 
+    /**
+     * Moves money from the sender's wallet to the recipient's wallet in one transaction. Both wallet rows
+     * are locked in a fixed order, so concurrent transfers can neither overspend nor deadlock.
+     *
+     * @param senderId the user who is sending
+     * @param request  the recipient, the amount and an optional note
+     * @return the sender's ledger entry
+     * @throws BusinessRuleException if the balance is too low or the daily transfer limit would be exceeded
+     */
     @Transactional
     public WalletTransactionResponse transfer(UUID senderId, TransferRequest request) {
         User recipient = recipientResolver.resolve(senderId, request.recipient());

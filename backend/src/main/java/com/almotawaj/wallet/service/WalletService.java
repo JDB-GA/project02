@@ -27,6 +27,10 @@ import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.UUID;
 
+/**
+ * Wallet operations for the signed-in holder: balance, ledger history and simulated incoming bank transfers.
+ * A wallet is created on first access for users who are allowed to hold one.
+ */
 @Service
 @RequiredArgsConstructor
 public class WalletService {
@@ -40,11 +44,25 @@ public class WalletService {
     private final ApplicationEventPublisher eventPublisher;
     private final AuditService auditService;
 
+    /**
+     * Returns the wallet of the given user, creating it on first access.
+     *
+     * @param userId the wallet holder
+     * @return the wallet with its IBAN, balance and currency
+     */
     @Transactional
     public WalletResponse getMine(UUID userId) {
         return WalletResponse.from(provisioner.getOrCreate(userId));
     }
 
+    /**
+     * Lists the holder's ledger entries that match the filters.
+     *
+     * @param userId   the wallet holder
+     * @param filter   optional search text, type, direction, date range (Bahrain time) and amount range
+     * @param pageable page, size and sort order
+     * @return one page of ledger entries
+     */
     @Transactional
     public PageResponse<WalletTransactionResponse> listTransactions(UUID userId, TransactionSearchRequest filter, Pageable pageable) {
         Wallet wallet = provisioner.getOrCreate(userId);
@@ -53,6 +71,12 @@ public class WalletService {
         return PageResponse.from(page, WalletTransactionResponse::from);
     }
 
+    /**
+     * Returns the demo bank accounts a top-up can come from and the limits that apply to it.
+     *
+     * @param userId the wallet holder
+     * @return the sources, the per-transfer range, the daily limit and what is left of it today
+     */
     @Transactional
     public TopUpOptionsResponse getTopUpOptions(UUID userId) {
         Wallet wallet = provisioner.getOrCreate(userId);
@@ -64,6 +88,15 @@ public class WalletService {
                 dailyLimitPolicy.remainingTopUp(wallet.getId()));
     }
 
+    /**
+     * Credits the wallet with a simulated incoming bank transfer. The wallet row is locked first so
+     * concurrent top-ups cannot exceed the daily limit.
+     *
+     * @param userId  the wallet holder
+     * @param request the source account and the amount
+     * @return the ledger entry that was created
+     * @throws com.almotawaj.wallet.exception.BusinessRuleException if the daily top-up limit would be exceeded
+     */
     @Transactional
     public WalletTransactionResponse topUp(UUID userId, TopUpRequest request) {
         Wallet wallet = walletLocker.lock(provisioner.getOrCreate(userId).getId());
@@ -77,10 +110,5 @@ public class WalletService {
         eventPublisher.publishEvent(new MoneyReceivedEvent(userId, transaction.getAmount(), sender.name(),
                 transaction.getReference()));
         return WalletTransactionResponse.from(transaction);
-    }
-
-    @Transactional
-    public void cleanAllTransactions() {
-        transactionRepository.deleteAllTransactions();
     }
 }
