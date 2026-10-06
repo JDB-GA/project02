@@ -5,6 +5,8 @@ import com.almotawaj.wallet.config.constants.ErrorMessages;
 import com.almotawaj.wallet.exception.InformationExistException;
 import com.almotawaj.wallet.exception.InformationNotFoundException;
 import com.almotawaj.wallet.exception.OtpVerificationException;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.OtpPurpose;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.response.UserResponse;
@@ -24,6 +26,7 @@ public class EmailVerificationService {
     private final OtpService otpService;
     private final EmailService emailService;
     private final UserRepository userRepository;
+    private final AuditService auditService;
 
     @Transactional
     public void sendCode(User user, Locale locale) {
@@ -50,6 +53,7 @@ public class EmailVerificationService {
         User user = findUnverifiedUser(userId);
         otpService.verify(userId, PURPOSE, code);
         user.setEmailVerified(true);
+        auditService.record(userId, AuditAction.EMAIL_VERIFIED, AuditTargetType.USER, userId, null);
         return UserResponse.from(user);
     }
 

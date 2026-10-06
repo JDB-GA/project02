@@ -40,6 +40,8 @@ class UserServiceRegisterTest {
     private AuthenticationManager authenticationManager;
     @Mock
     private EmailVerificationService emailVerificationService;
+    @Mock
+    private AuditService auditService;
 
     @InjectMocks
     private UserService userService;
@@ -75,7 +77,7 @@ class UserServiceRegisterTest {
                 .isInstanceOf(InformationExistException.class);
 
         verify(userRepository, never()).save(any());
-        verifyNoInteractions(emailVerificationService);
+        verifyNoInteractions(emailVerificationService, auditService);
     }
 
     @Test
@@ -86,6 +88,6 @@ class UserServiceRegisterTest {
                 .isInstanceOf(InformationExistException.class);
 
         verify(userRepository, never()).save(any());
-        verifyNoInteractions(emailVerificationService);
+        verifyNoInteractions(emailVerificationService, auditService);
     }
 }

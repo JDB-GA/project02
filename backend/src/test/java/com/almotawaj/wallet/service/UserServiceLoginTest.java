@@ -2,6 +2,8 @@ package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.security.JwtUtils;
 import com.almotawaj.wallet.config.security.MyUserDetails;
+import com.almotawaj.wallet.model.AuditAction;
+import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.request.LoginRequest;
 import com.almotawaj.wallet.repository.UserRepository;
@@ -18,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Locale;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -38,6 +41,8 @@ class UserServiceLoginTest {
     private AuthenticationManager authenticationManager;
     @Mock
     private EmailVerificationService emailVerificationService;
+    @Mock
+    private AuditService auditService;
 
     @InjectMocks
     private UserService userService;
@@ -45,6 +50,7 @@ class UserServiceLoginTest {
     @Test
     void login_withEmail_normalizesReturnsTokenAndSendsCodeIfNeeded() {
         User user = new User();
+        user.setId(UUID.randomUUID());
         MyUserDetails userDetails = new MyUserDetails(user);
         Authentication authenticated =
                 UsernamePasswordAuthenticationToken.authenticated(userDetails, null, userDetails.getAuthorities());
@@ -57,6 +63,7 @@ class UserServiceLoginTest {
         verify(authenticationManager).authenticate(captor.capture());
         assertThat(captor.getValue().getName()).isEqualTo("test@mail.com");
         verify(emailVerificationService).sendCodeIfNoneActive(user, LOCALE);
+        verify(auditService).record(user.getId(), AuditAction.USER_LOGGED_IN, AuditTargetType.USER, user.getId(), null);
     }
 
     @Test
@@ -69,6 +76,6 @@ class UserServiceLoginTest {
         ArgumentCaptor<Authentication> captor = ArgumentCaptor.forClass(Authentication.class);
         verify(authenticationManager).authenticate(captor.capture());
         assertThat(captor.getValue().getName()).isEqualTo("+97333123456");
-        verifyNoInteractions(jwtUtils, emailVerificationService);
+        verifyNoInteractions(jwtUtils, emailVerificationService, auditService);
     }
 }
