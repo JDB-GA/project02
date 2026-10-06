@@ -16,7 +16,7 @@ public final class SeedConstants {
     public static final List<SeedAccount> ACCOUNTS = List.of(
             new SeedAccount("admin@almotawaj.com", "30000001", UserRole.SUPER_ADMIN, Set.of(), null, null, null),
             new SeedAccount("reviewer@almotawaj.com", "30000004", UserRole.ADMIN,
-                    Set.of(Permission.KYC_REVIEW, Permission.USER_MANAGE), null, null, null),
+                    Set.of(Permission.KYC_REVIEW, Permission.USER_MANAGE, Permission.STATISTICS_VIEW), null, null, null),
             new SeedAccount("merchant@almotawaj.com", "30000003", UserRole.MERCHANT, Set.of(), null, null, null),
             new SeedAccount("client@almotawaj.com", "30000002", UserRole.CLIENT, Set.of(),
                     KycApplicationStatus.PENDING, "Ali Hasan", "900000001"),
