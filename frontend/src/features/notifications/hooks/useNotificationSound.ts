@@ -1,16 +1,14 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef } from 'react'
+import { NOTIFICATION_SOUND_URL } from '../constants/notification.constants'
 
 export function useNotificationSound() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const play = useCallback(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio("/notification.mp3");
-    }
+    audioRef.current ??= new Audio(NOTIFICATION_SOUND_URL)
+    audioRef.current.currentTime = 0
+    void audioRef.current.play().catch(() => undefined)
+  }, [])
 
-    audioRef.current.currentTime = 0;
-    audioRef.current.play().catch(() => {});
-  }, []);
-
-  return { play };
+  return { play }
 }
