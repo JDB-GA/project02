@@ -27,13 +27,14 @@
     "type": "النوع",
     "reference": "المرجع",
     "amount": "المبلغ",
-    "actions": "الإجراءات",
-    "view": "عرض التفاصيل",
     "emptyTitle": "لا توجد معاملات بعد",
     "emptyDescription": "ستظهر التحويلات والمدفوعات هنا.",
     "loadError": "تعذّر تحميل معاملاتك.",
     "noMatchesTitle": "لا توجد معاملات مطابقة",
-    "noMatchesDescription": "جرّب عوامل تصفية مختلفة أو امسحها."
+    "noMatchesDescription": "جرّب عوامل تصفية مختلفة أو امسحها.",
+    "viewOf": "عرض تفاصيل {{name}}",
+    "recent": "أحدث المعاملات",
+    "viewAll": "عرض الكل"
   },
   "details": {
     "title": "تفاصيل المعاملة",
@@ -120,8 +121,7 @@
     },
     "emptyTitle": "لا توجد طلبات",
     "emptyDescription": "ليس لديك أي طلبات دفع واردة أو صادرة.",
-    "newRequestReceived": "طلب شخص ما أموالاً منك.",
-    "statusLabel": "الحالة"
+    "newRequestReceived": "طلب شخص ما أموالاً منك."
   },
   "documents": {
     "receipt": "تنزيل الإيصال (PDF)",

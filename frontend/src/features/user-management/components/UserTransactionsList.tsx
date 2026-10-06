@@ -3,7 +3,7 @@ import { LoadErrorAlert } from '@/components/LoadErrorAlert'
 import { PaginationControls } from '@/components/PaginationControls'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TransactionsEmpty } from '@/features/wallet/components/TransactionsEmpty'
-import { TransactionsTable } from '@/features/wallet/components/TransactionsTable'
+import { TransactionItems } from '@/features/wallet/components/TransactionItems'
 import type { TransactionsQuery } from '@/features/wallet/types/wallet.types'
 import { useUserTransactions } from '../hooks/useUserTransactions'
 import type { AdminUser } from '../types/user-management.types'
@@ -39,10 +39,8 @@ export function UserTransactionsList({ user, query, hasFilters, onPageChange }: 
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-4" aria-busy={isPlaceholderData}>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-        <TransactionsTable transactions={data.content} ownerEmail={user.email} />
-      </div>
+    <div className="flex flex-col gap-4" aria-busy={isPlaceholderData}>
+      <TransactionItems transactions={data.content} ownerEmail={user.email} />
       <PaginationControls page={data.page} totalPages={data.totalPages} disabled={isPlaceholderData} onPageChange={onPageChange} />
     </div>
   )
