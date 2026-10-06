@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { env } from '@/config/env'
 import { useCurrentUser } from '@/features/auth/hooks/useCurrentUser'
+import { MERCHANT_QUERY_KEYS } from '@/features/merchant/constants/merchant.constants'
 import { PAYMENT_REQUEST_QUERY_KEYS } from '@/features/wallet/constants/payment-request.constants'
 import { WALLET_QUERY_KEYS } from '@/features/wallet/constants/wallet.constants'
 import { formatMoney } from '@/features/wallet/utils/format-money'
@@ -32,9 +33,10 @@ export function useLiveNotifications() {
       })
 
     const refreshWallet = () =>
-      queryClient.invalidateQueries({
-        queryKey: WALLET_QUERY_KEYS.all,
-      })
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: WALLET_QUERY_KEYS.all }),
+        queryClient.invalidateQueries({ queryKey: MERCHANT_QUERY_KEYS.sessions }),
+      ])
 
     const refreshAll = () => {
       void Promise.all([refreshRequests(), refreshWallet()])

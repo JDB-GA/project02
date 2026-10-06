@@ -25,13 +25,22 @@
     "PAYMENT_REQUEST_DECLINED": "Payment request declined",
     "PAYMENT_REQUEST_CANCELLED": "Payment request cancelled",
     "TOP_UP_COMPLETED": "Top-up completed",
-    "TRANSFER_COMPLETED": "Transfer completed"
+    "TRANSFER_COMPLETED": "Transfer completed",
+    "API_KEY_CREATED": "API key created",
+    "API_KEY_REVOKED": "API key revoked",
+    "CHECKOUT_CREATED": "Payment created",
+    "CHECKOUT_PAID": "Payment paid",
+    "CHECKOUT_CANCELLED": "Payment cancelled",
+    "CHECKOUT_EXPIRED": "Payment expired",
+    "CHECKOUT_REFUNDED": "Payment refunded"
   },
   "targets": {
     "USER": "User",
     "KYC_APPLICATION": "KYC application",
     "PAYMENT_REQUEST": "Payment request",
-    "WALLET_TRANSACTION": "Wallet transaction"
+    "WALLET_TRANSACTION": "Wallet transaction",
+    "API_KEY": "API key",
+    "CHECKOUT_SESSION": "Merchant payment"
   },
   "table": {
     "time": "Time",

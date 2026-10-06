@@ -25,13 +25,22 @@
     "PAYMENT_REQUEST_DECLINED": "رفض طلب الدفع",
     "PAYMENT_REQUEST_CANCELLED": "إلغاء طلب الدفع",
     "TOP_UP_COMPLETED": "إكمال تحويل بنكي",
-    "TRANSFER_COMPLETED": "إكمال تحويل"
+    "TRANSFER_COMPLETED": "إكمال تحويل",
+    "API_KEY_CREATED": "إنشاء مفتاح API",
+    "API_KEY_REVOKED": "إلغاء مفتاح API",
+    "CHECKOUT_CREATED": "إنشاء دفعة",
+    "CHECKOUT_PAID": "دفع دفعة",
+    "CHECKOUT_CANCELLED": "إلغاء دفعة",
+    "CHECKOUT_EXPIRED": "انتهاء صلاحية دفعة",
+    "CHECKOUT_REFUNDED": "استرداد دفعة"
   },
   "targets": {
     "USER": "مستخدم",
     "KYC_APPLICATION": "طلب تحقق",
     "PAYMENT_REQUEST": "طلب دفع",
-    "WALLET_TRANSACTION": "معاملة محفظة"
+    "WALLET_TRANSACTION": "معاملة محفظة",
+    "API_KEY": "مفتاح API",
+    "CHECKOUT_SESSION": "دفعة تاجر"
   },
   "table": {
     "time": "الوقت",
