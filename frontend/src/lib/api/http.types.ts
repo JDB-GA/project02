@@ -3,7 +3,7 @@ import type { problemDetailSchema } from './problem-detail.schema'
 
 export type ProblemDetail = z.infer<typeof problemDetailSchema>
 
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 export interface RequestOptions {
   method?: HttpMethod

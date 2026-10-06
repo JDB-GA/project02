@@ -4,13 +4,11 @@ import { AUDIT_ACTIONS, AUDIT_TARGET_TYPES } from '../constants/audit-log.consta
 
 export const auditActionSchema = z.enum(AUDIT_ACTIONS)
 
-export const auditTargetTypeSchema = z.enum(AUDIT_TARGET_TYPES)
-
 export const auditLogSchema = z.object({
   id: z.uuid(),
   actorEmail: z.email().nullable(),
   action: auditActionSchema,
-  targetType: auditTargetTypeSchema,
+  targetType: z.enum(AUDIT_TARGET_TYPES),
   targetId: z.uuid().nullable(),
   details: z.string().nullable(),
   createdAt: z.iso.datetime({ offset: true }),
