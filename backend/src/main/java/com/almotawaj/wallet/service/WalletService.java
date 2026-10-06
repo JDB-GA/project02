@@ -46,11 +46,10 @@ public class WalletService {
     }
 
     @Transactional
-    public PageResponse<WalletTransactionResponse> listTransactions(UUID userId, TransactionSearchRequest filter,
-            Pageable pageable) {
+    public PageResponse<WalletTransactionResponse> listTransactions(UUID userId, TransactionSearchRequest filter, Pageable pageable) {
         Wallet wallet = provisioner.getOrCreate(userId);
         Page<WalletTransaction> page = transactionRepository.findAll(
-                WalletTransactionSpecifications.matches(wallet.getId(), filter, ZONE), pageable);
+                WalletTransactionSpecifications.forWallet(wallet.getId(), filter, ZONE), pageable);
         return PageResponse.from(page, WalletTransactionResponse::from);
     }
 
