@@ -11,7 +11,6 @@ type AppPageId =
   | 'merchantApiKeys'
   | 'checkout'
   | 'admin'
-  | 'statistics'
   | 'kycReviews'
   | 'kycReview'
   | 'users'

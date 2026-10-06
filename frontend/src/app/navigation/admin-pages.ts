@@ -1,4 +1,4 @@
-import { BarChartIcon, ClipboardCheckIcon, HistoryIcon, LayoutDashboardIcon, ReceiptTextIcon, UsersIcon } from 'lucide-react'
+import { ClipboardCheckIcon, HistoryIcon, LayoutDashboardIcon, ReceiptTextIcon, UsersIcon } from 'lucide-react'
 import { ROUTES } from '@/config/routes'
 import type { AppPage } from './app-page.types'
 
@@ -10,15 +10,6 @@ export const ADMIN_PAGES: readonly AppPage[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
     showInSidebar: true,
     lazy: async () => ({ Component: (await import('@/features/admin/pages/AdminPage')).AdminPage }),
-  },
-  {
-    id: 'statistics',
-    path: ROUTES.statistics,
-    icon: BarChartIcon,
-    roles: ['ADMIN', 'SUPER_ADMIN'],
-    permission: 'STATISTICS_VIEW',
-    showInSidebar: true,
-    lazy: async () => ({ Component: (await import('@/features/admin/pages/StatisticsPage')).StatisticsPage }),
   },
   {
     id: 'kycReviews',
