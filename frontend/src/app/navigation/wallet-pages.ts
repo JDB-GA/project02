@@ -1,4 +1,5 @@
 import {
+  CircleUserIcon,
   CreditCardIcon,
   HandCoinsIcon,
   KeyRoundIcon,
@@ -83,5 +84,13 @@ export const WALLET_PAGES: readonly AppPage[] = [
     roles: ['CLIENT', 'MERCHANT', 'ADMIN', 'SUPER_ADMIN'],
     showInSidebar: false,
     lazy: async () => ({ Component: (await import('@/features/auth/pages/ChangePasswordPage')).ChangePasswordPage }),
+  },
+  {
+    id: 'profile',
+    path: ROUTES.profile,
+    icon: CircleUserIcon,
+    roles: ['CLIENT', 'MERCHANT'],
+    showInSidebar: true,
+    lazy: async () => ({ Component: (await import('@/features/profile/pages/ProfilePage')).ProfilePage }),
   },
 ]
