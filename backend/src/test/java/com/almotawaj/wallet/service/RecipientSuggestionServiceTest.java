@@ -4,12 +4,12 @@ import com.almotawaj.wallet.model.KycStatus;
 import com.almotawaj.wallet.model.User;
 import com.almotawaj.wallet.model.UserRole;
 import com.almotawaj.wallet.model.Wallet;
+import com.almotawaj.wallet.repository.KycApplicationRepository;
 import com.almotawaj.wallet.repository.UserRepository;
 import com.almotawaj.wallet.repository.WalletRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -36,9 +36,8 @@ class RecipientSuggestionServiceTest {
     @Spy
     private WalletAccessPolicy accessPolicy;
     @Mock
-    private WalletHolderNames holderNames;
+    private KycApplicationRepository kycApplicationRepository;
 
-    @InjectMocks
     private RecipientSuggestionService service;
 
     @BeforeEach
@@ -47,6 +46,8 @@ class RecipientSuggestionServiceTest {
         sender.setRole(UserRole.CLIENT);
         sender.setKycStatus(KycStatus.APPROVED);
         when(userRepository.findById(SENDER_ID)).thenReturn(Optional.of(sender));
+        service = new RecipientSuggestionService(userRepository, walletRepository, accessPolicy,
+                new WalletHolderNames(kycApplicationRepository));
     }
 
     @Test
@@ -58,6 +59,7 @@ class RecipientSuggestionServiceTest {
     @Test
     void suggest_escapesWildcardsAndMasksMobile() {
         User recipient = new User();
+        recipient.setEmailAddress("sara@example.com");
         recipient.setMobileNumber("+97333123456");
         recipient.setRole(UserRole.MERCHANT);
         Wallet wallet = new Wallet();

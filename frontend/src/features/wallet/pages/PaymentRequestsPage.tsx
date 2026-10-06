@@ -39,7 +39,7 @@ export function PaymentRequestsPage() {
               message={t("requests.loadError")}
               onRetry={() => void refetch()}
             />
-          ) : data ? (
+          ) : (
             <>
               <div
                 className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
@@ -55,7 +55,7 @@ export function PaymentRequestsPage() {
                 onPageChange={setPage}
               />
             </>
-          ) : null}
+          )}
         </CardContent>
       </Card>
     </div>
