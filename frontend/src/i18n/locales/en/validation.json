@@ -53,5 +53,10 @@
   "recipientSelf": "You can't send money to yourself",
   "insufficientBalance": "Your balance is not enough",
   "amountOverDailySendLimit": "This exceeds what you can still send today",
-  "noteTooLong": "Note must be at most {{noteMax}} characters"
+  "noteTooLong": "Note must be at most {{noteMax}} characters",
+  "apiKeyNameRequired": "Enter a name for the key",
+  "apiKeyNameTooLong": "Name must be at most {{apiKeyNameMax}} characters",
+  "orderReferenceRequired": "Enter an order reference",
+  "orderReferenceInvalid": "Use up to {{orderReferenceMax}} letters, digits, dots, dashes or underscores",
+  "orderReferenceUsed": "A payment already exists for this order reference"
 }

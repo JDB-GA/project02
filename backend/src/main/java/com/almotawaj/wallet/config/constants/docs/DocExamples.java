@@ -23,6 +23,9 @@ public final class DocExamples {
     public static final String TOP_UP_SOURCE = "NBB_SALARY";
     public static final String TRANSFER_NOTE = "Dinner split";
     public static final String AMOUNT = "150.500";
+    public static final String API_KEY_NAME = "Online store";
+    public static final String ORDER_REFERENCE = "ORDER-1042";
+    public static final String ORDER_DESCRIPTION = "2 x Arabic coffee beans";
 
     private DocExamples() {
     }

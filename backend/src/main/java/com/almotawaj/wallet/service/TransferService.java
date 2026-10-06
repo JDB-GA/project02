@@ -2,7 +2,6 @@ package com.almotawaj.wallet.service;
 
 import com.almotawaj.wallet.config.constants.ErrorCodes;
 import com.almotawaj.wallet.config.constants.ErrorMessages;
-import com.almotawaj.wallet.config.constants.WalletConstants;
 import com.almotawaj.wallet.config.constants.WalletLimits;
 import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.event.MoneyReceivedEvent;
@@ -35,6 +34,7 @@ public class TransferService {
     private final WalletLocker walletLocker;
     private final RecipientResolver recipientResolver;
     private final WalletHolderNames holderNames;
+    private final Counterparties counterparties;
     private final DailyLimitPolicy dailyLimitPolicy;
     private final WalletLedger ledger;
     private final ApplicationEventPublisher eventPublisher;
@@ -91,20 +91,14 @@ public class TransferService {
         }
         dailyLimitPolicy.ensureTransferAllowed(sender.getId(), amount);
         String note = request.note() == null || request.note().isBlank() ? null : request.note().strip();
-        Counterparty senderDetails = counterparty(sender);
+        Counterparty senderDetails = counterparties.of(sender);
         WalletTransaction received = ledger.credit(receiver, TransactionType.TRANSFER_IN, amount, senderDetails, note);
         eventPublisher.publishEvent(new MoneyReceivedEvent(recipient.getId(), received.getAmount(), senderDetails.name(),
                 received.getReference()));
         WalletTransaction transaction = ledger.debit(sender, TransactionType.TRANSFER_OUT, amount,
-                counterparty(receiver), note);
+                counterparties.of(receiver), note);
         auditService.record(senderId, AuditAction.TRANSFER_COMPLETED, AuditTargetType.WALLET_TRANSACTION,
                 transaction.getId(), null);
         return WalletTransactionResponse.from(transaction);
-    }
-
-    private Counterparty counterparty(Wallet wallet) {
-        User user = wallet.getUser();
-        return new Counterparty(holderNames.fullName(user), wallet.getIban(), WalletConstants.BANK_BIC,
-                holderNames.maskedEmail(user), holderNames.maskedMobile(user));
     }
 }

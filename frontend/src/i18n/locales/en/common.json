@@ -88,6 +88,18 @@
     "userTransactions": {
       "title": "User Transactions",
       "heading": "User transactions"
+    },
+    "merchantPayments": {
+      "title": "Payments",
+      "heading": "Payments"
+    },
+    "merchantApiKeys": {
+      "title": "API Keys",
+      "heading": "API keys"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "heading": "Pay a merchant"
     }
   },
   "nav": {

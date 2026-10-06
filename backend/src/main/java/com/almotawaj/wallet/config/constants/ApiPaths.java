@@ -50,6 +50,16 @@ public final class ApiPaths {
     public static final String WALLET_RECIPIENTS = WALLET + RECIPIENTS;
     public static final String WALLET_TOP_UPS = WALLET + TOP_UPS;
     public static final String WALLET_PAYMENT_REQUESTS = WALLET + PAYMENT_REQUESTS;
+    public static final String MERCHANT_API_KEYS = "/api/merchant/api-keys";
+    public static final String API_KEY_BY_ID = "/{keyId}";
+    public static final String MERCHANT_CHECKOUT_SESSIONS = "/api/merchant/checkout-sessions";
+    public static final String GATEWAY = "/api/gateway";
+    public static final String GATEWAY_CHECKOUT_SESSIONS = GATEWAY + "/checkout-sessions";
+    public static final String CHECKOUT = "/api/checkout";
+    public static final String CHECKOUT_SESSION = "/{sessionId}";
+    public static final String CHECKOUT_SESSION_PAY = "/{sessionId}/pay";
+    public static final String CHECKOUT_SESSION_CANCEL = "/{sessionId}/cancel";
+    public static final String CHECKOUT_SESSION_REFUND = "/{sessionId}/refund";
     public static final String USER_BY_ID = "/{userId}";
     public static final String USER_SUSPEND = "/{userId}/suspend";
     public static final String USER_REACTIVATE = "/{userId}/reactivate";
@@ -57,7 +67,6 @@ public final class ApiPaths {
     public static final String USER_TRANSACTIONS = "/{userId}/transactions";
     public static final String USER_STATISTICS = "/users";
     public static final String TRANSACTION_STATISTICS = "/transactions";
-    public static final String ALL_SUB_PATHS = "/**";
     public static final String SWAGGER_UI_HTML = "/swagger-ui.html";
     public static final String SWAGGER_UI = "/swagger-ui/**";
     public static final String API_DOCS = "/v3/api-docs/**";

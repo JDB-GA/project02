@@ -43,7 +43,6 @@ export const SUGGESTION_DELAY_MS = 250
 export const IBAN_MIN_LENGTH = 15
 export const EMAIL_MARKER = '@'
 export const AMOUNT_PATTERN = /^\d{1,16}(\.\d{1,3})?$/
-export const COPY_FEEDBACK_MS = 2000
 export const AMOUNT_PLACEHOLDER = '0.000'
 export const ALL_FILTER = 'ALL'
 export const TRANSACTION_SEARCH_MAX_LENGTH = 100

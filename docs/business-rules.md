@@ -6,8 +6,8 @@
 
 | Role          | Can do                                                               |
 | ------------- | -------------------------------------------------------------------- |
-| `CLIENT`      | Register, verify email, submit and track KYC, manage their password; after KYC approval: wallet, receive transfers, send and request money |
-| `MERCHANT`    | Wallet, receive transfers, send and request money (checkout payments are planned) |
+| `CLIENT`      | Register, verify email, submit and track KYC, manage their password; after KYC approval: wallet, receive transfers, send and request money, pay merchants |
+| `MERCHANT`    | Wallet, receive transfers, send and request money, API keys, payment links, cancel and refund payments |
 | `ADMIN`       | Only what their permissions allow                                    |
 | `SUPER_ADMIN` | Everything, including granting permissions and reading the audit log |
 
@@ -38,5 +38,10 @@ Admins with `USER_MANAGE` manage clients and merchants only; only the super admi
 15. Money movements lock the affected wallet rows (both, in a fixed order, for transfers), so concurrent requests can never overspend or exceed a daily limit.
 16. Recipient suggestions need at least 3 characters, return at most 5 masked results and never include yourself.
 17. A payment request can only be paid or declined by the payer and cancelled by the requester, and only while it is `PENDING`. Paying it is a normal transfer, so the balance and daily transfer limit apply; the request row is locked while it is decided, so it cannot be paid twice.
-18. Every sign-in, sign-out, registration, email verification, password change, KYC decision, permission change, user change, top-up, transfer and payment request is written to the audit log with the actor, the target and the time.
+18. Every sign-in, sign-out, registration, email verification, password change, KYC decision, permission change, user change, top-up, transfer, payment request, API key and merchant payment action is written to the audit log with the actor, the target and the time.
 19. Statistics count a transfer once on each side: the sender's debit is part of "money out" and the receiver's credit is part of "money in".
+20. A merchant can have at most 5 active API keys. A key is shown once, stored only as a hash, works only on the gateway endpoints and stops working as soon as it is revoked or the merchant is suspended or closed.
+21. An order reference can be used for one checkout session per merchant, so an order can never be paid twice. A session can only be paid while it is `PENDING` and not older than 30 minutes; the session row is locked while it is paid, cancelled or refunded.
+22. Only KYC-approved clients pay checkouts. A payment is 0.100–5,000.000 BHD, needs enough balance and counts towards a separate daily payment limit of 10,000.000 BHD.
+23. Only a `PAID` session can be refunded, once, in full, and only if the merchant's balance covers it.
+24. Sessions that are not paid in time are marked `EXPIRED` by a job that runs every minute.

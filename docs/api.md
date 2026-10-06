@@ -62,6 +62,19 @@ Lists accept `page`, `size` (max 100) and `sort` (e.g. `sort=createdAt,desc`) an
 | POST   | `/api/wallet/requests/{requestId}/pay`                  | Pay a request sent to me         | Wallet holder |
 | POST   | `/api/wallet/requests/{requestId}/decline`              | Decline a request sent to me     | Wallet holder |
 | POST   | `/api/wallet/requests/{requestId}/cancel`               | Cancel a request I sent          | Wallet holder |
+| GET    | `/api/checkout/{sessionId}`                             | Get a checkout to pay            | Client        |
+| POST   | `/api/checkout/{sessionId}/pay`                         | Pay a checkout from my wallet    | Client (KYC approved) |
+| GET    | `/api/merchant/api-keys`                                | List my API keys                 | Merchant      |
+| POST   | `/api/merchant/api-keys`                                | Create an API key (shown once)   | Merchant      |
+| DELETE | `/api/merchant/api-keys/{keyId}`                        | Revoke an API key                | Merchant      |
+| GET    | `/api/merchant/checkout-sessions`                       | List my payments                 | Merchant      |
+| POST   | `/api/merchant/checkout-sessions`                       | Create a payment link            | Merchant      |
+| POST   | `/api/merchant/checkout-sessions/{sessionId}/cancel`    | Cancel a pending payment         | Merchant      |
+| POST   | `/api/merchant/checkout-sessions/{sessionId}/refund`    | Refund a paid payment            | Merchant      |
+| POST   | `/api/gateway/checkout-sessions`                        | Create a checkout session        | API key       |
+| GET    | `/api/gateway/checkout-sessions/{sessionId}`            | Get a checkout session           | API key       |
+| POST   | `/api/gateway/checkout-sessions/{sessionId}/cancel`     | Cancel a pending session         | API key       |
+| POST   | `/api/gateway/checkout-sessions/{sessionId}/refund`     | Refund a paid session            | API key       |
 | GET    | `/api/notifications/stream`                             | Live notifications (SSE)         | Wallet holder |
 | GET    | `/api/admin/users/{userId}/transactions`                | Search a user's transactions     | `USER_MANAGE` |
 | GET    | `/api/admin/statistics/users`                           | Count users per role             | `STATISTICS_VIEW` |
@@ -70,7 +83,7 @@ Lists accept `page`, `size` (max 100) and `sort` (e.g. `sort=createdAt,desc`) an
 | DELETE | `/api/admin/seed-data`                                  | Remove demo data                 | Super admin   |
 | POST   | `/api/seed`                                             | Seed demo data                   | Seed token    |
 
-"Signed in" endpoints work before email verification; every other non-public endpoint also requires a verified email. "Wallet holder" means a merchant or a KYC-approved client.
+"Signed in" endpoints work before email verification; every other non-public endpoint also requires a verified email. "Wallet holder" means a merchant or a KYC-approved client. "API key" endpoints are called by a merchant's server with the `X-API-Key` header instead of a session cookie.
 
 ## Rate limiting
 
@@ -79,7 +92,34 @@ Sensitive endpoints allow 10 requests per minute for each client address and end
 | Limited | Endpoints |
 | --- | --- |
 | Every request | register, login, verify email and resend, forgot/reset/change password, top-ups, transfers, recipient lookup and suggestions, seeding and demo data clean-up |
-| Writes only | payment requests (create, pay, decline, cancel) |
+| Writes only | payment requests (create, pay, decline, cancel), API keys, merchant payments, gateway calls and checkout payments |
+
+## Payment gateway
+
+A merchant accepts wallet payments in four steps:
+
+1. Create an API key under **API keys** in the merchant dashboard (or `POST /api/merchant/api-keys`). The full key is returned once; only its SHA-256 hash is stored.
+2. The merchant's server creates a checkout session for an order:
+
+```bash
+curl -X POST https://api.almotawaj.com/api/gateway/checkout-sessions \
+  -H "X-API-Key: almt_..." \
+  -H "Content-Type: application/json" \
+  -d '{"orderReference":"ORDER-1042","amount":12.500,"description":"2 x Arabic coffee beans"}'
+```
+
+3. The response contains `checkoutUrl`. The merchant sends the customer there; the customer signs in and pays from their wallet.
+4. The merchant confirms the result with `GET /api/gateway/checkout-sessions/{sessionId}` before fulfilling the order.
+
+| Status | Meaning | Next |
+| --- | --- | --- |
+| `PENDING` | Waiting for the customer, for 30 minutes | `PAID`, `CANCELLED`, `EXPIRED` |
+| `PAID` | Money moved from the customer to the merchant | `REFUNDED` |
+| `CANCELLED` | Cancelled by the merchant | – |
+| `EXPIRED` | Not paid in time | – |
+| `REFUNDED` | The full amount moved back to the customer | – |
+
+An API key only opens `/api/gateway/**`; it cannot read the wallet or any other endpoint. Without a valid key the gateway answers `401`.
 
 ## Live notifications
 

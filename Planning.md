@@ -40,13 +40,13 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 | 2026-10-03 | Deployment to Railway and Vercel on `almotawaj.com`, email via Resend API, security headers |
 | 2026-10-04 | KYC submission (backend and client UI), file storage, permission model |
 | 2026-10-05 | KYC review, permissions, user management, create user by invitation, forgot/reset/change password, document preview, seeding, Swagger docs, test profile, audit log API and screen; wallets with generated IBANs, simulated incoming transfers with daily limits, wallet-to-wallet transfers with recipient autocomplete, transaction search and filters |
-| 2026-10-06 | Seeded data clean-up, live notifications over SSE, transactions page and details panel, request money; audit trail for sign-in, wallet and payment request activity with localized details, statistics permission with user counts and system transactions, user transactions for admins, JavaDoc on the main services, documentation split into guides |
+| 2026-10-06 | Seeded data clean-up, live notifications over SSE, transactions page and details panel, request money; audit trail for sign-in, wallet and payment request activity with localized details, statistics permission with user counts and system transactions, user transactions for admins, JavaDoc on the main services, documentation split into guides; payment gateway with merchant API keys, checkout sessions, hosted checkout page, refunds and expiry |
 
 ## Requirement coverage
 
 | # | Requirement | Status |
 | --- | --- | --- |
-| 1 | Five+ entities, relationships, ERD | Done – users, user_permissions, otp_challenges, kyc_applications, kyc_documents, audit_logs, wallets, wallet_transactions, payment_requests |
+| 1 | Five+ entities, relationships, ERD | Done – users, user_permissions, otp_challenges, kyc_applications, kyc_documents, audit_logs, wallets, wallet_transactions, payment_requests, merchant_api_keys, checkout_sessions |
 | 2 | Spring profiles (dev/test), no hard-coded secrets | Done – `dev`, `test` (H2), `prod` (environment variables) |
 | 3–4 | REST CRUD, correct status codes | Done |
 | 5–6 | Validation, global exception handling | Done |
@@ -56,7 +56,7 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 | 12 | User profile with profile picture | Planned |
 | 13 | File upload with validation | Done – KYC documents; profile picture planned |
 | 14 | Soft delete | Done – `CLOSED` status |
-| 15–16 | Booking workflow, statuses, double-booking prevention | Planned – payment gateway checkout sessions |
+| 15–16 | Booking workflow, statuses, double-booking prevention | Done – checkout sessions (`PENDING → PAID / CANCELLED / EXPIRED`, `PAID → REFUNDED`), one session per order reference, row locks |
 | 17 | Swagger / OpenAPI | Done |
 | 18 | DTOs | Done |
 | 19 | Seeding | Done – `POST /api/seed` with a seed token |
@@ -77,7 +77,6 @@ Every feature is built as one vertical slice, backend first, on its own branch:
 
 In order of priority:
 
-1. **Payment gateway** – merchant API keys and checkout sessions (`PENDING → PAID / CANCELLED / EXPIRED`, `PAID → REFUNDED`) with double-payment prevention and their own daily limit; covers the booking requirement.
-2. **PDF export** – printable documents.
-3. **Profile picture** – upload, preview and replace.
-4. **Final pass** – documentation, ERD, Swagger and tests updated; presentation.
+1. **PDF export** – transaction receipts and statements.
+2. **Profile picture** – upload, preview and replace.
+3. **Final pass** – documentation, ERD, Swagger and tests updated; presentation.

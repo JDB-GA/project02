@@ -53,5 +53,10 @@
   "recipientSelf": "لا يمكنك إرسال الأموال إلى نفسك",
   "insufficientBalance": "رصيدك غير كافٍ",
   "amountOverDailySendLimit": "المبلغ يتجاوز ما يمكنك إرساله اليوم",
-  "noteTooLong": "يجب ألا تزيد الملاحظة عن {{noteMax}} حرفاً"
+  "noteTooLong": "يجب ألا تزيد الملاحظة عن {{noteMax}} حرفاً",
+  "apiKeyNameRequired": "أدخل اسماً للمفتاح",
+  "apiKeyNameTooLong": "يجب ألا يزيد الاسم عن {{apiKeyNameMax}} حرفاً",
+  "orderReferenceRequired": "أدخل مرجع الطلب",
+  "orderReferenceInvalid": "استخدم حتى {{orderReferenceMax}} من الحروف والأرقام والنقاط والشرطات",
+  "orderReferenceUsed": "توجد دفعة لهذا المرجع مسبقاً"
 }

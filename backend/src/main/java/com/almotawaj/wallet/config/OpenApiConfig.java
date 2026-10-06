@@ -2,6 +2,7 @@ package com.almotawaj.wallet.config;
 
 import com.almotawaj.wallet.config.constants.SecurityConstants;
 import com.almotawaj.wallet.config.constants.docs.ApiDocs;
+import com.almotawaj.wallet.config.constants.docs.GatewayDocs;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -29,6 +30,11 @@ public class OpenApiConfig {
                         .addSecuritySchemes(ApiDocs.SEED_SCHEME_NAME, new SecurityScheme()
                                 .type(SecurityScheme.Type.HTTP)
                                 .scheme(ApiDocs.BEARER)
-                                .description(ApiDocs.SEED_SCHEME_DESCRIPTION)));
+                                .description(ApiDocs.SEED_SCHEME_DESCRIPTION))
+                        .addSecuritySchemes(GatewayDocs.API_KEY_SCHEME_NAME, new SecurityScheme()
+                                .name(SecurityConstants.API_KEY_HEADER)
+                                .type(SecurityScheme.Type.APIKEY)
+                                .in(SecurityScheme.In.HEADER)
+                                .description(GatewayDocs.API_KEY_SCHEME_DESCRIPTION)));
     }
 }

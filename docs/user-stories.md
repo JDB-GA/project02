@@ -123,14 +123,23 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 
 ## Epic: Payments
 
-**US-20 – Merchant API keys (planned).** As a merchant, I want an API key for my store, so that my website can create payments.
+**US-20 – Merchant API keys.** As a merchant, I want an API key for my store, so that my website can create payments.
+- [ ] The key is shown once, stored as a hash and can be revoked at any time; at most 5 active keys.
+- [ ] A key only works on the gateway endpoints.
 
-**US-21 – Checkout session (planned).** As a merchant, I want to create a checkout session for an order, so that my customer can pay with the wallet.
+**US-21 – Checkout session.** As a merchant, I want to create a checkout session for an order, so that my customer can pay with the wallet.
 - [ ] Statuses: `PENDING → PAID / CANCELLED / EXPIRED`, `PAID → REFUNDED`.
 - [ ] One order reference can only be paid once (double-payment prevention).
+- [ ] Sessions expire after 30 minutes; I can create them from my server or as a payment link in the dashboard.
 
-**US-22 – Pay a checkout (planned).** As a client, I want to pay a merchant's checkout from my wallet, so that I can buy online.
+**US-22 – Pay a checkout.** As a client, I want to pay a merchant's checkout from my wallet, so that I can buy online.
 - [ ] Only verified (KYC approved) clients can pay.
+- [ ] I see the merchant, the order and the amount and confirm before paying; if I am signed out I return to the payment after signing in.
+- [ ] I need enough balance and can pay at most 10,000.000 BHD per day.
+
+**US-32 – Manage payments.** As a merchant, I want to see my payments and refund or cancel them, so that I can run my store from the dashboard.
+- [ ] Filter by status; see who paid (masked) and when.
+- [ ] Refunding sends the full amount back to the customer once.
 
 ## Epic: Notifications
 
