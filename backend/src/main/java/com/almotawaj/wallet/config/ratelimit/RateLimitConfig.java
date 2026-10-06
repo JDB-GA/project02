@@ -19,6 +19,9 @@ public class RateLimitConfig implements WebMvcConfigurer {
                         ApiPaths.AUTH_FORGOT_PASSWORD, ApiPaths.AUTH_RESET_PASSWORD, ApiPaths.AUTH_CHANGE_PASSWORD, ApiPaths.SEED,
                         ApiPaths.ADMIN_SEED_DATA, ApiPaths.WALLET_TOP_UPS, ApiPaths.WALLET_TRANSFERS, ApiPaths.WALLET_RECIPIENTS);
         registry.addInterceptor(writeRateLimitInterceptor)
-                .addPathPatterns(ApiPaths.WALLET_PAYMENT_REQUESTS, ApiPaths.WALLET_PAYMENT_REQUESTS + ApiPaths.ALL_SUB_PATHS);
+                .addPathPatterns(ApiPaths.WALLET_PAYMENT_REQUESTS, ApiPaths.WALLET_PAYMENT_REQUESTS + ApiPaths.ALL,
+                        ApiPaths.MERCHANT_API_KEYS, ApiPaths.MERCHANT_CHECKOUT_SESSIONS,
+                        ApiPaths.MERCHANT_CHECKOUT_SESSIONS + ApiPaths.ALL, ApiPaths.GATEWAY + ApiPaths.ALL,
+                        ApiPaths.CHECKOUT + ApiPaths.ALL);
     }
 }
