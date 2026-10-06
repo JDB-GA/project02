@@ -13,11 +13,11 @@
   },
   "admin": {
     "cleanData": {
-      "title": "Clean seeded data & All Transactions",
-      "description": "Remove only the demo accounts and their dependent data. Other accounts and records remain unchanged.",
-      "action": "Clean seeded data",
-      "confirmTitle": "Clean all seeded data?",
-      "confirmDescription": "This permanently removes the seeded accounts, wallets, transactions, verification records, and documents. You will be signed out.",
+      "title": "Clean demo data",
+      "description": "Removes the demo accounts with their wallets, payment requests and verification records, and clears every wallet's transaction history. Other accounts stay.",
+      "action": "Clean demo data",
+      "confirmTitle": "Clean all demo data?",
+      "confirmDescription": "This permanently removes the demo accounts and their data and clears every wallet's transaction history. You will be signed out.",
       "success": "Seeded data removed.",
       "failure": "Could not remove seeded data."
     }

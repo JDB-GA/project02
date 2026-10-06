@@ -1,0 +1,49 @@
+# Frontend
+
+[← Back to the README](../README.md)
+
+React 19, TypeScript, Vite, TanStack Query, React Hook Form, Zod, shadcn/ui and i18next. Runs on http://localhost:5173.
+
+## Setup
+
+Prerequisites: Node.js 20+ and pnpm (`npm install -g pnpm`).
+
+```bash
+cd frontend
+pnpm install
+cp .env.example .env
+pnpm dev
+```
+
+`VITE_API_URL` in `.env` must point to the backend (`http://localhost:8080`). 
+## Scripts
+
+| Script | Does |
+| --- | --- |
+| `pnpm dev` | start the development server |
+| `pnpm build` | type-check and build for production |
+| `pnpm preview` | serve the production build locally |
+| `pnpm lint` | type-aware ESLint (`strictTypeChecked`); generated shadcn components in `src/components/ui` are excluded |
+
+## Structure
+
+```
+src
+├── app/          providers, router, route guards, layout, navigation (page registry)
+├── components/   shared components (ui/ is shadcn)
+├── config/       env and route constants
+├── features/     auth, kyc, kyc-review, user-management, audit-log, wallet, notifications, admin
+├── hooks/        shared hooks
+├── i18n/         i18next setup and en/ar translations
+└── lib/          HTTP client, query client, file helpers
+```
+
+Each feature is split into `api`, `schemas`, `types`, `constants`, `hooks`, `utils`, `components` and `pages`. Every API response is parsed with a Zod schema before it reaches a component, and types are inferred from those schemas.
+
+## Pages and access
+
+Pages are registered once in `src/app/navigation` with their route, icon, roles and optional permission. The router, the sidebar and the route guard are all built from that list.
+
+## Localisation
+
+Every text comes from a typed namespace in `src/i18n/locales/en` and `src/i18n/locales/ar`; a missing or misspelled key fails the type-check. Arabic switches the whole layout to right-to-left.

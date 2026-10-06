@@ -1,0 +1,92 @@
+# API reference
+
+[← Back to the README](../README.md)
+
+Interactive documentation with request/response schemas, status codes and examples: **`/swagger-ui.html`**. To try protected endpoints, call `POST /auth/users/login` first; the browser keeps the session cookie.
+
+Base URLs: `http://localhost:8080` in development and `https://api.almotawaj.com` in production.
+
+Errors use [RFC 9457 Problem Details](https://www.rfc-editor.org/rfc/rfc9457) with a machine-readable `code`:
+
+```json
+{
+  "detail": "This verification request has already been reviewed",
+  "instance": "/api/admin/kyc/4021630a-51e9-447e-afd6-355d60ae9339/approve",
+  "status": 422,
+  "title": "Unprocessable Content",
+  "code": "KYC_ALREADY_REVIEWED"
+}
+```
+
+Lists accept `page`, `size` (max 100) and `sort` (e.g. `sort=createdAt,desc`) and return `content`, `page`, `size`, `totalElements`, `totalPages`.
+
+| Method | Endpoint                                                | Functionality                    | Access        |
+| ------ | ------------------------------------------------------- | -------------------------------- | ------------- |
+| POST   | `/auth/users/register`                                  | Register a client account        | Public        |
+| POST   | `/auth/users/login`                                     | Log in                           | Public        |
+| POST   | `/auth/users/logout`                                    | Log out                          | Public        |
+| GET    | `/auth/users/me`                                        | Get the current user             | Signed in     |
+| POST   | `/auth/users/verify-email`                              | Verify email                     | Signed in     |
+| POST   | `/auth/users/verify-email/resend`                       | Resend the verification code     | Signed in     |
+| POST   | `/auth/users/password/forgot`                           | Request a password reset code    | Public        |
+| POST   | `/auth/users/password/reset`                            | Reset the password               | Public        |
+| POST   | `/auth/users/password/change`                           | Change the password              | Signed in     |
+| POST   | `/api/kyc`                                              | Submit an application            | Client        |
+| GET    | `/api/kyc/me`                                           | Get my latest application        | Client        |
+| GET    | `/api/kyc/me/documents/{documentId}`                    | Download one of my documents     | Client        |
+| GET    | `/api/admin/kyc`                                        | List applications                | `KYC_REVIEW`  |
+| GET    | `/api/admin/kyc/{applicationId}`                        | Get an application               | `KYC_REVIEW`  |
+| POST   | `/api/admin/kyc/{applicationId}/approve`                | Approve an application           | `KYC_REVIEW`  |
+| GET    | `/api/admin/kyc/{applicationId}/documents/{documentId}` | Download an application document | `KYC_REVIEW`  |
+| POST   | `/api/admin/kyc/{applicationId}/reject`                 | Reject an application            | `KYC_REVIEW`  |
+| GET    | `/api/admin/users`                                      | Search users                     | `USER_MANAGE` |
+| POST   | `/api/admin/users`                                      | Create a user                    | `USER_MANAGE` |
+| GET    | `/api/admin/users/{userId}`                             | Get a user                       | `USER_MANAGE` |
+| PATCH  | `/api/admin/users/{userId}`                             | Update contact details           | `USER_MANAGE` |
+| DELETE | `/api/admin/users/{userId}`                             | Close a user (soft delete)       | `USER_MANAGE` |
+| POST   | `/api/admin/users/{userId}/reactivate`                  | Reactivate a user                | `USER_MANAGE` |
+| POST   | `/api/admin/users/{userId}/suspend`                     | Suspend a user                   | `USER_MANAGE` |
+| PUT    | `/api/admin/users/{userId}/permissions/{permission}`    | Grant a permission               | Super admin   |
+| DELETE | `/api/admin/users/{userId}/permissions/{permission}`    | Revoke a permission              | Super admin   |
+| GET    | `/api/admin/audit-logs`                                 | List audit entries               | Super admin   |
+| GET    | `/api/wallet`                                           | Get my wallet                    | Wallet holder |
+| GET    | `/api/wallet/transactions`                              | Search and filter my transactions | Wallet holder |
+| GET    | `/api/wallet/top-ups/options`                           | Get top-up sources and limits    | Wallet holder |
+| POST   | `/api/wallet/top-ups`                                   | Receive a bank transfer (simulated) | Wallet holder |
+| GET    | `/api/wallet/recipients/suggestions`                    | Suggest recipients               | Wallet holder |
+| GET    | `/api/wallet/recipients`                                | Find a recipient                 | Wallet holder |
+| GET    | `/api/wallet/transfers/options`                         | Get transfer limits              | Wallet holder |
+| POST   | `/api/wallet/transfers`                                 | Send money                       | Wallet holder |
+| GET    | `/api/wallet/requests`                                  | List my payment requests         | Wallet holder |
+| POST   | `/api/wallet/requests`                                  | Request money                    | Wallet holder |
+| POST   | `/api/wallet/requests/{requestId}/pay`                  | Pay a request sent to me         | Wallet holder |
+| POST   | `/api/wallet/requests/{requestId}/decline`              | Decline a request sent to me     | Wallet holder |
+| POST   | `/api/wallet/requests/{requestId}/cancel`               | Cancel a request I sent          | Wallet holder |
+| GET    | `/api/notifications/stream`                             | Live notifications (SSE)         | Wallet holder |
+| GET    | `/api/admin/users/{userId}/transactions`                | Search a user's transactions     | `USER_MANAGE` |
+| GET    | `/api/admin/statistics/users`                           | Count users per role             | `STATISTICS_VIEW` |
+| GET    | `/api/admin/statistics/transactions`                    | Count and total transactions     | `STATISTICS_VIEW` |
+| GET    | `/api/admin/transactions`                               | Search every wallet's transactions | `STATISTICS_VIEW` |
+| DELETE | `/api/admin/seed-data`                                  | Remove demo data                 | Super admin   |
+| POST   | `/api/seed`                                             | Seed demo data                   | Seed token    |
+
+"Signed in" endpoints work before email verification; every other non-public endpoint also requires a verified email. "Wallet holder" means a merchant or a KYC-approved client.
+
+## Rate limiting
+
+Sensitive endpoints allow 10 requests per minute for each client address and endpoint. A blocked request returns `429` with a `Retry-After` header and the code `TOO_MANY_REQUESTS`.
+
+| Limited | Endpoints |
+| --- | --- |
+| Every request | register, login, verify email and resend, forgot/reset/change password, top-ups, transfers, recipient lookup and suggestions, seeding and demo data clean-up |
+| Writes only | payment requests (create, pay, decline, cancel) |
+
+## Live notifications
+
+`GET /api/notifications/stream` is a Server-Sent Events stream for the signed-in wallet holder. Events are sent only after the database transaction commits.
+
+| Event | Sent to | Payload |
+| --- | --- | --- |
+| `money-received` | the receiver of a top-up or transfer | `amount`, `senderName`, `reference` |
+| `payment-requested` | the payer of a new payment request | the payment request |
+| `payment-request-updated` | both sides when a request is created, paid, declined or cancelled | the payment request |
