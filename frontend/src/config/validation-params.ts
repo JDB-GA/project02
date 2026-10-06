@@ -13,6 +13,7 @@ import {
   MINIMUM_AGE_YEARS,
 } from '@/features/kyc/constants/kyc.constants'
 import { REJECTION_REASON_MAX_LENGTH } from '@/features/kyc-review/constants/kyc-review.constants'
+import { API_KEY_NAME_MAX_LENGTH, ORDER_REFERENCE_MAX_LENGTH } from '@/features/merchant/constants/merchant.constants'
 import { TOP_UP_MAX, TOP_UP_MIN, TRANSFER_NOTE_MAX_LENGTH } from '@/features/wallet/constants/wallet.constants'
 
 export const VALIDATION_PARAMS = {
@@ -30,4 +31,6 @@ export const VALIDATION_PARAMS = {
   topUpMin: TOP_UP_MIN,
   topUpMax: TOP_UP_MAX,
   noteMax: TRANSFER_NOTE_MAX_LENGTH,
+  apiKeyNameMax: API_KEY_NAME_MAX_LENGTH,
+  orderReferenceMax: ORDER_REFERENCE_MAX_LENGTH,
 } as const

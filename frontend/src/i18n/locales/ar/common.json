@@ -88,6 +88,18 @@
     "userTransactions": {
       "title": "معاملات المستخدم",
       "heading": "معاملات المستخدم"
+    },
+    "merchantPayments": {
+      "title": "المدفوعات",
+      "heading": "المدفوعات"
+    },
+    "merchantApiKeys": {
+      "title": "مفاتيح API",
+      "heading": "مفاتيح API"
+    },
+    "checkout": {
+      "title": "الدفع",
+      "heading": "الدفع لتاجر"
     }
   },
   "nav": {
