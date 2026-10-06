@@ -23,6 +23,8 @@
   "transactions": {
     "title": "المعاملات",
     "date": "التاريخ",
+    "from": "من",
+    "to": "إلى",
     "counterparty": "من / إلى",
     "type": "النوع",
     "reference": "المرجع",
@@ -93,5 +95,33 @@
       "title": "تم استلام أموال",
       "description": "تم استلام {{amount}} من {{sender}}."
     }
+  },
+  "requests": {
+    "title": "طلبات الدفع",
+    "heading": "طلبات الدفع",
+    "open": "طلب أموال",
+    "createTitle": "طلب أموال",
+    "createDescription": "اطلب من مستخدم آخر إرسال الأموال إليك.",
+    "payer": "الطلب من",
+    "submit": "إرسال الطلب",
+    "success": "تم إرسال طلب الدفع بنجاح.",
+    "pay": "دفع",
+    "paid": "تم دفع الطلب بنجاح.",
+    "decline": "رفض",
+    "declined": "تم رفض الطلب.",
+    "cancel": "إلغاء",
+    "cancelled": "تم إلغاء الطلب.",
+    "requestFrom": "طلب من",
+    "requestTo": "طلب إلى",
+    "loadError": "تعذر تحميل طلبات الدفع.",
+    "status": {
+      "PENDING": "قيد الانتظار",
+      "PAID": "تم الدفع",
+      "DECLINED": "مرفوض",
+      "CANCELLED": "ملغى"
+    },
+    "emptyTitle": "لا توجد طلبات",
+    "emptyDescription": "ليس لديك أي طلبات دفع واردة أو صادرة.",
+    "newRequestReceived": "طلب شخص ما أموالاً منك."
   }
 }

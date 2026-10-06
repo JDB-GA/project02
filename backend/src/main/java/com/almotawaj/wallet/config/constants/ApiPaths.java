@@ -1,3 +1,4 @@
+// backend/src/main/java/com/almotawaj/wallet/config/constants/ApiPaths.java
 package com.almotawaj.wallet.config.constants;
 
 public final class ApiPaths {
@@ -40,9 +41,15 @@ public final class ApiPaths {
     public static final String TRANSFER_OPTIONS = "/transfers/options";
     public static final String RECIPIENTS = "/recipients";
     public static final String RECIPIENT_SUGGESTIONS = "/recipients/suggestions";
+    public static final String PAYMENT_REQUESTS = "/requests";
+    public static final String PAYMENT_REQUEST_BY_ID = "/{requestId}";
+    public static final String PAYMENT_REQUEST_PAY = "/{requestId}/pay";
+    public static final String PAYMENT_REQUEST_DECLINE = "/{requestId}/decline";
+    public static final String PAYMENT_REQUEST_CANCEL = "/{requestId}/cancel";
     public static final String WALLET_TRANSFERS = WALLET + TRANSFERS;
     public static final String WALLET_RECIPIENTS = WALLET + RECIPIENTS;
     public static final String WALLET_TOP_UPS = WALLET + TOP_UPS;
+    public static final String WALLET_PAYMENT_REQUESTS = WALLET + PAYMENT_REQUESTS;
     public static final String USER_BY_ID = "/{userId}";
     public static final String USER_SUSPEND = "/{userId}/suspend";
     public static final String USER_REACTIVATE = "/{userId}/reactivate";

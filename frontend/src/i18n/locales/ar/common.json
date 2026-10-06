@@ -37,6 +37,10 @@
       "title": "المعاملات",
       "heading": "سجل المعاملات"
     },
+    "paymentRequests": {
+      "title": "طلبات الدفع",
+      "heading": "طلبات الدفع"
+    },
     "merchant": {
       "title": "التاجر",
       "heading": "مرحباً بك في لوحة التاجر"

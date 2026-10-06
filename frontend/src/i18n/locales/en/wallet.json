@@ -23,6 +23,8 @@
   "transactions": {
     "title": "Transactions",
     "date": "Date",
+    "from": "From",
+    "to": "To",
     "counterparty": "From / To",
     "type": "Type",
     "reference": "Reference",
@@ -93,5 +95,33 @@
       "title": "Money received",
       "description": "You received {{amount}} from {{sender}}."
     }
+  },
+  "requests": {
+    "title": "Payment Requests",
+    "heading": "Payment Requests",
+    "open": "Request money",
+    "createTitle": "Request money",
+    "createDescription": "Ask another wallet holder to send you money.",
+    "payer": "Request from",
+    "submit": "Send request",
+    "success": "Payment request sent successfully.",
+    "pay": "Pay",
+    "paid": "Request paid successfully.",
+    "decline": "Decline",
+    "declined": "Request declined.",
+    "cancel": "Cancel",
+    "cancelled": "Request cancelled.",
+    "requestFrom": "Request from",
+    "requestTo": "Request to",
+    "loadError": "Could not load your payment requests.",
+    "status": {
+      "PENDING": "Pending",
+      "PAID": "Paid",
+      "DECLINED": "Declined",
+      "CANCELLED": "Cancelled"
+    },
+    "emptyTitle": "No requests",
+    "emptyDescription": "You don't have any incoming or outgoing payment requests.",
+    "newRequestReceived": "Someone requested money from you."
   }
 }

@@ -37,6 +37,10 @@
       "title": "Transactions",
       "heading": "Transaction History"
     },
+    "paymentRequests": {
+      "title": "Payment Requests",
+      "heading": "Payment Requests"
+    },
     "merchant": {
       "title": "Merchant",
       "heading": "Welcome to your merchant dashboard"

@@ -15,6 +15,7 @@ export type AppPageId =
   | 'userCreate'
   | 'auditLog'
   | 'changePassword'
+  | 'paymentRequests'
 
 export interface AppPage {
   id: AppPageId

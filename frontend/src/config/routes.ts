@@ -17,4 +17,5 @@ export const ROUTES = {
   userCreate: '/admin/users/new',
   user: '/admin/users/:userId',
   auditLog: '/admin/audit-log',
+  paymentRequests: "/payment-requests",
 } as const

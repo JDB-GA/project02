@@ -80,12 +80,15 @@ public final class ErrorMessages {
     public static final String RECIPIENT_NOT_FOUND = "No wallet found for this email, mobile number or IBAN";
     public static final String RECIPIENT_UNAVAILABLE = "This user cannot receive money yet";
     public static final String RECIPIENT_REQUIRED = "Enter the recipient's email, mobile number or IBAN";
+    public static final String PAYER_REQUIRED = "Enter the payer's email, mobile number or IBAN";
     public static final String RECIPIENT_TOO_LONG = "Recipient must be at most {max} characters";
     public static final String NOTE_TOO_LONG = "Note must be at most {max} characters";
     public static final String SEARCH_TOO_LONG = "Search must be at most {max} characters";
     public static final String AMOUNT_FILTER_NEGATIVE = "Amount filters cannot be negative";
     public static final String DATE_RANGE_INVALID = "The start date must be on or before the end date";
     public static final String AMOUNT_RANGE_INVALID = "The minimum amount must not exceed the maximum amount";
+    public static final String PAYMENT_REQUEST_NOT_FOUND = "Payment request not found";
+    public static final String PAYMENT_REQUEST_NOT_PENDING = "This payment request is no longer pending";
 
     public static final String USER_NOT_FOUND = "User not found";
     public static final String NOT_FOUND = "The requested resource was not found";

@@ -2,5 +2,6 @@ package com.almotawaj.wallet.model;
 
 public enum AuditTargetType {
     USER,
-    KYC_APPLICATION
+    KYC_APPLICATION,
+    PAYMENT_REQUEST
 }

@@ -1,5 +1,6 @@
 import {
   ClipboardCheckIcon,
+  HandCoinsIcon,
   HistoryIcon,
   KeyRoundIcon,
   LayoutDashboardIcon,
@@ -116,5 +117,17 @@ export const APP_PAGES: readonly AppPage[] = [
     roles: ['CLIENT', 'MERCHANT', 'ADMIN', 'SUPER_ADMIN'],
     showInSidebar: false,
     lazy: async () => ({ Component: (await import('@/features/auth/pages/ChangePasswordPage')).ChangePasswordPage }),
+  },
+  {
+    id: "paymentRequests",
+    path: ROUTES.paymentRequests,
+    icon: HandCoinsIcon,
+    roles: ["CLIENT", "MERCHANT"],
+    showInSidebar: true,
+    lazy: async () => ({
+      Component: (
+        await import("@/features/wallet/pages/PaymentRequestsPage")
+      ).PaymentRequestsPage,
+    }),
   },
 ]

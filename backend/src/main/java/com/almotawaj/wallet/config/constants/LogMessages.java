@@ -19,6 +19,10 @@ public final class LogMessages {
     public static final String SEED_COMPLETED = "Basic database seeding completed";
     public static final String SEED_DATA_CLEANED = "Removed {} seeded accounts and their dependent data";
     public static final String SEED_TOKEN_REJECTED = "Rejected seed request with an invalid token";
+    public static final String PAYMENT_REQUEST_CREATED = "User {} requested payment {} from user {}";
+    public static final String PAYMENT_REQUEST_PAID = "User {} paid payment request {}";
+    public static final String PAYMENT_REQUEST_DECLINED = "User {} declined payment request {}";
+    public static final String PAYMENT_REQUEST_CANCELLED = "User {} cancelled payment request {}";
 
     private LogMessages() {
     }
