@@ -72,10 +72,20 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 
 ## Epic: Administration and operations
 
-**US-16 – Audit trail (API).** As the super admin, I want every administrative and security action recorded, so that I can see who did what and when.
+**US-16 – Audit trail (API).** As the super admin, I want every administrative, security and money action recorded, so that I can see who did what and when.
 - [ ] KYC decisions, permission changes, user creation, edits, status changes and password changes are stored.
+- [ ] Registration, sign-in, sign-out, email verification, top-ups, transfers and payment requests are stored.
 
 **US-17 – Audit log screen.** As the super admin, I want to browse and filter the audit log in the app, so that I don't need direct API access.
+- [ ] Actions, targets and details are shown in English and Arabic.
+
+**US-30 – Statistics.** As an admin with `STATISTICS_VIEW`, I want to see how many users of each type exist and how much money moves, so that I can follow the system at a glance.
+- [ ] Total users and users per role (clients, merchants, admins, super admins).
+- [ ] Number of transactions, money in and money out for the current filters.
+- [ ] Every wallet's transactions with the owner's email, searchable by that email.
+
+**US-31 – A user's transactions.** As an admin with `USER_MANAGE`, I want to open a user's transactions from their profile, so that I can answer their questions.
+- [ ] Same search and filters as the wallet history; the details panel shows the user as the wallet owner.
 
 **US-18 – Seed demo data.** As a developer or grader, I want to load demo accounts with one request, so that I can try every role immediately.
 - [ ] Protected by a seed token; safe to run repeatedly; disabled when no token is configured.
@@ -102,7 +112,9 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 - [ ] Search by counterparty name, reference or note (case-insensitive).
 - [ ] Filter by type, money in/out and date range; filters stay in the URL.
 
-**US-29 – Request money (planned).** As a wallet holder, I want to request money from another user, so that they can pay me with one tap.
+**US-29 – Request money.** As a wallet holder, I want to request money from another user, so that they can pay me with one tap.
+- [ ] The payer can pay or decline; I can cancel while it is pending.
+- [ ] Paying is a normal transfer: balance and daily limit apply, and a request can never be paid twice.
 
 ## Epic: Profile
 
@@ -122,5 +134,5 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 
 ## Epic: Notifications
 
-**US-23 – Live updates (planned).** As a user, I want to see money received, KYC decisions and payment results instantly, so that I don't need to refresh.
-- [ ] Delivered with Server-Sent Events.
+**US-23 – Live updates.** As a wallet holder, I want to see money received and payment requests instantly, so that I don't need to refresh.
+- [ ] Delivered with Server-Sent Events after the transaction commits, with a toast and a sound.
