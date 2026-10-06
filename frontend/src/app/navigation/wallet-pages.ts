@@ -1,4 +1,12 @@
-import { HandCoinsIcon, KeyRoundIcon, ReceiptTextIcon, ShieldCheckIcon, StoreIcon, WalletIcon } from 'lucide-react'
+import {
+  CreditCardIcon,
+  HandCoinsIcon,
+  KeyRoundIcon,
+  ReceiptTextIcon,
+  ShieldCheckIcon,
+  StoreIcon,
+  WalletIcon,
+} from 'lucide-react'
 import { ROUTES } from '@/config/routes'
 import type { AppPage } from './app-page.types'
 
@@ -18,6 +26,31 @@ export const WALLET_PAGES: readonly AppPage[] = [
     roles: ['MERCHANT'],
     showInSidebar: true,
     lazy: async () => ({ Component: (await import('@/features/merchant/pages/MerchantPage')).MerchantPage }),
+  },
+  {
+    id: 'merchantPayments',
+    path: ROUTES.merchantPayments,
+    icon: CreditCardIcon,
+    roles: ['MERCHANT'],
+    showInSidebar: true,
+    lazy: async () => ({ Component: (await import('@/features/merchant/pages/MerchantPaymentsPage')).MerchantPaymentsPage }),
+  },
+  {
+    id: 'merchantApiKeys',
+    path: ROUTES.merchantApiKeys,
+    icon: KeyRoundIcon,
+    roles: ['MERCHANT'],
+    showInSidebar: true,
+    lazy: async () => ({ Component: (await import('@/features/merchant/pages/MerchantApiKeysPage')).MerchantApiKeysPage }),
+  },
+  {
+    id: 'checkout',
+    path: ROUTES.checkout,
+    icon: CreditCardIcon,
+    roles: ['CLIENT'],
+    parentId: 'wallet',
+    showInSidebar: false,
+    lazy: async () => ({ Component: (await import('@/features/checkout/pages/CheckoutPage')).CheckoutPage }),
   },
   {
     id: 'transactions',
