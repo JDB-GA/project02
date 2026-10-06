@@ -47,12 +47,7 @@ public class RecipientSuggestionService {
     private RecipientSuggestionResponse toResponse(Wallet wallet) {
         User user = wallet.getUser();
         return new RecipientSuggestionResponse(wallet.getIban(), holderNames.maskedName(user), holderNames.maskedEmail(user),
-                maskMobile(user.getMobileNumber()), user.getRole());
-    }
-
-    private static String maskMobile(String mobile) {
-        int visible = Math.min(WalletConstants.MOBILE_VISIBLE_DIGITS, mobile.length());
-        return "*".repeat(mobile.length() - visible) + mobile.substring(mobile.length() - visible);
+                holderNames.maskedMobile(user), user.getRole());
     }
 
     private static String escapeLike(String value) {

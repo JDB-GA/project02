@@ -37,4 +37,10 @@ public class WalletHolderNames {
         int at = email.indexOf(WalletConstants.EMAIL_MARKER);
         return email.charAt(0) + WalletConstants.EMAIL_MASK + email.substring(at);
     }
+
+    public String maskedMobile(User user) {
+        String mobile = user.getMobileNumber();
+        int visible = Math.min(WalletConstants.MOBILE_VISIBLE_DIGITS, mobile.length());
+        return "*".repeat(mobile.length() - visible) + mobile.substring(mobile.length() - visible);
+    }
 }

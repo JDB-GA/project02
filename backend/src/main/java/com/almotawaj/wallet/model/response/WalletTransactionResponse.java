@@ -18,6 +18,8 @@ public record WalletTransactionResponse(
         String counterpartyName,
         String counterpartyIban,
         String counterpartyBic,
+        String counterpartyEmail,
+        String counterpartyMobile,
         String description,
         Instant createdAt
 ) {
@@ -32,6 +34,8 @@ public record WalletTransactionResponse(
                 transaction.getCounterpartyName(),
                 transaction.getCounterpartyIban(),
                 transaction.getCounterpartyBic(),
+                transaction.getCounterpartyEmail(),
+                transaction.getCounterpartyMobile(),
                 transaction.getDescription(),
                 transaction.getCreatedAt());
     }

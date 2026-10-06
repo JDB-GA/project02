@@ -19,6 +19,8 @@ export const transactionSchema = z.object({
   counterpartyName: z.string(),
   counterpartyIban: z.string().nullable(),
   counterpartyBic: z.string().nullable(),
+  counterpartyEmail: z.string().nullable(),
+  counterpartyMobile: z.string().nullable(),
   description: z.string().nullable(),
   createdAt: z.iso.datetime({ offset: true }),
 })

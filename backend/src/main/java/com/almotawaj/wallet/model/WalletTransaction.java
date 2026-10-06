@@ -1,3 +1,4 @@
+// backend/src/main/java/com/almotawaj/wallet/model/WalletTransaction.java
 package com.almotawaj.wallet.model;
 
 import com.almotawaj.wallet.config.constants.DatabaseTables;
@@ -51,6 +52,12 @@ public class WalletTransaction {
 
     @Column(updatable = false, length = ValidationLimits.BIC_MAX)
     private String counterpartyBic;
+
+    @Column(updatable = false, length = ValidationLimits.EMAIL_MAX)
+    private String counterpartyEmail;
+
+    @Column(updatable = false, length = ValidationLimits.MOBILE_MAX)
+    private String counterpartyMobile;
 
     @Column(updatable = false, length = ValidationLimits.TRANSACTION_DESCRIPTION_MAX)
     private String description;

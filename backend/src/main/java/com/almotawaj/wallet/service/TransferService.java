@@ -71,6 +71,8 @@ public class TransferService {
     }
 
     private Counterparty counterparty(Wallet wallet) {
-        return new Counterparty(holderNames.fullName(wallet.getUser()), wallet.getIban(), WalletConstants.BANK_BIC);
+        User user = wallet.getUser();
+        return new Counterparty(holderNames.fullName(user), wallet.getIban(), WalletConstants.BANK_BIC,
+                holderNames.maskedEmail(user), holderNames.maskedMobile(user));
     }
 }

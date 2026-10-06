@@ -66,7 +66,7 @@ public class WalletService {
         Wallet wallet = walletLocker.lock(provisioner.getOrCreate(userId).getId());
         dailyLimitPolicy.ensureTopUpAllowed(wallet.getId(), request.amount());
         TopUpSource source = request.source();
-        Counterparty sender = new Counterparty(source.getHolderName(), source.getIban(), source.getBic());
+        Counterparty sender = new Counterparty(source.getHolderName(), source.getIban(), source.getBic(), null, null);
         WalletTransaction transaction = ledger.credit(wallet, TransactionType.TOP_UP, request.amount(), sender,
                 source.getBankName());
         eventPublisher.publishEvent(new MoneyReceivedEvent(userId, transaction.getAmount(), sender.name(),
@@ -78,5 +78,4 @@ public class WalletService {
     public void cleanAllTransactions() {
         transactionRepository.deleteAllTransactions();
     }
-
 }
