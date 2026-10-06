@@ -53,6 +53,5 @@
   "recipientSelf": "لا يمكنك إرسال الأموال إلى نفسك",
   "insufficientBalance": "رصيدك غير كافٍ",
   "amountOverDailySendLimit": "المبلغ يتجاوز ما يمكنك إرساله اليوم",
-  "noteTooLong": "يجب ألا تزيد الملاحظة عن {{noteMax}} حرفاً",
-  "payerRequired": "أدخل البريد الإلكتروني، رقم الهاتف أو الآيبان للشخص الذي تطلب منه الأموال"
+  "noteTooLong": "يجب ألا تزيد الملاحظة عن {{noteMax}} حرفاً"
 }

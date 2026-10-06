@@ -23,8 +23,6 @@
   "transactions": {
     "title": "Transactions",
     "date": "Date",
-    "from": "From",
-    "to": "To",
     "counterparty": "From / To",
     "type": "Type",
     "reference": "Reference",
@@ -41,7 +39,6 @@
     "title": "Transaction details",
     "amount": "Amount",
     "date": "Date",
-    "type": "Type",
     "reference": "Reference",
     "sender": "Sender Details",
     "receiver": "Receiver Details",

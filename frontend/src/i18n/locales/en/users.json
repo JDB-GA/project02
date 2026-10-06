@@ -37,7 +37,6 @@
   "detail": {
     "back": "Back to users",
     "notFound": "This user was not found.",
-    "profile": "Profile",
     "fullName": "Full name",
     "noName": "No KYC submitted",
     "email": "Email",
@@ -45,8 +44,7 @@
     "mobileNumber": "Mobile number",
     "role": "Role",
     "kyc": "Identity verification",
-    "joined": "Joined",
-    "updated": "Last updated"
+    "joined": "Joined"
   },
   "contact": {
     "title": "Contact details",
