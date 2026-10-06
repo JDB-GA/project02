@@ -121,5 +121,10 @@
     "emptyTitle": "لا توجد طلبات",
     "emptyDescription": "ليس لديك أي طلبات دفع واردة أو صادرة.",
     "newRequestReceived": "طلب شخص ما أموالاً منك."
+  },
+  "documents": {
+    "receipt": "تنزيل الإيصال (PDF)",
+    "statement": "تنزيل كشف الحساب (PDF)",
+    "downloadFailed": "تعذر تنزيل ملف PDF. حاول مرة أخرى."
   }
 }

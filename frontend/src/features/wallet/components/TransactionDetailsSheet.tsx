@@ -6,6 +6,7 @@ import { KycDetailRow } from '@/features/kyc/components/KycDetailRow'
 import { formatDateTime } from '@/features/kyc/utils/format-kyc-date'
 import { useLanguage } from '@/hooks/useLanguage'
 import type { Transaction } from '../types/wallet.types'
+import { DownloadReceiptButton } from './DownloadReceiptButton'
 import { TransactionAmount } from './TransactionAmount'
 import { TransactionCounterparty } from './TransactionCounterparty'
 import { TransactionOwner } from './TransactionOwner'
@@ -63,6 +64,7 @@ export function TransactionDetailsSheet({ transaction, ownerEmail, onClose }: Tr
             <h3 className="text-sm font-semibold text-muted-foreground">{t('details.receiver')}</h3>
             {isCredit ? owner : counterparty}
           </section>
+          {!ownerEmail && <DownloadReceiptButton transaction={transaction} />}
           {transaction.description && (
             <>
               <Separator />

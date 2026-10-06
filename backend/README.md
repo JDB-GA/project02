@@ -2,7 +2,7 @@
 
 [← Back to the README](../README.md)
 
-Java 17, Spring Boot 4, Spring Security, Spring Data JPA and PostgreSQL. Runs on http://localhost:8080.
+Java 17, Spring Boot 4, Spring Security, Spring Data JPA, PostgreSQL and OpenPDF. Runs on http://localhost:8080.
 
 ## Setup
 
@@ -76,7 +76,7 @@ All accounts use `SEED_PASSWORD` and have verified emails. Seeded KYC applicatio
 src/main/java/com/almotawaj/wallet
 ├── config/       security, CORS, rate limiting, OpenAPI, constants (paths, messages, docs)
 ├── controller/   REST controllers (thin – no business logic)
-├── service/      business rules, policies, emails, file storage, notifications, payment gateway
+├── service/      business rules, policies, emails, file storage, notifications, payment gateway (pdf/ renders receipts and statements)
 ├── repository/   Spring Data JPA repositories and specifications
 ├── model/        entities, enums, request/response DTOs
 ├── event/        domain events (KYC reviewed, money received) handled after commit

@@ -112,6 +112,11 @@ Format: *As a [user], I want to [action], so that [reason].* Stories marked (pla
 - [ ] Search by counterparty name, reference or note (case-insensitive).
 - [ ] Filter by type, money in/out and date range; filters stay in the URL.
 
+**US-33 – Receipts and statements.** As a wallet holder, I want to download a PDF receipt for a transaction and a PDF statement of my history, so that I can keep or share a record.
+- [ ] The receipt shows the amount, type, reference, date, both sides and the note.
+- [ ] The statement follows my current filters and shows money in and money out totals.
+- [ ] Both are available in English and Arabic (right-to-left).
+
 **US-29 – Request money.** As a wallet holder, I want to request money from another user, so that they can pay me with one tap.
 - [ ] The payer can pay or decline; I can cancel while it is pending.
 - [ ] Paying is a normal transfer: balance and daily limit apply, and a request can never be paid twice.

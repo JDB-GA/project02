@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface WalletTransactionRepository extends JpaRepository<WalletTransaction, UUID>,
@@ -21,6 +22,9 @@ public interface WalletTransactionRepository extends JpaRepository<WalletTransac
     @Override
     @EntityGraph(attributePaths = {"wallet", "wallet.user"})
     Page<WalletTransaction> findAll(Specification<WalletTransaction> specification, Pageable pageable);
+
+    @EntityGraph(attributePaths = {"wallet", "wallet.user"})
+    Optional<WalletTransaction> findByIdAndWalletUserId(UUID id, UUID userId);
 
     @Query("""
             select coalesce(sum(t.amount), 0) from WalletTransaction t

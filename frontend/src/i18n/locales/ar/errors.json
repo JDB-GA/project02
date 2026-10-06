@@ -6,6 +6,7 @@
   "VALIDATION_FAILED": "بعض الحقول غير صالحة. يرجى مراجعتها والمحاولة مرة أخرى",
   "DATA_CONFLICT": "هذه المعلومات مستخدمة بالفعل",
   "NOT_FOUND": "المورد المطلوب غير موجود",
+  "TRANSACTION_NOT_FOUND": "لم يتم العثور على هذه المعاملة.",
   "PAYMENT_REQUEST_NOT_FOUND": "لم يتم العثور على طلب الدفع.",
   "PAYMENT_REQUEST_NOT_PENDING": "تم دفع طلب الدفع أو رفضه أو إلغاؤه مسبقاً.",
   "API_KEY_NOT_FOUND": "لم يتم العثور على مفتاح API.",

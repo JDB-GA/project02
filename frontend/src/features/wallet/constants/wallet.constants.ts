@@ -3,6 +3,8 @@ import type { TransactionsQuery } from '../types/wallet.types'
 export const WALLET_ENDPOINTS = {
   wallet: '/api/wallet',
   transactions: '/api/wallet/transactions',
+  statement: '/api/wallet/transactions/statement',
+  receipt: (transactionId: string) => `/api/wallet/transactions/${encodeURIComponent(transactionId)}/receipt`,
   topUps: '/api/wallet/top-ups',
   topUpOptions: '/api/wallet/top-ups/options',
   transfers: '/api/wallet/transfers',
@@ -30,6 +32,8 @@ export const CURRENCY = 'BHD'
 export const CURRENCY_DECIMALS = 3
 export const TRANSACTIONS_PAGE_SIZE = 10
 export const TRANSACTIONS_SORT = 'createdAt,desc'
+export const STATEMENT_FILE_NAME = 'statement.pdf'
+export const receiptFileName = (reference: string) => `receipt-${reference}.pdf`
 
 export const TOP_UP_MIN = 0.1
 export const TOP_UP_MAX = 5000

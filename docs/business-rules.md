@@ -45,3 +45,4 @@ Admins with `USER_MANAGE` manage clients and merchants only; only the super admi
 22. Only KYC-approved clients pay checkouts. A payment is 0.100–5,000.000 BHD, needs enough balance and counts towards a separate daily payment limit of 10,000.000 BHD.
 23. Only a `PAID` session can be refunded, once, in full, and only if the merchant's balance covers it.
 24. Sessions that are not paid in time are marked `EXPIRED` by a job that runs every minute.
+25. A wallet holder can download a receipt only for a transaction of their own wallet. A statement covers only their own wallet and lists at most the 500 newest matching transactions. Both downloads are written to the audit log.

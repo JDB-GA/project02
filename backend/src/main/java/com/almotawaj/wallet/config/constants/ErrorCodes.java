@@ -42,6 +42,7 @@ public final class ErrorCodes {
     public static final String SELF_TRANSFER_NOT_ALLOWED = "SELF_TRANSFER_NOT_ALLOWED";
     public static final String RECIPIENT_NOT_FOUND = "RECIPIENT_NOT_FOUND";
     public static final String RECIPIENT_UNAVAILABLE = "RECIPIENT_UNAVAILABLE";
+    public static final String TRANSACTION_NOT_FOUND = "TRANSACTION_NOT_FOUND";
     public static final String PAYMENT_REQUEST_NOT_FOUND = "PAYMENT_REQUEST_NOT_FOUND";
     public static final String PAYMENT_REQUEST_NOT_PENDING = "PAYMENT_REQUEST_NOT_PENDING";
     public static final String API_KEY_NOT_FOUND = "API_KEY_NOT_FOUND";
