@@ -40,12 +40,12 @@ export function CheckoutSessionsList({ status, page, onPageChange }: CheckoutSes
 
   return (
     <div className="flex flex-col gap-4" aria-busy={isPlaceholderData}>
-      <Table>
+      <Table className="stacked-table">
         <TableHeader>
           <TableRow>
             <TableHead>{t('payments.date')}</TableHead>
             <TableHead>{t('payments.order')}</TableHead>
-            <TableHead className="hidden md:table-cell">{t('payments.payer')}</TableHead>
+            <TableHead>{t('payments.payer')}</TableHead>
             <TableHead>{t('payments.status')}</TableHead>
             <TableHead className="text-end">{t('payments.amount')}</TableHead>
             <TableHead className="text-end">

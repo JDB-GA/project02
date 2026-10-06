@@ -120,7 +120,8 @@
     },
     "emptyTitle": "No requests",
     "emptyDescription": "You don't have any incoming or outgoing payment requests.",
-    "newRequestReceived": "Someone requested money from you."
+    "newRequestReceived": "Someone requested money from you.",
+    "statusLabel": "Status"
   },
   "documents": {
     "receipt": "Download receipt (PDF)",

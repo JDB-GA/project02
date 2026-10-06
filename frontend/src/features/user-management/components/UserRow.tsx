@@ -18,18 +18,18 @@ export function UserRow({ user }: UserRowProps) {
 
   return (
     <TableRow>
-      <TableCell className="max-w-56 truncate font-medium">
+      <TableCell data-label={t('users:table.email')} className="max-w-56 truncate font-medium">
         <bdi dir="ltr">{user.email}</bdi>
       </TableCell>
-      <TableCell className="hidden lg:table-cell">
+      <TableCell data-label={t('users:table.mobileNumber')}>
         <bdi dir="ltr">{user.mobileNumber}</bdi>
       </TableCell>
-      <TableCell>{t(`common:roles.${user.role}`)}</TableCell>
-      <TableCell>
+      <TableCell data-label={t('users:table.role')}>{t(`common:roles.${user.role}`)}</TableCell>
+      <TableCell data-label={t('users:table.status')}>
         <UserStatusBadge status={user.status} />
       </TableCell>
-      <TableCell className="hidden md:table-cell">{t(`users:kycStatus.${user.kycStatus}`)}</TableCell>
-      <TableCell className="hidden xl:table-cell">{formatDateTime(user.createdAt, language)}</TableCell>
+      <TableCell data-label={t('users:table.kyc')}>{t(`users:kycStatus.${user.kycStatus}`)}</TableCell>
+      <TableCell data-label={t('users:table.joined')}>{formatDateTime(user.createdAt, language)}</TableCell>
       <TableCell className="text-end">
         <Button asChild variant="outline" size="sm">
           <Link to={getUserPath(user.id)} aria-label={t('users:table.viewUser', { email: user.email })}>

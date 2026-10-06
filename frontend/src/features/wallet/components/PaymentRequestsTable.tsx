@@ -22,12 +22,12 @@ export function PaymentRequestsTable({ requests }: PaymentRequestsTableProps) {
   }
 
   return (
-    <Table>
+    <Table className="stacked-table">
       <TableHeader>
         <TableRow>
           <TableHead>{t('transactions.date')}</TableHead>
           <TableHead>{t('transactions.counterparty')}</TableHead>
-          <TableHead className="hidden md:table-cell">{t('transactions.type')}</TableHead>
+          <TableHead>{t('requests.statusLabel')}</TableHead>
           <TableHead className="text-end">{t('transactions.amount')}</TableHead>
           <TableHead className="text-end">
             <span className="sr-only">{t('transactions.actions')}</span>

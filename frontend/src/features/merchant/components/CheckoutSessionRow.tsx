@@ -18,8 +18,10 @@ export function CheckoutSessionRow({ session }: CheckoutSessionRowProps) {
 
   return (
     <TableRow>
-      <TableCell className="whitespace-nowrap">{formatDateTime(session.createdAt, language)}</TableCell>
-      <TableCell>
+      <TableCell data-label={t('payments.date')} className="whitespace-nowrap">
+        {formatDateTime(session.createdAt, language)}
+      </TableCell>
+      <TableCell data-label={t('payments.order')}>
         <div className="flex flex-col">
           <bdi dir="ltr" className="font-mono text-xs font-medium">
             {session.orderReference}
@@ -31,13 +33,13 @@ export function CheckoutSessionRow({ session }: CheckoutSessionRowProps) {
           )}
         </div>
       </TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell data-label={t('payments.payer')}>
         {session.payerName ? <bdi dir="ltr">{session.payerName}</bdi> : t('payments.noPayer')}
       </TableCell>
-      <TableCell>
+      <TableCell data-label={t('payments.status')}>
         <Badge variant={CHECKOUT_STATUS_BADGE_VARIANTS[session.status]}>{t(`status.${session.status}`)}</Badge>
       </TableCell>
-      <TableCell className="text-end">
+      <TableCell data-label={t('payments.amount')} className="text-end">
         <bdi dir="ltr" className="font-medium tabular-nums">
           {formatMoney(session.amount, language)}
         </bdi>

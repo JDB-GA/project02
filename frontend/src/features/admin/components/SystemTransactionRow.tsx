@@ -11,23 +11,25 @@ interface SystemTransactionRowProps {
 }
 
 export function SystemTransactionRow({ transaction }: SystemTransactionRowProps) {
-  const { t } = useTranslation('wallet')
+  const { t } = useTranslation(['wallet', 'statistics'])
   const { language } = useLanguage()
 
   return (
     <TableRow>
-      <TableCell className="whitespace-nowrap">{formatDateTime(transaction.createdAt, language)}</TableCell>
-      <TableCell className="font-medium">
+      <TableCell data-label={t('wallet:transactions.date')} className="whitespace-nowrap">
+        {formatDateTime(transaction.createdAt, language)}
+      </TableCell>
+      <TableCell data-label={t('statistics:transactions.walletOwner')} className="font-medium">
         <bdi dir="ltr">{transaction.walletOwnerEmail}</bdi>
       </TableCell>
-      <TableCell className="hidden md:table-cell">{transaction.counterpartyName}</TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell data-label={t('wallet:transactions.counterparty')}>{transaction.counterpartyName}</TableCell>
+      <TableCell data-label={t('wallet:transactions.type')}>
         <Badge variant="secondary">{t(`types.${transaction.type}`)}</Badge>
       </TableCell>
-      <TableCell className="hidden font-mono text-xs lg:table-cell">
+      <TableCell data-label={t('wallet:transactions.reference')} className="font-mono text-xs">
         <bdi dir="ltr">{transaction.reference}</bdi>
       </TableCell>
-      <TableCell className="text-end">
+      <TableCell data-label={t('wallet:transactions.amount')} className="text-end">
         <TransactionAmount transaction={transaction} />
       </TableCell>
     </TableRow>

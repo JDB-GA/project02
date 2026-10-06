@@ -18,17 +18,19 @@ export function AuditLogRow({ log }: AuditLogRowProps) {
 
   return (
     <TableRow>
-      <TableCell className="whitespace-nowrap">{formatDateTime(log.createdAt, language)}</TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell data-label={t('table.time')} className="whitespace-nowrap">
+        {formatDateTime(log.createdAt, language)}
+      </TableCell>
+      <TableCell data-label={t('table.actor')}>
         {log.actorEmail === null ? t('table.system') : <bdi dir="ltr">{log.actorEmail}</bdi>}
       </TableCell>
-      <TableCell>
+      <TableCell data-label={t('table.action')}>
         <Badge variant="secondary">{t(`actions.${log.action}`)}</Badge>
       </TableCell>
-      <TableCell>
+      <TableCell data-label={t('table.target')}>
         <AuditLogTarget log={log} />
       </TableCell>
-      <TableCell className="hidden max-w-xs truncate text-muted-foreground lg:table-cell" title={log.details ?? undefined}>
+      <TableCell data-label={t('table.details')} className="max-w-xs truncate text-muted-foreground" title={log.details ?? undefined}>
         {log.details === null ? EMPTY_VALUE : <AuditLogDetails details={log.details} />}
       </TableCell>
     </TableRow>

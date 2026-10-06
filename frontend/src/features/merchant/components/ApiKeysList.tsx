@@ -31,14 +31,14 @@ export function ApiKeysList() {
   }
 
   return (
-    <Table>
+    <Table className="stacked-table">
       <TableHeader>
         <TableRow>
           <TableHead>{t('keys.name')}</TableHead>
           <TableHead>{t('keys.key')}</TableHead>
           <TableHead>{t('keys.status')}</TableHead>
-          <TableHead className="hidden md:table-cell">{t('keys.lastUsed')}</TableHead>
-          <TableHead className="hidden lg:table-cell">{t('keys.created')}</TableHead>
+          <TableHead>{t('keys.lastUsed')}</TableHead>
+          <TableHead>{t('keys.created')}</TableHead>
           <TableHead className="text-end">
             <span className="sr-only">{t('actions')}</span>
           </TableHead>

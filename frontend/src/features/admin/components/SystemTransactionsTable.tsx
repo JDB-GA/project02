@@ -11,14 +11,14 @@ export function SystemTransactionsTable({ transactions }: SystemTransactionsTabl
   const { t } = useTranslation(['wallet', 'statistics'])
 
   return (
-    <Table>
+    <Table className="stacked-table">
       <TableHeader>
         <TableRow>
           <TableHead>{t('wallet:transactions.date')}</TableHead>
           <TableHead>{t('statistics:transactions.walletOwner')}</TableHead>
-          <TableHead className="hidden md:table-cell">{t('wallet:transactions.counterparty')}</TableHead>
-          <TableHead className="hidden md:table-cell">{t('wallet:transactions.type')}</TableHead>
-          <TableHead className="hidden lg:table-cell">{t('wallet:transactions.reference')}</TableHead>
+          <TableHead>{t('wallet:transactions.counterparty')}</TableHead>
+          <TableHead>{t('wallet:transactions.type')}</TableHead>
+          <TableHead>{t('wallet:transactions.reference')}</TableHead>
           <TableHead className="text-end">{t('wallet:transactions.amount')}</TableHead>
         </TableRow>
       </TableHeader>
