@@ -12,8 +12,14 @@ export function WalletPage() {
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4">
       <PageTitle title={t('areas.wallet.title')} />
-      <h1 className="text-2xl font-semibold">{t('areas.wallet.heading')}</h1>
-      {canUseWallet ? <WalletContent /> : <KycVerificationPrompt />}
+      {canUseWallet ? (
+        <WalletContent />
+      ) : (
+        <>
+          <h1 className="text-2xl font-semibold">{t('areas.wallet.heading')}</h1>
+          <KycVerificationPrompt />
+        </>
+      )}
     </div>
   )
 }
