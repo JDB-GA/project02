@@ -12,6 +12,7 @@ public final class ValidationPatterns {
     public static final String ROAD = "^\\d{1,5}$";
     public static final String BUILDING = "^[0-9A-Za-z]{1,6}$";
     public static final String FLAT = "^[0-9A-Za-z]{0,6}$";
+    public static final String ORDER_REFERENCE = "^[A-Za-z0-9._-]+$";
 
     private ValidationPatterns() {
     }

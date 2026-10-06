@@ -10,6 +10,8 @@ public final class DatabaseTables {
     public static final String WALLETS = "wallets";
     public static final String WALLET_TRANSACTIONS = "wallet_transactions";
     public static final String PAYMENT_REQUESTS = "payment_requests";
+    public static final String MERCHANT_API_KEYS = "merchant_api_keys";
+    public static final String CHECKOUT_SESSIONS = "checkout_sessions";
 
     private DatabaseTables() {
     }

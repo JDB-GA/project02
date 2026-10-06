@@ -29,7 +29,7 @@ public final class ApiDocs {
     public static final String VERSION = "1.0.0";
     public static final String DESCRIPTION = """
             REST API for the Almotawaj Digital Wallet: authentication, identity verification (KYC), \
-            wallets and transactions, KYC review, user management, permissions and audit logs.
+            wallets and transactions, merchant payments, KYC review, user management, permissions and audit logs.
 
             **How to authenticate in Swagger:** call `POST /auth/users/login`. The server sets an httpOnly \
             `access_token` cookie that the browser sends automatically with every following request.
