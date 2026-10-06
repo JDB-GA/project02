@@ -33,6 +33,10 @@
       "title": "My Wallet",
       "heading": "Welcome to your wallet"
     },
+    "transactions": {
+      "title": "Transactions",
+      "heading": "Transaction History"
+    },
     "merchant": {
       "title": "Merchant",
       "heading": "Welcome to your merchant dashboard"

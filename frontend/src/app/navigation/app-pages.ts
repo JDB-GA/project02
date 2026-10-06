@@ -3,6 +3,7 @@ import {
   HistoryIcon,
   KeyRoundIcon,
   LayoutDashboardIcon,
+  ReceiptTextIcon,
   ShieldCheckIcon,
   StoreIcon,
   UsersIcon,
@@ -19,6 +20,14 @@ export const APP_PAGES: readonly AppPage[] = [
     roles: ['CLIENT'],
     showInSidebar: true,
     lazy: async () => ({ Component: (await import('@/features/wallet/pages/WalletPage')).WalletPage }),
+  },
+  {
+    id: 'transactions',
+    path: ROUTES.transactions,
+    icon: ReceiptTextIcon,
+    roles: ['CLIENT', 'MERCHANT'],
+    showInSidebar: true,
+    lazy: async () => ({ Component: (await import('@/features/wallet/pages/TransactionsPage')).TransactionsPage }),
   },
   {
     id: 'verification',
