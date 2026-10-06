@@ -24,7 +24,7 @@ export function UserStatisticsCards() {
   }
 
   return (
-    <section aria-label={t('statistics:users.title')} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <section aria-label={t('statistics:users.title')} className="grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-4">
       <StatisticCard label={t('statistics:users.total')} icon={UsersIcon} value={format(data?.totalUsers)} />
       {ROLE_STATISTICS.map(({ role, icon }) => (
         <StatisticCard key={role} label={t(`statistics:users.roles.${role}`)} icon={icon} value={format(data?.usersByRole[role])} />
