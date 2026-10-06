@@ -15,7 +15,7 @@ export function TransactionAmount({ transaction, className }: TransactionAmountP
   return (
     <bdi
       dir="ltr"
-      className={cn('font-medium tabular-nums', isCredit ? 'text-emerald-700 dark:text-emerald-400' : 'text-foreground', className)}
+      className={cn('font-medium tabular-nums', isCredit ? 'text-emerald-600 dark:text-emerald-400' : 'text-destructive', className)}
     >
       {`${isCredit ? '+' : '−'}${formatMoney(transaction.amount, language)}`}
     </bdi>
