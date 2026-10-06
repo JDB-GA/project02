@@ -25,6 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Locale;
 import java.util.UUID;
 
+/**
+ * Account entry points: registration, sign-in and sign-out.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
