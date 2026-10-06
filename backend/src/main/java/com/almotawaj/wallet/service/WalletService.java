@@ -43,16 +43,18 @@ public class WalletService {
     private final DailyLimitPolicy dailyLimitPolicy;
     private final ApplicationEventPublisher eventPublisher;
     private final AuditService auditService;
+    private final WalletHolderNames holderNames;
 
     /**
      * Returns the wallet of the given user, creating it on first access.
      *
      * @param userId the wallet holder
-     * @return the wallet with its IBAN, balance and currency
+     * @return the wallet with its holder name, IBAN, balance and currency
      */
     @Transactional
     public WalletResponse getMine(UUID userId) {
-        return WalletResponse.from(provisioner.getOrCreate(userId));
+        Wallet wallet = provisioner.getOrCreate(userId);
+        return WalletResponse.from(wallet, holderNames.fullName(wallet.getUser()));
     }
 
     /**
