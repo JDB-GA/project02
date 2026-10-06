@@ -31,7 +31,6 @@ public final class AuthDocs {
     public static final String RESEND = "Resend the verification code";
     public static final String RESEND_DESCRIPTION = "Emails a new code. Allowed once every 60 seconds.";
     public static final String RESEND_NO_CONTENT = "Code sent";
-    public static final String RESEND_COOLDOWN = "Requested within the 60-second cooldown (OTP_RESEND_COOLDOWN)";
 
     public static final String FORGOT = "Request a password reset code";
     public static final String FORGOT_DESCRIPTION = "Emails a 6-digit reset code when an active account exists. Always returns 204 so it cannot be used to discover accounts.";

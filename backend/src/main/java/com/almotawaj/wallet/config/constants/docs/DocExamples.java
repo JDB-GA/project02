@@ -8,7 +8,6 @@ public final class DocExamples {
     public static final String NEW_PASSWORD = "N3wStr0ngPass!";
     public static final String OTP_CODE = "482913";
     public static final String ROLE = "MERCHANT";
-    public static final String PERMISSIONS = "[]";
     public static final String REJECTION_REASON = "The CPR copy is blurry. Please upload a clearer scan.";
     public static final String FULL_NAME = "Ali Hasan";
     public static final String CPR = "990101234";

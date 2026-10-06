@@ -7,7 +7,6 @@ public final class WalletLimits {
     public static final String TRANSFER_MIN = "0.100";
     public static final String TRANSFER_MAX = "5000.000";
     public static final String DAILY_TRANSFER_LIMIT = "10000.000";
-    public static final String DAILY_CHECKOUT_LIMIT = "10000.000";
 
     private WalletLimits() {
     }
