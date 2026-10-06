@@ -20,10 +20,10 @@ public final class SeedConstants {
             new SeedAccount("merchant@almotawaj.com", "30000003", UserRole.MERCHANT, Set.of(), null, null, null),
             new SeedAccount("client@almotawaj.com", "30000002", UserRole.CLIENT, Set.of(),
                     KycApplicationStatus.PENDING, "Ali Hasan", "900000001"),
-            new SeedAccount("verified.client@almotawaj.com", "30000005", UserRole.CLIENT, Set.of(),
-                    KycApplicationStatus.APPROVED, "Fatima Ahmed", "900000002"),
-            new SeedAccount("rejected.client@almotawaj.com", "30000006", UserRole.CLIENT, Set.of(),
-                    KycApplicationStatus.REJECTED, "Yousif Salman", "900000003"));
+            new SeedAccount("illia@almotawaj.com", "30000005", UserRole.CLIENT, Set.of(),
+                    KycApplicationStatus.APPROVED, "Illia", "900000002"),
+            new SeedAccount("salman@almotawaj.com", "30000006", UserRole.CLIENT, Set.of(),
+                    KycApplicationStatus.REJECTED, "Salman Mohammed", "900000003"));
 
     public static final String REVIEWER_EMAIL = "admin@almotawaj.com";
     public static final String REJECTION_REASON = "The CPR copy is blurry. Please upload a clearer scan.";

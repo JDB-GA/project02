@@ -5,6 +5,7 @@ import com.almotawaj.wallet.config.constants.SecurityConstants;
 import com.almotawaj.wallet.config.constants.docs.ApiDocs;
 import com.almotawaj.wallet.config.constants.docs.SystemDocs;
 import com.almotawaj.wallet.service.SeedDataCleanupService;
+import com.almotawaj.wallet.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SeedDataCleanupController {
     private final SeedDataCleanupService seedDataCleanupService;
+    private final WalletService walletService;
 
     @Operation(summary = SystemDocs.CLEAN_SEED_DATA, description = SystemDocs.CLEAN_SEED_DATA_DESCRIPTION)
     @ApiResponse(responseCode = ApiDocs.NO_CONTENT, description = SystemDocs.CLEAN_SEED_DATA_NO_CONTENT)
@@ -31,5 +33,8 @@ public class SeedDataCleanupController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void clean() {
         seedDataCleanupService.clean();
+
+        // To Clean All Transactions As Well (Temp)
+        walletService.cleanAllTransactions();
     }
 }

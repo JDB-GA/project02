@@ -73,4 +73,10 @@ public class WalletService {
                 transaction.getReference()));
         return WalletTransactionResponse.from(transaction);
     }
+
+    @Transactional
+    public void cleanAllTransactions() {
+        transactionRepository.deleteAllTransactions();
+    }
+
 }

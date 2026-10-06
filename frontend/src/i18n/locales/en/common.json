@@ -13,7 +13,7 @@
   },
   "admin": {
     "cleanData": {
-      "title": "Clean seeded data",
+      "title": "Clean seeded data & All Transactions",
       "description": "Remove only the demo accounts and their dependent data. Other accounts and records remain unchanged.",
       "action": "Clean seeded data",
       "confirmTitle": "Clean all seeded data?",
