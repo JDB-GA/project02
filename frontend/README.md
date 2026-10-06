@@ -47,3 +47,7 @@ Pages are registered once in `src/app/navigation` with their route, icon, roles 
 ## Localisation
 
 Every text comes from a typed namespace in `src/i18n/locales/en` and `src/i18n/locales/ar`; a missing or misspelled key fails the type-check. Arabic switches the whole layout to right-to-left.
+
+## Responsive tables
+
+Tables never hide columns. A table with the `stacked-table` class (see `src/styles/tables.css`) turns each row into a labelled card when the space it is given is narrower than 44rem; the label of each value comes from the cell's `data-label`. The switch is a container query, so it follows the table's own width rather than the screen, which keeps it correct when the sidebar is open.
