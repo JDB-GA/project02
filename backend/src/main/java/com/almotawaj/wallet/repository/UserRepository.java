@@ -1,5 +1,6 @@
 package com.almotawaj.wallet.repository;
 
+import com.almotawaj.wallet.model.RoleCount;
 import com.almotawaj.wallet.model.User;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,4 +27,7 @@ public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificat
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select u from User u where u.id = :id")
     Optional<User> findByIdForUpdate(UUID id);
+
+    @Query("select new com.almotawaj.wallet.model.RoleCount(u.role, count(u)) from User u group by u.role")
+    List<RoleCount> countByRole();
 }
