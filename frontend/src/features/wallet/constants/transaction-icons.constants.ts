@@ -1,0 +1,13 @@
+import { ArrowDownLeftIcon, ArrowUpRightIcon, LandmarkIcon, ShoppingBagIcon, StoreIcon, Undo2Icon } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import type { Transaction } from '../types/wallet.types'
+
+export const TRANSACTION_ICONS: Readonly<Record<Transaction['type'], LucideIcon>> = {
+  TOP_UP: LandmarkIcon,
+  PAYMENT: ShoppingBagIcon,
+  PAYMENT_RECEIVED: StoreIcon,
+  REFUND: Undo2Icon,
+  REFUND_ISSUED: Undo2Icon,
+  TRANSFER_IN: ArrowDownLeftIcon,
+  TRANSFER_OUT: ArrowUpRightIcon,
+}

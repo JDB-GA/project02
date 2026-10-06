@@ -1,10 +1,8 @@
 import { useSearchParams } from 'react-router'
-import { ALL_FILTER } from '../constants/wallet.constants'
+import { ALL_FILTER, DEFAULT_TRANSACTIONS_QUERY } from '../constants/wallet.constants'
 import type { TransactionsQuery } from '../types/wallet.types'
 import { parseTransactionsQuery } from '../utils/parse-transactions-query'
 import { toTransactionsUrlParams } from '../utils/to-transactions-url-params'
-
-const EMPTY_QUERY: TransactionsQuery = { search: '', type: ALL_FILTER, direction: ALL_FILTER, from: '', to: '', page: 0 }
 
 export function useTransactionsFilters() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -25,7 +23,7 @@ export function useTransactionsFilters() {
       update({ page })
     },
     reset: () => {
-      setSearchParams(toTransactionsUrlParams(EMPTY_QUERY), { replace: true })
+      setSearchParams(toTransactionsUrlParams(DEFAULT_TRANSACTIONS_QUERY), { replace: true })
     },
   }
 }

@@ -17,7 +17,7 @@ export function UserTransactionsPage() {
   }
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-4">
       <PageTitle title={t('areas.userTransactions.title')} />
       <Button asChild variant="ghost" size="sm" className="self-start">
         <Link to={getUserPath(userId)}>

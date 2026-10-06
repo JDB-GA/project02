@@ -11,10 +11,10 @@ export function TransactionsPage() {
   const { query, hasFilters, update, setPage, reset } = useTransactionsFilters()
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-4">
       <PageTitle title={t('areas.transactions.title')} />
-      <Card className="flex min-h-0 flex-1 flex-col">
-        <CardHeader className="shrink-0 flex flex-col gap-4">
+      <Card>
+        <CardHeader className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <CardTitle>
               <h1>{t('areas.transactions.heading')}</h1>
@@ -23,7 +23,7 @@ export function TransactionsPage() {
           </div>
           <TransactionsFilters query={query} hasFilters={hasFilters} onChange={update} onReset={reset} />
         </CardHeader>
-        <CardContent className="flex min-h-0 flex-1 flex-col">
+        <CardContent>
           <TransactionsList query={query} hasFilters={hasFilters} onPageChange={setPage} />
         </CardContent>
       </Card>

@@ -27,13 +27,14 @@
     "type": "Type",
     "reference": "Reference",
     "amount": "Amount",
-    "actions": "Actions",
-    "view": "View details",
     "emptyTitle": "No transactions yet",
     "emptyDescription": "Transfers and payments will appear here.",
     "loadError": "Could not load your transactions.",
     "noMatchesTitle": "No matching transactions",
-    "noMatchesDescription": "Try different filters or clear them."
+    "noMatchesDescription": "Try different filters or clear them.",
+    "viewOf": "View details of {{name}}",
+    "recent": "Recent transactions",
+    "viewAll": "View all"
   },
   "details": {
     "title": "Transaction details",
@@ -120,8 +121,7 @@
     },
     "emptyTitle": "No requests",
     "emptyDescription": "You don't have any incoming or outgoing payment requests.",
-    "newRequestReceived": "Someone requested money from you.",
-    "statusLabel": "Status"
+    "newRequestReceived": "Someone requested money from you."
   },
   "documents": {
     "receipt": "Download receipt (PDF)",

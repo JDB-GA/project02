@@ -31,6 +31,7 @@ export const TRANSACTION_DIRECTIONS = ['CREDIT', 'DEBIT'] as const
 export const CURRENCY = 'BHD'
 export const CURRENCY_DECIMALS = 3
 export const TRANSACTIONS_PAGE_SIZE = 10
+export const DEFAULT_TRANSACTIONS_QUERY: TransactionsQuery = { search: '', type: 'ALL', direction: 'ALL', from: '', to: '', page: 0 }
 export const TRANSACTIONS_SORT = 'createdAt,desc'
 export const STATEMENT_FILE_NAME = 'statement.pdf'
 export const receiptFileName = (reference: string) => `receipt-${reference}.pdf`

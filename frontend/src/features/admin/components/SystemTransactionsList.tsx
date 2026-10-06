@@ -37,10 +37,8 @@ export function SystemTransactionsList({ query, hasFilters, onPageChange }: Syst
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-4" aria-busy={isPlaceholderData}>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-        <SystemTransactionsTable transactions={data.content} />
-      </div>
+    <div className="flex flex-col gap-4" aria-busy={isPlaceholderData}>
+      <SystemTransactionsTable transactions={data.content} />
       <PaginationControls page={data.page} totalPages={data.totalPages} disabled={isPlaceholderData} onPageChange={onPageChange} />
     </div>
   )
