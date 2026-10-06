@@ -18,17 +18,21 @@ export function ApiKeyRow({ apiKey }: ApiKeyRowProps) {
 
   return (
     <TableRow>
-      <TableCell className="font-medium">{apiKey.name}</TableCell>
-      <TableCell className="font-mono text-xs">
+      <TableCell data-label={t('keys.name')} className="font-medium">
+        {apiKey.name}
+      </TableCell>
+      <TableCell data-label={t('keys.key')} className="font-mono text-xs">
         <bdi dir="ltr">{`${apiKey.keyPrefix}…`}</bdi>
       </TableCell>
-      <TableCell>
+      <TableCell data-label={t('keys.status')}>
         <Badge variant={apiKey.active ? 'default' : 'outline'}>{apiKey.active ? t('keys.active') : t('keys.revokedStatus')}</Badge>
       </TableCell>
-      <TableCell className="hidden whitespace-nowrap md:table-cell">
+      <TableCell data-label={t('keys.lastUsed')} className="whitespace-nowrap">
         {apiKey.lastUsedAt ? formatDateTime(apiKey.lastUsedAt, language) : t('keys.neverUsed')}
       </TableCell>
-      <TableCell className="hidden whitespace-nowrap lg:table-cell">{formatDateTime(apiKey.createdAt, language)}</TableCell>
+      <TableCell data-label={t('keys.created')} className="whitespace-nowrap">
+        {formatDateTime(apiKey.createdAt, language)}
+      </TableCell>
       <TableCell className="text-end">
         {apiKey.active && (
           <ConfirmActionDialog

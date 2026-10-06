@@ -11,14 +11,14 @@ export function AuditLogTable({ logs }: AuditLogTableProps) {
   const { t } = useTranslation('auditLog')
 
   return (
-    <Table>
+    <Table className="stacked-table">
       <TableHeader>
         <TableRow>
           <TableHead>{t('table.time')}</TableHead>
-          <TableHead className="hidden md:table-cell">{t('table.actor')}</TableHead>
+          <TableHead>{t('table.actor')}</TableHead>
           <TableHead>{t('table.action')}</TableHead>
           <TableHead>{t('table.target')}</TableHead>
-          <TableHead className="hidden lg:table-cell">{t('table.details')}</TableHead>
+          <TableHead>{t('table.details')}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

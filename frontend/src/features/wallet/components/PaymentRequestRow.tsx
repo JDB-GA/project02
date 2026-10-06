@@ -29,8 +29,10 @@ export function PaymentRequestRow({ request }: PaymentRequestRowProps) {
 
   return (
     <TableRow>
-      <TableCell className="whitespace-nowrap">{formatDateTime(request.createdAt, language)}</TableCell>
-      <TableCell>
+      <TableCell data-label={t('transactions.date')} className="whitespace-nowrap">
+        {formatDateTime(request.createdAt, language)}
+      </TableCell>
+      <TableCell data-label={t('transactions.counterparty')}>
         <div className="flex items-start gap-3">
           <div
             className={cn(
@@ -55,10 +57,10 @@ export function PaymentRequestRow({ request }: PaymentRequestRowProps) {
           </div>
         </div>
       </TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell data-label={t('requests.statusLabel')}>
         <Badge variant={PAYMENT_REQUEST_BADGE_VARIANTS[request.status]}>{t(`requests.status.${request.status}`)}</Badge>
       </TableCell>
-      <TableCell className="text-end">
+      <TableCell data-label={t('transactions.amount')} className="text-end">
         <bdi dir="ltr" className="font-medium tabular-nums text-foreground">
           {formatMoney(request.amount, language)}
         </bdi>

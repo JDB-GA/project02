@@ -11,15 +11,15 @@ export function UsersTable({ users }: UsersTableProps) {
   const { t } = useTranslation('users')
 
   return (
-    <Table>
+    <Table className="stacked-table">
       <TableHeader>
         <TableRow>
           <TableHead>{t('table.email')}</TableHead>
-          <TableHead className="hidden lg:table-cell">{t('table.mobileNumber')}</TableHead>
+          <TableHead>{t('table.mobileNumber')}</TableHead>
           <TableHead>{t('table.role')}</TableHead>
           <TableHead>{t('table.status')}</TableHead>
-          <TableHead className="hidden md:table-cell">{t('table.kyc')}</TableHead>
-          <TableHead className="hidden xl:table-cell">{t('table.joined')}</TableHead>
+          <TableHead>{t('table.kyc')}</TableHead>
+          <TableHead>{t('table.joined')}</TableHead>
           <TableHead className="text-end">
             <span className="sr-only">{t('table.actions')}</span>
           </TableHead>

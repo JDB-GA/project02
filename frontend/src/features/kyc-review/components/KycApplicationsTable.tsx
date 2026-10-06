@@ -11,13 +11,13 @@ export function KycApplicationsTable({ applications }: KycApplicationsTableProps
   const { t } = useTranslation('kycReview')
 
   return (
-    <Table>
+    <Table className="stacked-table">
       <TableHeader>
         <TableRow>
           <TableHead>{t('table.fullName')}</TableHead>
           <TableHead>{t('table.cprNumber')}</TableHead>
-          <TableHead className="hidden xl:table-cell">{t('table.email')}</TableHead>
-          <TableHead className="hidden md:table-cell">{t('table.submittedAt')}</TableHead>
+          <TableHead>{t('table.email')}</TableHead>
+          <TableHead>{t('table.submittedAt')}</TableHead>
           <TableHead>{t('table.status')}</TableHead>
           <TableHead className="text-end">
             <span className="sr-only">{t('table.actions')}</span>

@@ -18,15 +18,15 @@ export function KycApplicationRow({ application }: KycApplicationRowProps) {
 
   return (
     <TableRow>
-      <TableCell className="font-medium">{application.fullName}</TableCell>
-      <TableCell>
+      <TableCell data-label={t('table.fullName')} className="font-medium">{application.fullName}</TableCell>
+      <TableCell data-label={t('table.cprNumber')}>
         <bdi dir="ltr">{application.cprNumber}</bdi>
       </TableCell>
-      <TableCell className="hidden xl:table-cell">
+      <TableCell data-label={t('table.email')}>
         <bdi dir="ltr">{application.applicantEmail}</bdi>
       </TableCell>
-      <TableCell className="hidden md:table-cell">{formatDateTime(application.submittedAt, language)}</TableCell>
-      <TableCell>
+      <TableCell data-label={t('table.submittedAt')}>{formatDateTime(application.submittedAt, language)}</TableCell>
+      <TableCell data-label={t('table.status')}>
         <KycStatusBadge status={application.status} />
       </TableCell>
       <TableCell className="text-end">
