@@ -19,8 +19,8 @@ export const PAYMENT_REQUESTS_PAGE_SIZE = 10
 export const PAYMENT_REQUESTS_SORT = 'createdAt,desc'
 
 export const PAYMENT_REQUEST_BADGE_VARIANTS: Readonly<Record<PaymentRequestStatus, BadgeVariant>> = {
-  PENDING: 'default',
-  PAID: 'secondary',
+  PENDING: 'secondary',
+  PAID: 'default',
   DECLINED: 'destructive',
   CANCELLED: 'outline',
 }

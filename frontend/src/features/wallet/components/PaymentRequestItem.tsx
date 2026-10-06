@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { useCurrentUser } from '@/features/auth/hooks/useCurrentUser'
 import { formatDateTime } from '@/features/kyc/utils/format-kyc-date'
 import { useLanguage } from '@/hooks/useLanguage'
+import { cn } from '@/lib/utils'
 import { PAYMENT_REQUEST_BADGE_VARIANTS } from '../constants/payment-request.constants'
 import type { PaymentRequest } from '../types/payment-request.types'
 import { formatMoney } from '../utils/format-money'
@@ -27,8 +28,13 @@ export function PaymentRequestItem({ request }: PaymentRequestItemProps) {
 
   return (
     <li className="flex flex-wrap items-center gap-3 p-3">
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
-        <HandCoinsIcon className="size-4" aria-hidden="true" />
+      <span
+        className={cn(
+          'flex size-10 shrink-0 items-center justify-center rounded-full',
+          isIncoming ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-primary/10 text-primary',
+        )}
+      >
+        <HandCoinsIcon className="size-5" aria-hidden="true" />
       </span>
       <div className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span className="font-medium break-words">
