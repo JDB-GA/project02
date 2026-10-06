@@ -87,6 +87,7 @@ public final class ErrorMessages {
     public static final String AMOUNT_FILTER_NEGATIVE = "Amount filters cannot be negative";
     public static final String DATE_RANGE_INVALID = "The start date must be on or before the end date";
     public static final String AMOUNT_RANGE_INVALID = "The minimum amount must not exceed the maximum amount";
+    public static final String TRANSACTION_NOT_FOUND = "Transaction not found";
     public static final String PAYMENT_REQUEST_NOT_FOUND = "Payment request not found";
     public static final String PAYMENT_REQUEST_NOT_PENDING = "This payment request is no longer pending";
     public static final String API_KEY_NAME_REQUIRED = "Name is required";

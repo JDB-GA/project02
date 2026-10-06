@@ -36,6 +36,8 @@ public final class ApiPaths {
     public static final String WALLET = "/api/wallet";
     public static final String NOTIFICATIONS_STREAM = "/api/notifications/stream";
     public static final String TRANSACTIONS = "/transactions";
+    public static final String TRANSACTION_RECEIPT = "/transactions/{transactionId}/receipt";
+    public static final String TRANSACTIONS_STATEMENT = "/transactions/statement";
     public static final String TOP_UPS = "/top-ups";
     public static final String TOP_UP_OPTIONS = "/top-ups/options";
     public static final String TRANSFERS = "/transfers";
@@ -46,6 +48,8 @@ public final class ApiPaths {
     public static final String PAYMENT_REQUEST_PAY = "/{requestId}/pay";
     public static final String PAYMENT_REQUEST_DECLINE = "/{requestId}/decline";
     public static final String PAYMENT_REQUEST_CANCEL = "/{requestId}/cancel";
+    public static final String WALLET_TRANSACTION_RECEIPTS = WALLET + "/transactions/*/receipt";
+    public static final String WALLET_TRANSACTIONS_STATEMENT = WALLET + TRANSACTIONS_STATEMENT;
     public static final String WALLET_TRANSFERS = WALLET + TRANSFERS;
     public static final String WALLET_RECIPIENTS = WALLET + RECIPIENTS;
     public static final String WALLET_TOP_UPS = WALLET + TOP_UPS;

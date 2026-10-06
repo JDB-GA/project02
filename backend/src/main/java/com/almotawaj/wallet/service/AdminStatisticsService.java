@@ -18,7 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.util.EnumMap;
 import java.util.List;
@@ -48,8 +47,8 @@ public class AdminStatisticsService {
     public TransactionStatisticsResponse getTransactionStatistics(TransactionSearchRequest filter) {
         List<DirectionTotal> totals = totalsRepository.totalsByDirection(WalletTransactionSpecifications.forSystem(filter, ZONE));
         long totalTransactions = totals.stream().mapToLong(DirectionTotal::count).sum();
-        return new TransactionStatisticsResponse(totalTransactions, amountOf(totals, TransactionDirection.CREDIT),
-                amountOf(totals, TransactionDirection.DEBIT));
+        return new TransactionStatisticsResponse(totalTransactions, DirectionTotal.amountOf(totals, TransactionDirection.CREDIT),
+                DirectionTotal.amountOf(totals, TransactionDirection.DEBIT));
     }
 
     @Transactional(readOnly = true)
@@ -57,13 +56,5 @@ public class AdminStatisticsService {
         return PageResponse.from(
                 transactionRepository.findAll(WalletTransactionSpecifications.forSystem(filter, ZONE), pageable),
                 AdminTransactionResponse::from);
-    }
-
-    private static BigDecimal amountOf(List<DirectionTotal> totals, TransactionDirection direction) {
-        return totals.stream()
-                .filter(total -> total.direction() == direction)
-                .map(DirectionTotal::amount)
-                .findFirst()
-                .orElse(BigDecimal.ZERO);
     }
 }
