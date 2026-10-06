@@ -27,6 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtRequestFilter jwtRequestFilter;
+    private final ApiKeyAuthenticationFilter apiKeyAuthenticationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -48,10 +49,12 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, ApiPaths.AUTH_ME).authenticated()
                         .requestMatchers(HttpMethod.POST, ApiPaths.AUTH_VERIFY_EMAIL, ApiPaths.AUTH_RESEND_VERIFICATION,
                                 ApiPaths.AUTH_CHANGE_PASSWORD).authenticated()
+                        .requestMatchers(ApiPaths.GATEWAY + ApiPaths.ALL).hasAuthority(SecurityConstants.GATEWAY_AUTHORITY)
                         .anyRequest().hasAuthority(SecurityConstants.EMAIL_VERIFIED_AUTHORITY))
                 .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(apiKeyAuthenticationFilter, JwtRequestFilter.class);
 
         return http.build();
     }
