@@ -24,7 +24,7 @@ Monorepo:
 - **Identity verification (KYC)** – clients submit personal details, address, CPR and passport (PDF) and a photo; they can preview and download their own documents.
 - **KYC review** – reviewers filter applications, preview documents and approve or reject with a reason. Clients are emailed the decision in English and Arabic.
 - **User management** – search users, create users by invitation (they set their own password), edit contact details, suspend, reactivate and soft delete (close) accounts, and inspect a user's transactions.
-- **Wallet** – every verified client and merchant gets one wallet with a unique, generated Bahraini IBAN (`BH` + check digits + `ALMT` + 14 digits, valid ISO 13616 mod-97). Balances are in BHD with 3 decimals and every movement is an append-only ledger entry.
+- **Wallet** – a balance card with quick actions (send, receive, request) and recent activity; every verified client and merchant gets one wallet with a unique, generated Bahraini IBAN (`BH` + check digits + `ALMT` + 14 digits, valid ISO 13616 mod-97). Balances are in BHD with 3 decimals and every movement is an append-only ledger entry.
 - **Receive transfers (simulated)** – choose one of five demo external accounts and an amount; the backend fills in the sender's name, IBAN and BIC.
 - **Send money** – send to another wallet by email, mobile number or IBAN, with autocomplete (masked suggestions) and a masked recipient preview before sending.
 - **Request money** – ask another wallet holder for money; they pay it with one tap or decline it, and the requester can cancel it while it is pending.
