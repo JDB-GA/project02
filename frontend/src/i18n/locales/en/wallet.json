@@ -51,7 +51,8 @@
     "iban": "IBAN",
     "bic": "Bank identifier (BIC)",
     "note": "Note",
-    "you": "You (This Wallet)"
+    "you": "You (This Wallet)",
+    "walletOwner": "Wallet owner"
   },
   "types": {
     "TOP_UP": "Bank transfer",
