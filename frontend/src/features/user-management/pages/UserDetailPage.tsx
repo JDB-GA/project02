@@ -5,6 +5,7 @@ import { PageTitle } from '@/components/PageTitle'
 import { Button } from '@/components/ui/button'
 import { ROUTES } from '@/config/routes'
 import { UserDetailContent } from '../components/UserDetailContent'
+import { UserDetailView } from '../components/UserDetailView'
 
 export function UserDetailPage() {
   const { t } = useTranslation(['common', 'users'])
@@ -23,7 +24,7 @@ export function UserDetailPage() {
           {t('users:detail.back')}
         </Link>
       </Button>
-      <UserDetailContent userId={userId} />
+      <UserDetailContent userId={userId}>{(user) => <UserDetailView user={user} />}</UserDetailContent>
     </div>
   )
 }

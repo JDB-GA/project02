@@ -5,7 +5,8 @@ import java.util.Set;
 
 public enum Permission {
     KYC_REVIEW(UserRole.ADMIN),
-    USER_MANAGE(UserRole.ADMIN);
+    USER_MANAGE(UserRole.ADMIN),
+    STATISTICS_VIEW(UserRole.ADMIN);
 
     private final Set<UserRole> grantableTo;
 

@@ -11,6 +11,7 @@ public final class SecurityConstants {
     public static final String HAS_WALLET_ROLE = "hasAnyRole('CLIENT', 'MERCHANT')";
     public static final String HAS_KYC_REVIEW = "hasAuthority('KYC_REVIEW')";
     public static final String HAS_USER_MANAGE = "hasAuthority('USER_MANAGE')";
+    public static final String HAS_STATISTICS_VIEW = "hasAuthority('STATISTICS_VIEW')";
     public static final String JWT_SECRET_PROPERTY = "${jwt-secret}";
     public static final String JWT_EXPIRATION_PROPERTY = "${jwt-expiration-ms}";
 

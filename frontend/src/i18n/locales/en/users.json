@@ -71,6 +71,10 @@
     "USER_MANAGE": {
       "label": "Manage users",
       "description": "Search users, edit contact details, suspend and close accounts."
+    },
+    "STATISTICS_VIEW": {
+      "label": "View statistics",
+      "description": "Access system-wide statistics and all transactions."
     }
   },
   "account": {
@@ -102,5 +106,10 @@
     "permissionsHint": "Only available for admins.",
     "submit": "Create and send invitation",
     "success": "User created. Invitation email sent."
+  },
+  "transactions": {
+    "open": "View transactions",
+    "heading": "Transactions for {{email}}",
+    "back": "Back to user"
   }
 }

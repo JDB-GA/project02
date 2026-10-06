@@ -1,4 +1,5 @@
 import type { Permission, UserRole, UserStatus } from '@/features/auth/types/user.types'
+import type { TransactionsQuery } from '@/features/wallet/types/wallet.types'
 import type { CreatableRole, UsersQuery } from '../types/user-management.types'
 
 const userPath = (userId: string) => `/api/admin/users/${encodeURIComponent(userId)}`
@@ -9,18 +10,20 @@ export const USER_MANAGEMENT_ENDPOINTS = {
   suspend: (userId: string) => `${userPath(userId)}/suspend`,
   reactivate: (userId: string) => `${userPath(userId)}/reactivate`,
   permission: (userId: string, permission: Permission) => `${userPath(userId)}/permissions/${permission}`,
+  transactions: (userId: string) => `${userPath(userId)}/transactions`,
 } as const
 
 export const USER_MANAGEMENT_QUERY_KEYS = {
   lists: ['user-management', 'list'],
   list: (query: UsersQuery) => ['user-management', 'list', query],
   detail: (userId: string) => ['user-management', 'detail', userId],
+  transactions: (userId: string, query: TransactionsQuery) => ['user-management', 'transactions', userId, query],
 } as const
 
 export const ALL_FILTER = 'ALL'
 export const ROLE_FILTERS: readonly (UserRole | typeof ALL_FILTER)[] = [ALL_FILTER, 'CLIENT', 'MERCHANT', 'ADMIN', 'SUPER_ADMIN']
 export const STATUS_FILTERS: readonly (UserStatus | typeof ALL_FILTER)[] = [ALL_FILTER, 'ACTIVE', 'SUSPENDED', 'LOCKED', 'CLOSED']
-export const ALL_PERMISSIONS: readonly Permission[] = ['KYC_REVIEW', 'USER_MANAGE']
+export const ALL_PERMISSIONS: readonly Permission[] = ['KYC_REVIEW', 'USER_MANAGE', 'STATISTICS_VIEW']
 export const CREATABLE_ROLES = ['CLIENT', 'MERCHANT', 'ADMIN'] as const
 export const STAFF_CREATABLE_ROLES: readonly CreatableRole[] = ['CLIENT', 'MERCHANT']
 export const USERS_PAGE_SIZE = 10

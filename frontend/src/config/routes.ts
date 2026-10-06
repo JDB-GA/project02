@@ -16,6 +16,8 @@ export const ROUTES = {
   users: '/admin/users',
   userCreate: '/admin/users/new',
   user: '/admin/users/:userId',
+  userTransactions: '/admin/users/:userId/transactions',
+  statistics: '/admin/statistics',
   auditLog: '/admin/audit-log',
-  paymentRequests: "/payment-requests",
+  paymentRequests: '/payment-requests',
 } as const

@@ -1,4 +1,3 @@
-// backend/src/main/java/com/almotawaj/wallet/config/constants/ApiPaths.java
 package com.almotawaj.wallet.config.constants;
 
 public final class ApiPaths {
@@ -31,6 +30,8 @@ public final class ApiPaths {
     public static final String ADMIN_USERS = "/api/admin/users";
     public static final String ADMIN_SEED_DATA = "/api/admin/seed-data";
     public static final String ADMIN_AUDIT_LOGS = "/api/admin/audit-logs";
+    public static final String ADMIN_STATISTICS = "/api/admin/statistics";
+    public static final String ADMIN_TRANSACTIONS = "/api/admin/transactions";
     public static final String SEED = "/api/seed";
     public static final String WALLET = "/api/wallet";
     public static final String NOTIFICATIONS_STREAM = "/api/notifications/stream";
@@ -54,6 +55,9 @@ public final class ApiPaths {
     public static final String USER_SUSPEND = "/{userId}/suspend";
     public static final String USER_REACTIVATE = "/{userId}/reactivate";
     public static final String USER_PERMISSION = "/{userId}/permissions/{permission}";
+    public static final String USER_TRANSACTIONS = "/{userId}/transactions";
+    public static final String USER_STATISTICS = "/users";
+    public static final String TRANSACTION_STATISTICS = "/transactions";
     public static final String SWAGGER_UI_HTML = "/swagger-ui.html";
     public static final String SWAGGER_UI = "/swagger-ui/**";
     public static final String API_DOCS = "/v3/api-docs/**";

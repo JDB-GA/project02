@@ -1,0 +1,22 @@
+{
+  "loadError": "Could not load the statistics.",
+  "users": {
+    "title": "Users",
+    "total": "All users",
+    "roles": {
+      "CLIENT": "Clients",
+      "MERCHANT": "Merchants",
+      "ADMIN": "Admins",
+      "SUPER_ADMIN": "Super admins"
+    }
+  },
+  "transactions": {
+    "title": "All transactions",
+    "summary": "Totals for the current filters",
+    "count": "Transactions",
+    "credited": "Money in",
+    "debited": "Money out",
+    "walletOwner": "Wallet owner",
+    "loadError": "Could not load the transactions."
+  }
+}

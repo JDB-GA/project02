@@ -2,6 +2,10 @@ package com.almotawaj.wallet.repository;
 
 import com.almotawaj.wallet.model.TransactionType;
 import com.almotawaj.wallet.model.WalletTransaction;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,6 +18,10 @@ import java.util.UUID;
 
 public interface WalletTransactionRepository extends JpaRepository<WalletTransaction, UUID>,
         JpaSpecificationExecutor<WalletTransaction> {
+    @Override
+    @EntityGraph(attributePaths = {"wallet", "wallet.user"})
+    Page<WalletTransaction> findAll(Specification<WalletTransaction> specification, Pageable pageable);
+
     @Query("""
             select coalesce(sum(t.amount), 0) from WalletTransaction t
             where t.wallet.id = :walletId and t.type = :type and t.createdAt >= :since""")

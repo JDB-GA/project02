@@ -1,6 +1,6 @@
-// backend/src/main/java/com/almotawaj/wallet/config/openapi/TagOrderCustomizer.java
 package com.almotawaj.wallet.config.openapi;
 
+import com.almotawaj.wallet.config.constants.docs.AdminStatisticsDocs;
 import com.almotawaj.wallet.config.constants.docs.AuthDocs;
 import com.almotawaj.wallet.config.constants.docs.KycDocs;
 import com.almotawaj.wallet.config.constants.docs.KycReviewDocs;
@@ -21,7 +21,7 @@ import java.util.List;
 public class TagOrderCustomizer implements OpenApiCustomizer {
     private static final List<String> ORDER = List.of(AuthDocs.TAG, KycDocs.TAG, WalletDocs.TAG, TransferDocs.TAG,
             PaymentRequestDocs.TAG, KycReviewDocs.TAG, UserAdminDocs.TAG, UserAdminDocs.PERMISSIONS_TAG,
-            SystemDocs.AUDIT_TAG, SystemDocs.SEED_TAG);
+            AdminStatisticsDocs.TAG, SystemDocs.AUDIT_TAG, SystemDocs.SEED_TAG);
 
     @Override
     public void customise(OpenAPI openApi) {
