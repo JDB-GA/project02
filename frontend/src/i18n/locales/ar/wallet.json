@@ -120,7 +120,8 @@
     },
     "emptyTitle": "لا توجد طلبات",
     "emptyDescription": "ليس لديك أي طلبات دفع واردة أو صادرة.",
-    "newRequestReceived": "طلب شخص ما أموالاً منك."
+    "newRequestReceived": "طلب شخص ما أموالاً منك.",
+    "statusLabel": "الحالة"
   },
   "documents": {
     "receipt": "تنزيل الإيصال (PDF)",
