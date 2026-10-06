@@ -1,6 +1,6 @@
 # Almotawaj Digital Wallet
 
-A bilingual (English / Arabic) digital wallet for Bahrain. Clients register, verify their email and their identity (KYC), then get a wallet with its own IBAN to receive bank transfers and send money to other users; staff review identity documents and manage users through role- and permission-based access.
+A bilingual (English / Arabic) digital wallet for Bahrain. Clients register, verify their email and their identity (KYC), then get a wallet with its own IBAN to receive bank transfers and send money to other users and pay merchants; staff review identity documents and manage users through role- and permission-based access.
 
 |            | URL                                                                                                                       |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -28,6 +28,7 @@ Monorepo:
 - **Receive transfers (simulated)** – choose one of five demo external accounts and an amount; the backend fills in the sender's name, IBAN and BIC.
 - **Send money** – send to another wallet by email, mobile number or IBAN, with autocomplete (masked suggestions) and a masked recipient preview before sending.
 - **Request money** – ask another wallet holder for money; they pay it with one tap or decline it, and the requester can cancel it while it is pending.
+- **Merchant payments** – merchants create API keys and checkout sessions from their server or payment links from the dashboard; clients pay from their wallet on a hosted checkout page; merchants cancel pending payments and refund paid ones. An order can never be paid twice.
 - **Transactions** – paged history with the counterparty, type, reference, signed amount and a details panel; search by name, reference or note and filter by type, direction and date range. Filters live in the URL, so a filtered view can be bookmarked.
 - **Live notifications** – money received and payment requests arrive instantly over Server-Sent Events, with a toast and a sound.
 - **Statistics** – staff with the `STATISTICS_VIEW` permission see the number of users per role, transaction totals for any filter and every wallet's transactions.
@@ -42,7 +43,7 @@ Monorepo:
 | --- | --- |
 | [`backend/README.md`](backend/README.md) | Backend setup, profiles, seeding, structure, tests and JavaDoc |
 | [`frontend/README.md`](frontend/README.md) | Frontend setup, scripts, structure, pages and localisation |
-| [`docs/api.md`](docs/api.md) | Endpoint reference, error format, paging, rate limiting and live notifications |
+| [`docs/api.md`](docs/api.md) | Endpoint reference, error format, paging, rate limiting, payment gateway and live notifications |
 | [`docs/business-rules.md`](docs/business-rules.md) | Roles, permissions and business rules |
 | [`docs/deployment.md`](docs/deployment.md) | Railway and Vercel deployment with every environment variable |
 | [`docs/user-stories.md`](docs/user-stories.md) | User stories with acceptance criteria |
