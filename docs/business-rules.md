@@ -46,3 +46,4 @@ Admins with `USER_MANAGE` manage clients and merchants only; only the super admi
 23. Only a `PAID` session can be refunded, once, in full, and only if the merchant's balance covers it.
 24. Sessions that are not paid in time are marked `EXPIRED` by a job that runs every minute.
 25. A wallet holder can download a receipt only for a transaction of their own wallet. A statement covers only their own wallet and lists at most the 500 newest matching transactions. Both downloads are written to the audit log.
+26. A client's name is their verified KYC name and cannot be edited. A merchant sets a business name (2–70 characters), which replaces their email wherever their name is shown to other users. Profile pictures must be real JPEG or PNG files up to 5 MB; uploading a new one deletes the old file.

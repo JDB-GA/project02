@@ -83,6 +83,9 @@ Table users {
   email_verified          boolean      [not null, default: false]
   mobile_verified         boolean      [not null]
   credentials_changed_at  timestamptz  [note: 'Tokens issued before this are rejected']
+  display_name            varchar(70)  [note: 'Business name of a merchant']
+  picture_key             varchar(255) [note: 'Stored file name of the profile picture']
+  picture_content_type    varchar(50)
   created_at              timestamptz  [not null]
   updated_at              timestamptz  [not null]
 }
