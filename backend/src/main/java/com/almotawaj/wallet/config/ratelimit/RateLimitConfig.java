@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class RateLimitConfig implements WebMvcConfigurer {
     private final RateLimitInterceptor rateLimitInterceptor;
+    private final WriteRateLimitInterceptor writeRateLimitInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -17,5 +18,7 @@ public class RateLimitConfig implements WebMvcConfigurer {
                 .addPathPatterns(ApiPaths.AUTH_LOGIN, ApiPaths.AUTH_REGISTER, ApiPaths.AUTH_VERIFY_EMAIL, ApiPaths.AUTH_RESEND_VERIFICATION,
                         ApiPaths.AUTH_FORGOT_PASSWORD, ApiPaths.AUTH_RESET_PASSWORD, ApiPaths.AUTH_CHANGE_PASSWORD, ApiPaths.SEED,
                         ApiPaths.ADMIN_SEED_DATA, ApiPaths.WALLET_TOP_UPS, ApiPaths.WALLET_TRANSFERS, ApiPaths.WALLET_RECIPIENTS);
+        registry.addInterceptor(writeRateLimitInterceptor)
+                .addPathPatterns(ApiPaths.WALLET_PAYMENT_REQUESTS, ApiPaths.WALLET_PAYMENT_REQUESTS + ApiPaths.ALL_SUB_PATHS);
     }
 }
