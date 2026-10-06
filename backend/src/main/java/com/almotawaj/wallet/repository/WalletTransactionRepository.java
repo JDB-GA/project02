@@ -30,8 +30,4 @@ public interface WalletTransactionRepository extends JpaRepository<WalletTransac
     @Modifying
     @Query("delete from WalletTransaction t where t.wallet.user.id in :userIds")
     void deleteAllByWalletUserIdIn(Collection<UUID> userIds);
-
-    @Modifying
-    @Query("delete from WalletTransaction t")
-    void deleteAllTransactions();
 }

@@ -31,6 +31,5 @@ public class SeedDataCleanupController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void clean() {
         seedDataCleanupService.clean();
-        seedDataCleanupService.cleanAllTransactions();
     }
 }
