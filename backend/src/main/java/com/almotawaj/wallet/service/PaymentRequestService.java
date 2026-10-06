@@ -58,7 +58,7 @@ public class PaymentRequestService {
 
     @Transactional
     public WalletTransactionResponse pay(UUID payerId, UUID requestId) {
-        PaymentRequest request = pending(requestRepository.findByIdAndPayerId(requestId, payerId));
+        PaymentRequest request = pending(requestRepository.findByIdAndPayerIdForUpdate(requestId, payerId));
         WalletTransactionResponse transaction = transferService.transfer(payerId,
                 new TransferRequest(request.getRequester().getEmailAddress(), request.getAmount(), request.getNote()));
         close(request, PaymentRequestStatus.PAID, payerId, AuditAction.PAYMENT_REQUEST_PAID);
@@ -67,13 +67,13 @@ public class PaymentRequestService {
 
     @Transactional
     public PaymentRequestResponse decline(UUID payerId, UUID requestId) {
-        PaymentRequest request = pending(requestRepository.findByIdAndPayerId(requestId, payerId));
+        PaymentRequest request = pending(requestRepository.findByIdAndPayerIdForUpdate(requestId, payerId));
         return close(request, PaymentRequestStatus.DECLINED, payerId, AuditAction.PAYMENT_REQUEST_DECLINED);
     }
 
     @Transactional
     public PaymentRequestResponse cancel(UUID requesterId, UUID requestId) {
-        PaymentRequest request = pending(requestRepository.findByIdAndRequesterId(requestId, requesterId));
+        PaymentRequest request = pending(requestRepository.findByIdAndRequesterIdForUpdate(requestId, requesterId));
         return close(request, PaymentRequestStatus.CANCELLED, requesterId, AuditAction.PAYMENT_REQUEST_CANCELLED);
     }
 
