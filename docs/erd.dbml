@@ -39,6 +39,14 @@ Enum otp_purpose {
 Enum permission {
   KYC_REVIEW
   USER_MANAGE
+  STATISTICS_VIEW
+}
+
+Enum payment_request_status {
+  PENDING
+  PAID
+  DECLINED
+  CANCELLED
 }
 
 Enum transaction_type {
@@ -139,7 +147,7 @@ Table audit_logs {
   id           uuid          [pk]
   actor_id     uuid          [ref: > users.id, note: 'Who performed the action']
   action       varchar(40)   [not null, note: 'AuditAction enum name']
-  target_type  varchar(40)   [not null, note: 'USER or KYC_APPLICATION']
+  target_type  varchar(40)   [not null, note: 'USER, KYC_APPLICATION, PAYMENT_REQUEST or WALLET_TRANSACTION']
   target_id    uuid          [not null]
   details      varchar(500)
   created_at   timestamptz   [not null]
@@ -172,10 +180,28 @@ Table wallet_transactions {
   counterparty_name  varchar(70)            [not null]
   counterparty_iban  varchar(34)
   counterparty_bic   varchar(11)
+  counterparty_email   varchar(254)         [note: 'Masked']
+  counterparty_mobile  varchar(12)          [note: 'Masked']
   description        varchar(140)
   created_at         timestamptz            [not null]
 
   indexes {
     (wallet_id, created_at)
+  }
+}
+
+Table payment_requests {
+  id            uuid                    [pk]
+  requester_id  uuid                    [not null, ref: > users.id, note: 'Who asks for the money']
+  payer_id      uuid                    [not null, ref: > users.id, note: 'Who is asked to pay']
+  amount        numeric(19,3)           [not null]
+  note          varchar(140)
+  status        payment_request_status  [not null, default: 'PENDING']
+  created_at    timestamptz             [not null]
+  updated_at    timestamptz             [not null]
+
+  indexes {
+    (requester_id, created_at)
+    (payer_id, created_at)
   }
 }
