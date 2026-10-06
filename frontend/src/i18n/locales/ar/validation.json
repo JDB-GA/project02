@@ -58,5 +58,7 @@
   "apiKeyNameTooLong": "يجب ألا يزيد الاسم عن {{apiKeyNameMax}} حرفاً",
   "orderReferenceRequired": "أدخل مرجع الطلب",
   "orderReferenceInvalid": "استخدم حتى {{orderReferenceMax}} من الحروف والأرقام والنقاط والشرطات",
-  "orderReferenceUsed": "توجد دفعة لهذا المرجع مسبقاً"
+  "orderReferenceUsed": "توجد دفعة لهذا المرجع مسبقاً",
+  "businessNameLength": "يجب أن يكون اسم النشاط من {{businessNameMin}} إلى {{businessNameMax}} حرفاً",
+  "businessNameInvalid": "استخدم الحروف والأرقام والمسافات و . , & ' - فقط"
 }

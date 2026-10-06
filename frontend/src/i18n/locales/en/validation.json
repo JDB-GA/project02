@@ -58,5 +58,7 @@
   "apiKeyNameTooLong": "Name must be at most {{apiKeyNameMax}} characters",
   "orderReferenceRequired": "Enter an order reference",
   "orderReferenceInvalid": "Use up to {{orderReferenceMax}} letters, digits, dots, dashes or underscores",
-  "orderReferenceUsed": "A payment already exists for this order reference"
+  "orderReferenceUsed": "A payment already exists for this order reference",
+  "businessNameLength": "Business name must be {{businessNameMin}} to {{businessNameMax}} characters",
+  "businessNameInvalid": "Use letters, digits, spaces and . , & ' - only"
 }

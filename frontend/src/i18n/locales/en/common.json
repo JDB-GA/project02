@@ -9,7 +9,8 @@
     "mobileNumber": "Mobile number",
     "role": "Role",
     "logout": "Log out",
-    "changePassword": "Change password"
+    "changePassword": "Change password",
+    "profile": "Profile"
   },
   "admin": {
     "cleanData": {
@@ -95,6 +96,9 @@
     "checkout": {
       "title": "Checkout",
       "heading": "Pay a merchant"
+    },
+    "profile": {
+      "title": "Profile"
     }
   },
   "nav": {

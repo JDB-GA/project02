@@ -34,7 +34,10 @@
     "CHECKOUT_EXPIRED": "Payment expired",
     "CHECKOUT_REFUNDED": "Payment refunded",
     "RECEIPT_DOWNLOADED": "Receipt downloaded",
-    "STATEMENT_DOWNLOADED": "Statement downloaded"
+    "STATEMENT_DOWNLOADED": "Statement downloaded",
+    "PROFILE_UPDATED": "Profile updated",
+    "PROFILE_PICTURE_UPDATED": "Profile picture updated",
+    "PROFILE_PICTURE_REMOVED": "Profile picture removed"
   },
   "targets": {
     "USER": "User",

@@ -14,6 +14,7 @@ import {
 } from '@/features/kyc/constants/kyc.constants'
 import { REJECTION_REASON_MAX_LENGTH } from '@/features/kyc-review/constants/kyc-review.constants'
 import { API_KEY_NAME_MAX_LENGTH, ORDER_REFERENCE_MAX_LENGTH } from '@/features/merchant/constants/merchant.constants'
+import { DISPLAY_NAME_MAX_LENGTH, DISPLAY_NAME_MIN_LENGTH } from '@/features/profile/constants/profile.constants'
 import { TOP_UP_MAX, TOP_UP_MIN, TRANSFER_NOTE_MAX_LENGTH } from '@/features/wallet/constants/wallet.constants'
 
 export const VALIDATION_PARAMS = {
@@ -33,4 +34,6 @@ export const VALIDATION_PARAMS = {
   noteMax: TRANSFER_NOTE_MAX_LENGTH,
   apiKeyNameMax: API_KEY_NAME_MAX_LENGTH,
   orderReferenceMax: ORDER_REFERENCE_MAX_LENGTH,
+  businessNameMin: DISPLAY_NAME_MIN_LENGTH,
+  businessNameMax: DISPLAY_NAME_MAX_LENGTH,
 } as const
