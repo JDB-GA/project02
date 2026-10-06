@@ -18,13 +18,13 @@ export function TransactionItem({ transaction, onSelect }: TransactionItemProps)
     <li>
       <button
         type="button"
-        className="flex w-full items-center gap-3 rounded-xl p-3 text-start transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none"
+        className="flex w-full items-center gap-3 rounded-md p-3 text-start transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none"
         aria-label={t('transactions.viewOf', { name: transaction.counterpartyName })}
         onClick={() => {
           onSelect(transaction)
         }}
       >
-        <TransactionIcon transaction={transaction} />
+        <TransactionIcon type={transaction.type} />
         <span className="flex min-w-0 flex-1 flex-col gap-0.5">
           <bdi className="self-start text-sm font-medium break-words sm:text-base">{transaction.counterpartyName}</bdi>
           <span className="text-xs text-muted-foreground">
