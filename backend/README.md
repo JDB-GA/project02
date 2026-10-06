@@ -76,7 +76,7 @@ All accounts use `SEED_PASSWORD` and have verified emails. Seeded KYC applicatio
 src/main/java/com/almotawaj/wallet
 ├── config/       security, CORS, rate limiting, OpenAPI, constants (paths, messages, docs)
 ├── controller/   REST controllers (thin – no business logic)
-├── service/      business rules, policies, emails, file storage, notifications
+├── service/      business rules, policies, emails, file storage, notifications, payment gateway
 ├── repository/   Spring Data JPA repositories and specifications
 ├── model/        entities, enums, request/response DTOs
 ├── event/        domain events (KYC reviewed, money received) handled after commit

@@ -42,6 +42,14 @@ Enum permission {
   STATISTICS_VIEW
 }
 
+Enum checkout_status {
+  PENDING
+  PAID
+  CANCELLED
+  EXPIRED
+  REFUNDED
+}
+
 Enum payment_request_status {
   PENDING
   PAID
@@ -147,7 +155,7 @@ Table audit_logs {
   id           uuid          [pk]
   actor_id     uuid          [ref: > users.id, note: 'Who performed the action']
   action       varchar(40)   [not null, note: 'AuditAction enum name']
-  target_type  varchar(40)   [not null, note: 'USER, KYC_APPLICATION, PAYMENT_REQUEST or WALLET_TRANSACTION']
+  target_type  varchar(40)   [not null, note: 'USER, KYC_APPLICATION, PAYMENT_REQUEST, WALLET_TRANSACTION, API_KEY or CHECKOUT_SESSION']
   target_id    uuid          [not null]
   details      varchar(500)
   created_at   timestamptz   [not null]
@@ -203,5 +211,41 @@ Table payment_requests {
   indexes {
     (requester_id, created_at)
     (payer_id, created_at)
+  }
+}
+
+Table merchant_api_keys {
+  id            uuid         [pk]
+  merchant_id   uuid         [not null, ref: > users.id]
+  name          varchar(50)  [not null]
+  key_prefix    varchar(12)  [not null, note: 'First characters, shown in the dashboard']
+  key_hash      varchar(64)  [not null, unique, note: 'SHA-256 of the key']
+  last_used_at  timestamptz
+  revoked_at    timestamptz  [note: 'Null while the key is active']
+  created_at    timestamptz  [not null]
+
+  indexes {
+    (merchant_id, created_at)
+  }
+}
+
+Table checkout_sessions {
+  id               uuid             [pk]
+  merchant_id      uuid             [not null, ref: > users.id]
+  payer_id         uuid             [ref: > users.id, note: 'Set when the session is paid']
+  order_reference  varchar(64)      [not null, note: 'The merchant order id']
+  amount           numeric(19,3)    [not null]
+  description      varchar(140)
+  status           checkout_status  [not null, default: 'PENDING']
+  expires_at       timestamptz      [not null]
+  paid_at          timestamptz
+  refunded_at      timestamptz
+  created_at       timestamptz      [not null]
+  updated_at       timestamptz      [not null]
+
+  indexes {
+    (merchant_id, order_reference) [unique, note: 'One session per order']
+    (merchant_id, created_at)
+    (status, expires_at)
   }
 }
