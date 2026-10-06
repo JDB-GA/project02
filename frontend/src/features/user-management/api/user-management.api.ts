@@ -1,4 +1,7 @@
 import type { Permission } from '@/features/auth/types/user.types'
+import { transactionPageSchema } from '@/features/wallet/schemas/wallet.schema'
+import type { TransactionPage, TransactionsQuery } from '@/features/wallet/types/wallet.types'
+import { toTransactionsSearchParams } from '@/features/wallet/utils/to-transactions-search-params'
 import { requestJson, requestVoid } from '@/lib/api/http-client'
 import { USER_MANAGEMENT_ENDPOINTS } from '../constants/user-management.constants'
 import { adminUserPageSchema, adminUserSchema } from '../schemas/admin-user.schema'
@@ -37,4 +40,9 @@ export const userManagementApi = {
 
   revokePermission: (userId: string, permission: Permission): Promise<AdminUser> =>
     requestJson(USER_MANAGEMENT_ENDPOINTS.permission(userId, permission), adminUserSchema, { method: 'DELETE' }),
+
+  transactions: (userId: string, query: TransactionsQuery, signal?: AbortSignal): Promise<TransactionPage> =>
+    requestJson(`${USER_MANAGEMENT_ENDPOINTS.transactions(userId)}?${toTransactionsSearchParams(query)}`, transactionPageSchema, {
+      signal,
+    }),
 }
