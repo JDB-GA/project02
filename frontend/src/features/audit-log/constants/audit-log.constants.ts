@@ -1,6 +1,10 @@
 import type { AuditActionFilter } from '../types/audit-log.types'
 
 export const AUDIT_ACTIONS = [
+  'USER_REGISTERED',
+  'USER_LOGGED_IN',
+  'USER_LOGGED_OUT',
+  'EMAIL_VERIFIED',
   'KYC_SUBMITTED',
   'KYC_APPROVED',
   'KYC_REJECTED',
@@ -13,11 +17,20 @@ export const AUDIT_ACTIONS = [
   'USER_CLOSED',
   'PASSWORD_CHANGED',
   'PASSWORD_RESET',
+  'PAYMENT_REQUEST_CREATED',
+  'PAYMENT_REQUEST_PAID',
+  'PAYMENT_REQUEST_DECLINED',
+  'PAYMENT_REQUEST_CANCELLED',
+  'TOP_UP_COMPLETED',
+  'TRANSFER_COMPLETED',
 ] as const
 
-export const AUDIT_TARGET_TYPES = ['USER', 'KYC_APPLICATION'] as const
+export const AUDIT_TARGET_TYPES = ['USER', 'KYC_APPLICATION', 'PAYMENT_REQUEST', 'WALLET_TRANSACTION'] as const
 
 export const ALL_ACTIONS_FILTER = 'ALL'
+
+export const STATUS_CHANGE_SEPARATOR = ' -> '
+export const EMPTY_VALUE = '—'
 
 export const AUDIT_ACTION_FILTERS: readonly AuditActionFilter[] = [ALL_ACTIONS_FILTER, ...AUDIT_ACTIONS]
 

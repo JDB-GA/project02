@@ -4,6 +4,10 @@
   },
   "actions": {
     "ALL": "All actions",
+    "USER_REGISTERED": "User registered",
+    "USER_LOGGED_IN": "Signed in",
+    "USER_LOGGED_OUT": "Signed out",
+    "EMAIL_VERIFIED": "Email verified",
     "KYC_SUBMITTED": "KYC submitted",
     "KYC_APPROVED": "KYC approved",
     "KYC_REJECTED": "KYC rejected",
@@ -15,11 +19,19 @@
     "USER_REACTIVATED": "User reactivated",
     "USER_CLOSED": "User closed",
     "PASSWORD_CHANGED": "Password changed",
-    "PASSWORD_RESET": "Password reset"
+    "PASSWORD_RESET": "Password reset",
+    "PAYMENT_REQUEST_CREATED": "Payment request created",
+    "PAYMENT_REQUEST_PAID": "Payment request paid",
+    "PAYMENT_REQUEST_DECLINED": "Payment request declined",
+    "PAYMENT_REQUEST_CANCELLED": "Payment request cancelled",
+    "TOP_UP_COMPLETED": "Top-up completed",
+    "TRANSFER_COMPLETED": "Transfer completed"
   },
   "targets": {
     "USER": "User",
-    "KYC_APPLICATION": "KYC application"
+    "KYC_APPLICATION": "KYC application",
+    "PAYMENT_REQUEST": "Payment request",
+    "WALLET_TRANSACTION": "Wallet transaction"
   },
   "table": {
     "time": "Time",
@@ -28,6 +40,9 @@
     "target": "Target",
     "details": "Details",
     "system": "System"
+  },
+  "details": {
+    "statusChange": "{{from}} → {{to}}"
   },
   "empty": {
     "title": "No activity yet",
