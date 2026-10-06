@@ -32,7 +32,9 @@
     "CHECKOUT_PAID": "Payment paid",
     "CHECKOUT_CANCELLED": "Payment cancelled",
     "CHECKOUT_EXPIRED": "Payment expired",
-    "CHECKOUT_REFUNDED": "Payment refunded"
+    "CHECKOUT_REFUNDED": "Payment refunded",
+    "RECEIPT_DOWNLOADED": "Receipt downloaded",
+    "STATEMENT_DOWNLOADED": "Statement downloaded"
   },
   "targets": {
     "USER": "User",

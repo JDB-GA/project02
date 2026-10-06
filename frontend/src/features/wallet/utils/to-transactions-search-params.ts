@@ -1,8 +1,8 @@
 import { ALL_FILTER, TRANSACTIONS_PAGE_SIZE, TRANSACTIONS_SORT } from '../constants/wallet.constants'
 import type { TransactionsQuery } from '../types/wallet.types'
 
-export function toTransactionsSearchParams({ search, type, direction, from, to, page }: TransactionsQuery): string {
-  const params = new URLSearchParams({ page: String(page), size: String(TRANSACTIONS_PAGE_SIZE), sort: TRANSACTIONS_SORT })
+export function toTransactionsFilterParams({ search, type, direction, from, to }: TransactionsQuery): URLSearchParams {
+  const params = new URLSearchParams()
   if (search.trim()) {
     params.set('search', search.trim())
   }
@@ -18,5 +18,13 @@ export function toTransactionsSearchParams({ search, type, direction, from, to, 
   if (to) {
     params.set('to', to)
   }
+  return params
+}
+
+export function toTransactionsSearchParams(query: TransactionsQuery): string {
+  const params = toTransactionsFilterParams(query)
+  params.set('page', String(query.page))
+  params.set('size', String(TRANSACTIONS_PAGE_SIZE))
+  params.set('sort', TRANSACTIONS_SORT)
   return params.toString()
 }

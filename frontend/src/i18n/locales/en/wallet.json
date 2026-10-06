@@ -121,5 +121,10 @@
     "emptyTitle": "No requests",
     "emptyDescription": "You don't have any incoming or outgoing payment requests.",
     "newRequestReceived": "Someone requested money from you."
+  },
+  "documents": {
+    "receipt": "Download receipt (PDF)",
+    "statement": "Download statement (PDF)",
+    "downloadFailed": "Could not download the PDF. Try again."
   }
 }

@@ -32,7 +32,9 @@
     "CHECKOUT_PAID": "دفع دفعة",
     "CHECKOUT_CANCELLED": "إلغاء دفعة",
     "CHECKOUT_EXPIRED": "انتهاء صلاحية دفعة",
-    "CHECKOUT_REFUNDED": "استرداد دفعة"
+    "CHECKOUT_REFUNDED": "استرداد دفعة",
+    "RECEIPT_DOWNLOADED": "تنزيل إيصال",
+    "STATEMENT_DOWNLOADED": "تنزيل كشف حساب"
   },
   "targets": {
     "USER": "مستخدم",
