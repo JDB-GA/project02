@@ -23,6 +23,7 @@ public class RateLimitConfig implements WebMvcConfigurer {
                 .addPathPatterns(ApiPaths.WALLET_PAYMENT_REQUESTS, ApiPaths.WALLET_PAYMENT_REQUESTS + ApiPaths.ALL,
                         ApiPaths.MERCHANT_API_KEYS, ApiPaths.MERCHANT_CHECKOUT_SESSIONS,
                         ApiPaths.MERCHANT_CHECKOUT_SESSIONS + ApiPaths.ALL, ApiPaths.GATEWAY + ApiPaths.ALL,
-                        ApiPaths.CHECKOUT + ApiPaths.ALL);
+                        ApiPaths.CHECKOUT + ApiPaths.ALL,
+                        ApiPaths.PROFILE, ApiPaths.PROFILE + ApiPaths.ALL);
     }
 }
