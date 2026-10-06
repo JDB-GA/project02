@@ -80,6 +80,14 @@
     "auditLog": {
       "title": "Audit Log",
       "heading": "Audit log"
+    },
+    "statistics": {
+      "title": "Statistics",
+      "heading": "System statistics"
+    },
+    "userTransactions": {
+      "title": "User Transactions",
+      "heading": "User transactions"
     }
   },
   "nav": {
