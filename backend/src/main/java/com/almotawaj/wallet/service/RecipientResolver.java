@@ -43,6 +43,6 @@ public class RecipientResolver {
         if (query.matches(ValidationPatterns.MOBILE_NUMBER)) {
             return userRepository.findByMobileNumber(LoginIdentifier.normalizeMobile(query));
         }
-        return walletRepository.findByIban(Iban.normalize(query)).map(Wallet::getUser);
+        return Iban.isValid(query) ? walletRepository.findByIban(Iban.normalize(query)).map(Wallet::getUser) : Optional.empty();
     }
 }
