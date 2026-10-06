@@ -1,0 +1,53 @@
+[data-slot='table-container']:has(> .stacked-table) {
+  container-type: inline-size;
+}
+
+@container (width < 44rem) {
+  .stacked-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .stacked-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-block: 0.75rem;
+  }
+
+  .stacked-table tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: none;
+    padding: 0 0.5rem;
+    overflow: visible;
+    text-align: end;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .stacked-table tbody td::before {
+    flex-shrink: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    color: var(--muted-foreground);
+    text-align: start;
+    content: attr(data-label);
+  }
+
+  .stacked-table tbody td:not([data-label]) {
+    justify-content: flex-end;
+  }
+
+  .stacked-table tbody td:not([data-label])::before,
+  .stacked-table tbody td:empty {
+    display: none;
+  }
+}
