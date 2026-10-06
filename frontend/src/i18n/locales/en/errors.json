@@ -6,6 +6,8 @@
   "VALIDATION_FAILED": "Some fields are invalid. Please check them and try again",
   "DATA_CONFLICT": "This information is already in use",
   "NOT_FOUND": "The requested resource was not found",
+  "PAYMENT_REQUEST_NOT_FOUND": "This payment request was not found.",
+  "PAYMENT_REQUEST_NOT_PENDING": "This payment request has already been paid, declined or cancelled.",
   "network": "Unable to reach the server. Check your connection and try again",
   "server": "Something went wrong on our side. Please try again later",
   "unexpected": "Something went wrong. Please try again",

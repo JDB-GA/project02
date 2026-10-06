@@ -33,8 +33,6 @@ public class SeedDataCleanupController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void clean() {
         seedDataCleanupService.clean();
-
-        // To Clean All Transactions As Well (Temp)
         walletService.cleanAllTransactions();
     }
 }

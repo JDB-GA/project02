@@ -14,23 +14,20 @@ import com.almotawaj.wallet.repository.WalletTransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.ArgumentCaptor;
-import org.springframework.context.ApplicationEventPublisher;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -71,16 +68,13 @@ class TransferServiceTest {
     void setUp() {
         WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
         DailyLimitPolicy limits = new DailyLimitPolicy(transactionRepository, Clock.systemUTC());
-        transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, limits, ledger,
-                eventPublisher, auditService);
+        transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, limits, ledger, eventPublisher, auditService);
         sender = wallet("100.000");
         receiver = wallet("5.000");
-        User recipient = new User();
-        recipient.setId(UUID.randomUUID());
-        receiver.setUser(recipient);
-        when(recipientResolver.resolve(SENDER_ID, RECIPIENT_EMAIL)).thenReturn(recipient);
+        receiver.getUser().setId(UUID.randomUUID());
+        when(recipientResolver.resolve(SENDER_ID, RECIPIENT_EMAIL)).thenReturn(receiver.getUser());
         when(provisioner.getOrCreate(SENDER_ID)).thenReturn(sender);
-        when(provisioner.getOrCreate(recipient.getId())).thenReturn(receiver);
+        when(provisioner.getOrCreate(receiver.getUser().getId())).thenReturn(receiver);
         when(walletLocker.lockPair(sender.getId(), receiver.getId())).thenReturn(new WalletLocker.LockedPair(sender, receiver));
         when(holderNames.fullName(any())).thenReturn("Holder");
         when(referenceGenerator.next()).thenReturn("TXN-20261005-AAAAAAAA", "TXN-20261005-BBBBBBBB");

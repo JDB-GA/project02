@@ -1,4 +1,3 @@
-// backend/src/main/java/com/almotawaj/wallet/model/WalletTransaction.java
 package com.almotawaj.wallet.model;
 
 import com.almotawaj.wallet.config.constants.DatabaseTables;

@@ -43,7 +43,6 @@ public final class ApiPaths {
     public static final String RECIPIENTS = "/recipients";
     public static final String RECIPIENT_SUGGESTIONS = "/recipients/suggestions";
     public static final String PAYMENT_REQUESTS = "/requests";
-    public static final String PAYMENT_REQUEST_BY_ID = "/{requestId}";
     public static final String PAYMENT_REQUEST_PAY = "/{requestId}/pay";
     public static final String PAYMENT_REQUEST_DECLINE = "/{requestId}/decline";
     public static final String PAYMENT_REQUEST_CANCEL = "/{requestId}/cancel";
@@ -58,6 +57,7 @@ public final class ApiPaths {
     public static final String USER_TRANSACTIONS = "/{userId}/transactions";
     public static final String USER_STATISTICS = "/users";
     public static final String TRANSACTION_STATISTICS = "/transactions";
+    public static final String ALL_SUB_PATHS = "/**";
     public static final String SWAGGER_UI_HTML = "/swagger-ui.html";
     public static final String SWAGGER_UI = "/swagger-ui/**";
     public static final String API_DOCS = "/v3/api-docs/**";

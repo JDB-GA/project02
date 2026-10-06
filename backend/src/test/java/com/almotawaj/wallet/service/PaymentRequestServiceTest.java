@@ -68,8 +68,8 @@ class PaymentRequestServiceTest {
         request.setPayer(payer);
         request.setAmount(new BigDecimal("12.500"));
         request.setNote("Lunch");
-        when(requestRepository.findByIdAndPayerId(REQUEST_ID, payer.getId())).thenReturn(Optional.of(request));
-        when(requestRepository.findByIdAndRequesterId(REQUEST_ID, requester.getId())).thenReturn(Optional.of(request));
+        when(requestRepository.findByIdAndPayerIdForUpdate(REQUEST_ID, payer.getId())).thenReturn(Optional.of(request));
+        when(requestRepository.findByIdAndRequesterIdForUpdate(REQUEST_ID, requester.getId())).thenReturn(Optional.of(request));
         when(requestRepository.saveAndFlush(any(PaymentRequest.class))).thenAnswer(invocation -> invocation.getArgument(0));
     }
 

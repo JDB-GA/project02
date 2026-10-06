@@ -53,6 +53,5 @@
   "recipientSelf": "You can't send money to yourself",
   "insufficientBalance": "Your balance is not enough",
   "amountOverDailySendLimit": "This exceeds what you can still send today",
-  "noteTooLong": "Note must be at most {{noteMax}} characters",
-  "payerRequired": "Enter the email, mobile number or IBAN of the person you are requesting from"
+  "noteTooLong": "Note must be at most {{noteMax}} characters"
 }
