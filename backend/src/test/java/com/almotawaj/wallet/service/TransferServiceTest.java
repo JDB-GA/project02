@@ -6,7 +6,7 @@ import com.almotawaj.wallet.exception.BusinessRuleException;
 import com.almotawaj.wallet.model.AuditAction;
 import com.almotawaj.wallet.model.AuditTargetType;
 import com.almotawaj.wallet.model.TransactionType;
-import com.almotawaj.wallet.model.User;
+import com.almotawaj.wallet.model.UserRole;
 import com.almotawaj.wallet.model.Wallet;
 import com.almotawaj.wallet.model.WalletTransaction;
 import com.almotawaj.wallet.model.request.TransferRequest;
@@ -56,22 +56,13 @@ class TransferServiceTest {
     private Wallet sender;
     private Wallet receiver;
 
-    private static Wallet wallet(String balance) {
-        Wallet wallet = new Wallet();
-        wallet.setId(UUID.randomUUID());
-        wallet.setUser(new User());
-        wallet.setBalance(new BigDecimal(balance));
-        return wallet;
-    }
-
     @BeforeEach
     void setUp() {
-        WalletLedger ledger = new WalletLedger(transactionRepository, referenceGenerator);
-        DailyLimitPolicy limits = new DailyLimitPolicy(transactionRepository, Clock.systemUTC());
-        transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, limits, ledger, eventPublisher, auditService);
-        sender = wallet("100.000");
-        receiver = wallet("5.000");
-        receiver.getUser().setId(UUID.randomUUID());
+        transferService = new TransferService(provisioner, walletLocker, recipientResolver, holderNames, new Counterparties(holderNames),
+                new DailyLimitPolicy(transactionRepository, Clock.systemUTC()), new WalletLedger(transactionRepository, referenceGenerator),
+                eventPublisher, auditService);
+        sender = WalletFixtures.wallet(UserRole.CLIENT, "100.000");
+        receiver = WalletFixtures.wallet(UserRole.CLIENT, "5.000");
         when(recipientResolver.resolve(SENDER_ID, RECIPIENT_EMAIL)).thenReturn(receiver.getUser());
         when(provisioner.getOrCreate(SENDER_ID)).thenReturn(sender);
         when(provisioner.getOrCreate(receiver.getUser().getId())).thenReturn(receiver);

@@ -22,6 +22,7 @@ import java.util.UUID;
 public class DailyLimitPolicy {
     public static final BigDecimal TOP_UP_LIMIT = new BigDecimal(WalletLimits.DAILY_TOP_UP_LIMIT);
     public static final BigDecimal TRANSFER_LIMIT = new BigDecimal(WalletLimits.DAILY_TRANSFER_LIMIT);
+    private static final BigDecimal CHECKOUT_LIMIT = new BigDecimal(WalletLimits.DAILY_CHECKOUT_LIMIT);
     private static final ZoneId ZONE = ZoneId.of(WalletConstants.TIME_ZONE);
 
     private final WalletTransactionRepository transactionRepository;
@@ -44,6 +45,12 @@ public class DailyLimitPolicy {
     public void ensureTransferAllowed(UUID walletId, BigDecimal amount) {
         if (amount.compareTo(remainingTransfer(walletId)) > 0) {
             throw new BusinessRuleException(ErrorMessages.DAILY_TRANSFER_LIMIT_EXCEEDED, ErrorCodes.DAILY_TRANSFER_LIMIT_EXCEEDED);
+        }
+    }
+
+    public void ensureCheckoutAllowed(UUID walletId, BigDecimal amount) {
+        if (amount.compareTo(remaining(walletId, TransactionType.PAYMENT, CHECKOUT_LIMIT)) > 0) {
+            throw new BusinessRuleException(ErrorMessages.DAILY_CHECKOUT_LIMIT_EXCEEDED, ErrorCodes.DAILY_CHECKOUT_LIMIT_EXCEEDED);
         }
     }
 
