@@ -68,7 +68,7 @@ Authorization: Bearer <SEED_TOKEN>
 
 All accounts use `SEED_PASSWORD` and have verified emails. Seeded KYC applications have no document files.
 
-`DELETE /api/admin/seed-data` (super admin) removes the demo accounts with their wallets, payment requests, verification records and documents, and clears every wallet's transaction history.
+`DELETE /api/admin/seed-data` (super admin) removes only the demo accounts with their wallets, transactions, payment requests, verification records and documents. Other accounts keep their data.
 
 ## Structure
 

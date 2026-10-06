@@ -56,9 +56,4 @@ public class SeedDataCleanupService {
         userRepository.deleteAllInBatch(users);
         log.info(LogMessages.SEED_DATA_CLEANED, users.size());
     }
-
-    @Transactional
-    public void cleanAllTransactions() {
-        transactionRepository.deleteAllTransactions();
-    }
 }
