@@ -4,7 +4,7 @@ import { LoadErrorAlert } from '@/components/LoadErrorAlert'
 import { Skeleton } from '@/components/ui/skeleton'
 
 import { useWallet } from '../hooks/useWallet'
-import { SimulationPanel } from './SimulationPanel'
+import { TopUpDialog } from './TopUpDialog'
 import { TransactionsCard } from './TransactionsCard'
 import { WalletBalanceCard } from './WalletBalanceCard'
 
@@ -22,11 +22,16 @@ export function WalletContent() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold">
-        {t('welcome')} <bdi>{wallet.holderName}</bdi>
-      </h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-semibold">
+          {t('welcome')} <bdi>{wallet.holderName}</bdi>
+        </h1>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">{t('simulation.label')}</span>
+          <TopUpDialog />
+        </div>
+      </div>
       <WalletBalanceCard wallet={wallet} />
-      <SimulationPanel />
       <TransactionsCard />
     </div>
   )
