@@ -54,6 +54,7 @@ Monorepo:
 | [`docs/user-stories.md`](docs/user-stories.md)       | User stories with acceptance criteria                                                                          |
 | [`docs/erd.dbml`](docs/erd.dbml)                     | Database schema ([diagram](https://dbdiagram.io/d/Digital-Wallet-6aba3c4e0f25a52d012826f8))                    |
 | [`Planning.md`](Planning.md)                         | Process, timeline, requirement coverage and next steps                                                         |
+| [`CREDITS.md`](CREDITS.md)                           | Credit for the payment gateway process                                                                         |
 
 JavaDoc is used on the main services: [`UserService.java`](backend/src/main/java/com/almotawaj/wallet/service/UserService.java) (authentication), [`WalletService.java`](backend/src/main/java/com/almotawaj/wallet/service/WalletService.java) (wallet) and [`TransferService.java`](backend/src/main/java/com/almotawaj/wallet/service/TransferService.java) (transactions).
 
