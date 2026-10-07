@@ -22,8 +22,7 @@
     "loadError": "Could not load the transfer options."
   },
   "simulation": {
-    "title": "Simulation only",
-    "note": "Not part of the application. It adds demo money to the wallet so the other features can be tried."
+    "label": "Simulation only, not part of the application"
   },
   "transactions": {
     "title": "Transactions",
