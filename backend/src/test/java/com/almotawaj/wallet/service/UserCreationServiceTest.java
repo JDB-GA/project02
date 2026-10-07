@@ -82,7 +82,7 @@ class UserCreationServiceTest {
         assertThatThrownBy(() -> service.create(actor, request))
                 .isInstanceOf(InformationExistException.class)
                 .hasFieldOrPropertyWithValue("code", ErrorCodes.EMAIL_ALREADY_REGISTERED);
-        
+
         verify(userRepository, never()).saveAndFlush(any());
         verify(passwordResetService, never()).sendInvitation(any());
     }
@@ -96,7 +96,7 @@ class UserCreationServiceTest {
         assertThatThrownBy(() -> service.create(actor, request))
                 .isInstanceOf(InformationExistException.class)
                 .hasFieldOrPropertyWithValue("code", ErrorCodes.MOBILE_ALREADY_REGISTERED);
-        
+
         verify(userRepository, never()).saveAndFlush(any());
         verify(passwordResetService, never()).sendInvitation(any());
     }
