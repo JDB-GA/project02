@@ -10,7 +10,7 @@
   },
   "topUp": {
     "open": "Receive transfer",
-    "title": "Receive a bank transfer",
+    "title": "Receive a bank transfer (simulation only, not part of the application)",
     "description": "Simulates an incoming transfer from one of your demo accounts at other banks. The sender details are filled in automatically.",
     "source": "Receive from",
     "sourcePlaceholder": "Choose an account",
