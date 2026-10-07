@@ -21,6 +21,10 @@
     "success": "Transfer received and added to your balance",
     "loadError": "Could not load the transfer options."
   },
+  "simulation": {
+    "title": "Simulation only",
+    "note": "Not part of the application. It adds demo money to the wallet so the other features can be tried."
+  },
   "transactions": {
     "title": "Transactions",
     "date": "Date",
