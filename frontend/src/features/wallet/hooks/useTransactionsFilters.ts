@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router'
-import { ALL_FILTER, DEFAULT_TRANSACTIONS_QUERY } from '../constants/wallet.constants'
+import { ALL_FILTER, DEFAULT_TRANSACTIONS_QUERY, DEFAULT_TRANSACTION_SORT } from '../constants/wallet.constants'
 import type { TransactionsQuery } from '../types/wallet.types'
 import { parseTransactionsQuery } from '../utils/parse-transactions-query'
 import { toTransactionsUrlParams } from '../utils/to-transactions-url-params'
@@ -13,7 +13,12 @@ export function useTransactionsFilters() {
   }
 
   const hasFilters =
-    query.search !== '' || query.type !== ALL_FILTER || query.direction !== ALL_FILTER || query.from !== '' || query.to !== ''
+    query.search !== '' ||
+    query.type !== ALL_FILTER ||
+    query.direction !== ALL_FILTER ||
+    query.from !== '' ||
+    query.to !== '' ||
+    query.sort !== DEFAULT_TRANSACTION_SORT
 
   return {
     query,

@@ -31,8 +31,17 @@ export const TRANSACTION_DIRECTIONS = ['CREDIT', 'DEBIT'] as const
 export const CURRENCY = 'BHD'
 export const CURRENCY_DECIMALS = 3
 export const TRANSACTIONS_PAGE_SIZE = 10
-export const DEFAULT_TRANSACTIONS_QUERY: TransactionsQuery = { search: '', type: 'ALL', direction: 'ALL', from: '', to: '', page: 0 }
-export const TRANSACTIONS_SORT = 'createdAt,desc'
+export const TRANSACTION_SORTS = { NEWEST: 'createdAt,desc', AMOUNT_HIGH: 'amount,desc', AMOUNT_LOW: 'amount,asc' } as const
+export const DEFAULT_TRANSACTION_SORT = 'NEWEST'
+export const DEFAULT_TRANSACTIONS_QUERY: TransactionsQuery = {
+  search: '',
+  type: 'ALL',
+  direction: 'ALL',
+  from: '',
+  to: '',
+  sort: DEFAULT_TRANSACTION_SORT,
+  page: 0,
+}
 export const STATEMENT_FILE_NAME = 'statement.pdf'
 export const receiptFileName = (reference: string) => `receipt-${reference}.pdf`
 
@@ -59,5 +68,6 @@ export const TRANSACTIONS_SEARCH_PARAMS = {
   direction: 'direction',
   from: 'from',
   to: 'to',
+  sort: 'sort',
   page: 'page',
 } as const

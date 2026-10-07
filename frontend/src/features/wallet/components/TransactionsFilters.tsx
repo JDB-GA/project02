@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ALL_FILTER, TRANSACTION_DIRECTIONS, TRANSACTION_TYPES } from '../constants/wallet.constants'
-import type { TransactionDirectionFilter, TransactionTypeFilter, TransactionsQuery } from '../types/wallet.types'
+import type { TransactionDirectionFilter, TransactionSort, TransactionTypeFilter, TransactionsQuery } from '../types/wallet.types'
 import { TransactionsFilterSelect } from './TransactionsFilterSelect'
 import { TransactionsSearchInput } from './TransactionsSearchInput'
 
@@ -17,6 +17,7 @@ interface TransactionsFiltersProps {
 
 const TYPE_FILTERS: readonly TransactionTypeFilter[] = [ALL_FILTER, ...TRANSACTION_TYPES]
 const DIRECTION_FILTERS: readonly TransactionDirectionFilter[] = [ALL_FILTER, ...TRANSACTION_DIRECTIONS]
+const SORTS: readonly TransactionSort[] = ['NEWEST', 'AMOUNT_HIGH', 'AMOUNT_LOW']
 
 export function TransactionsFilters({ query, hasFilters, onChange, onReset }: TransactionsFiltersProps) {
   const { t } = useTranslation('wallet')
@@ -74,6 +75,15 @@ export function TransactionsFilters({ query, hasFilters, onChange, onReset }: Tr
           }}
         />
       </div>
+      <TransactionsFilterSelect
+        label={t('filters.sort')}
+        value={query.sort}
+        options={SORTS}
+        getOptionLabel={(sort) => t(`filters.sorts.${sort}`)}
+        onChange={(sort) => {
+          onChange({ sort })
+        }}
+      />
       {hasFilters && (
         <Button
           type="button"
