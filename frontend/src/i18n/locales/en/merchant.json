@@ -35,7 +35,8 @@
     "revoked": "API key revoked",
     "emptyTitle": "No API keys yet",
     "emptyDescription": "Create a key to accept payments from your website.",
-    "loadError": "Could not load your API keys."
+    "loadError": "Could not load your API keys.",
+    "namePlaceholder": "Online store"
   },
   "payments": {
     "description": "Create a payment link for an order and send it to your customer. Links expire after 30 minutes.",
@@ -66,13 +67,17 @@
     "refunded": "Payment refunded",
     "emptyTitle": "No payments yet",
     "emptyDescription": "Payments you create here or through the API appear in this list.",
-    "loadError": "Could not load your payments."
+    "loadError": "Could not load your payments.",
+    "orderPlaceholder": "ORDER-1042",
+    "descriptionPlaceholder": "What the customer is paying for",
+    "returnUrl": "Return address (optional)",
+    "returnUrlHint": "Where the customer is sent after paying, for example your order confirmation page.",
+    "returnUrlPlaceholder": "https://shop.example.com/orders/1042"
   },
   "checkout": {
     "description": "Check the details before you pay from your wallet.",
     "amount": "Amount to pay",
     "merchant": "Merchant",
-    "expires": "Pay before",
     "pay": "Pay {{amount}}",
     "confirmTitle": "Confirm this payment",
     "confirmDescription": "{{amount}} will be taken from your wallet and sent to {{merchant}}.",
@@ -80,6 +85,23 @@
     "paid": "Payment completed",
     "backToWallet": "Back to wallet",
     "notFound": "This payment link is not valid.",
-    "loadError": "Could not load this payment."
+    "loadError": "Could not load this payment.",
+    "returnTo": "Return to {{site}}",
+    "returning": "Taking you back to {{site}}…",
+    "expiresIn": "Time left to pay"
+  },
+  "webhook": {
+    "title": "Payment callback",
+    "description": "We call this address on your server whenever one of your payments is paid, cancelled, expired or refunded.",
+    "url": "Callback URL",
+    "urlHint": "Must be a public https address.",
+    "urlPlaceholder": "https://shop.example.com/webhooks/wallet",
+    "secret": "Signing secret",
+    "secretHint": "Use it to check that a callback really came from us. Removing the callback and adding it again creates a new secret.",
+    "save": "Save",
+    "saved": "Callback saved",
+    "remove": "Remove callback",
+    "removed": "Callback removed",
+    "loadError": "Could not load your callback settings."
   }
 }
