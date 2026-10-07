@@ -15,15 +15,16 @@ cp .env.example .env
 pnpm dev
 ```
 
-`VITE_API_URL` in `.env` must point to the backend (`http://localhost:8080`). 
+`VITE_API_URL` in `.env` must point to the backend (`http://localhost:8080`).
+
 ## Scripts
 
-| Script | Does |
-| --- | --- |
-| `pnpm dev` | start the development server |
-| `pnpm build` | type-check and build for production |
-| `pnpm preview` | serve the production build locally |
-| `pnpm lint` | type-aware ESLint (`strictTypeChecked`); generated shadcn components in `src/components/ui` are excluded |
+| Script         | Does                                                                                                     |
+| -------------- | -------------------------------------------------------------------------------------------------------- |
+| `pnpm dev`     | start the development server                                                                             |
+| `pnpm build`   | type-check and build for production                                                                      |
+| `pnpm preview` | serve the production build locally                                                                       |
+| `pnpm lint`    | type-aware ESLint (`strictTypeChecked`); generated shadcn components in `src/components/ui` are excluded |
 
 ## Structure
 

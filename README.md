@@ -2,21 +2,23 @@
 
 A bilingual (English / Arabic) digital wallet for Bahrain. Clients register, verify their email and their identity (KYC), then get a wallet with its own IBAN to receive bank transfers and send money to other users and pay merchants; staff review identity documents and manage users through role- and permission-based access.
 
-|            | URL                                                                                                                       |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Web app    | https://wallet.almotawaj.com                                                                                              |
-| API        | https://api.almotawaj.com                                                                                                 |
-| Swagger UI | https://api.almotawaj.com/swagger-ui.html                                                                                 |
-| ERD        | [dbdiagram.io](https://dbdiagram.io/d/Digital-Wallet-6aba3c4e0f25a52d012826f8) · source: [`docs/erd.dbml`](docs/erd.dbml) |
-| Planning   | [`Planning.md`](Planning.md) · user stories: [`docs/user-stories.md`](docs/user-stories.md)                               |
-| Trello     | https://trello.com/b/81cjvTR6/project-02-jdb                                                                              |
+|             | URL                                                                                                                       |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Web app     | https://wallet.almotawaj.com                                                                                              |
+| API         | https://api.almotawaj.com                                                                                                 |
+| Swagger UI  | https://api.almotawaj.com/swagger-ui.html                                                                                 |
+| Sample shop | https://demo-shop.almotawaj.com – a merchant website that takes payments through the gateway                              |
+| ERD         | [dbdiagram.io](https://dbdiagram.io/d/Digital-Wallet-6aba3c4e0f25a52d012826f8) · source: [`docs/erd.dbml`](docs/erd.dbml) |
+| Planning    | [`Planning.md`](Planning.md) · user stories: [`docs/user-stories.md`](docs/user-stories.md)                               |
+| Trello      | https://trello.com/b/81cjvTR6/project-02-jdb                                                                              |
 
 Monorepo:
 
-| Folder      | Stack                                                                                | Runs on               |
-| ----------- | ------------------------------------------------------------------------------------ | --------------------- |
-| `backend/`  | Java 17, Spring Boot 4, Spring Security, Spring Data JPA, PostgreSQL                 | http://localhost:8080 |
-| `frontend/` | React 19, TypeScript, Vite, TanStack Query, React Hook Form, Zod, shadcn/ui, i18next | http://localhost:5173 |
+| Folder                | Stack                                                                                | Runs on               |
+| --------------------- | ------------------------------------------------------------------------------------ | --------------------- |
+| `backend/`            | Java 17, Spring Boot 4, Spring Security, Spring Data JPA, PostgreSQL                 | http://localhost:8080 |
+| `frontend/`           | React 19, TypeScript, Vite, TanStack Query, React Hook Form, Zod, shadcn/ui, i18next | http://localhost:5173 |
+| `examples/demo-shop/` | Node.js, TypeScript, no runtime dependencies                                         | http://localhost:4000 |
 
 ## Features
 
@@ -41,17 +43,17 @@ Monorepo:
 
 ## Documentation
 
-| Document | What it covers |
-| --- | --- |
-| [`backend/README.md`](backend/README.md) | Backend setup, profiles, seeding, structure, tests and JavaDoc |
-| [`frontend/README.md`](frontend/README.md) | Frontend setup, scripts, structure, pages and localisation |
-| [`docs/api.md`](docs/api.md) | Endpoint reference, error format, paging, rate limiting, payment gateway, PDF documents and live notifications |
-| [`docs/business-rules.md`](docs/business-rules.md) | Roles, permissions and business rules |
-| [`docs/deployment.md`](docs/deployment.md) | Railway and Vercel deployment with every environment variable |
-| [`examples/demo-shop`](examples/demo-shop/README.md) | A sample store that integrates the payment gateway, for trying every payment outcome |
-| [`docs/user-stories.md`](docs/user-stories.md) | User stories with acceptance criteria |
-| [`docs/erd.dbml`](docs/erd.dbml) | Database schema ([diagram](https://dbdiagram.io/d/Digital-Wallet-6aba3c4e0f25a52d012826f8)) |
-| [`Planning.md`](Planning.md) | Process, timeline, requirement coverage and next steps |
+| Document                                             | What it covers                                                                                                 |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [`backend/README.md`](backend/README.md)             | Backend setup, profiles, seeding, structure, tests and JavaDoc                                                 |
+| [`frontend/README.md`](frontend/README.md)           | Frontend setup, scripts, structure, pages and localisation                                                     |
+| [`docs/api.md`](docs/api.md)                         | Endpoint reference, error format, paging, rate limiting, payment gateway, PDF documents and live notifications |
+| [`docs/business-rules.md`](docs/business-rules.md)   | Roles, permissions and business rules                                                                          |
+| [`docs/deployment.md`](docs/deployment.md)           | Railway and Vercel deployment with every environment variable                                                  |
+| [`examples/demo-shop`](examples/demo-shop/README.md) | A sample store that integrates the payment gateway, for trying every payment outcome                           |
+| [`docs/user-stories.md`](docs/user-stories.md)       | User stories with acceptance criteria                                                                          |
+| [`docs/erd.dbml`](docs/erd.dbml)                     | Database schema ([diagram](https://dbdiagram.io/d/Digital-Wallet-6aba3c4e0f25a52d012826f8))                    |
+| [`Planning.md`](Planning.md)                         | Process, timeline, requirement coverage and next steps                                                         |
 
 JavaDoc is used on the main services: [`UserService.java`](backend/src/main/java/com/almotawaj/wallet/service/UserService.java) (authentication), [`WalletService.java`](backend/src/main/java/com/almotawaj/wallet/service/WalletService.java) (wallet) and [`TransferService.java`](backend/src/main/java/com/almotawaj/wallet/service/TransferService.java) (transactions).
 

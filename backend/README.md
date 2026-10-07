@@ -16,16 +16,16 @@ cp src/main/resources/application-dev.properties.example src/main/resources/appl
 
 Fill in `application-dev.properties` (it is gitignored – never commit it):
 
-| Key                           | Value                                                         |
-| ----------------------------- | ------------------------------------------------------------- |
-| `spring.datasource.password`  | your PostgreSQL password                                      |
-| `jwt-secret`                  | `openssl rand -hex 32`                                        |
-| `otp-secret`                  | another `openssl rand -hex 32` (different from `jwt-secret`)  |
-| `resend-api-key`, `mail-from` | your [Resend](https://resend.com) API key and verified sender |
-| `cors-allowed-origins`        | `http://localhost:5173`                                       |
-| `app-url`                     | `http://localhost:5173` (used in email links)                 |
-| `storage-root`                | folder for uploaded files, default `uploads`                  |
-| `seed-token`, `seed-password` | optional, see [Seeding](#seeding)                             |
+| Key                           | Value                                                              |
+| ----------------------------- | ------------------------------------------------------------------ |
+| `spring.datasource.password`  | your PostgreSQL password                                           |
+| `jwt-secret`                  | `openssl rand -hex 32`                                             |
+| `otp-secret`                  | another `openssl rand -hex 32` (different from `jwt-secret`)       |
+| `resend-api-key`, `mail-from` | your [Resend](https://resend.com) API key and verified sender      |
+| `cors-allowed-origins`        | `http://localhost:5173`                                            |
+| `app-url`                     | `http://localhost:5173` (used in email links)                      |
+| `storage-root`                | folder for uploaded files, default `uploads`                       |
+| `seed-token`, `seed-password` | optional, see [Seeding](#seeding)                                  |
 | `webhook-allow-private-hosts` | `true` to let payment callbacks reach `localhost` while developing |
 
 ```bash
@@ -37,11 +37,11 @@ Tests use the `test` profile with an in-memory H2 database, so they never touch 
 
 ## Profiles
 
-| Profile | Database | Configuration |
-| --- | --- | --- |
-| `dev` (default) | local PostgreSQL | `application-dev.properties` (untracked) |
-| `test` | in-memory H2 | `src/test/resources/application-test.properties` |
-| `prod` | PostgreSQL on Railway | environment variables, see [deployment](../docs/deployment.md) |
+| Profile         | Database              | Configuration                                                  |
+| --------------- | --------------------- | -------------------------------------------------------------- |
+| `dev` (default) | local PostgreSQL      | `application-dev.properties` (untracked)                       |
+| `test`          | in-memory H2          | `src/test/resources/application-test.properties`               |
+| `prod`          | PostgreSQL on Railway | environment variables, see [deployment](../docs/deployment.md) |
 
 ## Seeding
 
@@ -58,14 +58,14 @@ Authorization: Bearer <SEED_TOKEN>
 
 `201` means the demo data exists. Running it again changes nothing. Without `SEED_TOKEN` the endpoint returns `404`; a wrong token returns `403`.
 
-| Email                           | Mobile   | Role          | Demo state                  |
-| ------------------------------- | -------- | ------------- | --------------------------- |
-| `admin@almotawaj.com`           | 30000001 | `SUPER_ADMIN` | –                           |
-| `reviewer@almotawaj.com`        | 30000004 | `ADMIN`       | `KYC_REVIEW`, `USER_MANAGE`, `STATISTICS_VIEW` |
-| `merchant@almotawaj.com`        | 30000003 | `MERCHANT`    | –                           |
-| `client@almotawaj.com`          | 30000002 | `CLIENT`      | KYC pending                 |
-| `illia@almotawaj.com`           | 30000005 | `CLIENT`      | KYC approved                |
-| `salman@almotawaj.com`          | 30000006 | `CLIENT`      | KYC rejected with a reason  |
+| Email                    | Mobile   | Role          | Demo state                                     |
+| ------------------------ | -------- | ------------- | ---------------------------------------------- |
+| `admin@almotawaj.com`    | 30000001 | `SUPER_ADMIN` | –                                              |
+| `reviewer@almotawaj.com` | 30000004 | `ADMIN`       | `KYC_REVIEW`, `USER_MANAGE`, `STATISTICS_VIEW` |
+| `merchant@almotawaj.com` | 30000003 | `MERCHANT`    | –                                              |
+| `client@almotawaj.com`   | 30000002 | `CLIENT`      | KYC pending                                    |
+| `illia@almotawaj.com`    | 30000005 | `CLIENT`      | KYC approved                                   |
+| `salman@almotawaj.com`   | 30000006 | `CLIENT`      | KYC rejected with a reason                     |
 
 All accounts use `SEED_PASSWORD` and have verified emails. Seeded KYC applications have no document files.
 
@@ -91,10 +91,10 @@ Conventions: every path, error code, message and Swagger text is a constant in `
 
 The public methods of the main services are documented with JavaDoc:
 
-| Area | File |
-| --- | --- |
-| Authentication | [`UserService.java`](src/main/java/com/almotawaj/wallet/service/UserService.java) |
-| Wallet | [`WalletService.java`](src/main/java/com/almotawaj/wallet/service/WalletService.java) |
+| Area                     | File                                                                                      |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| Authentication           | [`UserService.java`](src/main/java/com/almotawaj/wallet/service/UserService.java)         |
+| Wallet                   | [`WalletService.java`](src/main/java/com/almotawaj/wallet/service/WalletService.java)     |
 | Transactions (transfers) | [`TransferService.java`](src/main/java/com/almotawaj/wallet/service/TransferService.java) |
 
 Generate the HTML documentation with `./mvnw javadoc:javadoc`; it is written to `target/reports/apidocs`.
