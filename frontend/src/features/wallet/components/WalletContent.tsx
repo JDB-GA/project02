@@ -4,6 +4,7 @@ import { LoadErrorAlert } from '@/components/LoadErrorAlert'
 import { Skeleton } from '@/components/ui/skeleton'
 
 import { useWallet } from '../hooks/useWallet'
+import { SimulationPanel } from './SimulationPanel'
 import { TransactionsCard } from './TransactionsCard'
 import { WalletBalanceCard } from './WalletBalanceCard'
 
@@ -25,6 +26,7 @@ export function WalletContent() {
         {t('welcome')} <bdi>{wallet.holderName}</bdi>
       </h1>
       <WalletBalanceCard wallet={wallet} />
+      <SimulationPanel />
       <TransactionsCard />
     </div>
   )

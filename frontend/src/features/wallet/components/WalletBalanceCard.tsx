@@ -7,7 +7,6 @@ import { formatIban } from '../utils/iban'
 import { IbanCopyButton } from './IbanCopyButton'
 import { RequestMoneyDialog } from './RequestMoneyDialog'
 import { SendMoneyDialog } from './SendMoneyDialog'
-import { TopUpDialog } from './TopUpDialog'
 import { WalletQuickAction } from './WalletQuickAction'
 
 interface WalletBalanceCardProps {
@@ -40,7 +39,6 @@ export function WalletBalanceCard({ wallet }: WalletBalanceCardProps) {
         </div>
         <div className="flex gap-3">
           <SendMoneyDialog />
-          <TopUpDialog />
           <RequestMoneyDialog trigger={<WalletQuickAction icon={HandCoinsIcon} label={t('requests.open')} />} />
         </div>
       </div>
