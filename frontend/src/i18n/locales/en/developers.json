@@ -1,0 +1,138 @@
+{
+  "heading": "Payment gateway developer guide",
+  "intro": "Everything your developers need to accept wallet payments on your website: create a payment from your server, send the customer to our checkout page, then confirm the result.",
+  "overview": {
+    "title": "How it works",
+    "description": "A payment is a checkout session. Your server creates it with an API key and the customer pays it from their wallet.",
+    "steps": {
+      "createKey": "Create an API key on the API keys page and store it on your server.",
+      "createSession": "When a customer checks out, your server creates a checkout session for the order.",
+      "redirect": "Redirect the customer to the checkoutUrl from the response. They sign in and pay from their wallet.",
+      "return": "After paying, the customer is sent back to the returnUrl you gave, with the session id and your order reference added.",
+      "confirm": "Before you fulfil the order, confirm the payment: either wait for our signed callback or ask the API for the session, and continue only if its status is PAID."
+    },
+    "baseUrl": "Base URL",
+    "authentication": "Authentication",
+    "header": "Send your key in the {{header}} header on every request",
+    "manageKeys": "Manage API keys"
+  },
+  "fields": {
+    "name": "Field",
+    "detail": "Type",
+    "description": "Description",
+    "required": "required",
+    "optional": "optional"
+  },
+  "create": {
+    "title": "1. Create a checkout session",
+    "description": "Call this from your server when the customer is ready to pay. Never call it from the browser, because that would expose your key.",
+    "responseTitle": "Response",
+    "returnTitle": "Where the customer lands",
+    "returnDescription": "About three seconds after a successful payment the checkout page sends the customer to your returnUrl. The page also shows a link back to your site at any time. Treat the return as a hint only: the customer can change the address, so always confirm the status yourself.",
+    "returnExample": "Return address"
+  },
+  "request": {
+    "orderReference": "Your own order id. Up to 64 letters, digits, dots, dashes or underscores. It can be used for one session only.",
+    "amount": "Amount in BHD with up to 3 decimals, from 0.100 to 5000.000.",
+    "description": "What the customer is paying for, up to 140 characters. Shown on the checkout page.",
+    "returnUrl": "A full http(s) address on your site, up to 500 characters. The customer is sent there after paying. We add sessionId and orderReference to it.",
+    "expiresInMinutes": "How long the session can be paid, from 1 to 30 minutes. Defaults to 30."
+  },
+  "response": {
+    "id": "The session id. Store it with your order.",
+    "orderReference": "The order id you sent.",
+    "amount": "The amount in BHD.",
+    "description": "The description you sent, or null.",
+    "status": "The current status of the session.",
+    "payerName": "The masked name of the customer once the session is paid, otherwise null.",
+    "checkoutUrl": "The page to send the customer to.",
+    "expiresAt": "The session can be paid until this time, 30 minutes after it was created.",
+    "paidAt": "When it was paid, or null.",
+    "refundedAt": "When it was refunded, or null.",
+    "createdAt": "When it was created.",
+    "types": {
+      "id": "UUID",
+      "orderReference": "string",
+      "amount": "number",
+      "description": "string or null",
+      "status": "string",
+      "payerName": "string or null",
+      "checkoutUrl": "URL",
+      "expiresAt": "date-time",
+      "paidAt": "date-time or null",
+      "refundedAt": "date-time or null",
+      "createdAt": "date-time",
+      "returnUrl": "URL or null"
+    },
+    "returnUrl": "The return address you sent, or null."
+  },
+  "confirm": {
+    "title": "2. Confirm the payment",
+    "description": "Do not trust the browser redirect on its own. Ask the API for the session, or use the callback below, and check the status before you ship the order.",
+    "statusesTitle": "Statuses",
+    "statuses": {
+      "PENDING": "Waiting for the customer. It can still be paid, cancelled or expire.",
+      "PAID": "The money is in your wallet. Fulfil the order.",
+      "CANCELLED": "You cancelled it. It can no longer be paid.",
+      "EXPIRED": "It was not paid within 30 minutes. Create a new session with a new order reference.",
+      "REFUNDED": "You sent the full amount back to the customer."
+    }
+  },
+  "callback": {
+    "title": "3. Receive callbacks",
+    "description": "Set a callback URL on the API keys page and we will tell your server the moment a payment changes, so you do not have to keep asking.",
+    "events": "We send a JSON POST for each change. The event name is in the body and in the {{header}} header.",
+    "signature": "{{header}} is the HMAC-SHA256 of the exact request body, in hex, using your signing secret. Reject any call whose signature does not match.",
+    "retries": "Answer with any 2xx status within 5 seconds. Otherwise we try again, up to 3 times in total. Callbacks can arrive more than once, so make your handler safe to repeat.",
+    "bodyTitle": "Callback body",
+    "verifyTitle": "Verify the signature (Node.js, Express)",
+    "configure": "Set the callback URL"
+  },
+  "manage": {
+    "title": "4. Cancel or refund",
+    "description": "Cancel a session that is still pending, or refund a paid one. A refund sends the full amount from your wallet back to the customer and can be done once.",
+    "cancel": "Cancel a pending session",
+    "refund": "Refund a paid session"
+  },
+  "endpoints": {
+    "title": "All endpoints",
+    "method": "Method",
+    "path": "Path",
+    "purpose": "What it does",
+    "items": {
+      "create": "Create a checkout session.",
+      "get": "Get a session and its status.",
+      "cancel": "Cancel a pending session.",
+      "refund": "Refund a paid session in full."
+    }
+  },
+  "errors": {
+    "title": "Errors and rules",
+    "description": "Every error is a JSON problem document with an HTTP status and a stable code. Branch on the code, not on the text.",
+    "status": "Status",
+    "code": "Code",
+    "meaning": "Meaning",
+    "items": {
+      "VALIDATION_FAILED": "A field is missing or invalid. The errors object names each field.",
+      "UNAUTHORIZED": "The API key is missing, wrong or revoked. The body is empty.",
+      "CHECKOUT_NOT_FOUND": "No session with this id belongs to you.",
+      "ORDER_ALREADY_EXISTS": "You already created a session for this order reference.",
+      "CHECKOUT_NOT_PENDING": "The session is not pending, so it cannot be cancelled.",
+      "CHECKOUT_NOT_PAID": "Only a paid session can be refunded.",
+      "INSUFFICIENT_BALANCE": "Your wallet balance does not cover the refund.",
+      "TOO_MANY_REQUESTS": "More than 120 gateway requests in a minute with your keys. Wait for the Retry-After header."
+    }
+  },
+  "rules": {
+    "title": "Rules to remember",
+    "items": {
+      "amount": "Amounts are in BHD, from 0.100 to 5000.000, with at most 3 decimals.",
+      "expiry": "A session expires 30 minutes after it is created.",
+      "order": "One session per order reference, so an order can never be paid twice.",
+      "refund": "Refunds are for the full amount and need enough balance in your wallet.",
+      "rateLimit": "The gateway accepts 120 requests per minute per merchant account.",
+      "secret": "Keep the API key on your server. If it leaks, revoke it and create a new one.",
+      "testing": "There is no separate test mode. Try your integration with a small amount, then refund it."
+    }
+  }
+}
