@@ -43,6 +43,8 @@ class PaymentRequestServiceTest {
     @Mock
     private RecipientResolver recipientResolver;
     @Mock
+    private WalletAccessPolicy accessPolicy;
+    @Mock
     private TransferService transferService;
     @Mock
     private PaymentRequestNotifier notifier;
@@ -62,6 +64,7 @@ class PaymentRequestServiceTest {
     void setUp() {
         requester = user("requester@example.com");
         payer = user("payer@example.com");
+        when(userRepository.findById(any(UUID.class))).thenReturn(Optional.of(requester));
         request = new PaymentRequest();
         request.setId(REQUEST_ID);
         request.setRequester(requester);

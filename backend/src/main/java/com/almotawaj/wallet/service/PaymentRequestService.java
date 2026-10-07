@@ -30,6 +30,7 @@ public class PaymentRequestService {
     private final PaymentRequestRepository requestRepository;
     private final UserRepository userRepository;
     private final RecipientResolver recipientResolver;
+    private final WalletAccessPolicy accessPolicy;
     private final TransferService transferService;
     private final PaymentRequestNotifier notifier;
     private final WalletHolderNames names;
@@ -37,12 +38,14 @@ public class PaymentRequestService {
 
     @Transactional(readOnly = true)
     public PageResponse<PaymentRequestResponse> list(UUID userId, Pageable pageable) {
+        ensureWalletHolder(userId);
         return PageResponse.from(requestRepository.findByRequesterIdOrPayerId(userId, pageable),
                 request -> PaymentRequestResponse.from(request, names));
     }
 
     @Transactional
     public PaymentRequestResponse create(UUID requesterId, CreatePaymentRequest request) {
+        ensureWalletHolder(requesterId);
         User payer = recipientResolver.resolve(requesterId, request.payer());
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setRequester(userRepository.getReferenceById(requesterId));
@@ -67,14 +70,21 @@ public class PaymentRequestService {
 
     @Transactional
     public PaymentRequestResponse decline(UUID payerId, UUID requestId) {
+        ensureWalletHolder(payerId);
         PaymentRequest request = pending(requestRepository.findByIdAndPayerIdForUpdate(requestId, payerId));
         return close(request, PaymentRequestStatus.DECLINED, payerId, AuditAction.PAYMENT_REQUEST_DECLINED);
     }
 
     @Transactional
     public PaymentRequestResponse cancel(UUID requesterId, UUID requestId) {
+        ensureWalletHolder(requesterId);
         PaymentRequest request = pending(requestRepository.findByIdAndRequesterIdForUpdate(requestId, requesterId));
         return close(request, PaymentRequestStatus.CANCELLED, requesterId, AuditAction.PAYMENT_REQUEST_CANCELLED);
+    }
+
+    private void ensureWalletHolder(UUID userId) {
+        accessPolicy.ensureCanUseWallet(userRepository.findById(userId)
+                .orElseThrow(() -> new InformationNotFoundException(ErrorMessages.USER_NOT_FOUND)));
     }
 
     private PaymentRequest pending(Optional<PaymentRequest> found) {

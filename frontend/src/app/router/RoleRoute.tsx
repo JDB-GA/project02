@@ -1,21 +1,19 @@
 import { Navigate, Outlet } from 'react-router'
+import type { AppPage } from '@/app/navigation/app-page.types'
+import { canAccessPage } from '@/app/navigation/can-access-page'
 import { useCurrentUser } from '@/features/auth/hooks/useCurrentUser'
-import type { Permission, UserRole } from '@/features/auth/types/user.types'
 import { getLandingRoute } from './get-landing-route'
 
 interface RoleRouteProps {
-  roles: readonly UserRole[]
-  permission?: Permission
+  page: AppPage
 }
 
-export function RoleRoute({ roles, permission }: RoleRouteProps) {
+export function RoleRoute({ page }: RoleRouteProps) {
   const { data: user } = useCurrentUser()
 
   if (!user) {
     return null
   }
 
-  const isAllowed = roles.includes(user.role) && (!permission || user.permissions.includes(permission))
-
-  return isAllowed ? <Outlet /> : <Navigate to={getLandingRoute(user)} replace />
+  return canAccessPage(page, user) ? <Outlet /> : <Navigate to={getLandingRoute(user)} replace />
 }

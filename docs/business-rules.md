@@ -32,7 +32,7 @@ Admins with `USER_MANAGE` manage clients and merchants only; only the super admi
 9. Suspending or closing a user, or changing/resetting a password, takes effect on the very next request.
 10. Permissions are only grantable to the roles that may hold them; super admin permissions are fixed.
 11. Forgot-password responses never reveal whether an email exists.
-12. Only KYC-approved clients and merchants have wallets; each wallet has exactly one IBAN that never changes, and each user has one wallet.
+12. Only KYC-approved clients and merchants have wallets; each wallet has exactly one IBAN that never changes, and each user has one wallet. Until a client is approved they can only sign in, follow their KYC application and manage their profile and password; the wallet, transfers, top-ups, payment requests, transactions and documents are refused with `WALLET_KYC_REQUIRED`.
 13. Limits live in `WalletLimits`: top-ups and transfers are 0.100–5,000.000 BHD each, and at most 10,000.000 BHD may be received by top-up and 10,000.000 BHD sent by transfer per day (Bahrain time). Checkout payments will have their own daily limit.
 14. Transfers need enough balance, cannot go to yourself, and only reach active, eligible wallet holders.
 15. Money movements lock the affected wallet rows (both, in a fixed order, for transfers), so concurrent requests can never overspend or exceed a daily limit.

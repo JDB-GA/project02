@@ -29,6 +29,7 @@ export interface AppPage {
   icon: LucideIcon
   roles: readonly UserRole[]
   permission?: Permission
+  requiresWallet?: boolean
   parentId?: AppPageId
   showInSidebar: boolean
   lazy: LazyRouteFunction<RouteObject>
