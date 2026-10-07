@@ -90,6 +90,12 @@
     },
     "from": "From date",
     "to": "To date",
+    "sort": "Sort by",
+    "sorts": {
+      "NEWEST": "Newest first",
+      "AMOUNT_HIGH": "Amount: high to low",
+      "AMOUNT_LOW": "Amount: low to high"
+    },
     "clear": "Clear filters"
   },
   "notifications": {

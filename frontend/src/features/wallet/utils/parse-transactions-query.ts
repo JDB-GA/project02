@@ -1,11 +1,13 @@
 import {
   ALL_FILTER,
+  DEFAULT_TRANSACTION_SORT,
   TRANSACTION_DIRECTIONS,
   TRANSACTION_SEARCH_MAX_LENGTH,
+  TRANSACTION_SORTS,
   TRANSACTION_TYPES,
   TRANSACTIONS_SEARCH_PARAMS,
 } from '../constants/wallet.constants'
-import type { TransactionDirectionFilter, TransactionTypeFilter, TransactionsQuery } from '../types/wallet.types'
+import type { TransactionDirectionFilter, TransactionSort, TransactionTypeFilter, TransactionsQuery } from '../types/wallet.types'
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
 
@@ -14,11 +16,14 @@ const isType = (value: string | null): value is TransactionTypeFilter => TRANSAC
 const isDirection = (value: string | null): value is TransactionDirectionFilter =>
   TRANSACTION_DIRECTIONS.some((direction) => direction === value)
 
+const isSort = (value: string | null): value is TransactionSort => value !== null && Object.hasOwn(TRANSACTION_SORTS, value)
+
 const toDate = (value: string | null): string => (value && ISO_DATE.test(value) ? value : '')
 
 export function parseTransactionsQuery(params: URLSearchParams): TransactionsQuery {
   const type = params.get(TRANSACTIONS_SEARCH_PARAMS.type)
   const direction = params.get(TRANSACTIONS_SEARCH_PARAMS.direction)
+  const sort = params.get(TRANSACTIONS_SEARCH_PARAMS.sort)
   const page = Number(params.get(TRANSACTIONS_SEARCH_PARAMS.page))
 
   return {
@@ -27,6 +32,7 @@ export function parseTransactionsQuery(params: URLSearchParams): TransactionsQue
     direction: isDirection(direction) ? direction : ALL_FILTER,
     from: toDate(params.get(TRANSACTIONS_SEARCH_PARAMS.from)),
     to: toDate(params.get(TRANSACTIONS_SEARCH_PARAMS.to)),
+    sort: isSort(sort) ? sort : DEFAULT_TRANSACTION_SORT,
     page: Number.isInteger(page) && page > 0 ? page : 0,
   }
 }
